@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoSingalton : MonoBehaviour
+namespace Extentions
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MonoSingleton<T> : MonoBehaviour where T : Component
     {
-        
-    }
+        private static T _instance;
+        public static T Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<T>();
+                    if (_instance == null)
+                    {
+                        GameObject newGo = new GameObject();
+                        newGo.name = "TInstance";
+                        _instance = newGo.AddComponent<T>();
+                        DontDestroyOnLoad(newGo);
+                    }
+                }
+                return _instance;
+            }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected virtual void Awake()
+        {
+            _instance = this as T;
+        }
+
+
     }
 }
