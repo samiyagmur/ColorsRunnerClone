@@ -29,10 +29,10 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - ToonyColorsPro2.Demo
     - ToonyColorsPro.Runtime
+    - Assembly-CSharp
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
     showAdvancedSettings: 0
