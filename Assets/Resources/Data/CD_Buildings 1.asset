@@ -13,6 +13,23 @@ MonoBehaviour:
   m_Name: CD_Buildings 1
   m_EditorClassIdentifier: 
   CityData:
-    CityList: []
-    PublicPlaces: []
-    SideObjects: []
+    CityList:
+    - Building: {fileID: 0}
+      BuildingText: {fileID: 0}
+      BuildingMarketPrice: 0
+      PayedAmount: 0
+      BuildingAdressId: 0
+      BuildingState: 0
+      BuildingType: 1
+    PublicPlaces:
+    - RequiredBuilds: 3
+      RequiredBuildText: {fileID: 0}
+      BuildingState: 1
+    SideObjects:
+    - Building: {fileID: 0}
+      BuildingText: {fileID: 0}
+      BuildingMarketPrice: 0
+      PayedAmount: 0
+      BuildingAdressId: 0
+      BuildingState: 0
+      BuildingType: 1
