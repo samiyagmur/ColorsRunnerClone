@@ -8,12 +8,12 @@ namespace Datas.ValueObject
     public class CityData
     {   
         [Space]
-        public List<BuildingsData> CityList;
+        public List<BuildingsData> CityList = new List<BuildingsData>();
         
         [Space]
-        public List<PublicPlacesData> PublicPlaces;
+        public List<PublicPlacesData> PublicPlaces = new List<PublicPlacesData>();
         
         [Space]
-        public List<SideObject> SideObjects;
+        public List<SideObject> SideObjects = new List<SideObject>();
     }
 }

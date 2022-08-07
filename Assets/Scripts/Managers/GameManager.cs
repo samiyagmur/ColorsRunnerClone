@@ -1,3 +1,6 @@
+using System;
+using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -8,7 +11,7 @@ namespace Managers
 
         #region Public Variables
 
-        
+        public GameStates States;
 
         #endregion
 
@@ -29,6 +32,11 @@ namespace Managers
 
         #region Event Subscription
 
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -36,12 +44,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
         }
 
         private void UnsubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
         }
         private void OnDisable()
         {
@@ -49,5 +57,10 @@ namespace Managers
         }
 
         #endregion
+
+        private void OnChangeGameState(GameStates newState)
+        {
+            States = newState;
+        }
     }
 }

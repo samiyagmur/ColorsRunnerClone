@@ -1,19 +1,39 @@
+using Extentions;
 using UnityEngine;
+using System;
+using UnityEngine.Events;
+using Enums;
+
 
 namespace Signals
 {
-    public class CoreGameSignals : MonoBehaviour
+    public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public UnityAction <GameStates> onChangeGameState = delegate { };
         
-        }
+        public UnityAction onLevelInitialize = delegate { };
+        
+        public UnityAction onClearActiveLevel = delegate { };
+        
+        public UnityAction onLevelFailed = delegate { };
+        
+        public UnityAction onNextLevel = delegate { };
+        
+        public UnityAction onRestartLevel = delegate { };
+        
+        public UnityAction onPlay = delegate { };
+        
+        public UnityAction onReset = delegate { };
+        
+        public UnityAction onSetCameraTarget = delegate { };
+        
+        public UnityAction<CameraStates> onSetCameraState = delegate { };
 
-        // Update is called once per frame
-        void Update()
+        public Func<int> onGetLevelID = delegate { return 0; };
+
+        protected override void Awake()
         {
-        
+            base.Awake();
         }
     }
 }
