@@ -26,8 +26,7 @@ namespace Managers
         #endregion
 
         #endregion
-
-
+        
         #region Event Subscription
 
         private void OnEnable()

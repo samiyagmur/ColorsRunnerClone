@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using TMPro;
 using Enums;
 
 namespace Datas.ValueObject
 {   
-    [SerializeField]
+    [Serializable]
     public class SideObject
     {
         public GameObject Building;
@@ -18,6 +19,7 @@ namespace Datas.ValueObject
         public int BuildingAdressId;
         
         public BuildingState BuildingState = BuildingState.Uncompleted;
+        
         public BuildingType BuildingType = BuildingType.Default;
     }
 }

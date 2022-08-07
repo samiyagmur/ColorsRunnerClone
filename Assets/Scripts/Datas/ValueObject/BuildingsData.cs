@@ -19,6 +19,7 @@ namespace Datas.ValueObject
         public int BuildingAdressId;
 
         public BuildingState BuildingState = BuildingState.Uncompleted;
+        
         public BuildingType BuildingType = BuildingType.Default;
 
     }
