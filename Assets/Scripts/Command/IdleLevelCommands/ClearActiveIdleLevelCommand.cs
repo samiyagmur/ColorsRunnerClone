@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Command
+namespace Command.IdleLevelCommands
 {
     public class ClearActiveIdleLevelCommand : MonoBehaviour
     {

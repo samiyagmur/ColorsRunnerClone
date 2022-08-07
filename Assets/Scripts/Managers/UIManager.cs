@@ -106,7 +106,6 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel?.Invoke(uiPanels.startPanel);
             // CoreGamesignals.Instance.onReset?.Invoke();
-
         }
     }
 }

@@ -12,5 +12,6 @@ namespace Datas.ValueObject
         public TextMeshPro RequiredBuildText;
         
         public BuildingState BuildingState = BuildingState.Uncompleted;
+        public PublicPlacesType PublicPlacesType;
     }
 }

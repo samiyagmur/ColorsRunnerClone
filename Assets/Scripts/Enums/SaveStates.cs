@@ -3,7 +3,8 @@
     public enum SaveStates
     {
         Level,
-        Score,
-        Idle
+        IdleLevel,
+        CompletedBuildingsCount,
+        
     }
 }
