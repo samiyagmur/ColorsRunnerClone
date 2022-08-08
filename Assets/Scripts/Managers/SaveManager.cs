@@ -41,8 +41,7 @@ namespace Managers
 
             if (!ES3.FileExists())
             {
-                ES3.Save("Score", 0);
-                ES3.Save("Level",0);
+                ES3.Save("Level",0,"RunnerLevelData/RunnerLevelData.es3");
             }
         }
 

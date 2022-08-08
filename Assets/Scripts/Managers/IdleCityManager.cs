@@ -52,7 +52,7 @@ namespace Managers
 
         private void Start()
         {
-            StartCoroutine(SaveData());
+            //StartCoroutine(SaveData());
         }
 
         #region Event Subscription
@@ -79,14 +79,6 @@ namespace Managers
         #endregion
 
         // ReSharper disable Unity.PerformanceAnalysis
-        private IEnumerator SaveData()
-        {   
-            yield return new WaitForSeconds(1f);
-            foreach (var data in CityData.CityList)
-            {   
-                ES3.Save(data.BuildingAdressId.ToString(),data);
-                Debug.Log("SAVE");
-            }
-        }
+        
     }
 }

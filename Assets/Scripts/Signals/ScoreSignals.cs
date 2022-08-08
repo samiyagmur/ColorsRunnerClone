@@ -1,9 +1,14 @@
+using Extentions;
 using UnityEngine;
 
 namespace Signals
 {
-    public class ScoreSignals : MonoBehaviour
+    public class ScoreSignals : MonoSingleton<ScoreSignals>
     {
        
+        protected override void Awake()
+        {
+            base.Awake();
+        }
     }
 }

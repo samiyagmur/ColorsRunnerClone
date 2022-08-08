@@ -11,6 +11,11 @@ namespace Signals
     {
         public UnityAction<uiPanels> onOpenPanel = delegate { };
         public UnityAction<uiPanels> onClosePanel = delegate { };
+        
+        protected override void Awake()
+        {
+            base.Awake();
+        }
     }
 
 }
