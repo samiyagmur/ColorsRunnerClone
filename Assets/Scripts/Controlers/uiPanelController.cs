@@ -14,7 +14,7 @@ namespace Controlers
         List<GameObject> uiPanelsList = new List<GameObject>();        
         public  void OpenPanel(uiPanels panelParams)
         {
-            
+            Debug.Log("debug");
             uiPanelsList[(int)panelParams].SetActive(true);
         }
 
