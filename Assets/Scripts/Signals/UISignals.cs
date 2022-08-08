@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Enums;
-using Extentions;
+using Extention;
 
 namespace Signals
 {
     public class UISignals : MonoSingleton<UISignals>
     {
-        public UnityAction<uiPanels> onOpenPanel = delegate { };
-        public UnityAction<uiPanels> onClosePanel = delegate { };
+        public UnityAction<UIPanels> onOpenPanel = delegate { };
+        public UnityAction<UIPanels> onClosePanel = delegate { };
         
         protected override void Awake()
         {

@@ -31,8 +31,8 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp-firstpass
     - ToonyColorsPro2.Demo
-    - ToonyColorsPro.Runtime
     - Assembly-CSharp
+    - ToonyColorsPro.Runtime
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
     showAdvancedSettings: 1

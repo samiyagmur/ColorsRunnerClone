@@ -63,14 +63,14 @@ namespace Managers
             States = newState;
         }
 
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnApplicationQuit()
-        {
-            throw new NotImplementedException();
-        }
+        //private void OnApplicationPause(bool pauseStatus)
+        //{
+        //    throw new NotImplementedException();
+        //}
+//
+        //private void OnApplicationQuit()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
