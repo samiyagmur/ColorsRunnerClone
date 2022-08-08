@@ -19,6 +19,8 @@ namespace Managers
 
         private LoadGameCommand loadGameCommand;
         private SaveGameCommand saveGameCommand;
+        private LoadIdleGameCommand loadIdleGameCommand;
+        private SaveIdleGameCommand saveIdleGameCommand;
 
         #endregion
 
@@ -34,6 +36,8 @@ namespace Managers
         {
             loadGameCommand = new LoadGameCommand();
             saveGameCommand = new SaveGameCommand();
+            loadIdleGameCommand = new LoadIdleGameCommand();
+            saveIdleGameCommand = new SaveIdleGameCommand();
 
             if (!ES3.FileExists())
             {
@@ -53,12 +57,16 @@ namespace Managers
         {
             SaveLoadSignals.Instance.onSaveGameData += saveGameCommand.OnSaveGameData;
             SaveLoadSignals.Instance.onLoadGameData += loadGameCommand.OnLoadGameData;
+            SaveLoadSignals.Instance.onSaveIdleData += saveIdleGameCommand.OnSaveIdleGameData;
+            SaveLoadSignals.Instance.onLoadIdleData += loadIdleGameCommand.OnLoadBuildingsData;
         }
 
         private void UnsubscribeEvents()
         {
             SaveLoadSignals.Instance.onSaveGameData -= saveGameCommand.OnSaveGameData;
             SaveLoadSignals.Instance.onLoadGameData -= loadGameCommand.OnLoadGameData;
+            SaveLoadSignals.Instance.onSaveIdleData -= saveIdleGameCommand.OnSaveIdleGameData;
+            SaveLoadSignals.Instance.onLoadIdleData -= loadIdleGameCommand.OnLoadBuildingsData;
         }
         private void OnDisable()
         {

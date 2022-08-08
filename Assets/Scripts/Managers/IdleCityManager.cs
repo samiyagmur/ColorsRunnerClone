@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -63,7 +64,7 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-      
+            
         }
 
         private void UnsubscribeEvents()
@@ -82,8 +83,9 @@ namespace Managers
         {   
             yield return new WaitForSeconds(1f);
             foreach (var data in CityData.CityList)
-            {
+            {   
                 ES3.Save(data.BuildingAdressId.ToString(),data);
+                Debug.Log("SAVE");
             }
         }
     }

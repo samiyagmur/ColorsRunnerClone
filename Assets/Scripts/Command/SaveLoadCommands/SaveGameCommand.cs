@@ -1,6 +1,6 @@
 ﻿using Enums;
 
-namespace Command
+namespace Command.SaveLoadCommands
 {
     public class SaveGameCommand
     {

@@ -1,5 +1,7 @@
 ﻿using UnityEngine.Events;
 using System;
+using System.Collections.Generic;
+using Datas.ValueObject;
 using Enums;
 using Extentions;
 
@@ -7,7 +9,13 @@ namespace Signals
 {
     public class SaveLoadSignals : MonoSingleton<SaveLoadSignals>
     {
-        public  Action<SaveStates, int> onSaveGameData = delegate { };
+        public  UnityAction<SaveStates, int> onSaveGameData = delegate { };
+        
         public  Func<SaveStates, int> onLoadGameData = delegate { return 0; };
+        
+        public UnityAction<CityData> onSaveIdleData = delegate(CityData arg0) {  };
+        
+        public Func<SaveStates,CityData> onLoadIdleData = states => new CityData();
+
     }
 }
