@@ -8,7 +8,6 @@ namespace Datas.ValueObject
     [Serializable]
     public class SideObject
     {
-        public GameObject Building;
 
         public TextMeshPro BuildingText;
 

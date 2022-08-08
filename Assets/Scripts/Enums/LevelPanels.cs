@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Enums
 {
-    public enum uiPanels 
+    public enum UIPanels 
     {
-        startPanel,
-        levelPanel,
-        failPanel,
-        miniGamePanel,
+        StartPanel,
+        LevelPanel,
+        FailPanel,
+        MultiplyPanel,
         IdlePanel
     } 
 }

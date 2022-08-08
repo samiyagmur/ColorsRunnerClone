@@ -31,14 +31,14 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp-firstpass
     - ToonyColorsPro2.Demo
-    - ToonyColorsPro.Runtime
     - Assembly-CSharp
+    - ToonyColorsPro.Runtime
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
-    showAdvancedSettings: 0
+    showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
   addAllPrefabsToManager: 1
   logDebugInfo: 0
   logWarnings: 1
-  logErrors: 1
+  logErrors: 0
