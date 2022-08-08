@@ -15,7 +15,8 @@ namespace Signals
         
         public UnityAction<CityData> onSaveIdleData = delegate(CityData arg0) {  };
         
-        public Func<SaveStates,CityData> onLoadIdleData = states => new CityData();
+        //abone olduğum yerde bana ıdledata yollasın
+        public Func<SaveStates, CityData> onLoadIdleData;
         
         protected override void Awake()
         {

@@ -23,7 +23,7 @@ namespace Managers
 
         #region Serialized Variables
         
-        [SerializeField] private List<GameObject> cubeList = new List<GameObject>();
+        [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         [SerializeField] [Range(0.1f, 1f)] private float lerpDelay;
         public Transform PlayerTransform;
         
@@ -42,13 +42,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             StackSignals.Instance.onIncreaseStack += OnAddStack;
-            StackSignals.Instance.onIncreaseStack += OnRemoveStack;
+            StackSignals.Instance.onDecreaseStack += OnRemoveStack;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onIncreaseStack -= OnAddStack;
-            StackSignals.Instance.onIncreaseStack -= OnRemoveStack;
+            StackSignals.Instance.onDecreaseStack-= OnRemoveStack;
         }
         private void OnDisable()
         {
@@ -66,42 +66,49 @@ namespace Managers
         {   
             currentStack.transform.SetParent(transform);
 
-            if (cubeList.Count == 0)
+            if (collectableList.Count == 0)
             {
                 currentStack.transform.localPosition = transform.localPosition;
-                cubeList.Add(currentStack);
+                collectableList.Add(currentStack);
 
                 return;
             }
             
-            currentStack.transform.localPosition = cubeList[cubeList.Count-1].transform.localPosition + Vector3.back * 1.2f;
+            currentStack.transform.localPosition = collectableList[collectableList.Count-1].transform.localPosition + Vector3.back * 1.2f;
             
-            cubeList.Add(currentStack);
+            collectableList.Add(currentStack);
             
         }
 
-        private void OnRemoveStack(GameObject currentStack)
+        private void OnRemoveStack(int currentIndex)
         {
-            
+            for (int i = 0; i < collectableList.Count; i++)
+            {
+                transform.GetChild(currentIndex).SetParent(null);
+                
+                collectableList.RemoveAt(currentIndex);
+                
+                collectableList.TrimExcess();
+            }
         }
         
         private void LerpStack()
         {
-            for (int i = 0; i < cubeList.Count; i++)
+            for (int i = 0; i < collectableList.Count; i++)
             {
                 if (i == 0)
                 {
-                    Vector3 xPos = cubeList[i].transform.position;
+                    Vector3 xPos = collectableList[i].transform.position;
                     Vector3 targetPos = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y,
-                        cubeList[i].transform.position.z);
-                    cubeList[i].transform.position = Vector3.Lerp(xPos, targetPos,lerpDelay);
+                        collectableList[i].transform.position.z);
+                    collectableList[i].transform.position = Vector3.Lerp(xPos, targetPos,lerpDelay);
                 }
                 else
                 {
-                    Vector3 xPos = cubeList[i].transform.position;
-                    Vector3 targetPos = new Vector3(cubeList[i-1].transform.position.x,
-                        cubeList[i-1].transform.position.y, cubeList[i].transform.position.z);
-                    cubeList[i].transform.position = Vector3.Lerp(xPos, targetPos,lerpDelay);
+                    Vector3 xPos = collectableList[i].transform.position;
+                    Vector3 targetPos = new Vector3(collectableList[i-1].transform.position.x,
+                        collectableList[i-1].transform.position.y, collectableList[i].transform.position.z);
+                    collectableList[i].transform.position = Vector3.Lerp(xPos, targetPos,lerpDelay);
                 }
             }
         }
