@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     private bool _isTouching;
 
-    private GameStates _currentGameState = GameStates.Runner;
+    private GameStates _currentGameState = GameStates.Idle;
     
     private float _currentVelocity; //ref type
     private Vector2? _mousePosition; //ref type
@@ -127,6 +127,7 @@ public class InputManager : MonoBehaviour
                 }
                 else if (_currentGameState == GameStates.Idle)
                 {
+                    
                     _moveVector.x = floatingJoystick.Horizontal;
                     _moveVector.z = floatingJoystick.Vertical;
                     InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()

@@ -16,7 +16,7 @@ public class PlayerMovementController : MonoBehaviour
     #endregion
     #region Private Variables
     [Header("Data")] private PlayerMovementData _movementData;
-    private GameStates _currentGameState = GameStates.Runner;
+    private GameStates _currentGameState = GameStates.Idle;
     private bool _isReadyToMove, _isReadyToPlay;
     private float _inputValueX,_inputValueZ;
     private Vector2 _clampValues;
@@ -81,6 +81,7 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (_currentGameState == GameStates.Idle)
                     {
+                        Debug.Log("İdle");
                         IdleMove();
                     }
                     
