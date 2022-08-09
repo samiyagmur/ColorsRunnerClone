@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using Command;
 using Command.SaveLoadCommands;
+using Datas.ValueObject;
 using Signals;
 using UnityEngine;
 
@@ -45,6 +48,14 @@ namespace Managers
             }
         }
 
+        private void Start()
+        {
+            if (!ES3.FileExists())
+            {
+                
+            }
+        }
+
         #region Event Subscription
 
         private void OnEnable()
@@ -57,7 +68,7 @@ namespace Managers
             SaveLoadSignals.Instance.onSaveGameData += saveGameCommand.OnSaveGameData;
             SaveLoadSignals.Instance.onLoadGameData += loadGameCommand.OnLoadGameData;
             SaveLoadSignals.Instance.onSaveIdleData += saveIdleGameCommand.OnSaveIdleGameData;
-            SaveLoadSignals.Instance.onLoadIdleData += loadIdleGameCommand.OnLoadBuildingsData;
+            //SaveLoadSignals.Instance.onLoadIdleData += loadIdleGameCommand.OnLoadBuildingsData;
         }
 
         private void UnsubscribeEvents()
@@ -65,13 +76,15 @@ namespace Managers
             SaveLoadSignals.Instance.onSaveGameData -= saveGameCommand.OnSaveGameData;
             SaveLoadSignals.Instance.onLoadGameData -= loadGameCommand.OnLoadGameData;
             SaveLoadSignals.Instance.onSaveIdleData -= saveIdleGameCommand.OnSaveIdleGameData;
-            SaveLoadSignals.Instance.onLoadIdleData -= loadIdleGameCommand.OnLoadBuildingsData;
+            //SaveLoadSignals.Instance.onLoadIdleData -= loadIdleGameCommand.OnLoadBuildingsData;
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-
+        
         #endregion
+        
+       
     }
 }

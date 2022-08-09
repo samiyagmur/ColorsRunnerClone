@@ -47,12 +47,14 @@ namespace Managers
         {
             CityData = GetCityData();
             
+            
         }
+        
         private CityData GetCityData() => Resources.Load<CD_Buildings>("Data/CD_Buildings 1").CityData;
 
         private void Start()
         {
-            //StartCoroutine(SaveData());
+           SaveCityData(CityData);
         }
 
         #region Event Subscription
@@ -78,7 +80,13 @@ namespace Managers
 
         #endregion
 
-        // ReSharper disable Unity.PerformanceAnalysis
+        private void SaveCityData(CityData cityData)
+        {
+            foreach (var data in cityData.CityList)
+            {   
+                ES3.Save(data.BuildingAdressId.ToString(),data,"IdleLevelData/IdleLevelData.es3");
+            }
+        }
         
     }
 }

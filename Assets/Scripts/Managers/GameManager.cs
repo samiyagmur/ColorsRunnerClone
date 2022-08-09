@@ -39,6 +39,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            OnGameOpen();
             SubscribeEvents();
         }
 
@@ -62,7 +63,10 @@ namespace Managers
         {
             States = newState;
         }
-
+        private void OnGameOpen()
+        {
+            CoreGameSignals.Instance.onGameOpen?.Invoke();
+        }
         //private void OnApplicationPause(bool pauseStatus)
         //{
         //    throw new NotImplementedException();
