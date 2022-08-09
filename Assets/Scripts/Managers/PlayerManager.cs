@@ -95,7 +95,6 @@ namespace Managers
         private void OnGetIdleInputValues(IdleInputParams inputParams)
         {
             movementController.UpdateIdleInputValue(inputParams);
-           
         }
 
         #endregion

@@ -40,7 +40,6 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-
         }
 
         private void OnDisable()
@@ -50,6 +49,8 @@ namespace Managers
 
         #endregion
 
+        
+        
         #region PanelControls
 
         private void OnOpenPanel(UIPanels panels)
@@ -62,9 +63,9 @@ namespace Managers
             UIPanelController.ClosePanel(panels);
         }
         #endregion
-        private void OnPlay()
+        public void OnPlay()
         {
-            CoreGameSignals.Instance.onPlay?.Invoke();
+            
         }
         public void OnFail()
         {
@@ -85,8 +86,9 @@ namespace Managers
         }
         public void StartButton()
         {
+            Debug.Log("Tetik");
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
-            OnPlay();
+            CoreGameSignals.Instance.onPlay?.Invoke();
         }
         public void TryAgain()
         {
