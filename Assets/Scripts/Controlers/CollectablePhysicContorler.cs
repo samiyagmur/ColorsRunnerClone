@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Managers;
+using Signals;
 
 namespace Controlers
 {
@@ -12,28 +13,27 @@ namespace Controlers
         private void OnTriggerEnter(Collider other)
         {
 
-            //if (other.CompareTag("player"))
-            //{
 
-            //}
-            //if (other.CompareTag("collectable")) collectableMenager.OnIcreaseStack();
+            if (other.CompareTag("collectable")) collectableMenager.OnIcreaseStack();
 
-           // if (other.CompareTag("obstacle")) collectableMenager.OnDecreaseStack();
+            if (other.CompareTag("obstacle")) collectableMenager.OnDecreaseStack();
 
-            if (other.CompareTag("rainbow")) collectableMenager.OnChangeCollor();
+            if (other.CompareTag("colorGate")) collectableMenager.OnChangeColor(other.gameObject.GetComponent<Renderer>().material);
 
-            if (other.CompareTag("color")) collectableMenager.OnChangeCollor();
+            if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
 
-            if (other.CompareTag("taretArea")) collectableMenager.OnChangeCollor(); 
+            if (other.CompareTag("dronArea")) collectableMenager.StartPointDronArea();
 
-            if (other.CompareTag("dronArea")) collectableMenager.OnChangeCollor();
+            if (other.CompareTag("taretArea")) collectableMenager.StartPointTaretArea();
 
-           // if (other.CompareTag("nextIdleLevel")) collectableMenager.onHitNextIdleLevel();
-
+            // if (other.CompareTag("nextIdleLevel")) collectableMenager.onHitNextIdleLevel();
         }
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
+            if (other.CompareTag("dronArea")) collectableMenager.EndPointDronArea();
+            if (other.CompareTag("taretArea")) collectableMenager.EndPointTaretArea();
         }
+        
     }
 }

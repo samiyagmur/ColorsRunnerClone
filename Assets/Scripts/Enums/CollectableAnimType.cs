@@ -2,18 +2,11 @@ using UnityEngine;
 
 namespace Enums{
 
-public class CollectableAnimType : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public enum CollectableAnimType 
     {
-        
+        Idle,
+        Run,
+        Crouch,
+        CrouchandWalk
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
 }
