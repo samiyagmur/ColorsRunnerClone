@@ -9,7 +9,7 @@ namespace Signals
         
         public UnityAction<GameObject> onIncreaseStack = delegate(GameObject arg0) {  };
         
-        public UnityAction<GameObject> onDecreaseStack = delegate(GameObject arg0) {  };
+        public UnityAction<int> onDecreaseStack = delegate(int arg0) {  };
         protected override void Awake()
         {
             base.Awake();
