@@ -12,15 +12,13 @@ namespace Controlers
         
         private void OnTriggerEnter(Collider other)
         {
-
-
             if (other.CompareTag("collectable")) collectableMenager.OnIcreaseStack();
 
             if (other.CompareTag("obstacle")) collectableMenager.OnDecreaseStack();
 
             if (other.CompareTag("colorGate")) collectableMenager.OnChangeColor(other.gameObject.GetComponent<Renderer>().material);
 
-            if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
+            //if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
 
             if (other.CompareTag("dronArea")) collectableMenager.StartPointDronArea();
 

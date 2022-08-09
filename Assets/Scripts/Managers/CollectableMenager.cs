@@ -26,6 +26,8 @@ namespace Managers
         #endregion
 
 
+
+
         #region Event Subcription
         private void OnEnable()
         {
@@ -38,14 +40,17 @@ namespace Managers
             CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             CoreGameSignals.Instance.onEnterMiniGame += OnEnterMiniGame;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onGameOpen -= OnGameOpen;
             CoreGameSignals.Instance.onEnterMiniGame = OnEnterMiniGame;
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
         private void OnDisable()
         {
@@ -55,7 +60,11 @@ namespace Managers
 
         #region Physical Managment
         public void OnIcreaseStack() { StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);}
-        public void OnDecreaseStack() { StackSignals.Instance.onDecreaseStack?.Invoke(GetInstanceID());}
+        public void OnDecreaseStack() 
+        { 
+            StackSignals.Instance.onDecreaseStack?.Invoke(GetInstanceID());
+            collectableParticalController.PlayPartical();
+        }
         public void OnChangeColor(Material material) => collectableMashController.changeColor(material);
         private void OnGameOpen() { collectableAnimationController.WhenGameOpen(); }
         private void OnPlay() { collectableAnimationController.WhenPlay(); }
@@ -71,10 +80,11 @@ namespace Managers
             collectableMashController.reChangeOutLine();
             collectableAnimationController.WhenExitDronArea();
         }
+
         private void OnEnterMiniGame() { collectableAnimationController.WhenEnterMiniGame(); }
         private void OnEnterIdleArea() { collectableAnimationController.WhenEnterIdleArea(); }
-
-
+        private void OnNextLevel() { collectableAnimationController.WhenNextLevel(); }  
+      
         //public void onHitBuildingTextArea() => //IdlegameSignals ;
 
         //public void onHitNextIdleLevel() =>//IdlegameSignals
