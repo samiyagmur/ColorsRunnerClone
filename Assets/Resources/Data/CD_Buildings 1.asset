@@ -14,20 +14,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CityData:
     CityList:
-    - Building: {fileID: 0}
-      BuildingText: {fileID: 0}
-      BuildingMarketPrice: 0
-      PayedAmount: 0
+    - BuildingMarketPrice: 100
+      PayedAmount: 100
       BuildingAdressId: 0
+      BuildingState: 1
+      BuildingType: 1
+    - BuildingMarketPrice: 100
+      PayedAmount: 0
+      BuildingAdressId: 1
       BuildingState: 0
+      BuildingType: 4
+    - BuildingMarketPrice: 100
+      PayedAmount: 100
+      BuildingAdressId: 2
+      BuildingState: 1
+      BuildingType: 11
+    - BuildingMarketPrice: 100
+      PayedAmount: 54
+      BuildingAdressId: 3
+      BuildingState: 1
+      BuildingType: 1
+    - BuildingMarketPrice: 100
+      PayedAmount: 0
+      BuildingAdressId: 4
+      BuildingState: 1
+      BuildingType: 1
+    - BuildingMarketPrice: 100
+      PayedAmount: 59
+      BuildingAdressId: 5
+      BuildingState: 1
+      BuildingType: 1
+    - BuildingMarketPrice: 100
+      PayedAmount: 83
+      BuildingAdressId: 6
+      BuildingState: 1
       BuildingType: 1
     PublicPlaces:
     - RequiredBuilds: 3
       RequiredBuildText: {fileID: 0}
       BuildingState: 1
+      PublicPlacesType: 0
     SideObjects:
-    - Building: {fileID: 0}
-      BuildingText: {fileID: 0}
+    - BuildingText: {fileID: 0}
       BuildingMarketPrice: 0
       PayedAmount: 0
       BuildingAdressId: 0

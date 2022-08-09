@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+namespace Enums{
 
 public class CollectableAnimType : MonoBehaviour
 {
@@ -15,4 +15,5 @@ public class CollectableAnimType : MonoBehaviour
     {
         
     }
+}
 }
