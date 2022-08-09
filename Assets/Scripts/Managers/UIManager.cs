@@ -61,18 +61,15 @@ namespace Managers
         {
             UIPanelController.ClosePanel(panels);
         }
-
         #endregion
-        
-        public void StartButton()
+        private void OnPlay()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            CoreGameSignals.Instance.onPlay?.Invoke();
         }
-
         public void OnFail()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
-            //CoreGamesignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         public void OnEnterMultiply()
@@ -86,7 +83,11 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
         }
-
+        public void StartButton()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            OnPlay();
+        }
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
@@ -98,13 +99,13 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-            //CoreGamesignals.Instance.onNextLevel?.Invoke();
+            CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            // CoreGamesignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
     }
 }
