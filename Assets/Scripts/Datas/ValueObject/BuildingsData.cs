@@ -8,9 +8,6 @@ namespace Datas.ValueObject
     [Serializable]
     public class BuildingsData
     {
-        public GameObject Building;
-
-        public TextMeshPro BuildingText;
 
         public int BuildingMarketPrice;
 

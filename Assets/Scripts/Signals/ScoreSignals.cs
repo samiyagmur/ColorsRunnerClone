@@ -1,19 +1,14 @@
+using Extention;
 using UnityEngine;
 
 namespace Signals
 {
-    public class ScoreSignals : MonoBehaviour
+    public class ScoreSignals : MonoSingleton<ScoreSignals>
     {
-        // Start is called before the first frame update
-        void Start()
+       
+        protected override void Awake()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            base.Awake();
         }
     }
 }
