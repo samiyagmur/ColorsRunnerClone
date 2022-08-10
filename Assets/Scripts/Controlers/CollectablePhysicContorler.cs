@@ -8,29 +8,30 @@ namespace Controlers
     public class CollectablePhysicContorler : MonoBehaviour
     {
 
-        CollectableMenager collectableMenager;
+        [SerializeField]
+        private CollectableMenager collectableMenager;
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("collectable")) collectableMenager.OnIcreaseStack();
+            if (other.CompareTag("Collectable")) collectableMenager.OnIcreaseStack();
 
-            if (other.CompareTag("obstacle")) collectableMenager.OnDecreaseStack();
+            if (other.CompareTag("Obstacle")) collectableMenager.OnDecreaseStack();
 
-            if (other.CompareTag("colorGate")) collectableMenager.OnChangeColor(other.gameObject.GetComponent<Renderer>().material);
+            if (other.CompareTag("ColorGate")) collectableMenager.OnChangeColor(other.gameObject.GetComponent<Renderer>().material);
 
             //if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
 
-            if (other.CompareTag("dronArea")) collectableMenager.StartPointDronArea();
+            if (other.CompareTag("DroneArea")) collectableMenager.StartPointDroneArea(other.gameObject.GetComponent<Renderer>().material);
 
-            if (other.CompareTag("taretArea")) collectableMenager.StartPointTaretArea();
+            if (other.CompareTag("TurretArea")) collectableMenager.StartPointTurretArea();
 
             // if (other.CompareTag("nextIdleLevel")) collectableMenager.onHitNextIdleLevel();
         }
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
-            if (other.CompareTag("dronArea")) collectableMenager.EndPointDronArea();
-            if (other.CompareTag("taretArea")) collectableMenager.EndPointTaretArea();
+            if (other.CompareTag("DroneArea")) collectableMenager.EndPointDronArea();
+            if (other.CompareTag("TurretArea")) collectableMenager.EndPointTaretArea();
         }
         
     }

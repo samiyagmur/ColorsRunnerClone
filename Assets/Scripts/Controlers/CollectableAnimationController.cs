@@ -8,7 +8,7 @@ namespace Controlers
     {
         [SerializeField] Animator Collectabelanimator;
 
-        public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Idle);}
+        public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Crouch);}
 
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
 
@@ -16,17 +16,18 @@ namespace Controlers
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.Crouch); }
+        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.Crouch); }//Gecikmeli
 
-        public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }
+        public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }//bakılcak
 
-        public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }
 
-        public void WhenEnterIdleArea() { ChangeAnimationState(CollectableAnimType.Run); }
+        public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }//durma 
 
-        public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Idle); }
+        //public void WhenEnterIdleArea() { ChangeAnimationState(CollectableAnimType.Run); }//
 
-        public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }
+        public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Crouch); }//
+
+       // public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }
 
         
         public void ChangeAnimationState(CollectableAnimType type)
