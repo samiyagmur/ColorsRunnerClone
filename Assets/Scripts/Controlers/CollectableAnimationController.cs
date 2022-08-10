@@ -26,22 +26,24 @@ namespace Controlers
 
         public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Idle); }
 
+        public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }
+
         
         public void ChangeAnimationState(CollectableAnimType type)
         {   
             switch (type)
             {   
                 case CollectableAnimType.Idle:
-                    animator.SetTrigger("Idle");
+                    Collectabelanimator.SetTrigger("Idle");
                     break;
                 case CollectableAnimType.Run:
-                    animator.SetTrigger("Run");
+                    Collectabelanimator.SetTrigger("Run");
                     break;
                 case CollectableAnimType.Crouch:
-                    animator.SetTrigger("Crouch");
+                    Collectabelanimator.SetTrigger("Crouch");
                     break;
                 case CollectableAnimType.CrouchandWalk:
-                    animator.SetTrigger("CrouchandWalk");
+                    Collectabelanimator.SetTrigger("CrouchandWalk");
                     break;
             }
         }
