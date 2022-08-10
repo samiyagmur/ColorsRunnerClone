@@ -6,7 +6,7 @@ namespace Controlers
 {
     public class CollectableAnimationController : MonoBehaviour
     {
-        [SerializeField] Animator animator;
+        [SerializeField] Animator Collectabelanimator;
 
         public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Idle);}
 
