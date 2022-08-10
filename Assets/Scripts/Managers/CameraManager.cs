@@ -15,7 +15,6 @@ namespace Managers
         #endregion
         #endregion
 
-
         #region Event Subcription
 
         private void OnEnable()
@@ -46,11 +45,11 @@ namespace Managers
         }
 
         #endregion
+
         private void OnPlay()
         {
             camMovementController.whenGameStart();
         }
-    
 
         private void OnEnterMiniGame()
         {
@@ -65,13 +64,5 @@ namespace Managers
         {
             camMovementController.WhenOnReset();
         }
-
-
-
-
-
-
-
-
     }
 }

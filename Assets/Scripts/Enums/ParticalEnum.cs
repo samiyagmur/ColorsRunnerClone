@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enums
 {
-    public enum NewMonoBehaviour 
+    public enum ParticalEnum 
     {
         explore,
         exploreColorFul,

@@ -39,7 +39,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             CoreGameSignals.Instance.onEnterMiniGame += OnEnterMiniGame;
-            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            //CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             
         }
@@ -49,7 +49,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onGameOpen -= OnGameOpen;
             CoreGameSignals.Instance.onEnterMiniGame = OnEnterMiniGame;
-            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
+            //CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
         private void OnDisable()
@@ -62,27 +62,27 @@ namespace Managers
         public void OnIcreaseStack() { StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);}
         public void OnDecreaseStack() 
         { 
-            StackSignals.Instance.onDecreaseStack?.Invoke(GetInstanceID());
+            StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             collectableParticalController.PlayPartical();
         }
-        public void OnChangeColor(Material material) => collectableMashController.changeColor(material);
-        private void OnGameOpen() { collectableAnimationController.WhenGameOpen(); }
+        public void OnChangeColor(Material material) { StackSignals.Instance.onMaterialChange?.Invoke(material);}
+        private void OnGameOpen() {collectableAnimationController.WhenGameOpen();}
         private void OnPlay() { collectableAnimationController.WhenPlay(); }
-        public void StartPointTaretArea() => collectableAnimationController.WhenEnterTaretArea();
+        public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
         public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
-        public void StartPointDronArea()
+        public void StartPointDroneArea(Material materialDrone)
         {
-            collectableMashController.changeOutLine();
+            StackSignals.Instance.onMaterialChangeForDroneArea?.Invoke(materialDrone);//dornkontrol//Materyal kontrol edilcek.
             collectableAnimationController.WhenEnterDronArea();
         }
         public void EndPointDronArea()
         {
-            collectableMashController.reChangeOutLine();
+            //collectableMashController.reChangeOutLine();
             collectableAnimationController.WhenExitDronArea();
         }
 
         private void OnEnterMiniGame() { collectableAnimationController.WhenEnterMiniGame(); }
-        private void OnEnterIdleArea() { collectableAnimationController.WhenEnterIdleArea(); }
+        //private void OnEnterIdleArea() { collectableAnimationController.WhenEnterIdleArea(); }
         private void OnNextLevel() { collectableAnimationController.WhenNextLevel(); }  
       
         //public void onHitBuildingTextArea() => //IdlegameSignals ;
