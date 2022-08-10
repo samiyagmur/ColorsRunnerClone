@@ -43,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             _inputValueX = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
+            //_movementDirection = new Vector3((_inputValueX)/10,0,0);
         }
         public void UpdateIdleInputValue(IdleInputParams inputParam)
         {
@@ -77,11 +78,12 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     if (_currentGameState == GameStates.Runner)
                     {
+                        
                         RunnerMove();
                     }
                     else if (_currentGameState == GameStates.Idle)
                     {
-                        Debug.Log("İdle");
+                        
                         IdleMove();
                     }
                     
@@ -118,6 +120,10 @@ public class PlayerMovementController : MonoBehaviour
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
+            
+            Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+
+            transform.rotation = toRotation;
         }
 
         private void IdleMove()
@@ -130,6 +136,10 @@ public class PlayerMovementController : MonoBehaviour
             Vector3 position;
             position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
             rigidbody.position = position;
+
+            Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+
+            transform.rotation = toRotation;
         }
         private void RunnerStopSideways()
         {

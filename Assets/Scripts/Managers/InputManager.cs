@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     private bool _isTouching;
 
-    private GameStates _currentGameState = GameStates.Idle;
+    [SerializeField]private GameStates _currentGameState;
     
     private float _currentVelocity; //ref type
     private Vector2? _mousePosition; //ref type
@@ -78,14 +78,14 @@ public class InputManager : MonoBehaviour
     {
         if (!isReadyForTouch) return;
 
-        if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonUp(0))
         {
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonDown(0))
         {
             _isTouching = true;
             InputSignals.Instance.onInputTaken?.Invoke();
@@ -98,7 +98,7 @@ public class InputManager : MonoBehaviour
             _mousePosition = Input.mousePosition;
         }
 
-        if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButton(0) )
         {
             if (_isTouching)
             {
@@ -127,7 +127,6 @@ public class InputManager : MonoBehaviour
                 }
                 else if (_currentGameState == GameStates.Idle)
                 {
-                    
                     _moveVector.x = floatingJoystick.Horizontal;
                     _moveVector.z = floatingJoystick.Vertical;
                     InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
