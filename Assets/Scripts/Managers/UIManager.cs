@@ -15,7 +15,7 @@ namespace Managers
 
         #region SerializeField Veriables
 
-        [SerializeField] uiPanelController uiPanelController;
+        [SerializeField] UIPanelController UIPanelController;
 
         #endregion
 
@@ -40,7 +40,6 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-
         }
 
         private void OnDisable()
@@ -50,62 +49,67 @@ namespace Managers
 
         #endregion
 
+        
+        
         #region PanelControls
 
-        private void OnOpenPanel(uiPanels panels)
+        private void OnOpenPanel(UIPanels panels)
         {
-            uiPanelController.OpenPanel(panels);
+            UIPanelController.OpenPanel(panels);
         }
 
-        private void OnClosePanel(uiPanels panels)
+        private void OnClosePanel(UIPanels panels)
         {
-            uiPanelController.ClosePanel(panels);
+            UIPanelController.ClosePanel(panels);
         }
-
         #endregion
-
-        public void StartButton()
+        public void OnPlay()
         {
-            UISignals.Instance.onClosePanel?.Invoke(uiPanels.startPanel);
-
+            
         }
-
         public void OnFail()
         {
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.failPanel);
-            //CoreGamesignals.Instance.onReset?.Invoke();
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
-        public void OnEnterMiniGame()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(uiPanels.levelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.miniGamePanel);
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.IdlePanel);
+        public void OnEnterMiniGameArea()
+        {   
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
         }
 
         public void EnterIdleArea()
         {
-            UISignals.Instance.onClosePanel?.Invoke(uiPanels.miniGamePanel);
+            
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
+            CoreGameSignals.Instance.onEnterIdleArea();
         }
-
+        public void StartButton()
+        {
+            Debug.Log("Tetik");
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            CoreGameSignals.Instance.onPlay?.Invoke();
+        }
         public void TryAgain()
         {
-            UISignals.Instance.onClosePanel?.Invoke(uiPanels.failPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.startPanel);
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             // CoreGamesignals.Instance.onReset?.Invoke();
         }
 
         public void NextLevel()
         {
-            UISignals.Instance.onClosePanel?.Invoke(uiPanels.IdlePanel);
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.levelPanel);
-            //CoreGamesignals.Instance.onNextLevel?.Invoke();
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
         public void Restart()
         {
-            UISignals.Instance.onOpenPanel?.Invoke(uiPanels.startPanel);
-            // CoreGamesignals.Instance.onReset?.Invoke();
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
     }
 }

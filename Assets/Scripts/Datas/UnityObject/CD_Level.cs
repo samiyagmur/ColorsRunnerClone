@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using Datas.ValueObject;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace Datas.UnityObject
 {

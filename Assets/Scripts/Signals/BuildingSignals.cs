@@ -1,4 +1,4 @@
-﻿using Extentions;
+﻿using Extention;
 
 namespace Signals
 {

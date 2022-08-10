@@ -1,14 +1,20 @@
-using Extentions;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
 using Enums;
+using Extention;
 
 
 namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
+        public UnityAction onGameOpen = delegate { };
+
+        public UnityAction onEnterMiniGame = delegate { };
+
+        public UnityAction onEnterIdleArea= delegate { };
+
         public UnityAction <GameStates> onChangeGameState = delegate { };
         
         public UnityAction onLevelInitialize = delegate { };

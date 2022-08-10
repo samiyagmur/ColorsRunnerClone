@@ -40,6 +40,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            OnGameOpen();
             SubscribeEvents();
         }
 
@@ -77,5 +78,11 @@ namespace Managers
         {
             CoreGameSignals.Instance.onApplicationQuit?.Invoke();
         }
+
+        private void OnGameOpen()
+        {
+            CoreGameSignals.Instance.onGameOpen?.Invoke();
+        }
+
     }
 }
