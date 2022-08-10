@@ -7,7 +7,7 @@ namespace Enums{
         Idle,
         Run,
         Crouch,
-        openArms,
+        //openArms,
         CrouchandWalk
     }
 }
