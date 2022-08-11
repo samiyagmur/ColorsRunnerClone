@@ -364,6 +364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92b0bdca888273418b192eaa848bae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectableList: []
+  lerpDelay: 0
+  PlayerTransform: {fileID: 0}
 --- !u!1 &216156845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,13 +1216,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    GameState: 0
     HorizontalInputSpeed: 2
     ClampSides: {x: -3, y: 3}
     ClampSpeed: 0.007
   floatingJoystick: {fileID: 605955700}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
+  _currentGameState: 0
 --- !u!1 &856107185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1316455235}
   rigidbody: {fileID: 1316455236}
+  currentGameState: 0
 --- !u!136 &1316455238
 CapsuleCollider:
   m_ObjectHideFlags: 0
