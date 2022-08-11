@@ -62,10 +62,7 @@ namespace Managers
         }
         #endregion
        
-        public void OnPlay()
-        {
-            CoreGameSignals.Instance.onPlay?.Invoke();
-        }
+        
         public void OnFail()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
@@ -84,7 +81,6 @@ namespace Managers
             Debug.Log("Tetik");
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onPlay?.Invoke();
-            OnPlay();
         }
         public void TryAgain()
         {

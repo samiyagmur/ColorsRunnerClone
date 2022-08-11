@@ -8,12 +8,12 @@ using System;
 
 namespace Managers
 {
-    public class CollectableMenager : MonoBehaviour
+    public class CollectableManager : MonoBehaviour
     {
         #region Self Veriables
         #region SerializeField Veriables
         [SerializeField]
-        CollectableMashController collectableMashController;
+        CollectableMeshController collectableMeshController;
         [SerializeField]
         CollectableAnimationController collectableAnimationController;
         [SerializeField]

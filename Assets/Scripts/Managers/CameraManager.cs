@@ -11,7 +11,7 @@ namespace Managers
 
         #region Self Variables
         #region SerilizeField
-        [SerializeField]CamMovementController camMovementController;
+        [SerializeField]CameraMovementController cameraMovementController;
         #endregion
         #endregion
 
@@ -48,21 +48,21 @@ namespace Managers
 
         private void OnPlay()
         {
-            camMovementController.whenGameStart();
+            cameraMovementController.whenGameStart();
         }
 
         private void OnEnterMiniGame()
         {
-            camMovementController.WhenEnterMiniGame();
+            cameraMovementController.WhenEnterMiniGame();
         }
 
         private void OnEnterIdleArea()
         {
-            camMovementController.WhenEnTerIdleArea();
+            cameraMovementController.WhenEnTerIdleArea();
         }
         private void OnReset()
         {
-            camMovementController.WhenOnReset();
+            cameraMovementController.WhenOnReset();
         }
     }
 }

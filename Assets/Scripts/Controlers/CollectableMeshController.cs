@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controlers
 {
-    public class CollectableMashController : MonoBehaviour
+    public class CollectableMeshController : MonoBehaviour
     {
 
 

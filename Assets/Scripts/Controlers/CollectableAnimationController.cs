@@ -23,8 +23,6 @@ namespace Controlers
 
         public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }//durma 
 
-        //public void WhenEnterIdleArea() { ChangeAnimationState(CollectableAnimType.Run); }//
-
         public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Crouch); }//
 
        // public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }

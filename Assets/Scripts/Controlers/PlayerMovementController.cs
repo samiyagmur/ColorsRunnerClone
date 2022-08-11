@@ -121,8 +121,8 @@ public class PlayerMovementController : MonoBehaviour
                 position.z);
             rigidbody.position = position;
             
-            Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-            transform.rotation = toRotation;
+            //Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+            //transform.rotation = toRotation;
         }
 
         private void IdleMove()
@@ -136,9 +136,9 @@ public class PlayerMovementController : MonoBehaviour
             position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
             rigidbody.position = position;
 
-            Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-
-            transform.rotation = toRotation;
+            //Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+//
+            //transform.rotation = toRotation;
         }
         private void RunnerStopSideways()
         {

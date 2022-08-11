@@ -22,7 +22,7 @@ namespace Managers
         #region Serialized Variables
 
         [Space] [SerializeField] private PlayerMovementController movementController;
-     //   [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private TextMeshPro scoreText;
         
         #endregion
@@ -103,8 +103,9 @@ namespace Managers
         
         private void OnPlay()
         {
+            animationController.ActivatePlayerAnimation();
             movementController.IsReadyToPlay(true);
-         //   animationController.Playanim(PlayerAnimationStates.Run);
+            
         }
 
         private void OnLevelSuccessful()

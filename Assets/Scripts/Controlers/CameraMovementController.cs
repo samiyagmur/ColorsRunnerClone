@@ -4,7 +4,7 @@ using Enums;
 
 namespace Controlers
 {
-    public class CamMovementController : MonoBehaviour
+    public class CameraMovementController : MonoBehaviour
     {
         [SerializeField] Animator camAnimator;
         public void whenGameStart() { changeCam(CameraStates.Level); } 
