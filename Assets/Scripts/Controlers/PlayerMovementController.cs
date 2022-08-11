@@ -44,7 +44,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             _inputValueX = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
-            //_movementDirection = new Vector3((_inputValueX)/10,0,0);
+            _movementDirection = new Vector3((_inputValueX),0,1);
         }
         public void UpdateIdleInputValue(IdleInputParams inputParam)
         {
@@ -122,7 +122,6 @@ public class PlayerMovementController : MonoBehaviour
             rigidbody.position = position;
             
             Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-
             transform.rotation = toRotation;
         }
 

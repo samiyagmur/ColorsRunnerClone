@@ -20,14 +20,18 @@ namespace Controlers
             switch (cameraStates)
             {
                 case CameraStates.Level:
-                    camAnimator.SetTrigger("Level");
+                    camAnimator.Play("Level");
+                    Debug.Log("level");
                     break;
                 case CameraStates.MiniGame:
-                    camAnimator.SetTrigger("MiniGame");
+                    camAnimator.Play("MiniGame");
+                    Debug.Log("mini");
                     break;
                 case CameraStates.Idle:
-                    camAnimator.SetTrigger("Idle");
+                    camAnimator.Play("Idle");
+                    Debug.Log("idle");
                     break;
+                
 
             }
         }
