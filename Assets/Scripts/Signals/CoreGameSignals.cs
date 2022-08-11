@@ -33,6 +33,10 @@ namespace Signals
         
         public UnityAction onSetCameraTarget = delegate { };
         
+        public UnityAction onApplicationPause = delegate {  };
+        
+        public UnityAction onApplicationQuit = delegate {  };
+        
         public UnityAction<CameraStates> onSetCameraState = delegate { };
 
         public Func<int> onGetLevelID = delegate { return 0; };
