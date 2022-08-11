@@ -30,10 +30,15 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp-firstpass
+<<<<<<< HEAD
     - Cinemachine
+=======
+    - ToonyColorsPro2.Demo
+>>>>>>> origin/StackManager
     - Assembly-CSharp
     - ToonyColorsPro2.Demo
     - ToonyColorsPro.Runtime
+    - Cinemachine
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
     showAdvancedSettings: 1

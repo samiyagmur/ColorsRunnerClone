@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_MK/MKToon/EditorURP.unitypackage.meta
 guid: 6f5fa022fe3a7e1429bc1770260201c6
+========
+guid: c000a381590149e47b5697142702aed9
+folderAsset: yes
+>>>>>>>> origin/StackManager:Assets/Art/Animator.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
