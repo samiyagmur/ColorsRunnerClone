@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     private bool _isTouching;
 
-    private GameStates _currentGameState = GameStates.Idle;
+    [SerializeField]private GameStates _currentGameState;
     
     private float _currentVelocity; //ref type
     private Vector2? _mousePosition; //ref type
@@ -98,45 +98,57 @@ public class InputManager : MonoBehaviour
             _mousePosition = Input.mousePosition;
         }
 
-        if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
+        if (_currentGameState == GameStates.Runner)
         {
-            if (_isTouching)
+            if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
             {
-                if (_currentGameState == GameStates.Runner)
+                if (_isTouching)
                 {
+
                     if (_mousePosition != null)
                     {
-                        Vector2 mouseDeltaPos = (Vector2) Input.mousePosition - _mousePosition.Value;
-                        
+                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
+
                         if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
                             _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
                         else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
-                                _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
+                            _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
                         else
-                                _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                                    Data.ClampSpeed);
-                    
+                            _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
+                                Data.ClampSpeed);
+
                         _mousePosition = Input.mousePosition;
-                    
+
                         InputSignals.Instance.onInputDragged?.Invoke(new RunnerInputParams()
                         {
                             XValue = _moveVector.x,
                             ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y)
-                        }); 
+                        });
                     }
-                }
-                else if (_currentGameState == GameStates.Idle)
-                {
-                    
-                    _moveVector.x = floatingJoystick.Horizontal;
-                    _moveVector.z = floatingJoystick.Vertical;
-                    InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
-                    {
-                        XValue = _moveVector.x,
-                        ZValue = _moveVector.z
-                    });
+
+                    // else if (_currentGameState == GameStates.Idle)
+                    // {
+                    //     _moveVector.x = floatingJoystick.Horizontal;
+                    //     _moveVector.z = floatingJoystick.Vertical;
+                    //     InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
+                    //     {
+                    //         XValue = _moveVector.x,
+                    //         ZValue = _moveVector.z
+                    //     });
+                    // }
                 }
             }
+        }
+
+        if (_currentGameState == GameStates.Idle)
+        {
+            _moveVector.x = floatingJoystick.Horizontal;
+            _moveVector.z = floatingJoystick.Vertical;
+            InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
+            {
+                XValue = _moveVector.x,
+                ZValue = _moveVector.z
+            });
         }
     }
 

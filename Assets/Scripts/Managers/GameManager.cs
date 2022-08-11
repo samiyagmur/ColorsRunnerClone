@@ -1,4 +1,5 @@
 using System;
+using Datas.ValueObject;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -63,18 +64,25 @@ namespace Managers
         {
             States = newState;
         }
+
+        private void OnApplicationPause(bool isPauseStatus)
+        {
+            if (isPauseStatus)
+            {
+                CoreGameSignals.Instance.onApplicationPause?.Invoke();
+            }
+            
+        }
+
+        private void OnApplicationQuit()
+        {
+            CoreGameSignals.Instance.onApplicationQuit?.Invoke();
+        }
+
         private void OnGameOpen()
         {
             CoreGameSignals.Instance.onGameOpen?.Invoke();
         }
-        //private void OnApplicationPause(bool pauseStatus)
-        //{
-        //    throw new NotImplementedException();
-        //}
-//
-        //private void OnApplicationQuit()
-        //{
-        //    throw new NotImplementedException();
-        //}
+
     }
 }

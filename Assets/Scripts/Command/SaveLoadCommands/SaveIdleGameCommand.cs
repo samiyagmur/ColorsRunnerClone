@@ -7,7 +7,10 @@ namespace Command.SaveLoadCommands
     {
         public void OnSaveIdleGameData(CityData cityData)
         {
-            
+            foreach (var data in cityData.CityList)
+            {   
+                ES3.Save(data.BuildingAdressId.ToString(),data,"IdleLevelData/IdleLevelData.es3");
+            }
         }
     }
 }
