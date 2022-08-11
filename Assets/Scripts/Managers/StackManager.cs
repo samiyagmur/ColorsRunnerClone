@@ -130,16 +130,16 @@ namespace Managers
                     targetPos = new Vector3(
                         Mathf.Lerp(targetPos.x, collectablePos.transform.position.x, 0.7f),
                         Mathf.Lerp(targetPos.y, collectablePos.transform.position.y, 0.7f),
-                        Mathf.Lerp(targetPos.z, collectablePos.transform.position.z - 1.5f, 0.7f));
+                        Mathf.Lerp(targetPos.z, collectablePos.transform.position.z - 1.5f, 1));
                 }
                 else
                 {
                     var collectablePos = collectableList.ElementAt(i-1);
                     var targetPos = collectableList.ElementAt(i);
                     targetPos.transform.position = new Vector3(
-                        Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 10*Time.fixedDeltaTime),
-                        Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 10*Time.fixedDeltaTime),
-                        Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, 10*Time.fixedDeltaTime));
+                        Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.7f),
+                        Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.7f),
+                        Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, 1));
                 }
             }
         }
