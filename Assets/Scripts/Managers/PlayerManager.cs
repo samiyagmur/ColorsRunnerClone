@@ -24,6 +24,8 @@ namespace Managers
         [Space] [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private TextMeshPro scoreText;
+        [SerializeField] private GameObject skinMeshRenderer;
+        
         
         #endregion
         #endregion
@@ -103,9 +105,7 @@ namespace Managers
         
         private void OnPlay()
         {
-            animationController.ActivatePlayerAnimation();
             movementController.IsReadyToPlay(true);
-            
         }
 
         private void OnLevelSuccessful()
@@ -128,7 +128,8 @@ namespace Managers
         {
             gameObject.SetActive(true);
             movementController.OnReset();
-        //    animationController.OnReset();
+            skinMeshRenderer.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            gameObject.GetComponent<PlayerAnimationController>().enabled = false;
         }
 
         private void OnSetScoreText(int Values)
