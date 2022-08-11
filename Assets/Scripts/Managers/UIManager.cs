@@ -49,8 +49,6 @@ namespace Managers
 
         #endregion
 
-        
-        
         #region PanelControls
 
         private void OnOpenPanel(UIPanels panels)
@@ -63,40 +61,42 @@ namespace Managers
             UIPanelController.ClosePanel(panels);
         }
         #endregion
+       
         public void OnPlay()
         {
-            
+            CoreGameSignals.Instance.onPlay?.Invoke();
         }
         public void OnFail()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         public void OnEnterMiniGameArea()
-        {   
+        {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
         }
 
-        public void EnterIdleArea()
-        {
-            
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
-            CoreGameSignals.Instance.onEnterIdleArea();
-        }
+        #region ButonGrup
         public void StartButton()
         {
             Debug.Log("Tetik");
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onPlay?.Invoke();
+            OnPlay();
         }
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            // CoreGamesignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
+        }
+        public void EnterIdleArea()
+        {
+
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
+            CoreGameSignals.Instance.onEnterIdleArea();
         }
 
         public void NextLevel()
@@ -111,6 +111,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
-    }
+    } 
+        #endregion
 }
 

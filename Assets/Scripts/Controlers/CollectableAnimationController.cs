@@ -6,9 +6,9 @@ namespace Controlers
 {
     public class CollectableAnimationController : MonoBehaviour
     {
-        [SerializeField] Animator animator;
+        [SerializeField] Animator Collectabelanimator;
 
-        public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Idle);}
+        public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Crouch);}
 
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
 
@@ -16,15 +16,18 @@ namespace Controlers
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.Crouch); }
+        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.Crouch); }//Gecikmeli
 
-        public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }
+        public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }//bakılcak
 
-        public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }
 
-        public void WhenEnterIdleArea() { ChangeAnimationState(CollectableAnimType.Run); }
+        public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }//durma 
 
-        public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Idle); }
+        //public void WhenEnterIdleArea() { ChangeAnimationState(CollectableAnimType.Run); }//
+
+        public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Crouch); }//
+
+       // public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }
 
         
         public void ChangeAnimationState(CollectableAnimType type)
@@ -32,16 +35,16 @@ namespace Controlers
             switch (type)
             {   
                 case CollectableAnimType.Idle:
-                    animator.SetTrigger("Idle");
+                    Collectabelanimator.SetTrigger("Idle");
                     break;
                 case CollectableAnimType.Run:
-                    animator.SetTrigger("Run");
+                    Collectabelanimator.SetTrigger("Run");
                     break;
                 case CollectableAnimType.Crouch:
-                    animator.SetTrigger("Crouch");
+                    Collectabelanimator.SetTrigger("Crouch");
                     break;
                 case CollectableAnimType.CrouchandWalk:
-                    animator.SetTrigger("CrouchandWalk");
+                    Collectabelanimator.SetTrigger("CrouchandWalk");
                     break;
             }
         }
