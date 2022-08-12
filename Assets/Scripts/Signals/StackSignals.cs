@@ -1,3 +1,4 @@
+using Enums;
 using Extention;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,9 +13,7 @@ namespace Signals
 
         public UnityAction<int> onDecreaseStack = delegate(int arg0) {  };
 
-        public UnityAction<Material> onMaterialChange = delegate{ };
-
-        public UnityAction<Material> onMaterialChangeForDroneArea = delegate { };
+        public UnityAction<ColorType> onChangeColor = delegate { };
 
         protected override void Awake()
         {
