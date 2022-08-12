@@ -4,6 +4,7 @@ using Enums;
 using Keys;
 using Managers;
 using ToonyColorsPro.ShaderGenerator;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Controlers{
@@ -121,15 +122,11 @@ public class PlayerMovementController : MonoBehaviour
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
-
-            if (_inputValueX == 0)
-            {
-                rigidbody.transform.DOLocalRotate(Vector3.zero,0.05f);
-            }
-            else
-            {
-                rigidbody.transform.DOLocalRotate(new Vector3(0, position.x * 10f, 0), 0.05f);
-            }
+            
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
+            
+            transform.rotation = toRotation;
+            
         }
 
         private void IdleMove()
