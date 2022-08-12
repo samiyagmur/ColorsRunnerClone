@@ -37,28 +37,15 @@ namespace Managers
         #endregion
 
         #region Public Variables
-        [Header("Data")]
-        public Material Data;
-
-
+        
         #endregion
 
         #endregion
 
         private void Awake()
         {
-            
-            Data = GetCollectableMaterial();
-           
-            
+           collectableMeshController.GetCollectableMaterial(collectableColorType);
         }
-        private void Start()
-        {
-           GetComponent<Renderer>().material = Data;
-        }
-
-        private Material GetCollectableMaterial() => Resources.Load<Material>($"Materials/{collectableColorType.ToString()}Mat");
-
 
         #region Event Subcription
         private void OnEnable()
@@ -100,18 +87,20 @@ namespace Managers
             collectableParticalController.PlayPartical();
         }
 
+        public void OnChangeColor(ColorType colorType)
+        {
+            collectableMeshController.GetCollectableMaterial(colorType);
+        }
+
         
         private void OnGameOpen() {collectableAnimationController.WhenGameOpen();}
         private void OnPlay() { collectableAnimationController.WhenPlay(); }
-        public void OnChangeColor()
-        {
-           collectableMeshController.
-        }
+
         public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
         public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
         public void StartPointDroneArea(Material materialDrone)
         {
-            StackSignals.Instance.onMaterialChangeForDroneArea?.Invoke(materialDrone);//dornkontrol//Materyal kontrol edilcek.
+            //StackSignals.Instance.onMaterialChangeForDroneArea?.Invoke(materialDrone);//dornkontrol//Materyal kontrol edilcek.
             collectableAnimationController.WhenEnterDronArea();
         }
 

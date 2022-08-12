@@ -1,5 +1,6 @@
 ﻿using Enums;
 using System.Collections;
+using Managers;
 using UnityEngine;
 
 
@@ -7,29 +8,27 @@ namespace Controlers
 {
     public class CollectableMeshController : MonoBehaviour
     {
-        [Header("Data")]
-        public Material Data;
-        private void Awake()
+        #region Self Variables
+
+        #region Private Veriables
+
+        #endregion
+        #region Serialized Variables
+        
+        #endregion
+
+        #region Public Variables
+        
+        #endregion
+
+        #endregion
+
+
+        public void GetCollectableMaterial(ColorType type)
         {
-
-            Data = GetCollectableMaterial();
-
-
-        }
-        private void Start()
-        {
-            GetComponent<Renderer>().material = Data;
+            GetComponent<Renderer>().material = Resources.Load<Material>($"Materials/{type.ToString()}Mat");
         }
 
-        public Material GetCollectableMaterial(ColorType type) => Resources.Load<Material>($"Materials/{type.ToString()}Mat");
 
-        public void changeOutLine()///BakılcakDron
-        {
-
-        }
-        public void reChangeOutLine()
-        {
-
-        }
     }
 }

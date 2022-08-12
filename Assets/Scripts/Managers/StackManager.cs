@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Enums;
 using Signals;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Managers
@@ -44,12 +46,14 @@ namespace Managers
         {
             StackSignals.Instance.onIncreaseStack += OnAddStack;
             StackSignals.Instance.onDecreaseStack += OnRemoveStack;
+            StackSignals.Instance.onChangeColor += OnChangeColor;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onIncreaseStack -= OnAddStack;
             StackSignals.Instance.onDecreaseStack-= OnRemoveStack;
+            StackSignals.Instance.onChangeColor -= OnChangeColor;
         }
         private void OnDisable()
         {
@@ -64,6 +68,13 @@ namespace Managers
            //LerpStackWithVector3();
         }
 
+        private void OnChangeColor(ColorType colorType)
+        {
+            for (int i = 0; i < collectableList.Count; i++)
+            {
+                collectableList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
+            }
+        }
         private void OnAddStack(GameObject currentStack)
         {   
             currentStack.transform.SetParent(transform);

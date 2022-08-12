@@ -20,7 +20,7 @@ namespace Controlers
             //if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
 
 
-            if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea(other.gameObject.GetComponent<Renderer>().material);
+            //if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea(other.gameObject.GetComponent<Renderer>().material);
 
             if (other.CompareTag("TurretArea")) collectableManager.StartPointTurretArea();
 
