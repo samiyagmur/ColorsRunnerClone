@@ -1,4 +1,5 @@
 ﻿using Datas.ValueObject;
+using DG.Tweening;
 using Enums;
 using Keys;
 using Managers;
@@ -19,7 +20,7 @@ public class PlayerMovementController : MonoBehaviour
     #region Private Variables
     [Header("Data")] private PlayerMovementData _movementData;
     private bool _isReadyToMove, _isReadyToPlay;
-    private float _inputValueX,_inputValueZ;
+    private float _inputValueX;
     private Vector2 _clampValues;
     private Vector3 _movementDirection;
     #endregion
@@ -44,23 +45,23 @@ public class PlayerMovementController : MonoBehaviour
         {
             _inputValueX = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
-            _movementDirection = new Vector3((_inputValueX),0,1);
         }
+        
         public void UpdateIdleInputValue(IdleInputParams inputParam)
         {
-            _inputValueX = inputParam.XValue;
-            _inputValueZ = inputParam.ZValue;
-            _movementDirection = new Vector3(_inputValueX,0,_inputValueZ);
+            _movementDirection = inputParam.InputValues;
         }
         
-        
-
 
         public void IsReadyToPlay(bool state)
         {
             _isReadyToPlay = state;
         }
 
+        public void ChangeGameStates(GameStates currentState)
+        {
+            currentGameState = currentState;
+        }
         private void Update()
         {
             if (_isReadyToPlay)
@@ -120,25 +121,35 @@ public class PlayerMovementController : MonoBehaviour
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
-            
-            //Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-            //transform.rotation = toRotation;
+
+            if (_inputValueX == 0)
+            {
+                rigidbody.transform.DOLocalRotate(Vector3.zero,0.05f);
+            }
+            else
+            {
+                rigidbody.transform.DOLocalRotate(new Vector3(0, position.x * 10f, 0), 0.05f);
+            }
         }
 
         private void IdleMove()
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
-                _inputValueZ * _movementData.ForwardSpeed);
+            velocity = new Vector3(_movementDirection.x * _movementData.ForwardSpeed, velocity.y,
+                _movementDirection.z * _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
 
             Vector3 position;
             position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
             rigidbody.position = position;
 
-            //Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-//
-            //transform.rotation = toRotation;
+            if (_movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+                
+                transform.rotation = toRotation;
+            }
+            
         }
         private void RunnerStopSideways()
         {

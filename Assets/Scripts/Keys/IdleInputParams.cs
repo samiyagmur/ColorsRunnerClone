@@ -1,8 +1,9 @@
-﻿namespace Keys{
+﻿using UnityEngine;
+
+namespace Keys{
 
 public struct IdleInputParams
 {
-    public float XValue;
-    public float ZValue;
+    public Vector3 InputValues;
 }
 }

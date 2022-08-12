@@ -56,6 +56,7 @@ namespace Managers
             InputSignals.Instance.onInputReleased += OnDeactiveMovement;
             InputSignals.Instance.onInputDragged += OnGetRunnerInputValues;
             InputSignals.Instance.onJoyStickInputDragged += OnGetIdleInputValues;
+            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
@@ -66,6 +67,7 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
             InputSignals.Instance.onInputDragged -= OnGetRunnerInputValues;
             InputSignals.Instance.onJoyStickInputDragged -= OnGetIdleInputValues;
+            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
@@ -80,7 +82,6 @@ namespace Managers
         private void OnActivateMovement()
         {
             movementController.EnableMovement();
-            
         }
 
         private void OnDeactiveMovement()
@@ -91,7 +92,6 @@ namespace Managers
         private void OnGetRunnerInputValues(RunnerInputParams inputParams)
         {
             movementController.UpdateRunnerInputValue(inputParams);
-
         }
 
         private void OnGetIdleInputValues(IdleInputParams inputParams)
@@ -102,6 +102,11 @@ namespace Managers
         #endregion
 
         #endregion
+
+        private void OnChangeGameState(GameStates gameStates)
+        {
+            movementController.ChangeGameStates(gameStates);
+        }
         
         private void OnPlay()
         {
