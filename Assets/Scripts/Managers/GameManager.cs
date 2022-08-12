@@ -12,13 +12,13 @@ namespace Managers
 
         #region Public Variables
 
-        public GameStates States;
+        
 
         #endregion
 
         #region Private Variables
 
-        
+        private GameStates States;
 
         #endregion
 

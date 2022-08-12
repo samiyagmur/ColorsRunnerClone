@@ -3,6 +3,7 @@ using Signals;
 using Enums;
 using System;
 using Controlers;
+using ToonyColorsPro.ShaderGenerator;
 
 namespace Managers
 {
@@ -34,12 +35,14 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -61,8 +64,12 @@ namespace Managers
             UIPanelController.ClosePanel(panels);
         }
         #endregion
-       
-        
+
+        public void OnPlay()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+        }
         public void OnFail()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
@@ -74,14 +81,13 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
         }
-
-        #region ButonGrup
-        public void StartButton()
+        public void Play()
         {
-            Debug.Log("Tetik");
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onPlay?.Invoke();
+            CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.Level);
         }
+        #region ButonGrup
+        
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);

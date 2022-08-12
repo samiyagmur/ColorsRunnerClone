@@ -483,7 +483,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2040128696}
         m_TargetAssemblyTypeName: Managers.UIManager, Assembly-CSharp
-        m_MethodName: StartButton
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
