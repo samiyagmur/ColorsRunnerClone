@@ -171,7 +171,6 @@ MonoBehaviour:
   collectableMeshController: {fileID: 844895808}
   collectableAnimationController: {fileID: 1319579746}
   collectableParticalController: {fileID: 0}
-  collectablePhysicController: {fileID: 942861866}
   collectableColorType: 0
 --- !u!1 &80415389
 GameObject:
@@ -609,7 +608,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2040128696}
         m_TargetAssemblyTypeName: Managers.UIManager, Assembly-CSharp
-        m_MethodName: Play
+        m_MethodName: StartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1425,7 +1424,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 615a08cadaa8bec42a60d4f1bcd3fe93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1463,7 +1462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645911482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.911, y: 0.473, z: 2.697}
+  m_LocalPosition: {x: -3.88, y: 1.49, z: 11.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2296,10 +2295,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 1100995628}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1979886972}
-  - {fileID: 2098202251}
-  - {fileID: 1599705673}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -563630955
     m_VirtualCamera: {fileID: 1979886972}
@@ -2458,6 +2454,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6123731347151673987, guid: b836ac01240f7d24287dde675adc95d2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59f13b5f4fbcff948be224c027423306, type: 2}
     - target: {fileID: 919132149155446097, guid: b836ac01240f7d24287dde675adc95d2, type: 3}
       propertyPath: m_Name
       value: Mesh
@@ -2942,7 +2942,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 59f13b5f4fbcff948be224c027423306, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
