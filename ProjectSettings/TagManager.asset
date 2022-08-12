@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Idle
   - Runner
+  - Obstacle
+  - TurretArea
+  - Gate
+  - Collectable
   layers:
   - Default
   - TransparentFX

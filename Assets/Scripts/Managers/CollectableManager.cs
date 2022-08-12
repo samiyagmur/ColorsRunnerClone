@@ -55,8 +55,7 @@ namespace Managers
         public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
         public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
         public void StartPointDroneArea() => collectableAnimationController.Invoke("WhenEnterDronArea",2f);
-
-        //ObstacleBilgigelcek ona göre ayaða kalkçak;
+        
 
         #endregion
     }

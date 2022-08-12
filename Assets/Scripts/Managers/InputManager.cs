@@ -80,14 +80,14 @@ public class InputManager : MonoBehaviour
     {
         if (!isReadyForTouch) return;
 
-        if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonUp(0) /*&& !IsPointerOverUIElement()*/)
         {
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonDown(0) /*&& !IsPointerOverUIElement()*/)
         {
             _isTouching = true;
             InputSignals.Instance.onInputTaken?.Invoke();
@@ -101,9 +101,9 @@ public class InputManager : MonoBehaviour
             _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
         }
 
-        if (_currentGameState == GameStates.Runner)
-        {
-            if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
+        //if (_currentGameState == GameStates.Runner)
+        //{
+            if (Input.GetMouseButton(0) /*&& !IsPointerOverUIElement()*/)
             {
                 if (_isTouching)
                 {
@@ -129,28 +129,28 @@ public class InputManager : MonoBehaviour
                         });
                     }
                 }
-            }
-        }
+           // }
+       }
 
-        if (Input.GetMouseButton(0))
-        {
-            if (_isTouching)
-            {
-                if (_currentGameState == GameStates.Idle)
-                {
-                    _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
-                    
-                    _moveVector = _joystickPosition;
-                    
-                    InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
-                    {
-                        InputValues = _moveVector
-                    });
-                }
-            }
-
-        }
-       
+        //if (Input.GetMouseButton(0))
+        //{
+        //    if (_isTouching)
+        //    {
+        //        if (_currentGameState == GameStates.Idle)
+        //        {
+        //            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+        //            
+        //            _moveVector = _joystickPosition;
+        //            
+        //            InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
+        //            {
+        //                InputValues = _moveVector
+        //            });
+        //        }
+        //    }
+//
+        //}
+       //
     }
 
     private void OnChangeGameState(GameStates currentStates)
