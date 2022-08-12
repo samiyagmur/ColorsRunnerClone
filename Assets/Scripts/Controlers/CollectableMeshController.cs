@@ -26,10 +26,7 @@ namespace Controlers
 
         public void GetCollectableMaterial(ColorType type)
         {
-
-            GetComponent<Renderer>().material = Resources.Load<Material>($"Materials/{type.ToString()}Mat");///Bakılcak Yeri konusunda
-
-
+            GetComponent<Renderer>().material = Resources.Load<Material>($"Materials/{type.ToString()}Mat"); ///Bakılcak Yeri konusunda
         }
 
 
