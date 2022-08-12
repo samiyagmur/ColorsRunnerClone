@@ -17,9 +17,8 @@ namespace Controlers
 
             if (other.CompareTag("Obstacle")) collectableManager.OnDecreaseStack();
 
-            if (other.CompareTag("ColorGate")) collectableManager.OnChangeColor(other.gameObject.GetComponent<Renderer>().material);
-
             //if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
+
 
             if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea(other.gameObject.GetComponent<Renderer>().material);
 

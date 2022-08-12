@@ -4,6 +4,7 @@ using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -128,7 +129,10 @@ namespace Managers
             Vector2 pos = new Vector2(transform.position.x,transform.position.z);
            // StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
         }
-
+        internal void SendToColorType(ColorType colorType)
+        {
+            StackSignals.Instance.onChangeColor?.Invoke(colorType);
+        }
         private void OnReset()
         {
             gameObject.SetActive(true);
@@ -142,12 +146,15 @@ namespace Managers
             scoreText.text = Values.ToString();
         }
 
-       // IEnumerator WaitForFinal()
-       // {
-       //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);
-       //     yield return new WaitForSeconds(2f);
-       //     gameObject.SetActive(false);
-       //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
-       // }
-}
+        // IEnumerator WaitForFinal()
+        // {
+        //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);
+        //     yield return new WaitForSeconds(2f);
+        //     gameObject.SetActive(false);
+        //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
+        // }
+
+        
+
+    }
 }
