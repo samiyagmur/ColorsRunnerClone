@@ -7,8 +7,8 @@ namespace Controlers
     public class CollectableAnimationController : MonoBehaviour
     {
         [SerializeField] Animator Collectabelanimator;
-
-        public void WhenGameOpen() {ChangeAnimationState(CollectableAnimType.Crouch);}
+         
+        public void WhenGameOpenUnStack() { ChangeAnimationState(CollectableAnimType.Idle);}
 
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
 
@@ -16,18 +16,10 @@ namespace Controlers
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.Crouch); }//Gecikmeli
+        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.CrouchSit); }//Gecikmeli
 
         public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }//bakılcak
 
-
-        public void WhenEnterMiniGame() { ChangeAnimationState(CollectableAnimType.Idle); }//durma 
-
-        public void WhenNextLevel() { ChangeAnimationState(CollectableAnimType.Crouch); }//
-
-       // public void WhenEnterTextArea() { ChangeAnimationState(CollectableAnimType.openArms); }
-
-        
         public void ChangeAnimationState(CollectableAnimType type)
         {   
             switch (type)
@@ -38,7 +30,7 @@ namespace Controlers
                 case CollectableAnimType.Run:
                     Collectabelanimator.SetTrigger("Run");
                     break;
-                case CollectableAnimType.Crouch:
+                case CollectableAnimType.CrouchSit:
                     Collectabelanimator.SetTrigger("Crouch");
                     break;
                 case CollectableAnimType.CrouchandWalk:

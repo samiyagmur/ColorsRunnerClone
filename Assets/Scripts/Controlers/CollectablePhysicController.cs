@@ -17,10 +17,7 @@ namespace Controlers
 
             if (other.CompareTag("Obstacle")) collectableManager.OnDecreaseStack();
 
-            //if (other.CompareTag("MiniGameGate")) { CoreGameSignals.Instance.onEnterMiniGame?.Invoke(); }
-
-
-            //if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea(other.gameObject.GetComponent<Renderer>().material);
+            if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea();
 
             if (other.CompareTag("TurretArea")) collectableManager.StartPointTurretArea();
 
@@ -29,7 +26,6 @@ namespace Controlers
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
-            if (other.CompareTag("DroneArea")) collectableManager.EndPointDronArea();
             if (other.CompareTag("TurretArea")) collectableManager.EndPointTaretArea();
         }
         
