@@ -12,7 +12,7 @@ namespace Controlers
 
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterTaretArea() { ChangeAnimationState(CollectableAnimType.CrouchWalk); }
+        public void WhenEnterTaretArea() { ChangeAnimationState(CollectableAnimType.CrouchWalk);Debug.Log("turret"); }
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }
 
