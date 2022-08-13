@@ -35,14 +35,14 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
-            CoreGameSignals.Instance.onPlay += OnPlay;
+            //CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            //CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -67,8 +67,7 @@ namespace Managers
 
         public void OnPlay()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+           
         }
         public void OnFail()
         {
@@ -84,7 +83,9 @@ namespace Managers
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
-            CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.Level);
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            //CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.Level);
         }
         #region ButonGrup
         

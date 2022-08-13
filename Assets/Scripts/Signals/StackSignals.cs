@@ -12,6 +12,7 @@ namespace Signals
         
 
         public UnityAction<int> onDecreaseStack = delegate(int arg0) {  };
+        
 
         public UnityAction<ColorType> onChangeColor = delegate { };
 

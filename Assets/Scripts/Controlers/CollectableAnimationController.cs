@@ -8,10 +8,9 @@ namespace Controlers
     {
         [SerializeField] Animator Collectabelanimator;
          
-        public void WhenGameOpenUnStack() { ChangeAnimationState(CollectableAnimType.Idle);}
-
+        public void WhenGameOpenStack() { ChangeAnimationState(CollectableAnimType.CrouchIdle);}
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
-
+        public void WhenEnterStack(){ ChangeAnimationState(CollectableAnimType.Run);}
         public void WhenEnterTaretArea() { ChangeAnimationState(CollectableAnimType.CrouchWalk);Debug.Log("turret"); }
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }

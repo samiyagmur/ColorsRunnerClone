@@ -41,6 +41,7 @@ namespace Controlers
             {
                 collectableManager.OnDecreaseStack();
                 Destroy(other.transform.parent);
+                
             }
 
             if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea();
