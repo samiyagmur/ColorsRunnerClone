@@ -2,7 +2,7 @@
 using UnityEngine;
 using Signals;
 using System;
-using Controlers;
+using Controllers;
 
 namespace Managers
 {

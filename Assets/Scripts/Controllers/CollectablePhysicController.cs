@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using Enums;
 using UnityEngine;
 using Managers;
 using Signals;
 
-namespace Controlers
+namespace Controllers
 {
     public class CollectablePhysicController : MonoBehaviour
     {
@@ -44,22 +45,22 @@ namespace Controlers
                 
             }
 
-            if (other.CompareTag("DroneArea")) collectableManager.StartPointDroneArea();
+            if (other.CompareTag("DroneArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
 
-            if (other.CompareTag("TurretArea")) collectableManager.StartPointTurretArea();
+            if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchWalk);
 
             // if (other.CompareTag("nextIdleLevel")) collectableMenager.onHitNextIdleLevel();
 
             if (other.CompareTag("Bullet"))
             {
                 collectableManager.OnDecreaseStack();
-                collectableManager.WhenCollectableDie();
+                collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
             }
         }
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
-            if (other.CompareTag("TurretArea")) collectableManager.EndPointTaretArea();
+            if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.Run);
         }
         
     }

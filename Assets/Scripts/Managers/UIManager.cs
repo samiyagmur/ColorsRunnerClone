@@ -2,7 +2,7 @@ using UnityEngine;
 using Signals;
 using Enums;
 using System;
-using Controlers;
+using Controllers;
 using ToonyColorsPro.ShaderGenerator;
 
 namespace Managers

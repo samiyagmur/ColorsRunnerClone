@@ -5,7 +5,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Controlers
+namespace Controllers
 {
     public class CollectableMeshController : MonoBehaviour
     {
