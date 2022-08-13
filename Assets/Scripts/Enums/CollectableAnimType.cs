@@ -6,7 +6,8 @@ namespace Enums{
     {
         Idle,
         Run,
-        CrouchSit,
-        CrouchandWalk
+        CrouchIdle,
+        CrouchWalk,
+        Dying
     }
 }

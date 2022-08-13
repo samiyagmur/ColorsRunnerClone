@@ -10,7 +10,7 @@ namespace Enums
         Green,
         DarkGreen,
         Magenda,
-        Pink,
+        Orange,
         Gray,
     }
 }
