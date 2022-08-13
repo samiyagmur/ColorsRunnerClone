@@ -154,13 +154,15 @@ namespace Managers
                      
                      var collectablePos = collectableList.ElementAt(i);
                      Vector3 targetPos = playerTransform.position;
-                     var targetPosRot = playerTransform.rotation;
-                 
+        
                      collectablePos.transform.position= new Vector3(
                          Mathf.Lerp(collectablePos.transform.position.x, targetPos.x, 0.2f),
                          Mathf.Lerp(collectablePos.transform.position.y, targetPos.y, 0.2f),
                          Mathf.Lerp(collectablePos.transform.position.z,  targetPos.z- 1.5f, 1));
-   
+                     
+                    Quaternion toRotation = Quaternion.LookRotation(targetPos - collectablePos.transform.position);
+                    toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                    collectablePos.transform.rotation = Quaternion.Slerp(collectablePos.transform.rotation,toRotation,1f);
                  }
                  else
                  {
@@ -170,6 +172,10 @@ namespace Managers
                          Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.2f),
                          Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.2f),
                          Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, 1));
+                     
+                     Quaternion toRotation = Quaternion.LookRotation(collectablePos.transform.position - targetPos.transform.position);
+                     toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                     targetPos.transform.rotation = Quaternion.Slerp(collectablePos.transform.rotation,toRotation,1f);
 
                  }
             }
