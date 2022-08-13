@@ -28,7 +28,7 @@ namespace Managers
         
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         [SerializeField] [Range(0.1f, 1f)] private float lerpDelay;
-        public Transform PlayerTransform;
+        [SerializeField] private Transform playerTransform;
         
 
         #endregion
@@ -65,7 +65,6 @@ namespace Managers
         private void FixedUpdate()
         {
            LerpStackWithMathf();
-           //LerpStackWithVector3();
         }
 
         private void OnChangeColor(ColorType colorType)
@@ -90,53 +89,29 @@ namespace Managers
             currentStack.transform.localPosition = collectableList[collectableList.Count-1].transform.localPosition + Vector3.back * 1.2f;
             
             collectableList.Add(currentStack);
-            
+
         }
 
         private void OnRemoveStack(int currentIndex)
         {
             for (int i = 0; i < collectableList.Count; i++)
             {
-                transform.GetChild(currentIndex).SetParent(null);
-                
+
                 collectableList.RemoveAt(currentIndex);
                 
                 collectableList.TrimExcess();
-            }
-        }
-        
-        private void LerpStackWithVector3()
-        {
-            for (int i = 0; i < collectableList.Count; i++)
-            {   
-                Debug.Log(collectableList.Count);
-                if (i == 0)
-                {
-                    var  collectablePos = collectableList.ElementAt(i);
-                    Vector3 targetPos = PlayerTransform.localPosition;
-                    collectablePos .transform.position= Vector3.Lerp(collectablePos.transform.position, targetPos,lerpDelay);
-                }
-                else
-                {
-                    var collectablePos = collectableList.ElementAt(i);
-                    var targetPos = collectableList.ElementAt(i-1);
-                    collectablePos.transform.position = Vector3.Lerp(collectablePos.transform.position, targetPos.transform.position,lerpDelay);
-                   
-                }
-                
             }
         }
 
         private void LerpStackWithMathf()
         {
             for (int i = 0; i < collectableList.Count; i++)
-            {   
-                Debug.Log(collectableList.Count);
-                
+            {
+
                 if (i == 0)
                 {
                     var collectablePos = collectableList.ElementAt(i);
-                    Vector3 targetPos = PlayerTransform.position;
+                    Vector3 targetPos = playerTransform.position;
                     
                     targetPos = new Vector3(
                         Mathf.Lerp(targetPos.x, collectablePos.transform.position.x, 0.7f),

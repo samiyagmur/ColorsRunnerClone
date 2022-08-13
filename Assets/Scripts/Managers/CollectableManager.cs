@@ -7,6 +7,7 @@ using Controlers;
 using System;
 using Datas.ValueObject;
 using Datas.UnityObject;
+using DG.Tweening;
 using Enums;
 
 namespace Managers
@@ -38,7 +39,6 @@ namespace Managers
 
         #endregion
         
-
         private void Start()
         {
             SetReferences();
@@ -50,21 +50,43 @@ namespace Managers
         }
 
         #region Physical Managment
-        public void OnIcreaseStack() { StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);}
+
+        public void OnIcreaseStack()
+        {
+            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            CollectableEnterStack();
+        }
 
         public void OnDecreaseStack() 
         { 
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
+            gameObject.transform.SetParent(null);
             collectableParticalController.PlayPartical();
             WhenCollectableDie();
+            Destroy(gameObject,1.5f);
+        }
+
+        public void GameOpenStack()
+        {
+            collectableAnimationController.WhenGameOpenStack();
+        }
+
+        public void GameStartStack()
+        {
+            collectableAnimationController.WhenPlay();
         }
         public void OnChangeColor(ColorType colorType) =>collectableMeshController.SetCollectableMaterial(colorType);
-        
+
+        private void CollectableEnterStack() => collectableAnimationController.WhenEnterStack();
         public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
         public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
         public void StartPointDroneArea() => collectableAnimationController.Invoke("WhenEnterDronArea",2f);
         
         public void WhenCollectableDie() => collectableAnimationController.WhenCollectableDie();
+        
+        
+        
+        
         
 
         #endregion

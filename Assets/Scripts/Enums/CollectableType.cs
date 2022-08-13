@@ -2,6 +2,7 @@
 {
     public enum CollectableType
     {
-        
+        Collected,
+        UnCollected
     }
 }
