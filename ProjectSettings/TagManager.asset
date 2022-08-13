@@ -11,6 +11,8 @@ TagManager:
   - Gate
   - Collectable
   - Collected
+  - DroneArea
+  - Bullet
   layers:
   - Default
   - TransparentFX
