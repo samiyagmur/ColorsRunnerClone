@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using Signals;
+using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Managers
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         [SerializeField] [Range(0.1f, 1f)] private float lerpDelay;
         [SerializeField] private Transform playerTransform;
-        [SerializeField] private int initSize = 6;
+        [SerializeField] private int initSize = 3;
         
 
         #endregion
@@ -56,8 +57,8 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            StackSignals.Instance.onIncreaseStack += OnAddStack;
-            StackSignals.Instance.onDecreaseStack += OnRemoveStack;
+            StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+            StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
             StackSignals.Instance.onChangeColor += OnChangeColor;
             CoreGameSignals.Instance.onPlay += OnGameStartStack;
             CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
@@ -65,8 +66,8 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-            StackSignals.Instance.onIncreaseStack -= OnAddStack;
-            StackSignals.Instance.onDecreaseStack-= OnRemoveStack;
+            StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
+            StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
             StackSignals.Instance.onChangeColor -= OnChangeColor;
             CoreGameSignals.Instance.onPlay -= OnGameStartStack;
             CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
@@ -88,9 +89,10 @@ namespace Managers
             for (int i = 0; i <initSize ; i++)
             {   
                 
-                var Go = Instantiate(initStack, Vector3.back * i, this.transform.rotation);
-                OnAddStack(Go);
-                Go.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.CrouchIdle);
+                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
+                AddStackOnInitialize(_currentStack);
+                _currentStack.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.CrouchIdle);
+                
             }
         }
 
@@ -112,18 +114,29 @@ namespace Managers
                 collectableList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
             }
         }
-        private void OnAddStack(GameObject currentStack)
+
+        private void AddStackOnInitialize(GameObject currentStack)
+        {
+            collectableList.Add(currentStack);
+            
+            currentStack.transform.SetParent(transform);
+            
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
+        }
+        private void OnIncreaseStack(GameObject currentStack)
         {
             
             collectableList.Add(currentStack);
             
             currentStack.transform.SetParent(transform);
             
-            currentStack.transform.localPosition = collectableList[collectableList.Count-1].transform.localPosition + Vector3.back * 1.2f;
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
+            
+            currentStack.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.Run);
             
         }
 
-        private void OnRemoveStack(int currentIndex)
+        private void OnDecreaseStack(int currentIndex)
         {
             collectableList.RemoveAt(currentIndex);
                 
@@ -133,25 +146,36 @@ namespace Managers
         
         private void LerpStackWithMathf()
         {
-            for (int i = 0; i < collectableList.Count; i++)
-            {
+            for (int i = 0; i < collectableList.Count; i++) 
+            {   
+                
+                 if (i == 0)
+                 {  
+                     
+                     var collectablePos = collectableList.ElementAt(i);
+                     Vector3 targetPos = playerTransform.position;
+                     var targetPosRot = playerTransform.rotation;
+                 
+                     collectablePos.transform.position= new Vector3(
+                         Mathf.Lerp(collectablePos.transform.position.x, targetPos.x, 0.2f),
+                         Mathf.Lerp(collectablePos.transform.position.y, targetPos.y, 0.2f),
+                         Mathf.Lerp(collectablePos.transform.position.z,  targetPos.z- 1.5f, 1));
+   
+                 }
+                 else
+                 {
+                     var collectablePos = collectableList.ElementAt(i-1);
+                     var targetPos = collectableList.ElementAt(i);
+                     targetPos.transform.position = new Vector3(
+                         Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.2f),
+                         Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.2f),
+                         Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, 1));
 
-                if (i == 0)
-                {
-                     collectableList[i].transform.position = playerTransform.position;
-                }
-                else
-                {   
-                    
-                    var collectablePos = collectableList.ElementAt(i-1);
-                    var targetPos = collectableList.ElementAt(i);
-                    targetPos.transform.position = new Vector3(
-                        Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.2f),
-                        Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.2f),
-                        Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1f, .8f));
-                }
+                 }
             }
         }
+        
+        
         
         
     }

@@ -37,8 +37,7 @@ namespace Controllers
             _collectableRenderer = GetComponent<SkinnedMeshRenderer>();
         }
         public void SetCollectableMaterial(ColorType type)
-        {   
-            Debug.Log(type);
+        {
             _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
         }
 
