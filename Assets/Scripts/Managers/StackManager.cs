@@ -25,16 +25,28 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        
+
+        [SerializeField] private GameObject initStack;
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         [SerializeField] [Range(0.1f, 1f)] private float lerpDelay;
         [SerializeField] private Transform playerTransform;
+        [SerializeField] private int initSize = 6;
         
 
         #endregion
 
         #endregion
-        
+
+        private void Awake()
+        {
+            
+        }
+
+        private void Start()
+        {
+            OnInitializeStack();
+        }
+
         #region Event Subscription
 
         private void OnEnable()
@@ -47,6 +59,8 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack += OnAddStack;
             StackSignals.Instance.onDecreaseStack += OnRemoveStack;
             StackSignals.Instance.onChangeColor += OnChangeColor;
+            CoreGameSignals.Instance.onPlay += OnGameStartStack;
+            CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
         }
 
         private void UnsubscribeEvents()
@@ -54,6 +68,8 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack -= OnAddStack;
             StackSignals.Instance.onDecreaseStack-= OnRemoveStack;
             StackSignals.Instance.onChangeColor -= OnChangeColor;
+            CoreGameSignals.Instance.onPlay -= OnGameStartStack;
+            CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
         }
         private void OnDisable()
         {
@@ -67,6 +83,28 @@ namespace Managers
            LerpStackWithMathf();
         }
 
+        private void OnInitializeStack()
+        {
+            for (int i = 0; i <initSize ; i++)
+            {   
+                
+                var Go = Instantiate(initStack, Vector3.back * i, this.transform.rotation);
+                OnAddStack(Go);
+                Go.GetComponent<CollectableManager>().GameOpenStack();
+            }
+        }
+
+        private void OnGameStartStack()
+        {
+            for (int i = 0; i < collectableList.Count; i++)
+            {
+                collectableList[i].GetComponent<CollectableManager>().GameStartStack();
+            }
+        }
+        private void OnDoubleStack()
+        {
+           
+        }
         private void OnChangeColor(ColorType colorType)
         {
             for (int i = 0; i < collectableList.Count; i++)
@@ -103,6 +141,7 @@ namespace Managers
             }
         }
 
+        
         private void LerpStackWithMathf()
         {
             for (int i = 0; i < collectableList.Count; i++)

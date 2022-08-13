@@ -98,7 +98,7 @@ public class InputManager : MonoBehaviour
             }
 
             _mousePosition = Input.mousePosition;
-            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+            //_joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
         }
 
         //if (_currentGameState == GameStates.Runner)

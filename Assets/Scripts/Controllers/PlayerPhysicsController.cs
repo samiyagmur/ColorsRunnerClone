@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Controlers
+namespace Controllers
 {
     public class PlayerPhysicsController :MonoBehaviour
     {

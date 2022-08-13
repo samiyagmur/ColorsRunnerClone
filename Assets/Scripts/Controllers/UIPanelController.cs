@@ -5,16 +5,15 @@ using UnityEngine;
 
 
 
-namespace Controlers
+namespace Controllers
 {
    
     public class UIPanelController : MonoBehaviour
     {
         [SerializeField]
         List<GameObject> UIPanelsList = new List<GameObject>();        
-        public  void OpenPanel(UIPanels panelParams)
+        public void OpenPanel(UIPanels panelParams)
         {
-            Debug.Log("debug");
             UIPanelsList[(int)panelParams].SetActive(true);
         }
 

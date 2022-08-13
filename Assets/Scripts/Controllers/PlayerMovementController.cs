@@ -7,7 +7,7 @@ using ToonyColorsPro.ShaderGenerator;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Controlers{
+namespace Controllers{
 
 public class PlayerMovementController : MonoBehaviour
 {

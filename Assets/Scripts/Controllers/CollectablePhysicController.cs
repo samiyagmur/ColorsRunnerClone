@@ -3,7 +3,7 @@ using UnityEngine;
 using Managers;
 using Signals;
 
-namespace Controlers
+namespace Controllers
 {
     public class CollectablePhysicController : MonoBehaviour
     {

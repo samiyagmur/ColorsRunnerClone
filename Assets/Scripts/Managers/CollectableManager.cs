@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Managers;
 using Signals;
-using Controlers;
+using Controllers;
 using System;
 using Datas.ValueObject;
 using Datas.UnityObject;

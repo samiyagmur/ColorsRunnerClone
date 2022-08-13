@@ -2,7 +2,7 @@
 using UnityEngine;
 using Enums;
 
-namespace Controlers
+namespace Controllers
 {
     public class CollectableAnimationController : MonoBehaviour
     {
