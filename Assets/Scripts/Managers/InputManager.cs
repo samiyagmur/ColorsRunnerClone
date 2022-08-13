@@ -6,6 +6,7 @@ using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.EventSystems;
 
 namespace Managers{
@@ -29,11 +30,12 @@ public class InputManager : MonoBehaviour
 
     private bool _isTouching;
 
-    private GameStates _currentGameState = GameStates.Runner;
+    [SerializeField]private GameStates _currentGameState;
     
     private float _currentVelocity; //ref type
     private Vector2? _mousePosition; //ref type
     private Vector3 _moveVector; //ref type
+    private Vector3 _joystickPosition;
 
     #endregion
     #endregion
@@ -78,14 +80,14 @@ public class InputManager : MonoBehaviour
     {
         if (!isReadyForTouch) return;
 
-        if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonUp(0) /*&& !IsPointerOverUIElement()*/)
         {
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
+        if (Input.GetMouseButtonDown(0) /*&& !IsPointerOverUIElement()*/)
         {
             _isTouching = true;
             InputSignals.Instance.onInputTaken?.Invoke();
@@ -96,52 +98,72 @@ public class InputManager : MonoBehaviour
             }
 
             _mousePosition = Input.mousePosition;
+            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
         }
 
-        if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
-        {
-            if (_isTouching)
+        //if (_currentGameState == GameStates.Runner)
+        //{
+            if (Input.GetMouseButton(0) /*&& !IsPointerOverUIElement()*/)
             {
-                if (_currentGameState == GameStates.Runner)
+                if (_isTouching)
                 {
+
                     if (_mousePosition != null)
                     {
-                        Vector2 mouseDeltaPos = (Vector2) Input.mousePosition - _mousePosition.Value;
-                        
+                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
+
                         if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
                             _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
                         else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
-                                _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
+                            _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
                         else
-                                _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                                    Data.ClampSpeed);
-                    
+                            _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
+                                Data.ClampSpeed);
+
                         _mousePosition = Input.mousePosition;
-                    
+
                         InputSignals.Instance.onInputDragged?.Invoke(new RunnerInputParams()
                         {
                             XValue = _moveVector.x,
                             ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y)
-                        }); 
+                        });
                     }
                 }
-                else if (_currentGameState == GameStates.Idle)
-                {
-                    _moveVector.x = floatingJoystick.Horizontal;
-                    _moveVector.z = floatingJoystick.Vertical;
-                    InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
-                    {
-                        XValue = _moveVector.x,
-                        ZValue = _moveVector.z
-                    });
-                }
-            }
-        }
+           // }
+       }
+
+        //if (Input.GetMouseButton(0))
+        //{
+        //    if (_isTouching)
+        //    {
+        //        if (_currentGameState == GameStates.Idle)
+        //        {
+        //            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+        //            
+        //            _moveVector = _joystickPosition;
+        //            
+        //            InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
+        //            {
+        //                InputValues = _moveVector
+        //            });
+        //        }
+        //    }
+//
+        //}
+       //
     }
 
     private void OnChangeGameState(GameStates currentStates)
     {
         _currentGameState = currentStates;
+        if (_currentGameState == GameStates.Idle)
+        {
+            floatingJoystick.gameObject.SetActive(true);
+        }
+        else
+        {
+            floatingJoystick.gameObject.SetActive(false);
+        }
     }
     private void OnEnableInput()
     {

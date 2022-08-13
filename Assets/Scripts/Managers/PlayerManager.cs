@@ -4,6 +4,7 @@ using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -22,8 +23,10 @@ namespace Managers
         #region Serialized Variables
 
         [Space] [SerializeField] private PlayerMovementController movementController;
-     //   [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private TextMeshPro scoreText;
+        [SerializeField] private GameObject skinMeshRenderer;
+        
         
         #endregion
         #endregion
@@ -54,6 +57,7 @@ namespace Managers
             InputSignals.Instance.onInputReleased += OnDeactiveMovement;
             InputSignals.Instance.onInputDragged += OnGetRunnerInputValues;
             InputSignals.Instance.onJoyStickInputDragged += OnGetIdleInputValues;
+            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
@@ -64,6 +68,7 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
             InputSignals.Instance.onInputDragged -= OnGetRunnerInputValues;
             InputSignals.Instance.onJoyStickInputDragged -= OnGetIdleInputValues;
+            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
@@ -78,7 +83,6 @@ namespace Managers
         private void OnActivateMovement()
         {
             movementController.EnableMovement();
-            
         }
 
         private void OnDeactiveMovement()
@@ -89,23 +93,25 @@ namespace Managers
         private void OnGetRunnerInputValues(RunnerInputParams inputParams)
         {
             movementController.UpdateRunnerInputValue(inputParams);
-
         }
 
         private void OnGetIdleInputValues(IdleInputParams inputParams)
         {
             movementController.UpdateIdleInputValue(inputParams);
-           
         }
 
         #endregion
 
         #endregion
+
+        private void OnChangeGameState(GameStates gameStates)
+        {
+            movementController.ChangeGameStates(gameStates);
+        }
         
         private void OnPlay()
         {
             movementController.IsReadyToPlay(true);
-         //   animationController.Playanim(PlayerAnimationStates.Run);
         }
 
         private void OnLevelSuccessful()
@@ -123,12 +129,16 @@ namespace Managers
             Vector2 pos = new Vector2(transform.position.x,transform.position.z);
            // StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
         }
-
+        internal void SendToColorType(ColorType colorType)
+        {
+            StackSignals.Instance.onChangeColor?.Invoke(colorType);
+        }
         private void OnReset()
         {
             gameObject.SetActive(true);
             movementController.OnReset();
-        //    animationController.OnReset();
+            skinMeshRenderer.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            gameObject.GetComponent<PlayerAnimationController>().enabled = false;
         }
 
         private void OnSetScoreText(int Values)
@@ -136,12 +146,15 @@ namespace Managers
             scoreText.text = Values.ToString();
         }
 
-       // IEnumerator WaitForFinal()
-       // {
-       //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);
-       //     yield return new WaitForSeconds(2f);
-       //     gameObject.SetActive(false);
-       //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
-       // }
-}
+        // IEnumerator WaitForFinal()
+        // {
+        //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);
+        //     yield return new WaitForSeconds(2f);
+        //     gameObject.SetActive(false);
+        //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
+        // }
+
+        
+
+    }
 }

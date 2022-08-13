@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Datas.ValueObject;
+using Enums;
 
 namespace Command.SaveLoadCommands
 {
@@ -8,6 +9,8 @@ namespace Command.SaveLoadCommands
         {
             if (currentState == SaveStates.Level) return ES3.Load<int>("Level");
             else return 0;
-        } 
+        }
+
+       
     }
 }

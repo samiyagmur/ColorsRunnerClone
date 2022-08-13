@@ -1,19 +1,12 @@
+using Enums;
+using Extention;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Signals{
 
-public class PlayerSignals : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerSignals : MonoSingleton<PlayerSignals>
     {
-        
+       
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
 }

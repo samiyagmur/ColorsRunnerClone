@@ -9,6 +9,12 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
+        public UnityAction onGameOpen = delegate { };
+
+        public UnityAction onEnterMiniGame = delegate { };
+
+        public UnityAction onEnterIdleArea= delegate { };
+
         public UnityAction <GameStates> onChangeGameState = delegate { };
         
         public UnityAction onLevelInitialize = delegate { };
@@ -26,6 +32,10 @@ namespace Signals
         public UnityAction onReset = delegate { };
         
         public UnityAction onSetCameraTarget = delegate { };
+        
+        public UnityAction onApplicationPause = delegate {  };
+        
+        public UnityAction onApplicationQuit = delegate {  };
         
         public UnityAction<CameraStates> onSetCameraState = delegate { };
 

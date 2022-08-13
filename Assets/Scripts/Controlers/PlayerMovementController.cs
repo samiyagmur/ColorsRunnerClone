@@ -1,7 +1,10 @@
 ﻿using Datas.ValueObject;
+using DG.Tweening;
 using Enums;
 using Keys;
 using Managers;
+using ToonyColorsPro.ShaderGenerator;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Controlers{
@@ -13,18 +16,18 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField] private PlayerManager manager;
     [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] private GameStates currentGameState;
     #endregion
     #region Private Variables
     [Header("Data")] private PlayerMovementData _movementData;
-    private GameStates _currentGameState = GameStates.Runner;
     private bool _isReadyToMove, _isReadyToPlay;
-    private float _inputValueX,_inputValueZ;
+    private float _inputValueX;
     private Vector2 _clampValues;
     private Vector3 _movementDirection;
     #endregion
     #endregion
     
-    public void SetMovementData(PlayerMovementData dataMovementData)
+        public void SetMovementData(PlayerMovementData dataMovementData)
         {   
             _movementData = dataMovementData;
         }
@@ -44,21 +47,22 @@ public class PlayerMovementController : MonoBehaviour
             _inputValueX = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
         }
+        
         public void UpdateIdleInputValue(IdleInputParams inputParam)
         {
-            _inputValueX = inputParam.XValue;
-            _inputValueZ = inputParam.ZValue;
-            _movementDirection = new Vector3(_inputValueX,0,_inputValueZ);
+            _movementDirection = inputParam.InputValues;
         }
         
-        
-
 
         public void IsReadyToPlay(bool state)
         {
             _isReadyToPlay = state;
         }
 
+        public void ChangeGameStates(GameStates currentState)
+        {
+            currentGameState = currentState;
+        }
         private void Update()
         {
             if (_isReadyToPlay)
@@ -75,23 +79,24 @@ public class PlayerMovementController : MonoBehaviour
                 
                 if (_isReadyToMove)
                 {
-                    if (_currentGameState == GameStates.Runner)
+                    if (currentGameState == GameStates.Runner)
                     {
                         RunnerMove();
                     }
-                    else if (_currentGameState == GameStates.Idle)
+                    else if (currentGameState == GameStates.Idle)
                     {
+                        
                         IdleMove();
                     }
                     
                 }
                 else
                 {
-                    if (_currentGameState == GameStates.Runner)
+                    if (currentGameState == GameStates.Runner)
                     {
                         RunnerStopSideways();
                     }
-                    else if (_currentGameState == GameStates.Idle)
+                    else if (currentGameState == GameStates.Idle)
                     {
                         Stop();
                     }
@@ -117,18 +122,31 @@ public class PlayerMovementController : MonoBehaviour
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
+            
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
+            
+            transform.rotation = toRotation;
+            
         }
 
         private void IdleMove()
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
-                _inputValueZ * _movementData.ForwardSpeed);
+            velocity = new Vector3(_movementDirection.x * _movementData.ForwardSpeed, velocity.y,
+                _movementDirection.z * _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
 
             Vector3 position;
             position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
             rigidbody.position = position;
+
+            if (_movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+                
+                transform.rotation = toRotation;
+            }
+            
         }
         private void RunnerStopSideways()
         {

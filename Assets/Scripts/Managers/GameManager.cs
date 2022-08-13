@@ -1,4 +1,5 @@
 using System;
+using Datas.ValueObject;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -11,13 +12,13 @@ namespace Managers
 
         #region Public Variables
 
-        public GameStates States;
+        
 
         #endregion
 
         #region Private Variables
 
-        
+        private GameStates States;
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            OnGameOpen();
             SubscribeEvents();
         }
 
@@ -63,14 +65,24 @@ namespace Managers
             States = newState;
         }
 
-        //private void OnApplicationPause(bool pauseStatus)
-        //{
-        //    throw new NotImplementedException();
-        //}
-//
-        //private void OnApplicationQuit()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private void OnApplicationPause(bool isPauseStatus)
+        {
+            if (isPauseStatus)
+            {
+                CoreGameSignals.Instance.onApplicationPause?.Invoke();
+            }
+            
+        }
+
+        private void OnApplicationQuit()
+        {
+            CoreGameSignals.Instance.onApplicationQuit?.Invoke();
+        }
+
+        private void OnGameOpen()
+        {
+            CoreGameSignals.Instance.onGameOpen?.Invoke();
+        }
+
     }
 }

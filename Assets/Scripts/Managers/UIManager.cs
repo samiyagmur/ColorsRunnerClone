@@ -3,6 +3,7 @@ using Signals;
 using Enums;
 using System;
 using Controlers;
+using ToonyColorsPro.ShaderGenerator;
 
 namespace Managers
 {
@@ -34,13 +35,14 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -61,51 +63,57 @@ namespace Managers
         {
             UIPanelController.ClosePanel(panels);
         }
-
         #endregion
-        
-        public void StartButton()
+
+        public void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
-
         public void OnFail()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
-            //CoreGamesignals.Instance.onReset?.Invoke();
         }
 
-        public void OnEnterMultiply()
+        public void OnEnterMiniGameArea()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
         }
-
-        public void EnterIdleArea()
+        public void Play()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
+            CoreGameSignals.Instance.onPlay?.Invoke();
+            CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.Level);
         }
-
+        #region ButonGrup
+        
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            // CoreGamesignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
+        }
+        public void EnterIdleArea()
+        {
+
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
+            CoreGameSignals.Instance.onEnterIdleArea();
         }
 
         public void NextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-            //CoreGamesignals.Instance.onNextLevel?.Invoke();
+            CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            // CoreGamesignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
-    }
+    } 
+        #endregion
 }
 

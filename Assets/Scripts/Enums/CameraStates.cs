@@ -2,8 +2,9 @@
 {
     public enum CameraStates
     {
-        Initialize,
-        Runner,
+        
+        Level,
+        MiniGame,
         Idle
     }
 }
