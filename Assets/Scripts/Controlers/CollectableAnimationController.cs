@@ -12,32 +12,18 @@ namespace Controlers
 
         public void WhenPlay() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterTaretArea() { ChangeAnimationState(CollectableAnimType.CrouchandWalk); }
+        public void WhenEnterTaretArea() { ChangeAnimationState(CollectableAnimType.CrouchWalk); }
 
         public void WhenExitTaretArea() { ChangeAnimationState(CollectableAnimType.Run); }
 
-        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.CrouchSit); }//Gecikmeli
+        public void WhenEnterDronArea() { ChangeAnimationState(CollectableAnimType.CrouchIdle); }//Gecikmeli
 
         public void WhenExitDronArea() { ChangeAnimationState(CollectableAnimType.Run); }//bakılcak
 
-        public void ChangeAnimationState(CollectableAnimType type)
-        {   
-            switch (type)
-            {   
-                case CollectableAnimType.Idle:
-                    Collectabelanimator.SetTrigger("Idle");
-                    break;
-                case CollectableAnimType.Run:
-                    Collectabelanimator.SetTrigger("Run");
-                    break;
-                case CollectableAnimType.CrouchSit:
-                    Collectabelanimator.SetTrigger("Crouch");
-                    break;
-                case CollectableAnimType.CrouchandWalk:
-                    Collectabelanimator.SetTrigger("CrouchandWalk");
-                    break;
-            }
-        }
+        public void WhenCollectableDie() { ChangeAnimationState(CollectableAnimType.Dying);}
+
+        public void ChangeAnimationState(CollectableAnimType type) { Collectabelanimator.SetTrigger(type.ToString()); }
+        
 
     }
 }

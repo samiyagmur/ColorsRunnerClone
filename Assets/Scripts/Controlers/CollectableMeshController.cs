@@ -1,8 +1,9 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using System.Collections;
 using Managers;
 using UnityEngine;
-
+using UnityEngine.AddressableAssets;
 
 namespace Controlers
 {
@@ -12,6 +13,8 @@ namespace Controlers
 
         #region Private Veriables
 
+        private SkinnedMeshRenderer _collectableRenderer;
+        
         #endregion
         #region Serialized Variables
         
@@ -23,10 +26,20 @@ namespace Controlers
 
         #endregion
 
-
-        public void GetCollectableMaterial(ColorType type)
+        private void Awake()
         {
-            GetComponent<Renderer>().material = Resources.Load<Material>($"Materials/{type.ToString()}Mat"); ///Bakılcak Yeri konusunda
+            GetReferences();
+        }
+        
+
+        private void GetReferences()
+        {
+            _collectableRenderer = GetComponent<SkinnedMeshRenderer>();
+        }
+        public void SetCollectableMaterial(ColorType type)
+        {   
+            Debug.Log(type);
+            _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
         }
 
 

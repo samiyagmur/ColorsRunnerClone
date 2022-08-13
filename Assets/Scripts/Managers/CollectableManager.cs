@@ -24,8 +24,8 @@ namespace Managers
         CollectableAnimationController collectableAnimationController;
         [SerializeField]
         CollectableParticalController collectableParticalController;
-        [SerializeField]
-        private ColorType collectableColorType;
+       
+        public ColorType CollectableColorType;
         #endregion
 
         #region Private Variables
@@ -37,10 +37,16 @@ namespace Managers
         #endregion
 
         #endregion
+        
 
-        private void Awake()
+        private void Start()
         {
-            collectableMeshController.GetCollectableMaterial(collectableColorType);
+            SetReferences();
+        }
+
+        private void SetReferences()
+        {
+            collectableMeshController.SetCollectableMaterial(CollectableColorType);
         }
 
         #region Physical Managment
@@ -50,11 +56,15 @@ namespace Managers
         { 
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             collectableParticalController.PlayPartical();
+            WhenCollectableDie();
         }
-        public void OnChangeColor(ColorType colorType) =>collectableMeshController.GetCollectableMaterial(colorType);
+        public void OnChangeColor(ColorType colorType) =>collectableMeshController.SetCollectableMaterial(colorType);
+        
         public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
         public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
         public void StartPointDroneArea() => collectableAnimationController.Invoke("WhenEnterDronArea",2f);
+        
+        public void WhenCollectableDie() => collectableAnimationController.WhenCollectableDie();
         
 
         #endregion
