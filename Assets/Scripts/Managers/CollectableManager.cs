@@ -51,10 +51,11 @@ namespace Managers
 
         #region Physical Managment
 
-        public void OnIcreaseStack()
-        {
+        public void OnIcreaseStack(GameObject gameObject)
+        {   
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
-            ChangeAnimationOnController(CollectableAnimType.Run);
+            //DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+
         }
 
         public void OnDecreaseStack() 
@@ -63,7 +64,8 @@ namespace Managers
             gameObject.transform.SetParent(null);
             collectableParticalController.PlayPartical();
             ChangeAnimationOnController(CollectableAnimType.Dying);
-            Destroy(gameObject,1.5f);
+            Debug.Log("Die");
+            Destroy(gameObject,4f);
         }
 
 

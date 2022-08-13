@@ -6,9 +6,23 @@ namespace Controllers
 {
     public class CollectableAnimationController : MonoBehaviour
     {
-        [SerializeField] Animator Collectabelanimator;
+        #region Self Variables
+
+        #region Serialized Variables
+
+        [SerializeField] private Animator collectabelanimator;
+
+        #endregion
         
-        public void ChangeAnimationState(CollectableAnimType type) { Collectabelanimator.SetTrigger(type.ToString()); }
+
+        #endregion
+        
+
+        public void ChangeAnimationState(CollectableAnimType type)
+        {   
+            Debug.Log(type);
+            collectabelanimator.SetTrigger(type.ToString());
+        }
         
 
     }

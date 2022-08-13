@@ -27,7 +27,7 @@ namespace Controllers
             {
                 if (collectableManager.CollectableColorType == other.transform.parent.GetComponent<CollectableManager>().CollectableColorType)
                 {
-                    collectableManager.OnIcreaseStack();
+                    collectableManager.OnIcreaseStack(other.transform.parent.gameObject);
                     other.tag = "Collected";
                 }
                 else
