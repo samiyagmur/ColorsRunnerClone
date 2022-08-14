@@ -86,6 +86,7 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             //CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.Level);
+            StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.Run);
         }
         #region ButonGrup
         

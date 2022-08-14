@@ -20,7 +20,7 @@ public class PlayerMovementController : MonoBehaviour
     #endregion
     #region Private Variables
     [Header("Data")] private PlayerMovementData _movementData;
-    private bool _isReadyToMove, _isReadyToPlay;
+    private bool _isReadyToMove, _isReadyToPlay,_isMovingVertical;
     private float _inputValueX;
     private Vector2 _clampValues;
     private Vector3 _movementDirection;
@@ -81,7 +81,9 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     if (currentGameState == GameStates.Runner)
                     {
+                       
                         RunnerMove();
+
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
@@ -111,22 +113,22 @@ public class PlayerMovementController : MonoBehaviour
         private void RunnerMove()
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValueX * _movementData.SidewaysSpeed, velocity.y,
-                _movementData.ForwardSpeed);
-            rigidbody.velocity = velocity;
+                velocity = new Vector3(_inputValueX * _movementData.SidewaysSpeed, velocity.y,
+                    _movementData.ForwardSpeed);
+                rigidbody.velocity = velocity;
 
-            Vector3 position;
-            position = new Vector3(
-                Mathf.Clamp(rigidbody.position.x, _clampValues.x,
-                    _clampValues.y),
-                (position = rigidbody.position).y,
-                position.z);
-            rigidbody.position = position;
+                Vector3 position;
+                position = new Vector3(
+                    Mathf.Clamp(rigidbody.position.x, _clampValues.x,
+                        _clampValues.y),
+                    (position = rigidbody.position).y,
+                    position.z);
+                rigidbody.position = position;
             
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
             
-            transform.rotation = toRotation;
-            
+                transform.rotation = toRotation;
+                
         }
 
         private void IdleMove()
@@ -158,12 +160,18 @@ public class PlayerMovementController : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
-        
+        public void OnStopVerticalMovement()
+        {
+            _movementData.ForwardSpeed = 0;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
         public void OnReset()
         {
             Stop();
             _isReadyToPlay = false;
             _isReadyToMove = false;
         }
+
+       
     }
 }
