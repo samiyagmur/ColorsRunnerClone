@@ -37,6 +37,9 @@ namespace Managers
         [SerializeField] private Transform playerTransform;
         
         [SerializeField] private int initSize = 3;
+
+        [SerializeField] private GameObject stackHolder;                          //Levelden Buldur,test amacli boyle kalabilir
+        
         
 
         #endregion

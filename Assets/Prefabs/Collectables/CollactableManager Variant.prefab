@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2514597350788029776, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8326928516369419400, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -55,33 +51,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8326928516369419401, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: CollectableColorType
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8326928516369419402, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: m_Name
       value: CollactableManager Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 8326928517121663172, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: collectabelanimator
-      value: 
-      objectReference: {fileID: 3377155984415423120}
-    - target: {fileID: 8326928517241359760, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: m_Size.x
-      value: 0.66742826
-      objectReference: {fileID: 0}
-    - target: {fileID: 8326928517241359760, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: m_Size.y
-      value: 2.1715095
-      objectReference: {fileID: 0}
-    - target: {fileID: 8326928517241359760, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: m_Center.x
-      value: 0.010302544
-      objectReference: {fileID: 0}
-    - target: {fileID: 8326928517241359760, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-      propertyPath: m_Center.y
-      value: 1.1041795
       objectReference: {fileID: 0}
     - target: {fileID: 8326928517241359852, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: m_TagString
@@ -89,8 +61,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
---- !u!95 &3377155984415423120 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2514597350788029776, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
-  m_PrefabInstance: {fileID: 881497774190864320}
-  m_PrefabAsset: {fileID: 0}

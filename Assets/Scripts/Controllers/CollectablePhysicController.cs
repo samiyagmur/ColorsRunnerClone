@@ -53,8 +53,9 @@ namespace Controllers
             
             if (other.CompareTag("DroneArea"))
             { 
-                collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
+                //collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
                 collectableManager.DeListFromStack();
+                
             }
            
 
@@ -68,20 +69,12 @@ namespace Controllers
                 collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
             }
         }
-
-        private void OnTriggerStay(Collider other)
-        {
-            
-        }
-
+        
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.Run);
-            if (other.CompareTag("DroneArea"))
-            {
-                
-            }
+ 
         }
         
     }
