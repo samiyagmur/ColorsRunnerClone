@@ -25,7 +25,7 @@ namespace Managers
         CollectableAnimationController collectableAnimationController;
         [SerializeField]
         CollectableParticalController collectableParticalController;
-       
+
         public ColorType CollectableColorType;
         #endregion
 
@@ -51,21 +51,30 @@ namespace Managers
 
         #region Physical Managment
 
-        public void OnIcreaseStack(GameObject gameObject)
+        public void IncreaseStack(GameObject gameObject)
         {   
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
-            //DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+            DOVirtual.DelayedCall(.2f, () => {ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
 
-        public void OnDecreaseStack() 
+        public void DecreaseStack() 
         { 
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             gameObject.transform.SetParent(null);
-            collectableParticalController.PlayPartical();
+            //collectableParticalController.PlayPartical();
+            Destroy(gameObject);
+        }
+
+        public void DeListFromStack()
+        {
+            StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
+            gameObject.transform.SetParent(null);
+        }
+
+        public void DeathOnArea()
+        {
             ChangeAnimationOnController(CollectableAnimType.Dying);
-            Debug.Log("Die");
-            Destroy(gameObject,4f);
         }
 
 

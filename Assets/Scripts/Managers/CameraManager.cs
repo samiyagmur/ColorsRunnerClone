@@ -2,6 +2,7 @@
 using UnityEngine;
 using Signals;
 using System;
+using Cinemachine;
 using Controllers;
 
 namespace Managers
@@ -12,10 +13,17 @@ namespace Managers
         #region Self Variables
         #region SerilizeField
         [SerializeField]CameraMovementController cameraMovementController;
+        [SerializeField] private CinemachineVirtualCamera levelCam;
+        [SerializeField] private PlayerManager playerManager;
         #endregion
         #endregion
 
         #region Event Subcription
+
+        private void Start()
+        {
+            playerManager = FindObjectOfType<PlayerManager>();
+        }
 
         private void OnEnable()
         {
@@ -27,7 +35,8 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onEnterMiniGame += OnEnterMiniGame;
+            CoreGameSignals.Instance.onEnterDroneArea += OnEnterDroneArea;
+            CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
         }
 
@@ -35,7 +44,8 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onEnterMiniGame -= OnEnterMiniGame;
+            CoreGameSignals.Instance.onEnterDroneArea -= OnEnterMiniGame;
+            CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
         }
 
@@ -51,9 +61,18 @@ namespace Managers
             cameraMovementController.whenGameStart();
         }
 
+        private void OnEnterDroneArea()
+        {
+            levelCam.Follow = null;
+        }
         private void OnEnterMiniGame()
         {
             cameraMovementController.WhenEnterMiniGame();
+        }
+
+        private void OnExitDroneArea()
+        {
+            levelCam.Follow = playerManager.transform;
         }
 
         private void OnEnterIdleArea()

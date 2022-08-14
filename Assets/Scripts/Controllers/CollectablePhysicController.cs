@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using DG.Tweening;
 using Enums;
 using UnityEngine;
 using Managers;
@@ -22,30 +24,39 @@ namespace Controllers
         
         
         private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Collectable") && CompareTag("Collected"))
+        {   
+            if (CompareTag("Collected") && other.CompareTag("Collectable"))
             {
-                if (collectableManager.CollectableColorType == other.transform.parent.GetComponent<CollectableManager>().CollectableColorType)
+                CollectableManager otherCollectableManager = other.transform.parent.GetComponent<CollectableManager>();
+                
+                if (collectableManager.CollectableColorType == otherCollectableManager.CollectableColorType)
                 {
-                    collectableManager.OnIcreaseStack(other.transform.parent.gameObject);
+                    otherCollectableManager.IncreaseStack(other.transform.parent.gameObject);
                     other.tag = "Collected";
+                   
                 }
                 else
                 {
-                    collectableManager.OnDecreaseStack();
-                    other.gameObject.SetActive(false);
+                    collectableManager.DecreaseStack();
+                    other.transform.parent.gameObject.SetActive(false);
+        
                 }
                  
             }
 
             if (other.CompareTag("Obstacle"))
             {
-                collectableManager.OnDecreaseStack();
+                collectableManager.DecreaseStack();
                 Destroy(other.transform.parent);
                 
             }
-
-            if (other.CompareTag("DroneArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
+            
+            if (other.CompareTag("DroneArea"))
+            { 
+                collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
+                collectableManager.DeListFromStack();
+            }
+           
 
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchWalk);
 
@@ -53,14 +64,24 @@ namespace Controllers
 
             if (other.CompareTag("Bullet"))
             {
-                collectableManager.OnDecreaseStack();
+                collectableManager.DecreaseStack();
                 collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
             }
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            
+        }
+
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.Run);
+            if (other.CompareTag("DroneArea"))
+            {
+                
+            }
         }
         
     }
