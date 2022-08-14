@@ -21,6 +21,7 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
             }
+            
         }
 
         private void OnTriggerExit(Collider other)

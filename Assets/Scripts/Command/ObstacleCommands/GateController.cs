@@ -1,5 +1,10 @@
+using System;
+using Controllers;
+using DG.Tweening;
 using Enums;
+using Managers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Command.ObstacleCommands
 {
@@ -43,6 +48,30 @@ namespace Command.ObstacleCommands
         public void SetGateMaterial(ColorType type)
         {
             _GateRender.material = Resources.Load<Material>($"Materials/{type}Mat");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            
+            if (other.CompareTag("Collected"))
+            {
+                SetCollectablePosition(other.transform.parent.gameObject);
+                other.tag = "Collectable";
+                
+
+            }
+        }
+
+        private void SetCollectablePosition(GameObject collectable)
+        {
+            var RandomZValue =Random.Range(-(transform.localScale.z/2 - 2),(transform.localScale.z/2 - 2));
+            
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y,transform.position.z + RandomZValue);
+            
+            collectable.transform.DOMove(pos,2f).OnComplete(() =>
+            {
+                collectable.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.CrouchIdle);
+            });
         }
     }
 }
