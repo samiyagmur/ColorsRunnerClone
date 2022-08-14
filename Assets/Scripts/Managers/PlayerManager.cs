@@ -146,6 +146,11 @@ namespace Managers
             scoreText.text = Values.ToString();
         }
 
+        public void OnStopVerticalMovement()
+        {
+            movementController.OnStopVerticalMovement();
+        }
+
         // IEnumerator WaitForFinal()
         // {
         //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);

@@ -15,6 +15,8 @@ namespace Signals
         
 
         public UnityAction<ColorType> onChangeColor = delegate { };
+        
+        public UnityAction<CollectableAnimType> onChangeCollectedAnimation = delegate(CollectableAnimType arg0) {  };
 
         protected override void Awake()
         {

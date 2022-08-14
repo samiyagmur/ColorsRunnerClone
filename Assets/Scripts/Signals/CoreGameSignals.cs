@@ -11,7 +11,9 @@ namespace Signals
     {
         public UnityAction onGameOpen = delegate { };
 
-        public UnityAction onEnterMiniGame = delegate { };
+        public UnityAction onEnterDroneArea = delegate { };
+        
+        public UnityAction onExitDroneArea = delegate { };
 
         public UnityAction onEnterIdleArea= delegate { };
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Enums;
 using Signals;
 using Unity.Mathematics;
@@ -28,9 +29,13 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject initStack;
+        
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
-        [SerializeField] [Range(0.1f, 1f)] private float lerpDelay;
+        
+        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay;
+        
         [SerializeField] private Transform playerTransform;
+        
         [SerializeField] private int initSize = 3;
         
 
@@ -59,8 +64,8 @@ namespace Managers
         {
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
-            StackSignals.Instance.onChangeColor += OnChangeColor;
-            CoreGameSignals.Instance.onPlay += OnGameStartStack;
+            StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
+            StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
         }
 
@@ -68,8 +73,8 @@ namespace Managers
         {
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
-            StackSignals.Instance.onChangeColor -= OnChangeColor;
-            CoreGameSignals.Instance.onPlay -= OnGameStartStack;
+            StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
+            StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
         }
         private void OnDisable()
@@ -86,31 +91,35 @@ namespace Managers
 
         private void OnInitializeStack()
         {
-            for (int i = 0; i <initSize ; i++)
+            for (int i = 0; i < initSize ; i++)
             {   
                 
                 var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
+                
                 AddStackOnInitialize(_currentStack);
-                _currentStack.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.CrouchIdle);
+                
+                StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.CrouchIdle);
                 
             }
         }
 
-        private void OnGameStartStack()
+        private void OnChangeCollectedAnimation(CollectableAnimType nextCollectableAnimType)
         {
             for (int i = 0; i < collectableList.Count; i++)
             {
-                collectableList[i].GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.Run);
+                collectableList[i].GetComponent<CollectableManager>().ChangeAnimationOnController(nextCollectableAnimType);
             }
         }
+        
         private void OnDoubleStack()
         {
            
         }
-        private void OnChangeColor(ColorType colorType)
-        {
+        private async void OnChangeCollectableColor(ColorType colorType)
+        {   
             for (int i = 0; i < collectableList.Count; i++)
             {
+                await Task.Delay(50);
                 collectableList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
             }
         }
@@ -132,7 +141,6 @@ namespace Managers
             
             currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
             
-            currentStack.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.Run);
             
         }
 
@@ -148,36 +156,35 @@ namespace Managers
         {
             for (int i = 0; i < collectableList.Count; i++) 
             {   
-                
-                 if (i == 0)
-                 {  
+                if (i == 0)
+                {  
                      
-                     var collectablePos = collectableList.ElementAt(i);
-                     Vector3 targetPos = playerTransform.position;
+                    var collectablePos = collectableList.ElementAt(i);
+                    Vector3 targetPos = playerTransform.position;
         
-                     collectablePos.transform.position= new Vector3(
-                         Mathf.Lerp(collectablePos.transform.position.x, targetPos.x, 0.2f),
-                         Mathf.Lerp(collectablePos.transform.position.y, targetPos.y, 0.2f),
-                         Mathf.Lerp(collectablePos.transform.position.z,  targetPos.z- 1.5f, 1));
+                    collectablePos.transform.position= new Vector3(
+                        Mathf.Lerp(collectablePos.transform.position.x, targetPos.x, 0.2f),
+                        Mathf.Lerp(collectablePos.transform.position.y, targetPos.y, 0.2f),
+                        Mathf.Lerp(collectablePos.transform.position.z,  targetPos.z- 1.5f, lerpDelay));
                      
                     Quaternion toRotation = Quaternion.LookRotation(targetPos - collectablePos.transform.position);
                     toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
                     collectablePos.transform.rotation = Quaternion.Slerp(collectablePos.transform.rotation,toRotation,1f);
-                 }
-                 else
-                 {
-                     var collectablePos = collectableList.ElementAt(i-1);
-                     var targetPos = collectableList.ElementAt(i);
-                     targetPos.transform.position = new Vector3(
-                         Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.2f),
-                         Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.2f),
-                         Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, 1));
+                }
+                else
+                {
+                    var collectablePos = collectableList.ElementAt(i-1);
+                    var targetPos = collectableList.ElementAt(i);
+                    targetPos.transform.position = new Vector3(
+                        Mathf.Lerp(targetPos.transform.position.x, collectablePos.transform.position.x, 0.2f),
+                        Mathf.Lerp(targetPos.transform.position.y, collectablePos.transform.position.y, 0.2f),
+                        Mathf.Lerp(targetPos.transform.position.z, collectablePos.transform.position.z - 1.5f, lerpDelay));
                      
-                     Quaternion toRotation = Quaternion.LookRotation(collectablePos.transform.position - targetPos.transform.position);
-                     toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
-                     targetPos.transform.rotation = Quaternion.Slerp(collectablePos.transform.rotation,toRotation,1f);
+                    Quaternion toRotation = Quaternion.LookRotation(collectablePos.transform.position - targetPos.transform.position);
+                    toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                    targetPos.transform.rotation = Quaternion.Slerp(collectablePos.transform.rotation,toRotation,1f);
 
-                 }
+                }
             }
         }
         

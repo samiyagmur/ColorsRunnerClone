@@ -21,18 +21,13 @@ namespace Controllers
             {
                 case CameraStates.Level:
                     camAnimator.Play("Level");
-                    Debug.Log("level");
                     break;
                 case CameraStates.MiniGame:
                     camAnimator.Play("MiniGame");
-                    Debug.Log("mini");
                     break;
                 case CameraStates.Idle:
                     camAnimator.Play("Idle");
-                    Debug.Log("idle");
                     break;
-                
-
             }
         }
     }

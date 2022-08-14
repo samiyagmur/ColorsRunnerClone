@@ -19,8 +19,7 @@ namespace Controllers
         
 
         public void ChangeAnimationState(CollectableAnimType type)
-        {   
-            Debug.Log(type);
+        {
             collectabelanimator.SetTrigger(type.ToString());
         }
         
