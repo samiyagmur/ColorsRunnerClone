@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.754361, g: 0.8299514, b: 0.9811321, a: 1}
+  m_AmbientEquatorColor: {r: 0.7335796, g: 0.8877714, b: 0.990566, a: 1}
+  m_AmbientGroundColor: {r: 0.21698111, g: 0.19889936, b: 0.16273583, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -2553,8 +2553,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.7947445, z: 0.031954188}
-  m_Center: {x: 0, y: 1.8973726, z: -0.5175209}
+  m_Size: {x: 1, y: 10.653745, z: 0.03421016}
+  m_Center: {x: 0, y: 4.514245, z: -0.52141595}
 --- !u!23 &954304488
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2958,8 +2958,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.423209, z: 0.03053669}
-  m_Center: {x: 0, y: 1.7116051, z: -0.51944655}
+  m_Size: {x: 1, y: 10.7617035, z: 0.034913722}
+  m_Center: {x: 0, y: 4.355356, z: -0.52163506}
 --- !u!23 &1064681639
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4659,8 +4659,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.3697066, y: 1.638455, z: 1.5832291}
-  m_Center: {x: 0.12124467, y: 0.31922752, z: -3.2467613}
+  m_Size: {x: 7.3697066, y: 2.797564, z: 1.0684128}
+  m_Center: {x: 0.12124467, y: 1.1864007, z: -3.5492744}
 --- !u!4 &1530287693
 Transform:
   m_ObjectHideFlags: 0
@@ -5909,9 +5909,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initStack: {fileID: 9202125967591779146, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
-  lerpDelay: 0.232
+  lerpDelay: 0.303
   playerTransform: {fileID: 12595216}
-  initSize: 100
+  initSize: 40
   stackHolder: {fileID: 0}
 --- !u!95 &1896143526 stripped
 Animator:
