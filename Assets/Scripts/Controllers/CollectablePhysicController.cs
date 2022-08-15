@@ -75,6 +75,11 @@ namespace Controllers
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.Run);
  
         }
-        
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("TurretArea")) collectableManager.EnterTurretArea();
+        }
+
     }
 }

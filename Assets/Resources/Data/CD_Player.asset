@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
-      ForwardSpeed: 0
+      ForwardSpeed: 2
       SidewaysSpeed: 2
