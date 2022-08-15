@@ -21,8 +21,6 @@ namespace Managers
 
         [SerializeField] TurretController turretController;
 
-        TurretAreaType turretAreaType;
-
         #endregion
 
         #endregion
@@ -65,7 +63,7 @@ namespace Managers
         private void OnEnterTurretArea(Transform transformCollectable)
         {
             turretController.EnterTurretArea(transformCollectable);
-            Debug.Log("EnterTurretArea");
+            
         }
         private void OnExitTurretArea()
         {

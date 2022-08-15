@@ -82,6 +82,10 @@ namespace Managers
         
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType) => collectableAnimationController.ChangeAnimationState(collectableAnimType);
         
+        public void blabla()
+        {
+            ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+        }
  
 
         #endregion

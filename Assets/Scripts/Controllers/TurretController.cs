@@ -10,6 +10,7 @@ namespace Controllers
         Quaternion rotation;
         Vector3 shotPositon;
         Vector3 CollectablePos;
+        Vector3 relativePos;
         [SerializeField]
         Vector2 xTaretPosClamp;
         [SerializeField]
@@ -19,7 +20,7 @@ namespace Controllers
         public void EnterTurretArea(Transform transformCollectable)
         {
             CollectablePos = transformCollectable.position;
-            ChangeTurrentMovementWithState(TurretAreaType.InPlaceTurretArea);
+            turretAreaType = TurretAreaType.InPlaceTurretArea;
         }
         public void ExitTurretArea()
         {
@@ -29,7 +30,7 @@ namespace Controllers
 
         private void Start()
         {   
-            InvokeRepeating("TaretMovement", 0.01f, 1f);
+            InvokeRepeating("TaretMovement", 0.01f, 0.5f);
         }
 
         private void TaretMovement()
@@ -38,7 +39,8 @@ namespace Controllers
         }
         public void ChangeTurrentMovementWithState(TurretAreaType turretAreaType)
         {
-            Debug.Log(turretAreaType);
+
+            Debug.Log(CollectablePos);
             switch (turretAreaType)
             {
                 case TurretAreaType.UnPlaceTurretArea:
@@ -50,19 +52,25 @@ namespace Controllers
                     shotPositon = CollectablePos;
                     break;
             }
-
-            Vector3 relativePos = shotPositon - transform.position;
+            
+            relativePos = shotPositon - transform.position;
             rotation = Quaternion.LookRotation(relativePos);
 
-            transform.DORotateQuaternion(rotation, 0.9f).OnComplete(() => Debug.DrawRay(transform.position, relativePos, Color.red));
+            transform.DORotateQuaternion(rotation, 0.3f).OnComplete(() => RayCasting());
 
+        }
+
+        public void RayCasting()
+        {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, rotation.eulerAngles, out hit))
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
             {
-                if (hit.transform.gameObject.CompareTag("Collectable"))
+                Debug.DrawRay(transform.position, transform.forward*10, Color.red,0.1f);
+                if (hit.transform.gameObject.CompareTag("Collected"))
                 {
-                    Destroy(hit.transform.gameObject);
+                    Debug.Log("Collectable");
+                    Destroy(hit.transform.parent.gameObject);
                 }
             }
         }
