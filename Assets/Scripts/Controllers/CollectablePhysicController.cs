@@ -29,7 +29,7 @@ namespace Controllers
             {
                 CollectableManager otherCollectableManager = other.transform.parent.GetComponent<CollectableManager>();
                 
-                if (collectableManager.CollectableColorType == otherCollectableManager.CollectableColorType)
+                if (collectableManager.CurrentCollectableColorType == otherCollectableManager.CurrentCollectableColorType)
                 {
                     otherCollectableManager.IncreaseStack(other.transform.parent.gameObject);
                     other.tag = "Collected";
@@ -52,10 +52,27 @@ namespace Controllers
             }
             
             if (other.CompareTag("DroneArea"))
-            { 
-                //collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchIdle); // Delay
+            {
                 collectableManager.DeListFromStack();
+            }
+
+            if (other.CompareTag("ColoredGround") && CompareTag("Collected"))
+            {
                 
+               
+               collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);
+              
+               if (collectableManager.CurrentCollectableColorType == other.GetComponent<GroundColorCheckController>().colorType)
+               {
+                   collectableManager.ColorMatchType = ColorMatchType.Match;
+               }
+               
+               else
+               {
+                   collectableManager.ColorMatchType = ColorMatchType.Unmatch;
+               }
+               tag = "Collectable";
+
             }
            
 

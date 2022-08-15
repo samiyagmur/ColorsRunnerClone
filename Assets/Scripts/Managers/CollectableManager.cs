@@ -26,7 +26,11 @@ namespace Managers
         [SerializeField]
         CollectableParticalController collectableParticalController;
 
-        public ColorType CollectableColorType;
+        [SerializeField] private CollectableMovementCommand collectableMovementCommand;
+
+        public ColorType CurrentCollectableColorType;
+
+        public ColorMatchType ColorMatchType;
         #endregion
 
         #region Private Variables
@@ -46,7 +50,7 @@ namespace Managers
 
         private void SetReferences()
         {
-            collectableMeshController.SetCollectableMaterial(CollectableColorType);
+            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
         }
 
         #region Physical Managment
@@ -68,17 +72,25 @@ namespace Managers
 
         public void DeListFromStack()
         {
-            StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
-            gameObject.transform.SetParent(null);
+            StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
         }
 
         public void DeathOnArea()
         {
             ChangeAnimationOnController(CollectableAnimType.Dying);
+            Destroy(gameObject,2f);
         }
 
+        public void SetCollectablePositionOnDroneArea(Transform groundTransform)
+        {
+            collectableMovementCommand.MoveToGround(groundTransform);
+        }
 
-        public void OnChangeColor(ColorType colorType) => collectableMeshController.SetCollectableMaterial(colorType);
+        public void OnChangeColor(ColorType colorType)
+        {
+            CurrentCollectableColorType = colorType;
+            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
+        }
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)
         {
@@ -92,7 +104,7 @@ namespace Managers
         {
             ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
         }
- 
+        
 
         #endregion
     }

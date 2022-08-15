@@ -67,6 +67,8 @@ namespace Managers
         {
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
+            StackSignals.Instance.onDecreaseStackOnDroneArea += OnDecreaseStackOnDroneArea;
+            StackSignals.Instance.onRebuildStack += OnRebuildStack;
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
@@ -76,6 +78,8 @@ namespace Managers
         {
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
+            StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
+            StackSignals.Instance.onRebuildStack -= OnRebuildStack;
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
@@ -150,8 +154,34 @@ namespace Managers
         private void OnDecreaseStack(int currentIndex)
         {
             collectableList.RemoveAt(currentIndex);
-                
+            
             collectableList.TrimExcess();
+        }
+        private void OnDecreaseStackOnDroneArea(int currentIndex)
+        {
+            
+            DroneAreaSignals.Instance.onDroneAreaEnter?.Invoke(collectableList[currentIndex].gameObject);
+
+            collectableList.RemoveAt(currentIndex);
+            
+            collectableList.TrimExcess();
+
+            if (collectableList.Count == 0)
+            {
+                DroneAreaSignals.Instance.onDroneAreasCollectablesDeath?.Invoke();
+            }
+            
+        }
+
+        private void OnRebuildStack(GameObject gameObject)
+        {
+            for (int i = 0; i < stackHolder.transform.childCount; i++)
+            {
+                if (stackHolder.transform.GetChild(i) != gameObject)
+                {
+                    //Destroy(stackHolder.transform.GetChild(i));
+                }
+            }
         }
 
         
