@@ -69,7 +69,6 @@ namespace Controllers
                 collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
             }
         }
-        
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();

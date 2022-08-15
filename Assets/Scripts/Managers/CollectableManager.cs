@@ -34,11 +34,11 @@ namespace Managers
         #endregion
 
         #region Public Variables
-        
+
         #endregion
 
         #endregion
-        
+
         private void Start()
         {
             SetReferences();
@@ -52,14 +52,14 @@ namespace Managers
         #region Physical Managment
 
         public void IncreaseStack(GameObject gameObject)
-        {   
+        {
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
-            DOVirtual.DelayedCall(.2f, () => {ChangeAnimationOnController(CollectableAnimType.Run); });
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
 
-        public void DecreaseStack() 
-        { 
+        public void DecreaseStack()
+        {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             gameObject.transform.SetParent(null);
             //collectableParticalController.PlayPartical();
@@ -78,10 +78,20 @@ namespace Managers
         }
 
 
-        public void OnChangeColor(ColorType colorType) =>collectableMeshController.SetCollectableMaterial(colorType);
+        public void OnChangeColor(ColorType colorType) => collectableMeshController.SetCollectableMaterial(colorType);
+
+        public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)
+        {
+            
+
+            collectableAnimationController.ChangeAnimationState(collectableAnimType);
         
-        public void ChangeAnimationOnController(CollectableAnimType collectableAnimType) => collectableAnimationController.ChangeAnimationState(collectableAnimType);
         
+        }
+        public void ChangeBlaBla()
+        {
+            ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+        }
  
 
         #endregion

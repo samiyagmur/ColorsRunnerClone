@@ -57,16 +57,15 @@ namespace Command.ObstacleCommands
             {
                 SetCollectablePosition(other.transform.parent.gameObject);
                 other.tag = "Collectable";
-                
 
             }
         }
 
         private void SetCollectablePosition(GameObject collectable)
         {
-            var RandomZValue =Random.Range(-(transform.localScale.z/2 - 2),(transform.localScale.z/2 - 2));
+            var randomZValue =Random.Range(-(transform.localScale.z/2 - 2),(transform.localScale.z/2 - 2));
             
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y,transform.position.z + RandomZValue);
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y,transform.position.z + randomZValue);
             
             collectable.transform.DOMove(pos,2f).OnComplete(() =>
             {
