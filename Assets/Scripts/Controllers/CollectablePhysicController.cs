@@ -69,16 +69,6 @@ namespace Controllers
                 collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
             }
         }
-<<<<<<< HEAD
-        
-=======
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("TurretArea")) collectableManager.ChangeBlaBla();
-        }
-
->>>>>>> origin/CamManagerProblem
         private void OnTriggerExit(Collider other)
         {
             //if (other.CompareTag("buildingTextArea")) collectableMenager.OnDecreaseStack();
