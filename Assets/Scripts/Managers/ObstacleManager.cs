@@ -65,7 +65,7 @@ namespace Managers
         private void OnEnterTurretArea(Transform transformCollectable)
         {
             turretController.EnterTurretArea(transformCollectable);
-            Debug.Log("EnterTurretArea");
+
         }
         private void OnExitTurretArea()
         {

@@ -71,7 +71,7 @@ namespace Controllers
 
         private void OnTriggerStay(Collider other)
         {
-            
+            if (other.CompareTag("TurretArea")) collectableManager.ChangeBlaBla();
         }
 
         private void OnTriggerExit(Collider other)

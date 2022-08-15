@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollactableManager Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8326928516369419402, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
+      propertyPath: m_TagString
+      value: Collectable
+      objectReference: {fileID: 0}
     - target: {fileID: 8326928517121663172, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: collectabelanimator
       value: 
