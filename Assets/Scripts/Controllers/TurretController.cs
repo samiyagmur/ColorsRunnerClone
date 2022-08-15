@@ -20,7 +20,8 @@ namespace Controllers
         public void EnterTurretArea(Transform transformCollectable)
         {
             CollectablePos = transformCollectable.position;
-            ChangeTurrentMovementWithState(TurretAreaType.InPlaceTurretArea);
+            turretAreaType = TurretAreaType.InPlaceTurretArea;
+            Debug.Log("EnterTurretArea");
             
         }
         public void ExitTurretArea()
@@ -40,7 +41,7 @@ namespace Controllers
         }
         public void ChangeTurrentMovementWithState(TurretAreaType turretAreaType)
         {
-            Debug.Log("dd");
+            
             switch (turretAreaType)
             {
                 case TurretAreaType.UnPlaceTurretArea:
@@ -49,27 +50,28 @@ namespace Controllers
                     shotPositon = new Vector3(randomX, 0, randomY);
                     break;
                 case TurretAreaType.InPlaceTurretArea:
-                    shotPositon = CollectablePos+new Vector3(0,2,0);
+                    shotPositon = CollectablePos+new Vector3(0,0,0);
                     break;
             }
 
             Vector3 relativePos = shotPositon - transform.position;
             rotation = Quaternion.LookRotation(relativePos);
             
-            transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> Raycast());
+            transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> HitWithRaycast());
         }
 
 
 
-        private void Raycast()
+        private void HitWithRaycast()
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit))
             {
-                Debug.DrawRay(transform.position, transform.forward*15, Color.red,0.1f);
+                Debug.DrawRay(transform.position, transform.forward*15, Color.red);
 
                 if (hit.transform.gameObject.CompareTag("Collectable"))
                 {
-                    Destroy(hit.transform.gameObject);
+                    Debug.Log("Collectable");
+                    Destroy(hit.transform.parent.gameObject);
                 }
             }
 
