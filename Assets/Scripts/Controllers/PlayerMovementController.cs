@@ -30,6 +30,7 @@ public class PlayerMovementController : MonoBehaviour
         public void SetMovementData(PlayerMovementData dataMovementData)
         {   
             _movementData = dataMovementData;
+            _movementData.ForwardSpeed = 10;
         }
 
         public void EnableMovement()

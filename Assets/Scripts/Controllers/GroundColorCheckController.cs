@@ -1,17 +1,17 @@
-using System;
-using Controllers;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using DG.Tweening;
 using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Command.ObstacleCommands
+namespace Controllers
 {
-    public class GateController : MonoBehaviour
+    public class GroundColorCheckController : MonoBehaviour
     {
-    
-    
         #region Self Variables
 
         #region Public Variables
@@ -21,16 +21,13 @@ namespace Command.ObstacleCommands
         #endregion
         #region Private Veriables
 
-        private MeshRenderer _GateRender;
-        
-        #endregion
-    
-        #region Serialized Variables
-        
-        #endregion
+        private MeshRenderer _groundRenderer;
 
         #endregion
+        
 
+        #endregion
+        
         private void Awake()
         {
             GetReferences();
@@ -38,18 +35,18 @@ namespace Command.ObstacleCommands
 
         private void Start()
         {
-            SetGateMaterial(colorType);
+            SetGroundMaterial(colorType);
         }
 
         private void GetReferences()
         {
-            _GateRender = GetComponent<MeshRenderer>();
+            _groundRenderer = GetComponent<MeshRenderer>();
         }
 
-        private void SetGateMaterial(ColorType type)
+        private void SetGroundMaterial(ColorType type)
         {
-            _GateRender.material = Resources.Load<Material>($"Materials/{type}Mat");
+            _groundRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
         }
-        
+
     }
 }

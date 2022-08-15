@@ -13,6 +13,8 @@ TagManager:
   - Collected
   - DroneArea
   - Bullet
+  - Ground
+  - ColoredGround
   layers:
   - Default
   - TransparentFX
