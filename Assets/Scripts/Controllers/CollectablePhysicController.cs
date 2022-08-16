@@ -48,7 +48,7 @@ namespace Controllers
             {
                 collectableManager.DecreaseStack();
                 Destroy(other.transform.parent);
-                
+                Destroy(other.transform.gameObject);
             }
             
             if (other.CompareTag("DroneArea"))
@@ -92,6 +92,12 @@ namespace Controllers
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.Run);
  
         }
-        
+
+        private void OnTriggerStay(Collider other)
+        {   
+            if (other.CompareTag("TurretArea")) collectableManager.EnterTurretArea(other.GetComponent<Renderer>().material);
+
+        }
+
     }
 }
