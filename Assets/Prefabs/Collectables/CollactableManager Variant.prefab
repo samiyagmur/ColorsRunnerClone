@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: collectableMovementCommand
       value: 
       objectReference: {fileID: -5928249160284390517}
+    - target: {fileID: 8326928516369419401, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
+      propertyPath: CurrentCollectableColorType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8326928516369419402, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: m_Name
       value: CollactableManager Variant

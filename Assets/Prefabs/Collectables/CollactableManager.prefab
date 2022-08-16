@@ -63,7 +63,7 @@ MonoBehaviour:
   collectableAnimationController: {fileID: 8326928517121663172}
   collectableParticalController: {fileID: 8326928517376776972}
   collectableMovementCommand: {fileID: 742280035107523834}
-  CollectableColorType: 5
+  CurrentCollectableColorType: 5
   ColorMatchType: 0
 --- !u!114 &742280035107523834
 MonoBehaviour:

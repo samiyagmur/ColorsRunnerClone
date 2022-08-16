@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using UnityEngine;
 
 namespace Controllers{
@@ -17,9 +18,7 @@ public class PlayerAnimationController : MonoBehaviour
     #endregion
 
     #endregion
-
     
-
     public void WhenJoinIdle() {ChangeAnimationState(PlayerAnimationType.Idle);}
 
     public void WhenRunning() { ChangeAnimationState(PlayerAnimationType.Running); }

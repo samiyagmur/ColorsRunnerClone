@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Managers;
 using Signals;
 using Controllers;
 using System;
-using Datas.ValueObject;
-using Datas.UnityObject;
 using DG.Tweening;
 using Enums;
 
@@ -62,6 +57,15 @@ namespace Managers
 
         }
 
+        public void IncreaseStackAfterDroneArea(GameObject gameObject)
+        {
+            gameObject.transform.GetChild(1).tag = "Collected";
+            
+            StackSignals.Instance.onRebuildStack?.Invoke(gameObject);
+            
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+        }
+
         public void DecreaseStack()
         {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
@@ -84,7 +88,11 @@ namespace Managers
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
-            collectableMeshController.OutlineChange();
+        }
+
+        public void ChangeOutline(bool isOutlineActive)
+        {
+            collectableMeshController.OutlineChange(isOutlineActive);
         }
 
         public void OnChangeColor(ColorType colorType)
@@ -95,15 +103,18 @@ namespace Managers
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)
         {
-            
-
             collectableAnimationController.ChangeAnimationState(collectableAnimType);
-        
-        
         }
-        public void EnterTurretArea()
+        public void EnterTurretArea(Material materialOther)
         {
-            ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+            Debug.Log(collectableMeshController.GetComponent<Renderer>().material);
+            if (collectableMeshController.GetComponent<Renderer>().material.color==materialOther.color)
+            {
+                Debug.Log("girdi");
+                ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+            }
+            
+            
         }
         
 

@@ -22,8 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: GreenMat
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
-  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_LIGHT_CEL _MK_OUTLINE_NOISE
-    _MK_WRAPPED_DIFFUSE _WRAPPEDLIGHTING_ON
+  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_LIGHT_CEL _MK_WRAPPED_DIFFUSE
+    _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -214,8 +214,8 @@ Material:
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
-    - _OutlineNoise: -0.25
-    - _OutlineSize: 125
+    - _OutlineNoise: 0
+    - _OutlineSize: 100
     - _OutlineTab: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -255,7 +255,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.13679248, g: 1, b: 0.13679248, a: 1}
+    - _AlbedoColor: {r: 0.012281928, g: 0.8679245, b: 0.012281928, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
