@@ -45,11 +45,7 @@ namespace Managers
         #endregion
 
         #endregion
-
-        private void Awake()
-        {
-            
-        }
+        
 
         private void Start()
         {
@@ -150,7 +146,7 @@ namespace Managers
             currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
 
         }
-
+        
         private void OnDecreaseStack(int currentIndex)
         {
             collectableList.RemoveAt(currentIndex);
@@ -158,10 +154,14 @@ namespace Managers
             collectableList.TrimExcess();
         }
         
+        private void SetDroneAreaHolder(GameObject gameObject)
+        {
+            gameObject.transform.SetParent(stackHolder.transform);
+        }
+        
         private void OnDecreaseStackOnDroneArea(int currentIndex)
         {
-            
-            DroneAreaSignals.Instance.onDroneAreaEnter?.Invoke(collectableList[currentIndex].gameObject);
+            SetDroneAreaHolder(collectableList[currentIndex].gameObject);
 
             collectableList.RemoveAt(currentIndex);
             
@@ -169,9 +169,41 @@ namespace Managers
 
             if (collectableList.Count == 0)
             {
-                DroneAreaSignals.Instance.onDroneAreasCollectablesDeath?.Invoke();
+               SendCollectablesBackToDeath();
             }
+        }
+        
+        private async void SendCollectablesBackToDeath() 
+        {
+            for (int i = 0; i < stackHolder.transform.childCount; i++)
+            {
+                await Task.Delay(50);
+                
+                CollectableManager collectableManager =
+                    stackHolder.transform.GetChild(i).GetComponent<CollectableManager>();
+                
+                if (collectableManager.ColorMatchType != ColorMatchType.Match)
+                {
+                    collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
+                    
+                    Destroy(stackHolder.transform.GetChild(i).gameObject,3f);
+                }
+            }
+
+            await Task.Delay(3000);
             
+            SendCollectablesBackToStack();
+
+            DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
+
+        }
+        
+        private void SendCollectablesBackToStack()
+        {
+            for (int i = 0; i < stackHolder.transform.childCount; i++)
+            { 
+                stackHolder.transform.GetChild(i).GetComponent<CollectableManager>().IncreaseStackAfterDroneArea(stackHolder.transform.GetChild(i).gameObject);
+            }
         }
 
         private void OnRebuildStack(GameObject currentStack)
