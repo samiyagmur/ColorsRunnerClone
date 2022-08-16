@@ -87,6 +87,7 @@ namespace Managers
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
+            collectableMeshController.OutlineChange();
         }
 
         public void OnChangeColor(ColorType colorType)
@@ -99,7 +100,7 @@ namespace Managers
         {
             collectableAnimationController.ChangeAnimationState(collectableAnimType);
         }
-        public void ChangeBlaBla()
+        public void EnterTurretArea()
         {
             ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
         }
