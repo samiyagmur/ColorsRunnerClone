@@ -84,6 +84,7 @@ namespace Managers
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
+            collectableMeshController.OutlineChange();
         }
 
         public void OnChangeColor(ColorType colorType)
