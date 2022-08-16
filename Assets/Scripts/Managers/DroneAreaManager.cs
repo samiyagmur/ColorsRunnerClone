@@ -25,7 +25,7 @@ namespace Managers
 
         #endregion
 
-        #region Event Subscribetions
+        #region Event Subscriptions
 
         private void OnEnable()
         {
@@ -56,14 +56,14 @@ namespace Managers
             gameObject.transform.SetParent(droneAreaCollectableHolder.transform);
         }
 
-        private void OnSendCollectablesBackToStack()
+        private void SendCollectablesBackToStack()
         {
             for (int i = 0; i < droneAreaCollectableHolder.transform.childCount; i++)
             { 
-                StackSignals.Instance.onRebuildStack?.Invoke(droneAreaCollectableHolder.transform.GetChild(i).gameObject);
+                droneAreaCollectableHolder.transform.GetChild(i).GetComponent<CollectableManager>().IncreaseStackAfterDroneArea(droneAreaCollectableHolder.transform.GetChild(i).gameObject);
             }
         }
-        private async void OnSendCollectablesBackToDeath() // Bu fonksiyon CollectableManager her unmatch oldugunda collectable tarafından invokelanıp dinlenecek
+        private async void OnSendCollectablesBackToDeath() 
         {
             for (int i = 0; i < droneAreaCollectableHolder.transform.childCount; i++)
             {
@@ -72,10 +72,17 @@ namespace Managers
                 {
                     droneAreaCollectableHolder.transform.GetChild(i).GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimType.Dying);
                     
-                    //Destroy(droneAreaCollectableHolder.transform.GetChild(i),3f);
+                    Destroy(droneAreaCollectableHolder.transform.GetChild(i).gameObject,3f);
                 }
                 
             }
+
+            await Task.Delay(3000);
+            SendCollectablesBackToStack();
+            transform.GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(1).GetComponent<BoxCollider>().enabled = false;
+           
         }
     }
 }

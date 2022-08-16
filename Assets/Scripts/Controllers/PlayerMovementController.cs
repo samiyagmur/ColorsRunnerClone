@@ -64,15 +64,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             currentGameState = currentState;
         }
-        private void Update()
-        {
-            if (_isReadyToPlay)
-            {
-                manager.SetStackPosition();
-        
-            }
-        }
-    
+
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
@@ -166,6 +158,12 @@ public class PlayerMovementController : MonoBehaviour
             _movementData.ForwardSpeed = 0;
             rigidbody.angularVelocity = Vector3.zero;
         }
+
+        public void OnStartVerticalMovement()
+        {
+            _movementData.ForwardSpeed = 10;
+        }
+        
         public void OnReset()
         {
             Stop();

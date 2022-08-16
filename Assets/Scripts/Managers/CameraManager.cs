@@ -4,6 +4,7 @@ using Signals;
 using System;
 using Cinemachine;
 using Controllers;
+using DG.Tweening;
 
 namespace Managers
 {
@@ -71,8 +72,8 @@ namespace Managers
         }
 
         private void OnExitDroneArea()
-        {
-            levelCam.Follow = playerManager.transform;
+        {   
+            DOVirtual.DelayedCall(.1f,()=>levelCam.Follow = playerManager.transform);
         }
 
         private void OnEnterIdleArea()

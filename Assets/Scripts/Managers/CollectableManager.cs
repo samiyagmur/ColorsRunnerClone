@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Managers;
 using Signals;
 using Controllers;
 using System;
-using Datas.ValueObject;
-using Datas.UnityObject;
 using DG.Tweening;
 using Enums;
 
@@ -62,6 +57,14 @@ namespace Managers
 
         }
 
+        public void IncreaseStackAfterDroneArea(GameObject gameObject)
+        {
+            gameObject.transform.GetChild(1).tag = "Collected";
+            StackSignals.Instance.onRebuildStack?.Invoke(gameObject);
+            
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+        }
+
         public void DecreaseStack()
         {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
@@ -94,11 +97,7 @@ namespace Managers
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)
         {
-            
-
             collectableAnimationController.ChangeAnimationState(collectableAnimType);
-        
-        
         }
         public void ChangeBlaBla()
         {
