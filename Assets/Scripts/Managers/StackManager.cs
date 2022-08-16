@@ -133,7 +133,7 @@ namespace Managers
             
             currentStack.transform.SetParent(transform);
             
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
         }
         
         private void OnIncreaseStack(GameObject currentStack)
@@ -143,7 +143,7 @@ namespace Managers
             
             currentStack.transform.SetParent(transform);
 
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
 
         }
         
@@ -192,17 +192,21 @@ namespace Managers
 
             await Task.Delay(3000);
             
-            SendCollectablesBackToStack();
-
             DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
+            
+            SendCollectablesBackToStack();
 
         }
         
         private void SendCollectablesBackToStack()
         {
             for (int i = 0; i < stackHolder.transform.childCount; i++)
-            { 
-                stackHolder.transform.GetChild(i).GetComponent<CollectableManager>().IncreaseStackAfterDroneArea(stackHolder.transform.GetChild(i).gameObject);
+            {   
+                CollectableManager collectableManager = stackHolder.transform.GetChild(i).GetComponent<CollectableManager>();
+                
+                collectableManager.IncreaseStackAfterDroneArea(stackHolder.transform.GetChild(i).gameObject);
+                
+                collectableManager.ChangeOutline(false);
             }
         }
 
@@ -210,15 +214,15 @@ namespace Managers
         {
             collectableList.Add(currentStack);
             
+            CoreGameSignals.Instance.onExitDroneArea?.Invoke(); 
+            
             playerTransform.position = collectableList[0].transform.position;
             
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
-            
             playerTransform.GetComponent<PlayerManager>().OnStartVerticalMovement();
-            
+
             currentStack.transform.SetParent(transform);
             
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back *1.2f;
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
 
         }
 

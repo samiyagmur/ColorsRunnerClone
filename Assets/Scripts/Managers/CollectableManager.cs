@@ -60,6 +60,7 @@ namespace Managers
         public void IncreaseStackAfterDroneArea(GameObject gameObject)
         {
             gameObject.transform.GetChild(1).tag = "Collected";
+            
             StackSignals.Instance.onRebuildStack?.Invoke(gameObject);
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
@@ -87,7 +88,11 @@ namespace Managers
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
-            collectableMeshController.OutlineChange();
+        }
+
+        public void ChangeOutline(bool isOutlineActive)
+        {
+            collectableMeshController.OutlineChange(isOutlineActive);
         }
 
         public void OnChangeColor(ColorType colorType)
