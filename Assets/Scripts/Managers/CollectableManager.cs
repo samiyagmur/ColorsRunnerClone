@@ -53,6 +53,7 @@ namespace Managers
         public void IncreaseStack(GameObject gameObject)
         {
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
@@ -63,6 +64,8 @@ namespace Managers
             
             StackSignals.Instance.onRebuildStack?.Invoke(gameObject);
             
+            ChangeOutline(false);
+
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
         }
 

@@ -53,7 +53,7 @@ namespace Controllers
             }
             else
             {
-                materialColor.DOFloat(100f, "_OutlineSize", .1f);
+                materialColor.DOFloat(100f, "_OutlineSize",0);
             }
         }
 

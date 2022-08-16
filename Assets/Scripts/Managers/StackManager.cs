@@ -190,9 +190,13 @@ namespace Managers
                 }
             }
 
-            await Task.Delay(3000);
+            await Task.Delay(3500);
             
             DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
+            
+            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+            
+            playerTransform.GetComponent<PlayerManager>().OnStartVerticalMovement();
             
             SendCollectablesBackToStack();
 
@@ -200,25 +204,19 @@ namespace Managers
         
         private void SendCollectablesBackToStack()
         {
-            for (int i = 0; i < stackHolder.transform.childCount; i++)
+            for (int i = stackHolder.transform.childCount -1; i >= 0 ; i--)
             {   
                 CollectableManager collectableManager = stackHolder.transform.GetChild(i).GetComponent<CollectableManager>();
                 
                 collectableManager.IncreaseStackAfterDroneArea(stackHolder.transform.GetChild(i).gameObject);
-                
-                collectableManager.ChangeOutline(false);
             }
         }
-
+        
         private void OnRebuildStack(GameObject currentStack)
         {
             collectableList.Add(currentStack);
             
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke(); 
-            
             playerTransform.position = collectableList[0].transform.position;
-            
-            playerTransform.GetComponent<PlayerManager>().OnStartVerticalMovement();
 
             currentStack.transform.SetParent(transform);
             
