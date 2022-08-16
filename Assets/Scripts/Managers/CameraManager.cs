@@ -73,7 +73,7 @@ namespace Managers
 
         private void OnExitDroneArea()
         {   
-            DOVirtual.DelayedCall(.1f,()=>levelCam.Follow = playerManager.transform);
+           levelCam.Follow = playerManager.transform;
         }
 
         private void OnEnterIdleArea()

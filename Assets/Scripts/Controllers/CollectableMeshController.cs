@@ -37,14 +37,24 @@ namespace Controllers
         {
             _collectableRenderer = GetComponent<SkinnedMeshRenderer>();
         }
+        
         public void SetCollectableMaterial(ColorType type)
         {
             _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
         }
-        public void OutlineChange()
+        
+        public void OutlineChange(bool isOutlineActive)
         {
-            var materialColor = transform.GetComponentInChildren<SkinnedMeshRenderer>().material;
-            materialColor.DOFloat(0f, "_OutlineSize", 1f);
+            var materialColor = _collectableRenderer.material;
+            
+            if (isOutlineActive)
+            {
+                materialColor.DOFloat(0f, "_OutlineSize", 1f);
+            }
+            else
+            {
+                materialColor.DOFloat(100f, "_OutlineSize", .1f);
+            }
         }
 
     }

@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Controllers;
-using Enums;
-using Signals;
+﻿using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -32,13 +29,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            DroneAreaSignals.Instance.onDisableAllColliders += OndisableallColliders;
+            DroneAreaSignals.Instance.onDisableAllColliders += OnDisableAllColliders;
         }
 
         private void UnsubscribeEvents()
         {
 
-            DroneAreaSignals.Instance.onDisableAllColliders -= OndisableallColliders;
+            DroneAreaSignals.Instance.onDisableAllColliders -= OnDisableAllColliders;
         }
         private void OnDisable()
         {
@@ -47,7 +44,7 @@ namespace Managers
         #endregion
         
 
-        private void OndisableallColliders()
+        private void OnDisableAllColliders()
         {   
             transform.GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
