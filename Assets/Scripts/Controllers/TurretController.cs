@@ -2,6 +2,7 @@
 using UnityEngine;
 using Enums;
 using DG.Tweening;
+using Signals;
 
 namespace Controllers
 {
@@ -16,12 +17,18 @@ namespace Controllers
         Vector2 yTaretPosClamp;
         TurretAreaType turretAreaType;
         RaycastHit hit;
+        float randomX;
+        float randomY;
+        Vector3 relativePos;
+        public float dd;
+        private float ff;
+        public float cc;
 
         public void EnterTurretArea(Transform transformCollectable)
         {
             CollectablePos = transformCollectable.position;
             turretAreaType = TurretAreaType.InPlaceTurretArea;
-            Debug.Log("EnterTurretArea");
+
             
         }
         public void ExitTurretArea()
@@ -32,9 +39,19 @@ namespace Controllers
 
         private void Start()
         {   
-            InvokeRepeating("TaretMovement", 0.01f, 0.5f);
-        }
+            //InvokeRepeating("TaretMovement",0, 0.5f);
+            InvokeRepeating("GetRandomPos", 0, cc);
 
+        }
+        private void GetRandomPos()
+        {
+             randomX= Random.Range(xTaretPosClamp.x, yTaretPosClamp.x);
+             randomY = Random.Range(xTaretPosClamp.y, yTaretPosClamp.y);
+        }
+        private void FixedUpdate()
+        {
+            TaretMovement();
+        }
         private void TaretMovement()
         {
             ChangeTurrentMovementWithState(turretAreaType);
@@ -45,19 +62,35 @@ namespace Controllers
             switch (turretAreaType)
             {
                 case TurretAreaType.UnPlaceTurretArea:
-                    float randomX = Random.Range(xTaretPosClamp.x, yTaretPosClamp.x);
-                    float randomY = Random.Range(xTaretPosClamp.y, yTaretPosClamp.y);
+                    
                     shotPositon = new Vector3(randomX, 0, randomY);
+                    relativePos = shotPositon - transform.position;
+                    rotation = Quaternion.LookRotation(relativePos);
+
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation,Mathf.Lerp(0,1,dd));
+
+
                     break;
                 case TurretAreaType.InPlaceTurretArea:
                     shotPositon = CollectablePos+new Vector3(0,0,0);
+                    relativePos = shotPositon - transform.position;
+                    rotation = Quaternion.LookRotation(relativePos);
+
+                    ff+=dd;
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, ff);
+                    Debug.Log(ff);
+
+                    if (ff >= 1)
+                    {
+                        ff = 0;
+                        HitWithRaycast();
+                    }
+                    
                     break;
             }
 
-            Vector3 relativePos = shotPositon - transform.position;
-            rotation = Quaternion.LookRotation(relativePos);
-            
-            transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> HitWithRaycast());
+
+            //transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> HitWithRaycast());
         }
 
 
@@ -71,7 +104,10 @@ namespace Controllers
                 if (hit.transform.gameObject.CompareTag("Collectable"))
                 {
                     Debug.Log("Collectable");
+                    StackSignals.Instance.onDecreaseStack?.Invoke(hit.transform.parent.GetSiblingIndex());
                     Destroy(hit.transform.parent.gameObject);
+                    hit.transform.parent.SetParent(null);
+
                 }
             }
 

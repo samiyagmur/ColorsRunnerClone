@@ -101,9 +101,16 @@ namespace Managers
         
         
         }
-        public void EnterTurretArea()
+        public void EnterTurretArea(Material materialOther)
         {
-            ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+            Debug.Log(collectableMeshController.GetComponent<Renderer>().material);
+            if (collectableMeshController.GetComponent<Renderer>().material.color==materialOther.color)
+            {
+                Debug.Log("girdi");
+                ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+            }
+            
+            
         }
         
 
