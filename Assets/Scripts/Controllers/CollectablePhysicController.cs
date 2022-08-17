@@ -52,8 +52,7 @@ namespace Controllers
             if (other.CompareTag("Obstacle"))
             {
                 collectableManager.DecreaseStack();
-                Destroy(other.transform.parent);
-                Destroy(other.transform.gameObject);
+                Destroy(other.transform.parent.gameObject);
             }
 
             #endregion
@@ -116,7 +115,7 @@ namespace Controllers
 
             // if (other.CompareTag("nextIdleLevel")) collectableMenager.onHitNextIdleLevel();
 
-            if (other.CompareTag("Bullet"))
+            if (other.CompareTag("Bullet")) //else if or return, there is no need to loop all tags
             {
                 collectableManager.DecreaseStack();
                 collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);

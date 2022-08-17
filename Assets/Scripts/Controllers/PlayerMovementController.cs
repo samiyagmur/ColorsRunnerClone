@@ -1,4 +1,5 @@
 ﻿using Datas.ValueObject;
+using DG.Tweening;
 using Enums;
 using Keys;
 using Managers;
@@ -153,22 +154,27 @@ public class PlayerMovementController : MonoBehaviour
         private void RunnerStopSideways()
         {
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _movementData.ForwardSpeed);
+            
             rigidbody.angularVelocity = Vector3.zero;
         }
         private void Stop()
         {
             rigidbody.velocity = Vector3.zero;
+            
             rigidbody.angularVelocity = Vector3.zero;
         }
         public void StopVerticalMovement()
         {
             _movementData.ForwardSpeed = 0;
+            
             rigidbody.angularVelocity = Vector3.zero;
         }
 
-        public void OnStartVerticalMovement()
+        public void OnStartVerticalMovement(Transform exitPosition)
         {
             _movementData.ForwardSpeed = 10;
+            
+            gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z), .1f);
         }
         
         public void OnReset()
