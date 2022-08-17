@@ -110,8 +110,7 @@ namespace Controllers
            
 
             #endregion
-           
-           
+            
 
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchWalk);
 

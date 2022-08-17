@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Enums;
 using Signals;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Managers
@@ -13,18 +11,6 @@ namespace Managers
     public class StackManager : MonoBehaviour
     {
         #region Self Variables
-
-        #region Public Variables
-
-        
-
-        #endregion
-
-        #region Private Variables
-
-        
-
-        #endregion
 
         #region Serialized Variables
 
@@ -38,7 +24,7 @@ namespace Managers
         
         [SerializeField] private int initSize = 3;
 
-        [SerializeField] private GameObject stackHolder;                          //Levelden Buldur,test amacli boyle kalabilir
+        [SerializeField] private GameObject stackHolder;       //Levelden Buldur,test amacli boyle kalabilir
         
         
 
@@ -46,7 +32,6 @@ namespace Managers
 
         #endregion
         
-
         private void Start()
         {
             OnInitializeStack();
@@ -64,7 +49,6 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea += OnDecreaseStackOnDroneArea;
-            StackSignals.Instance.onSendsCollectablesBackToStack +=OnIncreaseStack;
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
@@ -75,7 +59,6 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
-            StackSignals.Instance.onSendsCollectablesBackToStack -= OnIncreaseStack;
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
@@ -92,6 +75,8 @@ namespace Managers
            LerpStackWithMathf();
         }
 
+        #region Initialize Stack
+
         private void OnInitializeStack()
         {
             for (int i = 0; i < initSize ; i++)
@@ -105,6 +90,21 @@ namespace Managers
                 
             }
         }
+        
+        private void AddStackOnInitialize(GameObject currentStack)
+        {
+            collectableList.Add(currentStack);
+            
+            currentStack.transform.SetParent(transform);
+            
+            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
+        }
+        
+
+        #endregion
+        
+
+        #region Stack Visuals
 
         private void OnChangeCollectedAnimation(CollectableAnimType nextCollectableAnimType)
         {
@@ -116,7 +116,7 @@ namespace Managers
         
         private void OnDoubleStack()
         {
-           
+            // Work in Progress,When Pool is created,we will add this future for beloved users.
         }
         private async void OnChangeCollectableColor(ColorType colorType)
         {   
@@ -127,16 +127,12 @@ namespace Managers
             }
         }
 
-        private void AddStackOnInitialize(GameObject currentStack)
-        {
-            collectableList.Add(currentStack);
-            
-            currentStack.transform.SetParent(transform);
-            
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
-        }
-        
-        private void OnIncreaseStack(GameObject currentStack) // SendCollectableBackToStack
+        #endregion
+
+
+        #region Stack / Unstack Collectables
+
+        private void OnIncreaseStack(GameObject currentStack) 
         {
             
             collectableList.Add(currentStack);
@@ -153,10 +149,12 @@ namespace Managers
             
             collectableList.TrimExcess();
         }
-        
-      
 
-        #region OnDecreaseStackOnDroneArea
+        #endregion
+        
+       
+
+        #region Decrease Stack On Drone Area
         
         private void SetDroneAreaHolder(GameObject gameObject)
         {
@@ -180,17 +178,18 @@ namespace Managers
                 
                 DroneAreaSignals.Instance.onEnableDroneAreaCollider?.Invoke();
                 
-                OnDroneAreaExit();
+                await Task.Delay(500);
+                
+                DroneAreaExit();
             }
         }
-        private async void OnDroneAreaExit()
+        private void DroneAreaExit()
         {
-            await Task.Delay(500);
             DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
+            
             if (stackHolder.transform.childCount == 0)
             {   
                 playerTransform.position = collectableList[0].transform.position;
-                
             }
         }
 
@@ -235,9 +234,6 @@ namespace Managers
             }
         }
         #endregion
-        
-        
-        
         
     }
 }

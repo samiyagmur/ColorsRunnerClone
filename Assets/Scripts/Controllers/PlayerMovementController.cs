@@ -1,13 +1,11 @@
 ﻿using Datas.ValueObject;
-using DG.Tweening;
 using Enums;
 using Keys;
 using Managers;
-using ToonyColorsPro.ShaderGenerator;
-using Unity.Mathematics;
 using UnityEngine;
 
-namespace Controllers{
+namespace Controllers
+{
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -15,15 +13,24 @@ public class PlayerMovementController : MonoBehaviour
     #region Serialized Variables
 
     [SerializeField] private PlayerManager manager;
+    
     [SerializeField] private new Rigidbody rigidbody;
+    
     [SerializeField] private GameStates currentGameState;
+    
     #endregion
     #region Private Variables
+    
     [Header("Data")] private PlayerMovementData _movementData;
+    
     private bool _isReadyToMove, _isReadyToPlay,_isMovingVertical;
+    
     private float _inputValueX;
+    
     private Vector2 _clampValues;
+    
     private Vector3 _movementDirection;
+    
     #endregion
     #endregion
     
@@ -153,7 +160,7 @@ public class PlayerMovementController : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
-        public void OnStopVerticalMovement()
+        public void StopVerticalMovement()
         {
             _movementData.ForwardSpeed = 0;
             rigidbody.angularVelocity = Vector3.zero;

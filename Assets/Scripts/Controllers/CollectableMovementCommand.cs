@@ -11,11 +11,16 @@ namespace Controllers
 {
     public class CollectableMovementCommand : MonoBehaviour
     {
+        #region Self Variables
+
         #region Serialized Variables
 
         [SerializeField] private CollectableManager collectableManager;
 
         #endregion
+
+        #endregion
+        
 
         public void MoveToGround(Transform groundTransform)
         {

@@ -17,13 +17,6 @@ namespace Controllers
         private SkinnedMeshRenderer _collectableRenderer;
         
         #endregion
-        #region Serialized Variables
-        
-        #endregion
-
-        #region Public Variables
-        
-        #endregion
 
         #endregion
 
