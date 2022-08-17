@@ -2372,13 +2372,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775084132}
-  m_LocalRotation: {x: -0.4207536, y: -0, z: -0, w: 0.90717494}
-  m_LocalPosition: {x: -0.0386, y: -0.24, z: 90.15}
+  m_LocalRotation: {x: -0.30212736, y: -0, z: -0, w: 0.95326763}
+  m_LocalPosition: {x: -0.0386, y: -0.22, z: 91.02}
   m_LocalScale: {x: 10.07446, y: 1.1486, z: 4.2905636}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: -49.764, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -35.171, y: 0, z: 0}
 --- !u!4 &811195125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8326928516369419400, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
@@ -3759,6 +3759,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1131848455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131848457}
+  - component: {fileID: 1131848456}
+  m_Layer: 0
+  m_Name: TInstance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131848456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131848455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64213d479480468aade6cc1a67d432cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1131848457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131848455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145128456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,7 +6758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initStack: {fileID: 1877316333817627185, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
-  lerpDelay: 0.239
+  lerpDelay: 0.252
   playerTransform: {fileID: 12595216}
   initSize: 10
   stackHolder: {fileID: 884048808}

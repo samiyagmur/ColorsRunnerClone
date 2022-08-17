@@ -26,9 +26,7 @@ namespace Controllers
             {
                 playerManager.StartMovementAfterDroneArea();
             }
-            
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("DroneArea"))

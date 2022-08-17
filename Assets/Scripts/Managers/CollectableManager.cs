@@ -23,11 +23,10 @@ namespace Managers
         [SerializeField]
         CollectableParticalController collectableParticalController;
 
-        [SerializeField] private CollectableMovementCommand collectableMovementCommand;
+        [SerializeField] 
+        private CollectableMovementCommand collectableMovementCommand;
 
-        public ColorType CurrentCollectableColorType;
-
-        public ColorMatchType ColorMatchType;
+        
         #endregion
 
         #region Private Variables
@@ -35,7 +34,11 @@ namespace Managers
         #endregion
 
         #region Public Variables
+        
+        public ColorType CurrentCollectableColorType;
 
+        public ColorMatchType ColorMatchType;
+        
         #endregion
 
         #endregion
@@ -50,7 +53,7 @@ namespace Managers
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
         }
 
-        #region Physical Managment
+        #region Stack Management
 
         public void IncreaseStack(GameObject gameObject)
         {
@@ -58,17 +61,6 @@ namespace Managers
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
-        }
-
-        public async void IncreaseStackAfterDroneArea()
-        {
-            await Task.Delay(300);
-                
-            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
-            
-            ChangeOutline(false);
-
-            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
         }
         
         public void DecreaseStack()
@@ -79,7 +71,21 @@ namespace Managers
             
             Destroy(gameObject);
         }
+        #endregion
+
+        #region On Drone Area Collectable Behaviours
         
+        public async void IncreaseStackAfterDroneArea()
+        {
+            await Task.Delay(300);
+                
+            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            
+            ChangeOutline(false);
+
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+        }
+
         public void DecreaseStackAfterDroneArea()
         {
             ChangeAnimationOnController(CollectableAnimType.Dying);
@@ -95,12 +101,13 @@ namespace Managers
             StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
         }
         
-
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
         }
 
+        #endregion
+        
         #region Collectable Visuals
         
         public void ChangeOutline(bool isOutlineActive)
@@ -118,7 +125,6 @@ namespace Managers
         {
             collectableAnimationController.ChangeAnimationState(collectableAnimType);
         }
-        
 
         #endregion
        
@@ -133,6 +139,6 @@ namespace Managers
         }
         
 
-        #endregion
+        
     }
 }

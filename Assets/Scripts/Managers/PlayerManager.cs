@@ -146,21 +146,20 @@ namespace Managers
         public async void StartMovementAfterDroneArea()
         {
             
-            OnStartVerticalMovement();
+            StartVerticalMovement();
 
             await Task.Delay(1000);
             
             CoreGameSignals.Instance.onExitDroneArea?.Invoke();
-            
-            
+
         }
 
         public void OnStopVerticalMovement()
         {
-            movementController.OnStopVerticalMovement();
+            movementController.StopVerticalMovement();
         }
 
-        public void OnStartVerticalMovement()
+        public void StartVerticalMovement()
         {
             movementController.OnStartVerticalMovement();
         }
