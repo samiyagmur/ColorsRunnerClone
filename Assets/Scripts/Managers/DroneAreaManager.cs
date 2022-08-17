@@ -1,4 +1,5 @@
-﻿using Signals;
+﻿using System.Threading.Tasks;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -16,6 +17,7 @@ namespace Managers
     
         #region Serialized Variables
 
+        [SerializeField] private GameObject droneGameObject;
         #endregion
 
         #endregion
@@ -49,10 +51,12 @@ namespace Managers
         
 
         private void OnDisableAllColliders()
-        {   
+        {
+            DroneMovementActive();
             transform.GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(1).GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(2).GetComponent<BoxCollider>().enabled = false;
+
         }
 
         private void OnEnableDroneAreaCollider()
@@ -64,5 +68,11 @@ namespace Managers
         {
             transform.GetChild(0).gameObject.SetActive(false);
         }
+
+        public void DroneMovementActive()
+        {
+            droneGameObject.SetActive(true);
+        }
+        
     }
 }

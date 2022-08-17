@@ -23,7 +23,7 @@ Material:
   m_Name: DarkGreenMat
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
   m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-    _MK_LIGHT_CEL _MK_OUTLINE_NOISE _MK_WRAPPED_DIFFUSE _WRAPPEDLIGHTING_ON
+    _MK_LIGHT_CEL _MK_WRAPPED_DIFFUSE _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -214,8 +214,8 @@ Material:
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
-    - _OutlineNoise: -0.286
-    - _OutlineSize: 125
+    - _OutlineNoise: 0
+    - _OutlineSize: 100
     - _OutlineTab: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
