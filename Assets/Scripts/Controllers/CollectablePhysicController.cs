@@ -25,6 +25,8 @@ namespace Controllers
         
         private void OnTriggerEnter(Collider other)
         {   
+            #region Stacking collectables
+            
             if (CompareTag("Collected") && other.CompareTag("Collectable"))
             {
                 CollectableManager otherCollectableManager = other.transform.parent.GetComponent<CollectableManager>();
@@ -43,6 +45,9 @@ namespace Controllers
                 }
                  
             }
+            #endregion
+
+            #region Obstacle Collision
 
             if (other.CompareTag("Obstacle"))
             {
@@ -50,6 +55,13 @@ namespace Controllers
                 Destroy(other.transform.parent);
                 Destroy(other.transform.gameObject);
             }
+
+            #endregion
+
+            #region DroneArea Collisions
+            
+            
+            #region Enter Colored Ground
             
             if (other.CompareTag("DroneArea"))
             {
@@ -59,21 +71,46 @@ namespace Controllers
             if (other.CompareTag("ColoredGround") && CompareTag("Collected"))
             {
                 
-               
-               collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);
+                collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);
               
-               if (collectableManager.CurrentCollectableColorType == other.GetComponent<GroundColorCheckController>().colorType)
-               {
-                   collectableManager.ColorMatchType = ColorMatchType.Match;
-               }
+                if (collectableManager.CurrentCollectableColorType == other.GetComponent<GroundColorCheckController>().colorType)
+                {
+                    collectableManager.ColorMatchType = ColorMatchType.Match;
+                }
                
-               else
-               {
-                   collectableManager.ColorMatchType = ColorMatchType.Unmatch;
-               }
-               tag = "Collectable";
+                else
+                {
+                    collectableManager.ColorMatchType = ColorMatchType.Unmatch;
+                }
+                tag = "Collectable";
 
             }
+
+            #endregion
+
+
+            #region Exit Colored Ground
+            
+            if (other.CompareTag("AfterGround"))
+            {
+                if (collectableManager.ColorMatchType != ColorMatchType.Match)
+                {   
+                    collectableManager.DecreaseStackAfterDroneArea();
+                    
+                }
+                else
+                {
+                    collectableManager.IncreaseStackAfterDroneArea();
+                    gameObject.tag = "Collected";
+                }
+            }
+
+ 
+            #endregion
+           
+
+            #endregion
+           
            
 
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchWalk);

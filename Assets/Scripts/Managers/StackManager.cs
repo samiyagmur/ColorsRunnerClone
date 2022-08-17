@@ -64,7 +64,7 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea += OnDecreaseStackOnDroneArea;
-            StackSignals.Instance.onRebuildStack += OnRebuildStack;
+            StackSignals.Instance.onSendsCollectablesBackToStack +=OnIncreaseStack;
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
@@ -75,7 +75,7 @@ namespace Managers
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
-            StackSignals.Instance.onRebuildStack -= OnRebuildStack;
+            StackSignals.Instance.onSendsCollectablesBackToStack -= OnIncreaseStack;
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
@@ -136,7 +136,7 @@ namespace Managers
             currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
         }
         
-        private void OnIncreaseStack(GameObject currentStack)
+        private void OnIncreaseStack(GameObject currentStack) // SendCollectableBackToStack
         {
             
             collectableList.Add(currentStack);
@@ -146,7 +146,7 @@ namespace Managers
             currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
 
         }
-        
+
         private void OnDecreaseStack(int currentIndex)
         {
             collectableList.RemoveAt(currentIndex);
@@ -154,76 +154,50 @@ namespace Managers
             collectableList.TrimExcess();
         }
         
+      
+
+        #region OnDecreaseStackOnDroneArea
+        
         private void SetDroneAreaHolder(GameObject gameObject)
         {
             gameObject.transform.SetParent(stackHolder.transform);
         }
-        
-        private void OnDecreaseStackOnDroneArea(int currentIndex)
+        private async void OnDecreaseStackOnDroneArea(int currentIndex)  
         {
             SetDroneAreaHolder(collectableList[currentIndex].gameObject);
+            
+            collectableList[currentIndex].transform.SetParent(stackHolder.transform);
 
             collectableList.RemoveAt(currentIndex);
             
             collectableList.TrimExcess();
 
-            if (collectableList.Count == 0)
+            if (transform.childCount == 0)
             {
-               SendCollectablesBackToDeath();
+                await Task.Delay(3000);
+                
+                DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
+                
+                DroneAreaSignals.Instance.onEnableDroneAreaCollider?.Invoke();
+                
+                OnDroneAreaExit();
             }
         }
-        
-        private async void SendCollectablesBackToDeath() 
+        private async void OnDroneAreaExit()
         {
-            for (int i = 0; i < stackHolder.transform.childCount; i++)
-            {
-                await Task.Delay(50);
-                
-                CollectableManager collectableManager =
-                    stackHolder.transform.GetChild(i).GetComponent<CollectableManager>();
-                
-                if (collectableManager.ColorMatchType != ColorMatchType.Match)
-                {
-                    collectableManager.ChangeAnimationOnController(CollectableAnimType.Dying);
-                    
-                    Destroy(stackHolder.transform.GetChild(i).gameObject,3f);
-                }
-            }
-
-            await Task.Delay(3500);
-            
-            DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
-            
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
-            
-            playerTransform.GetComponent<PlayerManager>().OnStartVerticalMovement();
-            
-            SendCollectablesBackToStack();
-
-        }
-        
-        private void SendCollectablesBackToStack()
-        {
-            for (int i = stackHolder.transform.childCount -1; i >= 0 ; i--)
+            await Task.Delay(500);
+            DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
+            if (stackHolder.transform.childCount == 0)
             {   
-                CollectableManager collectableManager = stackHolder.transform.GetChild(i).GetComponent<CollectableManager>();
+                playerTransform.position = collectableList[0].transform.position;
                 
-                collectableManager.IncreaseStackAfterDroneArea(stackHolder.transform.GetChild(i).gameObject);
             }
         }
+
+        #endregion
         
-        private void OnRebuildStack(GameObject currentStack)
-        {
-            collectableList.Add(currentStack);
-            
-            playerTransform.position = collectableList[0].transform.position;
-
-            currentStack.transform.SetParent(transform);
-            
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
-
-        }
-
+        
+        #region Collectable Lerp Position && Rotation
         
         private void LerpStackWithMathf()
         {
@@ -260,6 +234,7 @@ namespace Managers
                 }
             }
         }
+        #endregion
         
         
         

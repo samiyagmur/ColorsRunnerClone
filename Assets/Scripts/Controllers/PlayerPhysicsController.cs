@@ -21,6 +21,11 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
             }
+
+            if (other.CompareTag("AfterGround"))
+            {
+                playerManager.StartMovementAfterDroneArea();
+            }
             
         }
 
