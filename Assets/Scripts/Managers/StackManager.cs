@@ -139,7 +139,7 @@ namespace Managers
             
             currentStack.transform.SetParent(transform);
 
-            //currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
+            
 
         }
 
