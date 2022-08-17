@@ -52,7 +52,7 @@ namespace Controllers
             if (other.CompareTag("Obstacle"))
             {
                 collectableManager.DecreaseStack();
-                Destroy(other.transform.parent.gameObject);
+                Destroy(other.transform.gameObject);
             }
 
             #endregion

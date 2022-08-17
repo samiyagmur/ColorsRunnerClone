@@ -145,7 +145,6 @@ namespace Managers
 
         public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
-            
             StartVerticalMovement(exitPosition);
 
             await Task.Delay(1000);

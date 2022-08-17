@@ -172,13 +172,15 @@ namespace Managers
 
             if (transform.childCount == 0)
             {
-                await Task.Delay(3000);
+                await Task.Delay(1000);
                 
                 DroneAreaSignals.Instance.onDisableAllColliders?.Invoke();
+               
+                await Task.Delay(3000);
                 
                 DroneAreaSignals.Instance.onEnableDroneAreaCollider?.Invoke();
                 
-                await Task.Delay(500);
+                await Task.Delay(3000);
                 
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
             }
