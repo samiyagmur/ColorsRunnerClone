@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Managers;
 using Signals;
-using Controlers;
+using Controllers;
 using System;
-using Datas.ValueObject;
-using Datas.UnityObject;
+using DG.Tweening;
 using Enums;
+using UnityEditor.VersionControl;
+using Task = System.Threading.Tasks.Task;
 
 namespace Managers
 {
@@ -24,8 +22,11 @@ namespace Managers
         CollectableAnimationController collectableAnimationController;
         [SerializeField]
         CollectableParticalController collectableParticalController;
-       
-        public ColorType CollectableColorType;
+
+        [SerializeField] 
+        private CollectableMovementCommand collectableMovementCommand;
+
+        
         #endregion
 
         #region Private Variables
@@ -34,39 +35,109 @@ namespace Managers
 
         #region Public Variables
         
+        public ColorType CurrentCollectableColorType;
+
+        public ColorMatchType ColorMatchType;
+        
         #endregion
 
         #endregion
-        
 
         private void Start()
         {
-            SetReferences();
+            SetReferences(); 
         }
 
         private void SetReferences()
         {
-            collectableMeshController.SetCollectableMaterial(CollectableColorType);
+            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
         }
 
-        #region Physical Managment
-        public void OnIcreaseStack() { StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);}
+        #region Stack Management
 
-        public void OnDecreaseStack() 
-        { 
+        public void IncreaseStack(GameObject gameObject)
+        {
+            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+
+        }
+        
+        public void DecreaseStack()
+        {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
-            collectableParticalController.PlayPartical();
-            WhenCollectableDie();
+            
+            gameObject.transform.SetParent(null);
+            
+            Destroy(gameObject);
         }
-        public void OnChangeColor(ColorType colorType) =>collectableMeshController.SetCollectableMaterial(colorType);
+        #endregion
+
+        #region On Drone Area Collectable Behaviours
         
-        public void StartPointTurretArea() => collectableAnimationController.WhenEnterTaretArea();
-        public void EndPointTaretArea() => collectableAnimationController.WhenExitTaretArea();
-        public void StartPointDroneArea() => collectableAnimationController.Invoke("WhenEnterDronArea",2f);
+        public async void IncreaseStackAfterDroneArea()
+        {
+            await Task.Delay(300);
+                
+            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            
+            ChangeOutline(false);
+
+            DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
+        }
+
+        public void DecreaseStackAfterDroneArea()
+        {
+            ChangeAnimationOnController(CollectableAnimType.Dying);
+            
+            gameObject.transform.SetParent(null);
+            
+            Destroy(gameObject,3f);
+        }
+       
+
+        public void DeListFromStack()
+        {
+            StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
+        }
         
-        public void WhenCollectableDie() => collectableAnimationController.WhenCollectableDie();
-        
+        public void SetCollectablePositionOnDroneArea(Transform groundTransform)
+        {
+            collectableMovementCommand.MoveToGround(groundTransform);
+        }
 
         #endregion
+        
+        #region Collectable Visuals
+        
+        public void ChangeOutline(bool isOutlineActive)
+        {
+            collectableMeshController.OutlineChange(isOutlineActive);
+        }
+
+        public void OnChangeColor(ColorType colorType)
+        {
+            CurrentCollectableColorType = colorType;
+            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
+        }
+
+        public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)
+        {
+            collectableAnimationController.ChangeAnimationState(collectableAnimType);
+        }
+
+        #endregion
+       
+        public void EnterTurretArea(Material materialOther)
+        {
+            Debug.Log(collectableMeshController.GetComponent<Renderer>().material);
+            if (collectableMeshController.GetComponent<Renderer>().material.color==materialOther.color)
+            {
+                Debug.Log("girdi");
+                ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
+            }
+        }
+
+        
     }
 }

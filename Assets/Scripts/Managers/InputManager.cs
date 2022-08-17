@@ -23,18 +23,22 @@ public class InputManager : MonoBehaviour
     #region Serialized Variables
 
     [SerializeField] private FloatingJoystick floatingJoystick;
+    
     [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
+    
+    [SerializeField]private GameStates currentGameState;
 
     #endregion
     #region Private Variables
 
     private bool _isTouching;
 
-    [SerializeField]private GameStates _currentGameState;
-    
     private float _currentVelocity; //ref type
+    
     private Vector2? _mousePosition; //ref type
+    
     private Vector3 _moveVector; //ref type
+    
     private Vector3 _joystickPosition;
 
     #endregion
@@ -80,14 +84,14 @@ public class InputManager : MonoBehaviour
     {
         if (!isReadyForTouch) return;
 
-        if (Input.GetMouseButtonUp(0) /*&& !IsPointerOverUIElement()*/)
+        if (Input.GetMouseButtonUp(0))
         {
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
 
-        if (Input.GetMouseButtonDown(0) /*&& !IsPointerOverUIElement()*/)
+        if (Input.GetMouseButtonDown(0))
         {
             _isTouching = true;
             InputSignals.Instance.onInputTaken?.Invoke();
@@ -98,16 +102,14 @@ public class InputManager : MonoBehaviour
             }
 
             _mousePosition = Input.mousePosition;
-            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
         }
 
-        //if (_currentGameState == GameStates.Runner)
-        //{
-            if (Input.GetMouseButton(0) /*&& !IsPointerOverUIElement()*/)
+        if (currentGameState == GameStates.Runner)
+        {
+            if (Input.GetMouseButton(0))
             {
                 if (_isTouching)
                 {
-
                     if (_mousePosition != null)
                     {
                         Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
@@ -129,34 +131,37 @@ public class InputManager : MonoBehaviour
                         });
                     }
                 }
-           // }
-       }
+            }
+        }
 
-        //if (Input.GetMouseButton(0))
-        //{
-        //    if (_isTouching)
-        //    {
-        //        if (_currentGameState == GameStates.Idle)
-        //        {
-        //            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
-        //            
-        //            _moveVector = _joystickPosition;
-        //            
-        //            InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
-        //            {
-        //                InputValues = _moveVector
-        //            });
-        //        }
-        //    }
-//
-        //}
-       //
+        if (currentGameState == GameStates.Idle)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if (_isTouching)
+                {
+                    if (currentGameState == GameStates.Idle)
+                    {
+                        _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+                    
+                        _moveVector = _joystickPosition;
+                    
+                        InputSignals.Instance.onJoyStickInputDragged?.Invoke(new IdleInputParams()
+                        {
+                            InputValues = _moveVector
+                        });
+                    }
+                }
+
+            }
+        }
+
     }
 
     private void OnChangeGameState(GameStates currentStates)
     {
-        _currentGameState = currentStates;
-        if (_currentGameState == GameStates.Idle)
+        currentGameState = currentStates;
+        if (currentGameState == GameStates.Idle)
         {
             floatingJoystick.gameObject.SetActive(true);
         }

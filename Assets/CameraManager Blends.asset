@@ -20,9 +20,72 @@ MonoBehaviour:
       m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0.011449397
+          inSlope: 4.3291206
+          outSlope: 4.3291206
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.09334772
+          value: 0.41556293
+          inSlope: 1.3336668
+          outSlope: 1.3336668
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.32927835
+          value: 0.023496512
+          inSlope: 0.0072707534
+          outSlope: 0.0072707534
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.6522606
+          value: 0.56492084
+          inSlope: 5.0421405
+          outSlope: 5.0421405
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.696801
+          value: 0.93941444
+          inSlope: 3.7390656
+          outSlope: 3.7390656
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.8759615
+          value: 0.77282727
+          inSlope: 0.45082414
+          outSlope: 0.45082414
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1.8314693
+          outSlope: 1.8314693
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
         m_RotationOrder: 0
   - m_From: MiniGameCam
     m_To: IdleCam

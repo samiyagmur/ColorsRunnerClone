@@ -1,10 +1,11 @@
-using Controlers;
+using Controllers;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Managers
 {
     public class PlayerManager : MonoBehaviour
 {
-    #region Self Variables
+        #region Self Variables
 
         #region Public Variables
 
@@ -23,9 +24,12 @@ namespace Managers
         #region Serialized Variables
 
         [Space] [SerializeField] private PlayerMovementController movementController;
+        
         [SerializeField] private PlayerAnimationController animationController;
+        
+        [SerializeField] private PlayerMeshController playerMeshController;
+
         [SerializeField] private TextMeshPro scoreText;
-        [SerializeField] private GameObject skinMeshRenderer;
         
         
         #endregion
@@ -116,19 +120,14 @@ namespace Managers
 
         private void OnLevelSuccessful()
         {
-            movementController.IsReadyToPlay(false);
+            movementController.IsReadyToPlay(false); //OnReset,playermanager  emir versin,is yapmasin
 
         }
         private void OnLevelFailed()
         {
-            movementController.IsReadyToPlay(false);
+            movementController.IsReadyToPlay(false); // Reset
         }
-
-        public void SetStackPosition()
-        {
-            Vector2 pos = new Vector2(transform.position.x,transform.position.z);
-           // StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
-        }
+        
         internal void SendToColorType(ColorType colorType)
         {
             StackSignals.Instance.onChangeColor?.Invoke(colorType);
@@ -137,13 +136,31 @@ namespace Managers
         {
             gameObject.SetActive(true);
             movementController.OnReset();
-            skinMeshRenderer.GetComponent<SkinnedMeshRenderer>().enabled = false;
-            gameObject.GetComponent<PlayerAnimationController>().enabled = false;
         }
 
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
+        }
+
+        public async void StartMovementAfterDroneArea(Transform exitPosition)
+        {
+            StartVerticalMovement(exitPosition);
+
+            await Task.Delay(1000);
+            
+            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+
+        }
+
+        public void OnStopVerticalMovement()
+        {
+            movementController.StopVerticalMovement();
+        }
+
+        public void StartVerticalMovement(Transform exitPosition)
+        {
+            movementController.OnStartVerticalMovement(exitPosition);
         }
 
         // IEnumerator WaitForFinal()
@@ -154,7 +171,7 @@ namespace Managers
         //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         // }
 
-        
 
-    }
+
+}
 }
