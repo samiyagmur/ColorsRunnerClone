@@ -18,7 +18,7 @@ namespace Managers
         
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         
-        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay;
+        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay; // Data
         
         [SerializeField] private Transform playerTransform; // Levelden buldur
         
@@ -82,7 +82,7 @@ namespace Managers
             for (int i = 0; i < initSize ; i++)
             {   
                 
-                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
+                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation); // change name
                 
                 AddStackOnInitialize(_currentStack);
                 
@@ -95,7 +95,7 @@ namespace Managers
         {
             collectableList.Add(currentStack);
             
-            currentStack.transform.SetParent(transform);
+            currentStack.transform.SetParent(transform); // all currenstack need to change
             
             currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
         }
@@ -139,7 +139,7 @@ namespace Managers
             
             currentStack.transform.SetParent(transform);
 
-            currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
+            //currentStack.transform.position = collectableList[collectableList.Count-1].transform.position + Vector3.back;
 
         }
 
@@ -180,18 +180,10 @@ namespace Managers
                 
                 await Task.Delay(500);
                 
-                DroneAreaExit();
+                DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
             }
         }
-        private void DroneAreaExit()
-        {
-            DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
-            
-            if (stackHolder.transform.childCount == 0)
-            {   
-                playerTransform.position = collectableList[0].transform.position;
-            }
-        }
+        
 
         #endregion
         

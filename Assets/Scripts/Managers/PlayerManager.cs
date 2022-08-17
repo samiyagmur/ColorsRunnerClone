@@ -143,10 +143,10 @@ namespace Managers
             scoreText.text = Values.ToString();
         }
 
-        public async void StartMovementAfterDroneArea()
+        public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
             
-            StartVerticalMovement();
+            StartVerticalMovement(exitPosition);
 
             await Task.Delay(1000);
             
@@ -159,9 +159,9 @@ namespace Managers
             movementController.StopVerticalMovement();
         }
 
-        public void StartVerticalMovement()
+        public void StartVerticalMovement(Transform exitPosition)
         {
-            movementController.OnStartVerticalMovement();
+            movementController.OnStartVerticalMovement(exitPosition);
         }
 
         // IEnumerator WaitForFinal()

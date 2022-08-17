@@ -1,6 +1,4 @@
-﻿using System;
-using Managers;
-using System.Collections;
+﻿using Managers;
 using Command.ObstacleCommands;
 using Signals;
 using UnityEngine;
@@ -24,7 +22,7 @@ namespace Controllers
 
             if (other.CompareTag("AfterGround"))
             {
-                playerManager.StartMovementAfterDroneArea();
+                playerManager.StartMovementAfterDroneArea(other.transform);
             }
         }
         private void OnTriggerExit(Collider other)

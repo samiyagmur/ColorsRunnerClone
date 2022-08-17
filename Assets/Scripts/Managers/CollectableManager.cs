@@ -45,7 +45,7 @@ namespace Managers
 
         private void Start()
         {
-            SetReferences();
+            SetReferences(); 
         }
 
         private void SetReferences()
@@ -137,7 +137,6 @@ namespace Managers
                 ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
             }
         }
-        
 
         
     }
