@@ -12,7 +12,7 @@ namespace Signals
         
         public UnityAction<int> onDecreaseStack = delegate(int arg0) {  };
         
-        public UnityAction<GameObject> onRebuildStack = delegate(GameObject arg0) {  }; // DroneArea signals
+        public UnityAction<GameObject> onSendsCollectablesBackToStack = delegate(GameObject arg0) {  }; // DroneArea signals
 
         public UnityAction<int> onDecreaseStackOnDroneArea = delegate(int arg0) {  };
 

@@ -19,7 +19,7 @@ namespace Controllers
 
         public void MoveToGround(Transform groundTransform)
         {
-            var randomZValue =Random.Range(-(groundTransform.localScale.z/2),(groundTransform.localScale.z/2 - 7));
+            var randomZValue =Random.Range(-(groundTransform.localScale.z/2 -2),(groundTransform.localScale.z/2 - 2));
             
             Vector3 pos = new Vector3(groundTransform.position.x, groundTransform.position.y,groundTransform.position.z + randomZValue);
             

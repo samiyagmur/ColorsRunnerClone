@@ -5,6 +5,7 @@ using Enums;
 using Keys;
 using Signals;
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -140,6 +141,18 @@ namespace Managers
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
+        }
+
+        public async void StartMovementAfterDroneArea()
+        {
+            
+            OnStartVerticalMovement();
+
+            await Task.Delay(1000);
+            
+            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+            
+            
         }
 
         public void OnStopVerticalMovement()

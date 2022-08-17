@@ -4,6 +4,8 @@ using Controllers;
 using System;
 using DG.Tweening;
 using Enums;
+using UnityEditor.VersionControl;
+using Task = System.Threading.Tasks.Task;
 
 namespace Managers
 {
@@ -58,41 +60,49 @@ namespace Managers
 
         }
 
-        public void IncreaseStackAfterDroneArea(GameObject gameObject)
+        public async void IncreaseStackAfterDroneArea()
         {
-            gameObject.transform.GetChild(1).tag = "Collected";
-            
-            StackSignals.Instance.onRebuildStack?.Invoke(gameObject);
+            await Task.Delay(300);
+                
+            StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
             
             ChangeOutline(false);
 
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
         }
-
+        
         public void DecreaseStack()
         {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
+            
             gameObject.transform.SetParent(null);
-            //collectableParticalController.PlayPartical();
+            
             Destroy(gameObject);
         }
+        
+        public void DecreaseStackAfterDroneArea()
+        {
+            ChangeAnimationOnController(CollectableAnimType.Dying);
+            
+            gameObject.transform.SetParent(null);
+            
+            Destroy(gameObject,3f);
+        }
+       
 
         public void DeListFromStack()
         {
             StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
         }
-
-        public void DeathOnArea()
-        {
-            ChangeAnimationOnController(CollectableAnimType.Dying);
-            Destroy(gameObject,2f);
-        }
+        
 
         public void SetCollectablePositionOnDroneArea(Transform groundTransform)
         {
             collectableMovementCommand.MoveToGround(groundTransform);
         }
 
+        #region Collectable Visuals
+        
         public void ChangeOutline(bool isOutlineActive)
         {
             collectableMeshController.OutlineChange(isOutlineActive);
@@ -108,6 +118,10 @@ namespace Managers
         {
             collectableAnimationController.ChangeAnimationState(collectableAnimType);
         }
+        
+
+        #endregion
+       
         public void EnterTurretArea(Material materialOther)
         {
             Debug.Log(collectableMeshController.GetComponent<Renderer>().material);
@@ -116,8 +130,6 @@ namespace Managers
                 Debug.Log("girdi");
                 ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
             }
-            
-            
         }
         
 

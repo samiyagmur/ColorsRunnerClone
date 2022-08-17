@@ -30,12 +30,16 @@ namespace Managers
         private void SubscribeEvents()
         {
             DroneAreaSignals.Instance.onDisableAllColliders += OnDisableAllColliders;
+            DroneAreaSignals.Instance.onEnableDroneAreaCollider += OnEnableDroneAreaCollider;
+            DroneAreaSignals.Instance.onDisableDroneAreaCollider += OnDisableDroneAreaCollider;
         }
 
         private void UnsubscribeEvents()
         {
 
             DroneAreaSignals.Instance.onDisableAllColliders -= OnDisableAllColliders;
+            DroneAreaSignals.Instance.onEnableDroneAreaCollider -= OnEnableDroneAreaCollider;
+            DroneAreaSignals.Instance.onDisableDroneAreaCollider -= OnDisableDroneAreaCollider;
         }
         private void OnDisable()
         {
@@ -47,8 +51,18 @@ namespace Managers
         private void OnDisableAllColliders()
         {   
             transform.GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(1).GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(2).GetComponent<BoxCollider>().enabled = false;
+        }
+
+        private void OnEnableDroneAreaCollider()
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+        private void OnDisableDroneAreaCollider()
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }
