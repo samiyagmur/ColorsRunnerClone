@@ -14,15 +14,15 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject initStack;
+        [SerializeField] private GameObject initStack; //Data
         
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         
         [SerializeField] [Range(0.02f, 1f)] private float lerpDelay;
         
-        [SerializeField] private Transform playerTransform;
+        [SerializeField] private Transform playerTransform; // Levelden buldur
         
-        [SerializeField] private int initSize = 3;
+        [SerializeField] private int initSize = 3;  //Pooldan cek // Data
 
         [SerializeField] private GameObject stackHolder;       //Levelden Buldur,test amacli boyle kalabilir
         
