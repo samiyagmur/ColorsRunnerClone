@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b1e6536fa4bb0469286306d8685574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectableManager: {fileID: 8326928516369419401}
 --- !u!1 &8326928516369419402
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 1795363338989721595}
   m_Layer: 0
   m_Name: Physics
-  m_TagString: Collectable
+  m_TagString: Collected
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

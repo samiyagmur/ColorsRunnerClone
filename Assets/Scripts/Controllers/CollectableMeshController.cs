@@ -15,7 +15,11 @@ namespace Controllers
         #region Private Veriables
 
         private SkinnedMeshRenderer _collectableRenderer;
-        
+
+        #endregion
+        #region SerializeField Variables
+        [SerializeField]
+        private CollectableManager collectableManager;
         #endregion
 
         #endregion
@@ -50,5 +54,14 @@ namespace Controllers
             }
         }
 
+        public void CompareColorOnTurretArea(GameObject gameObjectOther,ColorType CurrentCollectableColorType)
+        {
+            if (gameObjectOther.GetComponent<GroundColorCheckController>().colorType != CurrentCollectableColorType)
+            {
+                collectableManager.SendCollectableTransform();
+            }
+        }
+
+        
     }
 }
