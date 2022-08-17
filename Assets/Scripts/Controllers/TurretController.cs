@@ -27,9 +27,7 @@ namespace Controllers
         public void EnterTurretArea(Transform transformCollectable)
         {
             CollectablePos = transformCollectable.position;
-            turretAreaType = TurretAreaType.InPlaceTurretArea;
-
-            
+            turretAreaType = TurretAreaType.InPlaceTurretArea; 
         }
         public void ExitTurretArea()
         {
@@ -41,7 +39,6 @@ namespace Controllers
         {   
             //InvokeRepeating("TaretMovement",0, 0.5f);
             InvokeRepeating("GetRandomPos", 0, cc);
-
         }
         private void GetRandomPos()
         {
@@ -67,7 +64,7 @@ namespace Controllers
                     relativePos = shotPositon - transform.position;
                     rotation = Quaternion.LookRotation(relativePos);
 
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation,Mathf.Lerp(0,1,dd));
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Mathf.Lerp(0,1,dd));
 
 
                     break;
@@ -75,41 +72,42 @@ namespace Controllers
                     shotPositon = CollectablePos+new Vector3(0,0,0);
                     relativePos = shotPositon - transform.position;
                     rotation = Quaternion.LookRotation(relativePos);
-
+                    //Debug.Log(turretAreaType);
                     ff+=dd;
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, ff);
-                    Debug.Log(ff);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, ff);//PlayerıYavaşlat;
+                    HitWithRaycast();
 
                     if (ff >= 1)
-                    {
+                    {   
                         ff = 0;
-                        HitWithRaycast();
                     }
                     
                     break;
             }
-
-
             //transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> HitWithRaycast());
         }
 
 
 
         private void HitWithRaycast()
-        {
+        {   
             if (Physics.Raycast(transform.position, transform.forward, out hit))
-            {
+            {   
                 Debug.DrawRay(transform.position, transform.forward*15, Color.red);
 
-                if (hit.transform.gameObject.CompareTag("Collectable"))
+                if (hit.transform.gameObject.CompareTag("Collected"))
                 {
-                    Debug.Log("Collectable");
+                    Debug.Log("Collected");
                     StackSignals.Instance.onDecreaseStack?.Invoke(hit.transform.parent.GetSiblingIndex());
-                    Destroy(hit.transform.parent.gameObject);
                     hit.transform.parent.SetParent(null);
+                    Destroy(hit.transform.parent.gameObject);
 
                 }
             }
+
+        }
+        private void RandomPos()//burayı yaz
+        {
 
         }
     }

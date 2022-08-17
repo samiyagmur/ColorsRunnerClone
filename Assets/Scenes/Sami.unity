@@ -898,8 +898,8 @@ MonoBehaviour:
       SidewaysSpeed: 2
   movementController: {fileID: 292743961}
   animationController: {fileID: 201209102}
+  playerMeshController: {fileID: 1359633108}
   scoreText: {fileID: 0}
-  skinMeshRenderer: {fileID: 0}
 --- !u!4 &292743963
 Transform:
   m_ObjectHideFlags: 0
@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 377502582}
   - component: {fileID: 377502581}
   - component: {fileID: 377502580}
+  - component: {fileID: 377502584}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: TurretArea
@@ -1110,6 +1111,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377502584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377502579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e72dc580ce34f7eba05ec5509a793cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorType: 5
 --- !u!1 &417183084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,9 +1594,10 @@ GameObject:
   - component: {fileID: 547309805}
   - component: {fileID: 547309804}
   - component: {fileID: 547309803}
+  - component: {fileID: 547309807}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: TurretArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1595,7 +1610,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547309802}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1663,6 +1678,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547309807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547309802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e72dc580ce34f7eba05ec5509a793cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorType: 2
 --- !u!4 &553277885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8326928516369419400, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
@@ -3838,11 +3866,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92b0bdca888273418b192eaa848bae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initStack: {fileID: 8326928516369419402, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
+  initStack: {fileID: 1877316333817627185, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
   lerpDelay: 0.303
   playerTransform: {fileID: 292743963}
-  initSize: 5
+  initSize: 10
   stackHolder: {fileID: 0}
 --- !u!1 &1245888360
 GameObject:
@@ -4081,6 +4109,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8326928516369419400, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
   m_PrefabInstance: {fileID: 1040102827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1359633105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7917291961305824890, guid: b836ac01240f7d24287dde675adc95d2, type: 3}
+  m_PrefabInstance: {fileID: 423400537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1359633108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359633105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736b7c5032d3486184f28a9735c29002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1406074190
 GameObject:
   m_ObjectHideFlags: 0
@@ -5748,7 +5793,7 @@ MonoBehaviour:
   floatingJoystick: {fileID: 234318066}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
-  _currentGameState: 0
+  currentGameState: 0
 --- !u!4 &1999480062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8326928516369419400, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
@@ -5786,7 +5831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xTaretPosClamp: {x: 3.5, y: 46}
   yTaretPosClamp: {x: -3.5, y: 36}
-  dd: 0.04
+  dd: 0.009
   cc: 0.5
 --- !u!114 &2011065365
 MonoBehaviour:
