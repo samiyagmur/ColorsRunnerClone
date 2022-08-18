@@ -23,6 +23,7 @@ namespace Managers
         [SerializeField]
         CollectableParticalController collectableParticalController;
 
+        [SerializeField] private CollectablePhysicController collectablePhysicController;
         [SerializeField] 
         private CollectableMovementCommand collectableMovementCommand;
 
@@ -56,7 +57,9 @@ namespace Managers
         #region Stack Management
 
         public void IncreaseStack(GameObject gameObject)
-        {
+        {   
+            gameObject.SetActive(false);
+            
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
@@ -91,6 +94,8 @@ namespace Managers
             ChangeAnimationOnController(CollectableAnimType.Dying);
             
             gameObject.transform.SetParent(null);
+            
+            Death();
             
             Destroy(gameObject,3f);
         }
@@ -136,6 +141,11 @@ namespace Managers
                 Debug.Log("girdi");
                 ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
             }
+        }
+
+        public void Death()
+        {
+            collectablePhysicController.DeActivedCollider();
         }
 
         

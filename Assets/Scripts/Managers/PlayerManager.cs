@@ -149,7 +149,7 @@ namespace Managers
 
             await Task.Delay(1000);
             
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+           // CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
 

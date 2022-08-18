@@ -3,6 +3,7 @@ using Controllers;
 using DG.Tweening;
 using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,6 +40,7 @@ namespace Command.ObstacleCommands
         private void Start()
         {
             SetGateMaterial(colorType);
+            SendGateTypeToDroneManager(colorType);
         }
 
         private void GetReferences()
@@ -49,6 +51,11 @@ namespace Command.ObstacleCommands
         private void SetGateMaterial(ColorType type)
         {
             _GateRender.material = Resources.Load<Material>($"Materials/{type}Mat");
+        }
+
+        private void SendGateTypeToDroneManager(ColorType gateColor)
+        {
+            DroneAreaSignals.Instance.onSetCorrectColorToGround?.Invoke(gateColor);
         }
         
     }

@@ -35,7 +35,7 @@ namespace Controllers
 
         private void Start()
         {
-            SetGroundMaterial(colorType);
+            //SetGroundMaterial(colorType);
         }
 
         private void GetReferences()
@@ -43,8 +43,9 @@ namespace Controllers
             _groundRenderer = GetComponent<MeshRenderer>();
         }
 
-        private void SetGroundMaterial(ColorType type)
+        public void SetGroundMaterial(ColorType type)
         {
+            colorType = type;
             _groundRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
         }
 

@@ -17,6 +17,7 @@ namespace Controllers
         [SerializeField]
         private CollectableManager collectableManager;
         
+        [SerializeField] private BoxCollider collectableCollider;
 
         #endregion
 
@@ -132,6 +133,11 @@ namespace Controllers
         {   
             if (other.CompareTag("TurretArea")) collectableManager.EnterTurretArea(other.GetComponent<Renderer>().material);
 
+        }
+        
+        public void DeActivedCollider()
+        {
+            collectableCollider.enabled = false;
         }
 
     }

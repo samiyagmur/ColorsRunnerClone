@@ -62,6 +62,7 @@ MonoBehaviour:
   collectableMeshController: {fileID: 8326928517121663179}
   collectableAnimationController: {fileID: 8326928517121663172}
   collectableParticalController: {fileID: 8326928517376776972}
+  collectablePhysicController: {fileID: 8326928517241359762}
   collectableMovementCommand: {fileID: 742280035107523834}
   CurrentCollectableColorType: 5
   ColorMatchType: 0
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableManager: {fileID: 8326928516369419401}
+  collectableCollider: {fileID: 8326928517241359760}
 --- !u!54 &1795363338989721595
 Rigidbody:
   m_ObjectHideFlags: 0

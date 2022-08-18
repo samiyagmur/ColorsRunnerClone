@@ -7,20 +7,29 @@ namespace Controllers
 {
     public class PlayerPhysicsController :MonoBehaviour
     {
+        #region Self Variables
 
+        #region Serialized Variables
+        
         [SerializeField]
         private PlayerManager playerManager;
+        
+
+        #endregion
+
+        #endregion
+       
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Gate")) playerManager.SendToColorType(other.transform.GetComponent<GateController>().colorType);
 
-            if (other.CompareTag("DroneArea"))
+            else if (other.CompareTag("DroneArea"))
             {
-                CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
+               // CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
             }
 
-            if (other.CompareTag("AfterGround"))
+            else if (other.CompareTag("AfterGround"))
             {
                 playerManager.StartMovementAfterDroneArea(other.transform);
             }
@@ -32,5 +41,6 @@ namespace Controllers
                 playerManager.OnStopVerticalMovement();
             }
         }
+  
     }
 }

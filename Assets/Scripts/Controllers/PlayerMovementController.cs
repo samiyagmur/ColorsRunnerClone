@@ -174,7 +174,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             _movementData.ForwardSpeed = 10;
             
-            gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z), .1f);
+            gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z/2.2f), .1f);
         }
         
         public void OnReset()
