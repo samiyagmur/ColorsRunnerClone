@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1795363338989721595}
   m_Layer: 0
   m_Name: Physics
-  m_TagString: Collected
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
