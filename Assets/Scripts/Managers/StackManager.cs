@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Enums;
 using Signals;
@@ -92,8 +93,10 @@ namespace Managers
         {
             if (playerTransform != null)
             {
-                LerpStackWithMathf();
+                LerpStack();
             }
+            
+            
            
         }
         
@@ -160,7 +163,7 @@ namespace Managers
 
         private async void OnIncreaseStack(GameObject currentStack) 
         {
-
+            
             collectableList.Add(currentStack);
             
             collectableList.TrimExcess();
@@ -171,15 +174,25 @@ namespace Managers
             {
                 playerTransform.position = collectableList[0].transform.position;
             }
-
-            await Task.Delay(50);
+            currentStack.SetActive(false);
+            await Task.Delay(25);
             currentStack.SetActive(true);
         }
 
         private void OnDecreaseStack(int currentIndex)
         {
+            if (collectableList[currentIndex] is null)
+            {
+                return;
+            }
 
+            GameObject currentGameObj = collectableList[currentIndex].gameObject;
+            
+            collectableList[currentIndex].gameObject.SetActive(false);
+            
             collectableList.RemoveAt(currentIndex);
+            
+            Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
         }
@@ -240,13 +253,16 @@ namespace Managers
         
         #region Collectable Lerp Position && Rotation
         
-        private void LerpStackWithMathf()
+        private void LerpStack()
         {
             for (int i = 0; i < collectableList.Count; i++) 
             {   
                 if (i == 0)
                 {
-                    
+                    if (collectableList[i] is null)
+                    {
+                        return;
+                    }
                     collectableList[i].transform.position= new Vector3(
                         Mathf.Lerp(collectableList[i].transform.position.x, playerTransform.position.x, 0.3f),
                         Mathf.Lerp(collectableList[i].transform.position.y, playerTransform.position.y, 0.3f),
@@ -265,6 +281,10 @@ namespace Managers
                 }
                 else
                 {
+                    if (collectableList[i] is null || collectableList[i-1] is null)
+                    {
+                        return;
+                    }
                     collectableList[i].transform.position = new Vector3(
                         Mathf.Lerp(collectableList[i].transform.position.x, collectableList[i-1].transform.position.x, 0.3f),
                         Mathf.Lerp(collectableList[i].transform.position.y, collectableList[i-1].transform.position.y, 0.3f),
