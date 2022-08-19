@@ -5,7 +5,7 @@ namespace Enums
 {
     public enum TurretAreaType 
     {
-        UnPlaceTurretArea,
+        OutPlaceTurretArea,
         InPlaceTurretArea
         
 

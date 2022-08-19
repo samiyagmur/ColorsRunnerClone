@@ -18,16 +18,14 @@ namespace Managers
         
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         
-        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay; // Data
+        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay; //Data
         
-        [SerializeField] private Transform playerTransform; // Levelden buldur
+        [SerializeField] private Transform playerTransform; //Levelden buldur
         
         [SerializeField] private int initSize = 3;  //Pooldan cek // Data
 
-        [SerializeField] private GameObject stackHolder;       //Levelden Buldur,test amacli boyle kalabilir
+        [SerializeField] private GameObject stackHolder;   //Levelden Buldur,test amacli boyle kalabilir
         
-        
-
         #endregion
 
         #endregion

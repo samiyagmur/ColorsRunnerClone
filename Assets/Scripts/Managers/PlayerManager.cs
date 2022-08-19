@@ -30,8 +30,9 @@ namespace Managers
         [SerializeField] private PlayerMeshController playerMeshController;
 
         [SerializeField] private TextMeshPro scoreText;
-        
-        
+
+
+
         #endregion
         #endregion
 
@@ -46,6 +47,7 @@ namespace Managers
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(Data.MovementData);
+            movementController.ChangeForwardSpeed(ChangeSpeedState.Normal);
         }
 
         #region Event Subscription
@@ -149,7 +151,6 @@ namespace Managers
 
             await Task.Delay(1000);
             
-           // CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
 
@@ -170,8 +171,13 @@ namespace Managers
         //     gameObject.SetActive(false);
         //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         // }
+        public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState)
+        {
+            movementController.ChangeForwardSpeed(changeSpeedState);
+        }
 
 
 
-}
+
+    }
 }

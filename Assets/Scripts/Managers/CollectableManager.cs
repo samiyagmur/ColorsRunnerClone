@@ -74,10 +74,13 @@ namespace Managers
             
             Destroy(gameObject,0.1f);
         }
+
+        
         #endregion
 
         #region On Drone Area Collectable Behaviours
         
+
         public async void IncreaseStackAfterDroneArea()
         {
             await Task.Delay(300);
@@ -132,22 +135,21 @@ namespace Managers
         }
 
         #endregion
-       
-        public void EnterTurretArea(Material materialOther)
-        {
-            Debug.Log(collectableMeshController.GetComponent<Renderer>().material);
-            if (collectableMeshController.GetComponent<Renderer>().material.color==materialOther.color)
-            {
-                Debug.Log("girdi");
-                ObstacleSignals.Instance.onEnterTurretArea?.Invoke(transform);
-            }
-        }
 
         public void Death()
         {
             collectablePhysicController.DeActivedCollider();
         }
-
         
+        public void EnterTurretArea(GameObject gameObjectOther)
+        {   
+            collectableMeshController.CompareColorOnTurretArea(gameObjectOther, CurrentCollectableColorType);
+            
+        }
+        public void SendCollectableTransform()
+        {   
+            ObstacleSignals.Instance.onEnterTurretArea(transform);
+           
+        }
     }
 }

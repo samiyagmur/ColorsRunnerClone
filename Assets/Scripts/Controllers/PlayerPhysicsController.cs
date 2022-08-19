@@ -2,6 +2,7 @@
 using Command.ObstacleCommands;
 using Signals;
 using UnityEngine;
+using Enums;
 
 namespace Controllers
 {
@@ -20,6 +21,7 @@ namespace Controllers
         #endregion
        
 
+      
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Gate")) playerManager.SendToColorType(other.transform.GetComponent<GateController>().colorType);
@@ -32,6 +34,13 @@ namespace Controllers
             else if (other.CompareTag("AfterGround"))
             {
                 playerManager.StartMovementAfterDroneArea(other.transform);
+                playerManager.ChangeForwardSpeeds(ChangeSpeedState.Normal);
+
+            }
+
+            if (other.CompareTag("TurretArea"))
+            {
+                playerManager.ChangeForwardSpeeds(ChangeSpeedState.EnterTaretArea);
             }
         }
         private void OnTriggerExit(Collider other)
@@ -39,6 +48,11 @@ namespace Controllers
             if (other.CompareTag("DroneArea"))
             {
                 playerManager.OnStopVerticalMovement();
+                playerManager.ChangeForwardSpeeds(ChangeSpeedState.Stop);
+            }
+            if (other.CompareTag("TurretArea"))
+            {
+                playerManager.ChangeForwardSpeeds(ChangeSpeedState.Normal);
             }
         }
   

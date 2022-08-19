@@ -130,9 +130,11 @@ namespace Controllers
         }
 
         private void OnTriggerStay(Collider other)
-        {   
-            if (other.CompareTag("TurretArea")) collectableManager.EnterTurretArea(other.GetComponent<Renderer>().material);
-
+        {
+            if (other.CompareTag("TurretArea"))
+            {
+                collectableManager.EnterTurretArea(other.gameObject);
+            }
         }
         
         public void DeActivedCollider()
