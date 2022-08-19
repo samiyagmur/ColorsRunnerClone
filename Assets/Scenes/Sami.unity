@@ -254,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 34225285}
   - component: {fileID: 34225286}
+  - component: {fileID: 34225287}
   m_Layer: 0
   m_Name: TurretGun
   m_TagString: Untagged
@@ -268,7 +269,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34225284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -288,9 +289,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a488a5c351060243beedb7e7a8d60c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _taretAreaTranform: {fileID: 988114183}
-  "time\u0130ncreaseSpeed": 0.09
-  invokeRepeatTime: 0.5
+  taretAreaTranform: {fileID: 988114183}
+  "time\u0130ncreaseSpeed": 0.01
+  invokeRepeatTimeForRandomPos: 0.5
+--- !u!114 &34225287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34225284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae9ee0426a489b4c8543dc8ca765386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretController: {fileID: 34225286}
 --- !u!1 &78193317
 GameObject:
   m_ObjectHideFlags: 3
@@ -4244,7 +4258,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1080057875}
-  - component: {fileID: 1080057876}
   m_Layer: 0
   m_Name: Obstacles
   m_TagString: Untagged
@@ -4271,19 +4284,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1080057876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080057874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae9ee0426a489b4c8543dc8ca765386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretController: {fileID: 0}
 --- !u!1 &1095414006
 GameObject:
   m_ObjectHideFlags: 0
@@ -4775,8 +4775,9 @@ MonoBehaviour:
       SidewaysSpeed: 2
   movementController: {fileID: 1156944546}
   animationController: {fileID: 378462491}
-  playerMeshController: {fileID: 0}
+  playerMeshController: {fileID: 1257372243}
   scoreText: {fileID: 0}
+  changeSpeedState: 0
 --- !u!4 &1156944548
 Transform:
   m_ObjectHideFlags: 0
@@ -5735,6 +5736,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219367637}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1257372242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7917291961305824890, guid: b836ac01240f7d24287dde675adc95d2, type: 3}
+  m_PrefabInstance: {fileID: 378462487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1257372243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257372242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736b7c5032d3486184f28a9735c29002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1288459637
 GameObject:
   m_ObjectHideFlags: 0
@@ -6801,6 +6819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1481163032}
   - component: {fileID: 1481163033}
+  - component: {fileID: 1481163034}
   m_Layer: 0
   m_Name: TurretGun
   m_TagString: Untagged
@@ -6835,9 +6854,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a488a5c351060243beedb7e7a8d60c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _taretAreaTranform: {fileID: 988114183}
-  "time\u0130ncreaseSpeed": 0.09
-  invokeRepeatTime: 0.5
+  taretAreaTranform: {fileID: 988114183}
+  "time\u0130ncreaseSpeed": 0.01
+  invokeRepeatTimeForRandomPos: 0.5
+--- !u!114 &1481163034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481163031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae9ee0426a489b4c8543dc8ca765386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretController: {fileID: 1481163033}
 --- !u!1001 &1503583148
 PrefabInstance:
   m_ObjectHideFlags: 0

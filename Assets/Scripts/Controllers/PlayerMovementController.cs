@@ -3,6 +3,7 @@ using DG.Tweening;
 using Enums;
 using Keys;
 using Managers;
+using System;
 using UnityEngine;
 
 namespace Controllers
@@ -37,8 +38,7 @@ public class PlayerMovementController : MonoBehaviour
     
         public void SetMovementData(PlayerMovementData dataMovementData)
         {   
-            _movementData = dataMovementData;
-            _movementData.ForwardSpeed = 10;
+            _movementData = dataMovementData; 
         }
 
         public void EnableMovement()
@@ -176,7 +176,13 @@ public class PlayerMovementController : MonoBehaviour
             
             gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z), .1f);
         }
-        
+
+        public void ChangeForwardSpeed(ChangeSpeedState changeSpeedState)
+        {
+            _movementData.ForwardSpeed =(int)changeSpeedState;
+            Debug.Log((int)changeSpeedState);
+        }
+
         public void OnReset()
         {
             Stop();
@@ -184,6 +190,5 @@ public class PlayerMovementController : MonoBehaviour
             _isReadyToMove = false;
         }
 
-       
     }
 }

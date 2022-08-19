@@ -66,9 +66,7 @@ namespace Managers
         public void DecreaseStack()
         {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
-            
             gameObject.transform.SetParent(null);
-            
             Destroy(gameObject);
         }
 
@@ -132,13 +130,14 @@ namespace Managers
       
 
         public void EnterTurretArea(GameObject gameObjectOther)
-        {
+        {   
             collectableMeshController.CompareColorOnTurretArea(gameObjectOther, CurrentCollectableColorType);
+            
         }
         public void SendCollectableTransform()
-        {
+        {   
             ObstacleSignals.Instance.onEnterTurretArea(transform);
+           
         }
-
     }
 }
