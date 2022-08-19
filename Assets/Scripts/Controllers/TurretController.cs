@@ -3,6 +3,9 @@ using UnityEngine;
 using Enums;
 using DG.Tweening;
 using Signals;
+using System.Threading.Tasks;
+using Managers;
+
 
 namespace Controllers
 {
@@ -12,32 +15,33 @@ namespace Controllers
 
         #region Self Variables
         #region SerializeField Variables
+
         [SerializeField]
-        private Transform _taretAreaTranform;
+        private Transform taretAreaTranform;
         [SerializeField]
         private float timeİncreaseSpeed;
         [SerializeField]
-        private float invokeRepeatTime;
+        private float invokeRepeatTimeForRandomPos;
+
         #endregion
         #region Private Variables
-        private Quaternion rotation;
-        private Vector3 shotPositon;
-        private Vector3 collectablePos;
-        private Vector3 relativePos;
-        private float randomClampStartPos;
-        private float randomClampEndPos;
-        private float lerpTime;
-        TurretAreaType turretAreaType;
-        #endregion
-        #endregion
-       
-        
-   
 
-        public void EnterTurretArea(Transform transformCollectable)
+        private Quaternion _rotation;
+        private Vector3 _shotPositon;
+        private Vector3 _collectablePos;
+        private Vector3 _relativePos;
+        private float _randomClampStartPos;
+        private float _randomClampEndPos;
+        TurretAreaType _turretAreaType;
+
+        #endregion
+        #endregion
+
+        public void EnterTurretArea(Transform transformCollectable)///Hit.gameobject.transform.pos.z-gameobjecttransform pos.z>localscale.z ? stop
         {
-            collectablePos = transformCollectable.position;
-            turretAreaType = TurretAreaType.InPlaceTurretArea; 
+            _collectablePos = transformCollectable.position;
+            _turretAreaType = TurretAreaType.InPlaceTurretArea; 
+
         }
         public void ExitTurretArea()
         {
@@ -47,82 +51,72 @@ namespace Controllers
 
         private void Start()
         {
-           
-           // InvokeRepeating("TaretMovement", 0, 0.5f);
-            InvokeRepeating("GetRandomPos", 0, invokeRepeatTime);
+           // float TurretMaxHitDistance = (float)Math.Sqrt(Math.Pow(_taretAreaTranform.GetChild(0).transform.localScale.x+1, 2) + Math.Pow(_taretAreaTranform.GetChild(0).transform.localScale.y/2, 2));
+          
+            // InvokeRepeating("TaretMovement", 0, 0.5f);
+            InvokeRepeating("GetRandomPos", 0, invokeRepeatTimeForRandomPos);
         }
 
         private void GetRandomPos()
         {   
-            float TaretAreaStartXPos = _taretAreaTranform.position.x - _taretAreaTranform.GetChild(0).transform.localScale.x;
-            float TaretAreaEndXpos = _taretAreaTranform.position.x + _taretAreaTranform.GetChild(1).transform.localScale.x;
-            float TurretAreaStartZpos = _taretAreaTranform.position.z - _taretAreaTranform.GetChild(0).transform.localScale.z / 2;
-            float TurretAreaEndZPos = _taretAreaTranform.position.z + _taretAreaTranform.GetChild(1).transform.localScale.z / 2;
-            
-            randomClampStartPos = Random.Range(TaretAreaStartXPos, TaretAreaEndXpos);
-            randomClampEndPos = Random.Range(TurretAreaStartZpos, TurretAreaEndZPos);
 
-            Debug.Log(_taretAreaTranform.position.x + "   " + _taretAreaTranform.GetChild(0).transform.localScale);
+            float TaretAreaStartXPos = taretAreaTranform.position.x - taretAreaTranform.GetChild(0).transform.localScale.x;
+            float TaretAreaEndXpos = taretAreaTranform.position.x + taretAreaTranform.GetChild(1).transform.localScale.x;
+            float TurretAreaStartZpos = taretAreaTranform.position.z - taretAreaTranform.GetChild(0).transform.localScale.z / 2;
+            float TurretAreaEndZPos = taretAreaTranform.position.z + taretAreaTranform.GetChild(1).transform.localScale.z / 2;
+            
+            _randomClampStartPos =Random.Range(TaretAreaStartXPos, TaretAreaEndXpos);
+            _randomClampEndPos = Random.Range(TurretAreaStartZpos, TurretAreaEndZPos);
+
+            
         }
         private void FixedUpdate()
         {
-            TaretMovement();
+            ChangeTurretMovementWithState(_turretAreaType);
         }
-        private void TaretMovement()
-        {
-            ChangeTurrentMovementWithState(turretAreaType);
-        }
-        public void ChangeTurrentMovementWithState(TurretAreaType turretAreaType)
+
+        public  void ChangeTurretMovementWithState(TurretAreaType turretAreaType)
         {
             
             switch (turretAreaType)
             {
                 case TurretAreaType.OutPlaceTurretArea:
                     
-                    shotPositon = new Vector3(randomClampStartPos, 0, randomClampEndPos);
-                    relativePos = shotPositon - transform.position;
-                    rotation = Quaternion.LookRotation(relativePos);
+                    _shotPositon = new Vector3(_randomClampStartPos, 0, _randomClampEndPos);
+                    _relativePos = _shotPositon - transform.position;
+                    _rotation = Quaternion.LookRotation(_relativePos);
 
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Mathf.Lerp(0,1, timeİncreaseSpeed));
+                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0,1, timeİncreaseSpeed*10));
 
 
                     break;
 
                 case TurretAreaType.InPlaceTurretArea:
-                    shotPositon = collectablePos+new Vector3(0,0,0);
-                    relativePos = shotPositon - transform.position;
-                    rotation = Quaternion.LookRotation(relativePos);
-                    //Debug.Log(turretAreaType);
-                    lerpTime+= timeİncreaseSpeed;
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, lerpTime);//PlayerıYavaşlat;
-                    HitWithRaycast();
 
-                    if (lerpTime >= 1)
-                    {   
-                        lerpTime = 0;
-                    }
-                    
+                    _shotPositon = _collectablePos+new Vector3(0,1,0);
+                    _relativePos = _shotPositon - transform.position;
+                    _rotation = Quaternion.LookRotation(_relativePos);
+                    //Debug.Log(turretAreaType);
+                    //lerpTime+= timeİncreaseSpeed;
+                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0, 1, timeİncreaseSpeed));//PlayerıYavaşlat;
+                    HitWithRaycast();
+                   // await Task.Delay(500);
                     break;
             }
             //transform.DORotateQuaternion(rotation, 0.3f).OnComplete(()=> HitWithRaycast());
         }
 
-
-
         private void HitWithRaycast()
         {
             RaycastHit hit;
+
             if (Physics.Raycast(transform.position, transform.forward, out hit))
             {   
-                Debug.DrawRay(transform.position, transform.forward*15, Color.red);
+                Debug.DrawRay(transform.position, transform.forward* 15f, Color.red);
 
                 if (hit.transform.gameObject.CompareTag("Collected"))
-                {
-                    Debug.Log("Collected");
-                    StackSignals.Instance.onDecreaseStack?.Invoke(hit.transform.parent.GetSiblingIndex());
-                    hit.transform.parent.SetParent(null);
-                    Destroy(hit.transform.parent.gameObject);
-
+                {   
+                    hit.transform.parent.GetComponent<CollectableManager>().DecreaseStack();
                 }
             }
 

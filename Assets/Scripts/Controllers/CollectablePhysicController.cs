@@ -132,10 +132,8 @@ namespace Controllers
         {
             if (other.CompareTag("TurretArea"))
             {
-                
                 collectableManager.EnterTurretArea(other.gameObject);
             }
-
         }
 
     }
