@@ -58,7 +58,7 @@ namespace Managers
 
         public void IncreaseStack(GameObject gameObject)
         {   
-            gameObject.SetActive(false);
+           //gameObject.SetActive(false);
             
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
             
@@ -71,8 +71,6 @@ namespace Managers
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             
             gameObject.transform.SetParent(null);
-            
-            Destroy(gameObject,0.1f);
         }
 
         

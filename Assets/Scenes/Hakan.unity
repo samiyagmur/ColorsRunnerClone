@@ -3365,7 +3365,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMovementController: {fileID: 1731207509}
   stateDrivenCamera: {fileID: 1731207512}
-  levelCam: {fileID: 1882125338}
   playerManager: {fileID: 0}
 --- !u!95 &1731207511
 Animator:

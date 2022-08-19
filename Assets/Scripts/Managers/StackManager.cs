@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Enums;
 using Signals;
@@ -92,8 +93,10 @@ namespace Managers
         {
             if (playerTransform != null)
             {
-                LerpStackWithMathf();
+                LerpStack();
             }
+            
+            
            
         }
         
@@ -163,20 +166,33 @@ namespace Managers
             
             collectableList.Add(currentStack);
             
+            collectableList.TrimExcess();
+            
             currentStack.transform.SetParent(transform);
 
             if (collectableList.Count == 1)
             {
                 playerTransform.position = collectableList[0].transform.position;
             }
-
-            await Task.Delay(100);
+            currentStack.SetActive(false);
+            await Task.Delay(25);
             currentStack.SetActive(true);
         }
 
         private void OnDecreaseStack(int currentIndex)
         {
+            if (collectableList[currentIndex] is null)
+            {
+                return;
+            }
+
+            GameObject currentGameObj = collectableList[currentIndex].gameObject;
+            
+            collectableList[currentIndex].gameObject.SetActive(false);
+            
             collectableList.RemoveAt(currentIndex);
+            
+            Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
         }
@@ -237,46 +253,52 @@ namespace Managers
         
         #region Collectable Lerp Position && Rotation
         
-        private void LerpStackWithMathf()
+        private void LerpStack()
         {
             for (int i = 0; i < collectableList.Count; i++) 
             {   
                 if (i == 0)
                 {
-                    var _collectablePos = collectableList.ElementAt(i);
-                    Vector3 _targetPos = playerTransform.position;
-        
-                    _collectablePos.transform.position= new Vector3(
-                        Mathf.Lerp(_collectablePos.transform.position.x, _targetPos.x, 0.3f),
-                        Mathf.Lerp(_collectablePos.transform.position.y, _targetPos.y, 0.3f),
-                        Mathf.Lerp(_collectablePos.transform.position.z,  _targetPos.z- 1f, lerpDelay));
-                    
-                    Vector3 _rotationDirection = _targetPos - _collectablePos.transform.position;
-                    if (_rotationDirection != Vector3.zero)
+                    if (collectableList[i] is null)
                     {
-                        Quaternion _toRotation = Quaternion.LookRotation(_rotationDirection);
-                   
-                        _toRotation = Quaternion.Euler(0,_toRotation.eulerAngles.y,0);
-                        _collectablePos.transform.rotation = Quaternion.Slerp(_collectablePos.transform.rotation,_toRotation,1f);
+                        return;
+                    }
+                    collectableList[i].transform.position= new Vector3(
+                        Mathf.Lerp(collectableList[i].transform.position.x, playerTransform.position.x, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.y, playerTransform.position.y, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.z,  playerTransform.position.z- 1f, lerpDelay));
+                    
+                    Vector3 rotationDirection = playerTransform.position - collectableList[i].transform.position;
+                    
+                    if (rotationDirection != Vector3.zero)
+                    {
+                        Quaternion toRotation = Quaternion.LookRotation(rotationDirection);
+                        
+                        toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                        
+                        collectableList[i].transform.rotation = Quaternion.Slerp(collectableList[i].transform.rotation,toRotation,1f);
                     }
                 }
                 else
                 {
-                    var _collectablePos = collectableList.ElementAt(i-1);
-                    var _targetPos = collectableList.ElementAt(i);
-                    _targetPos.transform.position = new Vector3(
-                        Mathf.Lerp(_targetPos.transform.position.x, _collectablePos.transform.position.x, 0.3f),
-                        Mathf.Lerp(_targetPos.transform.position.y, _collectablePos.transform.position.y, 0.3f),
-                        Mathf.Lerp(_targetPos.transform.position.z, _collectablePos.transform.position.z - 1f, lerpDelay));
-
-                    Vector3 rotationAngle = _collectablePos.transform.position - _targetPos.transform.position;
-                    
-                    if (rotationAngle != Vector3.zero)
+                    if (collectableList[i] is null || collectableList[i-1] is null)
                     {
-                        Quaternion _toRotation = Quaternion.LookRotation(rotationAngle);
+                        return;
+                    }
+                    collectableList[i].transform.position = new Vector3(
+                        Mathf.Lerp(collectableList[i].transform.position.x, collectableList[i-1].transform.position.x, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.y, collectableList[i-1].transform.position.y, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.z, collectableList[i-1].transform.position.z - 1f, lerpDelay));
+
+                    Vector3 rotationDirection = collectableList[i-1].transform.position - collectableList[i].transform.position;
+                    
+                    if (rotationDirection != Vector3.zero)
+                    {
+                        Quaternion toRotation = Quaternion.LookRotation(rotationDirection);
    
-                        _toRotation = Quaternion.Euler(0,_toRotation.eulerAngles.y,0);
-                        _targetPos.transform.rotation = Quaternion.Slerp(_collectablePos.transform.rotation,_toRotation,1f);
+                        toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                        
+                        collectableList[i].transform.rotation = Quaternion.Slerp(collectableList[i].transform.rotation,toRotation,1f);
                     }
                 }
             }
