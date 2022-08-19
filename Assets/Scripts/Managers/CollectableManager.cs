@@ -23,6 +23,7 @@ namespace Managers
         [SerializeField]
         CollectableParticalController collectableParticalController;
 
+        [SerializeField] private CollectablePhysicController collectablePhysicController;
         [SerializeField] 
         private CollectableMovementCommand collectableMovementCommand;
 
@@ -56,7 +57,9 @@ namespace Managers
         #region Stack Management
 
         public void IncreaseStack(GameObject gameObject)
-        {
+        {   
+            gameObject.SetActive(false);
+            
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
@@ -66,14 +69,17 @@ namespace Managers
         public void DecreaseStack()
         {
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
+            
             gameObject.transform.SetParent(null);
-            Destroy(gameObject);
+            
+            Destroy(gameObject,0.1f);
         }
 
         
         #endregion
 
         #region On Drone Area Collectable Behaviours
+        
 
         public async void IncreaseStackAfterDroneArea()
         {
@@ -91,6 +97,8 @@ namespace Managers
             ChangeAnimationOnController(CollectableAnimType.Dying);
             
             gameObject.transform.SetParent(null);
+            
+            Death();
             
             Destroy(gameObject,3f);
         }
@@ -127,8 +135,12 @@ namespace Managers
         }
 
         #endregion
-      
 
+        public void Death()
+        {
+            collectablePhysicController.DeActivedCollider();
+        }
+        
         public void EnterTurretArea(GameObject gameObjectOther)
         {   
             collectableMeshController.CompareColorOnTurretArea(gameObjectOther, CurrentCollectableColorType);

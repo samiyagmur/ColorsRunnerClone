@@ -125,11 +125,7 @@ public class PlayerMovementController : MonoBehaviour
                     (position = rigidbody.position).y,
                     position.z);
                 rigidbody.position = position;
-            
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
-            
-                transform.rotation = toRotation;
-                
+
         }
 
         private void IdleMove()
@@ -174,13 +170,12 @@ public class PlayerMovementController : MonoBehaviour
         {
             _movementData.ForwardSpeed = 10;
             
-            gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z), .1f);
+            gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z/2.2f), .1f);
         }
 
         public void ChangeForwardSpeed(ChangeSpeedState changeSpeedState)
         {
             _movementData.ForwardSpeed =(int)changeSpeedState;
-            Debug.Log((int)changeSpeedState);
         }
 
         public void OnReset()

@@ -11,10 +11,6 @@ namespace Signals
     {
         public UnityAction onGameOpen = delegate { };
 
-        public UnityAction onEnterDroneArea = delegate { };
-        
-        public UnityAction onExitDroneArea = delegate { };
-
         public UnityAction onEnterIdleArea= delegate { };
 
         public UnityAction <GameStates> onChangeGameState = delegate { };
@@ -38,8 +34,6 @@ namespace Signals
         public UnityAction onApplicationPause = delegate {  };
         
         public UnityAction onApplicationQuit = delegate {  };
-        
-        public UnityAction<CameraStates> onSetCameraState = delegate { };
 
         public Func<int> onGetLevelID = delegate { return 0; };
 

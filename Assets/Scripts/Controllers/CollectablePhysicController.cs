@@ -17,6 +17,7 @@ namespace Controllers
         [SerializeField]
         private CollectableManager collectableManager;
         
+        [SerializeField] private BoxCollider collectableCollider;
 
         #endregion
 
@@ -134,6 +135,11 @@ namespace Controllers
             {
                 collectableManager.EnterTurretArea(other.gameObject);
             }
+        }
+        
+        public void DeActivedCollider()
+        {
+            collectableCollider.enabled = false;
         }
 
     }

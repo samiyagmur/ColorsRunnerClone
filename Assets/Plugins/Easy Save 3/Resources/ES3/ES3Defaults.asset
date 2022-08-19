@@ -35,8 +35,8 @@ MonoBehaviour:
     - ToonyColorsPro2.Demo
     - ToonyColorsPro.Runtime
     - AllIn1VfxDemoScriptAssemblies
-    - AllIn1VfxAssmebly
     - AllIn1VfxTexDemoAssembly
+    - AllIn1VfxAssmebly
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
     showAdvancedSettings: 0

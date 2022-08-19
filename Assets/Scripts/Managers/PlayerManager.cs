@@ -151,7 +151,6 @@ namespace Managers
 
             await Task.Delay(1000);
             
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
 
