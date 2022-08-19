@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc8a019f9e247cd9a328f58add63612, type: 3}
   m_Name: CD_IdleLevel
   m_EditorClassIdentifier: 
-  IdleLevelDatas: []
+  IdleLevelDatas:
+  - levelData: 12
+  - levelData: 10
+  - levelData: 1
+  - levelData: 3
+  - levelData: 1

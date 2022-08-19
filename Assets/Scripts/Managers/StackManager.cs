@@ -20,16 +20,16 @@ namespace Managers
         
         [SerializeField] [Range(0.02f, 1f)] private float lerpDelay; //Data
         
-        [SerializeField] private Transform playerTransform; //Levelden buldur
+        [SerializeField] private Transform playerTransform;
         
         [SerializeField] private int initSize = 3;  //Pooldan cek // Data
 
-        [SerializeField] private GameObject stackHolder;   //Levelden Buldur,test amacli boyle kalabilir
+        [SerializeField] private GameObject stackHolder;  
         
         #endregion
 
         #endregion
-        
+
         private void Start()
         {
             OnInitializeStack();
@@ -44,22 +44,26 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onPlay += SetStackTarget;
+            StackSignals.Instance.onSetStackTarget += OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea += OnDecreaseStackOnDroneArea;
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
-            CoreGameSignals.Instance.onGameOpen+= OnInitializeStack;
+            StackSignals.Instance.onInitializeStack += OnRunStack;
         }
 
         private void UnsubscribeEvents()
-        {
+        {   
+            CoreGameSignals.Instance.onPlay -= SetStackTarget;
+            StackSignals.Instance.onSetStackTarget -= OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
             StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
-            CoreGameSignals.Instance.onGameOpen += OnInitializeStack;
+            StackSignals.Instance.onInitializeStack-= OnRunStack;
         }
         private void OnDisable()
         {
@@ -67,26 +71,52 @@ namespace Managers
         }
 
         #endregion
-        
-        private void FixedUpdate()
+
+        private void SetStackTarget()
         {
-           LerpStackWithMathf();
+            StackSignals.Instance.onSetStackTarget?.Invoke();
         }
 
+        private void OnSetStackTarget()
+        {
+
+            playerTransform = FindObjectOfType<PlayerManager>().transform;
+            
+            stackHolder = GameObject.FindWithTag("StackHolder");
+            
+            StackSignals.Instance.onInitializeStack?.Invoke();
+            
+            
+        }
+        private void FixedUpdate()
+        {
+            if (playerTransform != null)
+            {
+                LerpStackWithMathf();
+            }
+           
+        }
+        
         #region Initialize Stack
 
         private void OnInitializeStack()
         {
             for (int i = 0; i < initSize ; i++)
-            {   
-                
-                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation); // change name
+            {
+                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
                 
                 StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.CrouchIdle);
                 
             }
+        }
+
+        private void OnRunStack()
+        {
+          
+           StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.Run);
+            
         }
         
         private void AddStackOnInitialize(GameObject currentStack)
@@ -100,7 +130,6 @@ namespace Managers
         
 
         #endregion
-        
 
         #region Stack Visuals
 
@@ -126,7 +155,6 @@ namespace Managers
         }
 
         #endregion
-
 
         #region Stack / Unstack Collectables
 
@@ -154,14 +182,12 @@ namespace Managers
         }
 
         #endregion
-        
-       
 
         #region Decrease Stack On Drone Area
         
         private void SetDroneAreaHolder(GameObject gameObject)
         {
-            gameObject.transform.SetParent(stackHolder.transform);
+            gameObject.transform.SetParent(stackHolder.transform); // atmiycam
         }
         private async void OnDecreaseStackOnDroneArea(int currentIndex)  
         {
@@ -208,6 +234,7 @@ namespace Managers
         }
 
         #endregion
+        
         #region Collectable Lerp Position && Rotation
         
         private void LerpStackWithMathf()

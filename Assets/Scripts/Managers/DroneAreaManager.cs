@@ -99,8 +99,7 @@ namespace Managers
         private void OnDisableWrongColorGround()
         {
             if (_correctGroundIndex == 1)
-            {   
-                Debug.Log(_correctGroundIndex);
+            {
                 leftGroundColorController.gameObject.transform.DOScaleZ(0, 1f).OnComplete(() =>
                 {
                     leftGroundColorController.gameObject.SetActive(false);

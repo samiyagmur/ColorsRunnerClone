@@ -125,11 +125,7 @@ public class PlayerMovementController : MonoBehaviour
                     (position = rigidbody.position).y,
                     position.z);
                 rigidbody.position = position;
-            
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX,0,_movementData.ForwardSpeed*4));
-            
-                transform.rotation = toRotation;
-                
+
         }
 
         private void IdleMove()

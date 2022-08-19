@@ -16,6 +16,7 @@ TagManager:
   - Ground
   - ColoredGround
   - AfterGround
+  - StackHolder
   layers:
   - Default
   - TransparentFX
