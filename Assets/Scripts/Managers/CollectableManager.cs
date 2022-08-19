@@ -72,7 +72,7 @@ namespace Managers
             
             gameObject.transform.SetParent(null);
             
-            Destroy(gameObject);
+            Destroy(gameObject,0.1f);
         }
         #endregion
 

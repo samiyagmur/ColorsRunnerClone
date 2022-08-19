@@ -196,8 +196,20 @@ namespace Managers
         
 
         #endregion
-        
-        
+
+        #region Decrease stack On LevelEnd
+
+        private async void OnLevelEndDecreaseStack()
+        {
+            for (int i = 0; i < collectableList.Count; i++)
+            {   
+                collectableList[i].transform.SetParent(stackHolder.transform);
+                collectableList.RemoveAt(i);
+                
+            }
+        }
+
+        #endregion
         #region Collectable Lerp Position && Rotation
         
         private void LerpStackWithMathf()
