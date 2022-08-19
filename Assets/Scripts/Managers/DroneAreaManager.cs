@@ -106,8 +106,7 @@ namespace Managers
                 });
             }
             else
-            {   
-                Debug.Log(_correctGroundIndex);
+            {
                 rightGroundColorController.gameObject.transform.DOScaleZ(0, 1f).OnComplete(() =>
                 {
                     rightGroundColorController.gameObject.SetActive(false);

@@ -83,8 +83,9 @@ namespace Managers
         }
         public void Play()
         {
-            CoreGameSignals.Instance.onPlay?.Invoke();
+            CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
         }
+        
         #region ButonGrup
         
         public void TryAgain()

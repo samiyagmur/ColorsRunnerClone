@@ -16,7 +16,6 @@ namespace Managers
         #region SerilizeField
         [SerializeField]CameraMovementController cameraMovementController;
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
-        [SerializeField] private CinemachineVirtualCamera levelCam;
         [SerializeField] private PlayerManager playerManager;
         #endregion
         #endregion
@@ -67,6 +66,7 @@ namespace Managers
         private void OnSetCameraTarget()
         {
             playerManager = FindObjectOfType<PlayerManager>();
+            
             stateDrivenCamera.Follow = playerManager.transform;
         }
         
