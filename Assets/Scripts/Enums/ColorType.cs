@@ -12,5 +12,6 @@ namespace Enums
         Magenda,
         Orange,
         Gray,
+        Rainbow
     }
 }

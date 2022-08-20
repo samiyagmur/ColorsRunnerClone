@@ -22,7 +22,8 @@ namespace Command.ObstacleCommands
         #endregion
         #region Private Veriables
 
-        private MeshRenderer _GateRender;
+        private MeshRenderer _gateRenderer;
+        private MeshRenderer _gateGradient;
         
         #endregion
     
@@ -45,12 +46,15 @@ namespace Command.ObstacleCommands
 
         private void GetReferences()
         {
-            _GateRender = GetComponent<MeshRenderer>();
+            _gateRenderer = GetComponent<MeshRenderer>();
+            _gateGradient = GetComponent<MeshRenderer>();
         }
 
         private void SetGateMaterial(ColorType type)
         {
-            _GateRender.material = Resources.Load<Material>($"Materials/{type}Mat");
+            _gateGradient = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+            _gateRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
+            _gateGradient.material = Resources.Load<Material>($"Materials/Gate{type}Mat");
         }
 
         private void SendGateTypeToDroneManager(ColorType gateColor)
