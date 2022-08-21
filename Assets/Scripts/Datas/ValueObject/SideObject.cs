@@ -12,14 +12,13 @@ namespace Datas.ValueObject
 
         public int BuildingMarketPrice;
 
-        public int PayedAmount;
+        public int PayedAmounth;
 
         public int BuildingAdressId;
 
-        public int RequiredBuildingAdressId;
+        public float Saturation;
         
         public IdleLevelState ıdleLevelState = IdleLevelState.Uncompleted;
-
-        public BuildingType BuildingType;
+        
     }
 }

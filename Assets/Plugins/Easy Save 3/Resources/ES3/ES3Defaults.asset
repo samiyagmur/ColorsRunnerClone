@@ -37,8 +37,11 @@ MonoBehaviour:
     - AllIn1VfxDemoScriptAssemblies
     - ToonyColorsPro.Runtime
     - AllIn1VfxTexDemoAssembly
+    - Sirenix.OdinInspector.CompatibilityLayer
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

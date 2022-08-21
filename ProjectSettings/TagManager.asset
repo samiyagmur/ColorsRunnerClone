@@ -17,6 +17,7 @@ TagManager:
   - ColoredGround
   - AfterGround
   - StackHolder
+  - Buildings
   layers:
   - Default
   - TransparentFX

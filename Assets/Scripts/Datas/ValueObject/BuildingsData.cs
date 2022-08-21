@@ -9,7 +9,6 @@ namespace Datas.ValueObject
     [Serializable]
     public class BuildingsData
     {
-  
         public bool isDepended;
 
         public SideObject SideObject;
@@ -19,11 +18,10 @@ namespace Datas.ValueObject
         public int PayedAmount;
 
         public int BuildingAdressId;
-
+        
+        public float Saturation;
+        
         public IdleLevelState ıdleLevelState;
-        
-        public BuildingType BuildingType;
-        
 
     }
 }

@@ -15,7 +15,11 @@ namespace Signals
         
         public UnityAction<SaveStates,int> onSaveIdleLevelData = delegate{  };
         
-        public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;} ;
+        public UnityAction<SaveStates,IdleLevelData> onSaveIdleLevelProgressData = delegate{  };
+        
+        public Func<SaveStates,IdleLevelData,IdleLevelData> onLoadIdleLevelProgressData = delegate { return new IdleLevelData();};
+        
+        public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;};
         
         protected override void Awake()
         {

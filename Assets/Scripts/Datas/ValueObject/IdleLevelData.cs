@@ -10,8 +10,6 @@ namespace Datas.ValueObject
 
         public List<BuildingsData> Buildings = new List<BuildingsData>();
 
-        public List<PublicPlacesData> PublicPlacesDatas = new List<PublicPlacesData>();
-
         public IdleLevelState IdleLevelState;
 
     }
