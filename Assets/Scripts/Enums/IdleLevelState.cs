@@ -1,6 +1,6 @@
 ﻿namespace Enums
 {
-    public enum BuildingState
+    public enum IdleLevelState
     {
         Uncompleted,
         Completed

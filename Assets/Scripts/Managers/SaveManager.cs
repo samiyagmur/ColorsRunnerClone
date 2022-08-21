@@ -20,10 +20,10 @@ namespace Managers
 
         #region Private Variables
 
-        private LoadGameCommand loadGameCommand;
-        private SaveGameCommand saveGameCommand;
-        private LoadIdleGameCommand loadIdleGameCommand;
-        private SaveIdleGameCommand saveIdleGameCommand;
+        private LoadGameCommand _loadGameCommand;
+        private SaveGameCommand _saveGameCommand;
+        private LoadIdleGameCommand _loadIdleGameCommand;
+        private SaveIdleGameCommand _saveIdleGameCommand;
 
         #endregion
 
@@ -37,22 +37,19 @@ namespace Managers
 
         private void Awake()
         {
-            loadGameCommand = new LoadGameCommand();
-            saveGameCommand = new SaveGameCommand();
-            loadIdleGameCommand = new LoadIdleGameCommand();
-            saveIdleGameCommand = new SaveIdleGameCommand();
+            _loadGameCommand = new LoadGameCommand();
+            _saveGameCommand = new SaveGameCommand();
+            _loadIdleGameCommand = new LoadIdleGameCommand();
+            _saveIdleGameCommand = new SaveIdleGameCommand();
 
             if (!ES3.FileExists())
             {
                 ES3.Save("Level",0,"RunnerLevelData/RunnerLevelData.es3");
             }
-        }
 
-        private void Start()
-        {
             if (!ES3.FileExists())
             {
-                
+                ES3.Save("IdleLevel",0,"IdleLevelData/IdleLevelData.es3");
             }
         }
 
@@ -65,18 +62,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveGameData += saveGameCommand.OnSaveGameData;
-            SaveLoadSignals.Instance.onLoadGameData += loadGameCommand.OnLoadGameData;
-            SaveLoadSignals.Instance.onSaveIdleData += saveIdleGameCommand.OnSaveIdleGameData;
-            //SaveLoadSignals.Instance.onLoadIdleData += loadIdleGameCommand.OnLoadBuildingsData;
+            SaveLoadSignals.Instance.onSaveRunnerLevelData += _saveGameCommand.OnSaveGameData;
+            SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.OnLoadGameData;
+            SaveLoadSignals.Instance.onSaveIdleLevelData += _saveIdleGameCommand.OnSaveIdleGameData;
+            SaveLoadSignals.Instance.onLoadIdleData += _loadIdleGameCommand.OnLoadBuildingsData;
         }
 
         private void UnsubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveGameData -= saveGameCommand.OnSaveGameData;
-            SaveLoadSignals.Instance.onLoadGameData -= loadGameCommand.OnLoadGameData;
-            SaveLoadSignals.Instance.onSaveIdleData -= saveIdleGameCommand.OnSaveIdleGameData;
-            //SaveLoadSignals.Instance.onLoadIdleData -= loadIdleGameCommand.OnLoadBuildingsData;
+            SaveLoadSignals.Instance.onSaveRunnerLevelData -= _saveGameCommand.OnSaveGameData;
+            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.OnLoadGameData;
+            SaveLoadSignals.Instance.onSaveIdleLevelData -= _saveIdleGameCommand.OnSaveIdleGameData;
+            SaveLoadSignals.Instance.onLoadIdleData -= _loadIdleGameCommand.OnLoadBuildingsData;
         }
         private void OnDisable()
         {

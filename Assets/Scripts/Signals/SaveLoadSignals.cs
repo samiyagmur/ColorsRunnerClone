@@ -9,14 +9,13 @@ namespace Signals
 {
     public class SaveLoadSignals : MonoSingleton<SaveLoadSignals>
     {
-        public  UnityAction<SaveStates, int> onSaveGameData = delegate { };
+        public UnityAction<SaveStates, int> onSaveRunnerLevelData = delegate { };
         
-        public  Func<SaveStates, int> onLoadGameData = delegate { return 0; };
+        public Func<SaveStates, int> onLoadGameData = delegate { return 0; };
         
-        public UnityAction<CityData> onSaveIdleData = delegate(CityData arg0) {  };
+        public UnityAction<SaveStates,int> onSaveIdleLevelData = delegate{  };
         
-        //abone olduğum yerde bana ıdledata yollasın
-        public Func<SaveStates, CityData> onLoadIdleData;
+        public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;} ;
         
         protected override void Awake()
         {
