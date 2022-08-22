@@ -36,6 +36,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onFailed += OnFailed;
         }
 
         private void UnsubscribeEvents()
@@ -43,6 +44,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
         }
 
         private void OnDisable()
@@ -70,7 +72,7 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
-        public void OnFail()
+        public void OnFailed()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
         }
@@ -111,7 +113,8 @@ namespace Managers
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
+            //CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onRestartLevel?.Invoke();
         }
     } 
         #endregion

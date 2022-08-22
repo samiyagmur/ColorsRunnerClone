@@ -144,6 +144,7 @@ MonoBehaviour:
   buildingMarketStatusController: {fileID: 4776822466620894259}
   buildingMeshController: {fileID: 7632061493992399629}
   buildingPhysicsController: {fileID: 7632061494339189703}
+  buildingScorePhysicsController: {fileID: 6732366323518569719}
   BuildingsAdressId: 0
   PayedAmount: 0
   BuildingMarketPrice: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1533ce762275425382126b8fc053b1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingManager: {fileID: 7632061493999078399}
 --- !u!1 &7632061495094575862
 GameObject:
   m_ObjectHideFlags: 0
