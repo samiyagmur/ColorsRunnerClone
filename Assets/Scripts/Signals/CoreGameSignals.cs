@@ -19,7 +19,7 @@ namespace Signals
         
         public UnityAction onClearActiveLevel = delegate { };
         
-        public UnityAction onLevelFailed = delegate { };
+        public UnityAction onFailed = delegate { };
         
         public UnityAction onNextLevel = delegate { };
         

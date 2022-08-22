@@ -25,10 +25,12 @@ namespace Managers
         
         [SerializeField] private int initSize = 3;  //Pooldan cek // Data
 
-        [SerializeField] private GameObject stackHolder;  
-        
-        #endregion
+        [SerializeField] private GameObject stackHolder;
 
+        #endregion
+        #region Private Variables
+        FailState failState;
+        #endregion
         #endregion
 
         private void Start()
@@ -182,7 +184,7 @@ namespace Managers
         private void OnDecreaseStack(int currentIndex)
         {
             if (collectableList[currentIndex] is null)
-            {
+            {   
                 return;
             }
 
@@ -195,6 +197,7 @@ namespace Managers
             Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
+            OnFail(collectableList.Count);
         }
 
         #endregion
@@ -214,7 +217,9 @@ namespace Managers
             collectableList.RemoveAt(currentIndex);
             
             collectableList.TrimExcess();
-            
+
+            OnFail(collectableList.Count);
+
             DroneAreaSignals.Instance.onDroneActive?.Invoke();
             
             if(transform.childCount == 0)
@@ -233,7 +238,7 @@ namespace Managers
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
             }
         }
-        
+
 
         #endregion
 
@@ -304,8 +309,18 @@ namespace Managers
             }
         }
 
-      
+        private void OnFail(int count)
+        {
+            if (count is 0)
+            {
+                CoreGameSignals.Instance.onFailed();
+            }
+
+        }
+
+
+
         #endregion
-        
+
     }
 }

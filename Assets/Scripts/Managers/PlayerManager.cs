@@ -66,6 +66,7 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onFailed += OnFailed;
         }
 
         private void UnsubscribeEvents()
@@ -77,6 +78,7 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
         }
 
         private void OnDisable()
@@ -120,16 +122,15 @@ namespace Managers
             movementController.IsReadyToPlay(true);
         }
 
+        private void OnFailed()
+        {
+            movementController.IsReadyToPlay(false); // Reset
+        }
         private void OnLevelSuccessful()
         {
             movementController.IsReadyToPlay(false); //OnReset,playermanager  emir versin,is yapmasin
 
-        }
-        private void OnLevelFailed()
-        {
-            movementController.IsReadyToPlay(false); // Reset
-        }
-        
+        }        
         internal void SendToColorType(ColorType colorType)
         {
             StackSignals.Instance.onChangeColor?.Invoke(colorType);
@@ -137,7 +138,7 @@ namespace Managers
         private void OnReset()
         {
             gameObject.SetActive(true);
-            movementController.OnReset();
+            gameObject.transform.position= Vector3.zero;
         }
 
         private void OnSetScoreText(int Values)
