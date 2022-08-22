@@ -3814,7 +3814,7 @@ MonoBehaviour:
   collectableList: []
   lerpDelay: 0.252
   playerTransform: {fileID: 0}
-  initSize: 10
+  initSize: 65
   stackHolder: {fileID: 0}
 --- !u!4 &6153571843394109442
 Transform:

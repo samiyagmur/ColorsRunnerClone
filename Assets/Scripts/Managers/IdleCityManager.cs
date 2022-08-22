@@ -51,7 +51,7 @@ namespace Managers
         #endregion
 
  
-       private IdleLevelData OnGetCityData() => Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelId];
+       private IdleLevelData OnGetCityData() => Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelId]; //SaveManager çeksin bize passlasin,
 
        private void GetIdleLevelData()
        {
@@ -66,12 +66,12 @@ namespace Managers
            {
                IdleLevelData = OnGetCityData();
 
-               SaveCityData(IdleLevelData); // Yeni level nasil yuklenecek o zaman awq
+               SaveCityData(IdleLevelData); 
            }
            
            LoadCityData(IdleLevelData);
            
-           SetDataToControllers();
+           SetDataToBuildingManagers();
 
        }
 
@@ -100,24 +100,7 @@ namespace Managers
         }
 
         #endregion
-
-        private void SetControllers()
-        {
-            for (int i = 0; i< buildingControllerArray.Length; i++)
-            {
-                BuildingManager.Add(buildingControllerArray[i]);
-            }
-            
-        }
-
-        private void SetBuildings()
-        {
-            for (int i = 0; i<buildingsArray.Length; i++)
-            {
-                Buildings.Add(buildingsArray[i]);
-            }
-        }
-        
+ 
         private void SaveCityData(IdleLevelData ıdleLevelData)
         {
             SaveLoadSignals.Instance.onSaveIdleLevelProgressData?.Invoke(SaveStates.IdleLevelProgress,ıdleLevelData);
@@ -134,7 +117,7 @@ namespace Managers
         }
         
 
-        private void SetDataToControllers()
+        private void SetDataToBuildingManagers()
         {
             for (int i = 0; i < Buildings.Count; i++)
             {
@@ -146,9 +129,9 @@ namespace Managers
                 
                 BuildingManager[i].BuildingMarketPrice= IdleLevelData.Buildings[i].BuildingMarketPrice;
                 
-                BuildingManager[i].PayedAmounth  = IdleLevelData.Buildings[i].PayedAmount;
+                BuildingManager[i].PayedAmount  = IdleLevelData.Buildings[i].PayedAmount;
                 
-                BuildingManager[i].Saturation = IdleLevelData.Buildings[i].Saturation ;
+                BuildingManager[i].Saturation = IdleLevelData.Buildings[i].Saturation;
 
                 if (IdleLevelData.Buildings[i].isDepended && IdleLevelData.Buildings[i].ıdleLevelState == IdleLevelState.Completed)
                 {   
@@ -156,14 +139,27 @@ namespace Managers
                     
                     BuildingManager[i].BuildingsAdressId = i;  
                     
-                    BuildingManager[i].PayedAmounth= IdleLevelData.Buildings[i].SideObject.PayedAmounth;
+                    BuildingManager[i].PayedAmount= IdleLevelData.Buildings[i].SideObject.PayedAmounth;
                     
                     BuildingManager[i].BuildingMarketPrice = IdleLevelData.Buildings[i].SideObject.BuildingMarketPrice;
                     
                     BuildingManager[i].Saturation= IdleLevelData.Buildings[i].SideObject.Saturation;
-
                 }
             }
+            
+            BuildingsDatasAreSync();
+            
+            
+        }
+
+        private void BuildingsDatasAreSync()
+        {
+            BuildingSignals.Instance.onDataReadyToUse?.Invoke();
+        }
+
+        private void OnGetBuildingsDataFromBuildingManagers()
+        {
+            
         }
         
     }

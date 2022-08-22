@@ -10,13 +10,15 @@ namespace Controllers
 
         #region Public Variables
 
-    
+        public int PayedAmount;
+        public int MarketPrice;
 
         #endregion
         #region Serialized Variables
         
         [SerializeField] private TextMeshPro MarketPriceText;
         [SerializeField] private BuildingManager buildingManager;
+        
         #endregion
     
         #region Private Variables
@@ -27,35 +29,26 @@ namespace Controllers
         
 
         #endregion
-    
-        private void Awake()
-        {
-        
-        }
-
-        private void OnEnable()
-        {
-        
-        }
-
         private void Start()
         {
             SetRequiredAmountToText();
         }
-
+        
+        
         private void SetRequiredAmountToText()
         {
-            MarketPriceText.text = $"{buildingManager.PayedAmounth}/{buildingManager.BuildingMarketPrice}";
+            MarketPriceText.text = $"{buildingManager.PayedAmount}/{buildingManager.BuildingMarketPrice}";
         }
 
-        private void UpdateRequiredTextCount()
+        public void UpdatePayedAmountText()
         {
-        
+             //Set edicez
         }
 
         public void ControlCompletionState()
         {
        
         }
+        
     }
 }

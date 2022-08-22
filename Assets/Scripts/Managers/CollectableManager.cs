@@ -57,9 +57,8 @@ namespace Managers
         #region Stack Management
 
         public void IncreaseStack(GameObject gameObject)
-        {   
-           //gameObject.SetActive(false);
-            
+        {
+
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });

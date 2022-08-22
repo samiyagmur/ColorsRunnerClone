@@ -21,7 +21,7 @@ MonoBehaviour:
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 334
+      BuildingMarketPrice: 0
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
         Saturation: 0
         "\u0131dleLevelState": 0
       BuildingMarketPrice: 0
-      PayedAmount: 2
+      PayedAmount: 0
       BuildingAdressId: 3
       Saturation: 0
       "\u0131dleLevelState": 0
