@@ -32,7 +32,6 @@ namespace Managers
         [SerializeField] private TextMeshPro scoreText;
 
 
-
         #endregion
         #endregion
 

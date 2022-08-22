@@ -8,17 +8,17 @@ namespace Datas.ValueObject
     [Serializable]
     public class SideObject
     {
-
-        public TextMeshPro BuildingText;
+        //public TextMeshPro BuildingText;
 
         public int BuildingMarketPrice;
 
-        public int PayedAmount;
+        public int PayedAmounth;
 
         public int BuildingAdressId;
-        
-        public BuildingState BuildingState = BuildingState.Uncompleted;
 
-        public BuildingType BuildingType;
+        public float Saturation;
+        
+        public IdleLevelState ıdleLevelState = IdleLevelState.Uncompleted;
+        
     }
 }

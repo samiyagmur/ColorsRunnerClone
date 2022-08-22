@@ -5,6 +5,7 @@
         Level,
         IdleLevel,
         CompletedBuildingsCount,
+        IdleLevelProgress
         
     }
 }
