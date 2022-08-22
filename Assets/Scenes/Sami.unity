@@ -366,7 +366,8 @@ MonoBehaviour:
   LevelData:
     DroneAreaList: []
   IdleLevelData:
-    levelData: 0
+    Buildings: []
+    IdleLevelState: 0
   levelHolder: {fileID: 1503123531}
   idleLevelHolder: {fileID: 2018358481}
   levelLoader: {fileID: 243842581}
@@ -1183,11 +1184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b0560a78bc44c8aba4b42b9f189c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CityData:
-    CityList: []
-    PublicPlaces: []
-    SideObjects: []
+  IdleLevelData:
+    Buildings: []
+    IdleLevelState: 0
   Buildings: []
+  BuildingManager: []
   PublicPlaces: []
   BuildingsTransforms:
   - {fileID: 0}
@@ -1195,6 +1196,8 @@ MonoBehaviour:
   - {fileID: 0}
   SideObjectTransforms:
   - {fileID: 0}
+  buildingControllerArray: []
+  buildingsArray: []
 --- !u!1 &748532426
 GameObject:
   m_ObjectHideFlags: 0

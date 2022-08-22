@@ -140,9 +140,10 @@ namespace Managers
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            SaveLoadSignals.Instance.onSaveGameData?.Invoke(SaveStates.Level, _levelID);
+            SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
             Debug.Log("onLevelInitialize");
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            //onreset
         }
 
         private int OnGetLevelID()

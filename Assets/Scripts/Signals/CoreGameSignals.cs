@@ -23,9 +23,10 @@ namespace Signals
         
         public UnityAction onClearActiveIdleLevel = delegate { };
         
-        
-        public UnityAction onLevelFailed = delegate { };
-        
+        public UnityAction onFailed = delegate { };
+
+        public UnityAction onSaveGameData = delegate { };
+
         public UnityAction onNextLevel = delegate { };
         
         public UnityAction onRestartLevel = delegate { };
