@@ -7,13 +7,10 @@ namespace Command.SaveLoadCommands
 {
     public class LoadIdleGameCommand
     {
-        public CityData OnLoadBuildingsData(SaveStates state)
+        public int OnLoadBuildingsData(SaveStates state)
         {
-             if (state == SaveStates.IdleLevel) return ES3.Load<CityData>("CityData","");
-            
-             else return Resources.Load<CD_Buildings>("Data/CD_Buildings").CityData;
-            
-
+            if (state == SaveStates.IdleLevel) return ES3.Load<int>("IdleLevel");
+            else return 0;
         }
     }
 }

@@ -17,7 +17,12 @@ namespace Signals
         
         public UnityAction onLevelInitialize = delegate { };
         
+        public UnityAction onIdleLevelInitialize = delegate { };
+        
         public UnityAction onClearActiveLevel = delegate { };
+        
+        public UnityAction onClearActiveIdleLevel = delegate { };
+        
         
         public UnityAction onLevelFailed = delegate { };
         
@@ -36,6 +41,8 @@ namespace Signals
         public UnityAction onApplicationQuit = delegate {  };
 
         public Func<int> onGetLevelID = delegate { return 0; };
+        
+        public Func<int> onGetIdleLevelID = delegate { return 0; };
 
         protected override void Awake()
         {

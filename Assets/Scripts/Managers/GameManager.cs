@@ -30,14 +30,14 @@ namespace Managers
 
         #endregion
 
-
-        #region Event Subscription
-
         private void Awake()
         {
             Application.targetFrameRate = 60;
         }
-
+        
+        
+        #region Event Subscription
+        
         private void OnEnable()
         {
             OnGameOpen();

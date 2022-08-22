@@ -148,11 +148,11 @@ namespace Managers
         {
             // Work in Progress,When Pool is created,we will add this future for beloved users.
         }
-        private async void OnChangeCollectableColor(ColorType colorType)
+        private  void OnChangeCollectableColor(ColorType colorType)
         {   
             for (int i = 0; i < collectableList.Count; i++)
             {
-                await Task.Delay(50);
+                //await Task.Delay(50);
                 collectableList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
             }
         }
