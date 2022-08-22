@@ -5,6 +5,7 @@ using Datas.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Signals;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Managers
@@ -86,7 +87,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
-            CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
+            CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
         }
 
@@ -95,7 +96,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-            CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
+            CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
         }
 
@@ -123,11 +124,11 @@ namespace Managers
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
 
-        private void OnRestartLevel()
+        private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveGameData?.Invoke(SaveStates.Level, _levelID);
+            Debug.Log("onLevelInitialize");
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
@@ -135,10 +136,9 @@ namespace Managers
         {
             return _levelID;
         }
-
-
-        private void OnInitializeLevel()
+        private  void OnInitializeLevel()
         {
+            
             var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }

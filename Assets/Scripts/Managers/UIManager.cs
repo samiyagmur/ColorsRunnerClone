@@ -113,7 +113,8 @@ namespace Managers
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
+            //CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onRestartLevel?.Invoke();
         }
     } 
         #endregion

@@ -29,7 +29,7 @@ namespace Managers
 
         #endregion
         #region Private Variables
-        FailState failState;
+       
         #endregion
         #endregion
 
@@ -48,6 +48,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += SetStackTarget;
+            CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onSetStackTarget += OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
@@ -60,6 +61,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {   
             CoreGameSignals.Instance.onPlay -= SetStackTarget;
+            CoreGameSignals.Instance.onReset -= OnReset;
             StackSignals.Instance.onSetStackTarget -= OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
@@ -68,6 +70,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -108,7 +111,7 @@ namespace Managers
         {
             for (int i = 0; i < initSize ; i++)
             {
-                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
+                var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
                 
@@ -218,7 +221,7 @@ namespace Managers
             
             collectableList.TrimExcess();
 
-            OnFail(collectableList.Count);
+            
 
             DroneAreaSignals.Instance.onDroneActive?.Invoke();
             
@@ -236,6 +239,7 @@ namespace Managers
                 
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
+                OnFail(collectableList.Count);
             }
         }
 
@@ -319,6 +323,10 @@ namespace Managers
         }
 
 
+        private void OnReset()
+        {
+            OnInitializeStack();
+        }
 
         #endregion
 
