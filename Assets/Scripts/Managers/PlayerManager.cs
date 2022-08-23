@@ -107,7 +107,15 @@ namespace Managers
 
         private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,playermanager  emir versin,is yapmasin
    
-        internal void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
+        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
+
+        public async void IsHitRainbow(ColorType colorType)
+        {
+            StackSignals.Instance.onChangeColor?.Invoke(colorType);
+            await Task.Delay(2500);
+            ChangeForwardSpeeds(ChangeSpeedState.Stop);
+            CoreGameSignals.Instance.onEnterMutiplyArea?.Invoke();
+        }
 
         private void OnReset()
         {
