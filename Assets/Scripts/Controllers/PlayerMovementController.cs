@@ -58,6 +58,7 @@ public class PlayerMovementController : MonoBehaviour
 
         private void FixedUpdate()
         {
+            Debug.Log("_isReadyToPlay="+_isReadyToPlay+ "_isReadyToMove=" + _isReadyToMove);
             if (_isReadyToPlay)
             {
                 
@@ -136,6 +137,7 @@ public class PlayerMovementController : MonoBehaviour
             
             rigidbody.angularVelocity = Vector3.zero;
         }
+
         private void Stop()
         {
             rigidbody.velocity = Vector3.zero;

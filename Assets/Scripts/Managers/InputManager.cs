@@ -160,6 +160,7 @@ public class InputManager : MonoBehaviour
 
     private void OnChangeGameState(GameStates currentStates)
     {
+            Debug.Log("gamstate");
         currentGameState = currentStates;//next levelde bura çaðýralacak//
         if (currentGameState == GameStates.Idle)
         {

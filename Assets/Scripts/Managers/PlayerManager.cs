@@ -67,6 +67,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onFailed += OnFailed;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+
         }
 
         private void UnsubscribeEvents()
