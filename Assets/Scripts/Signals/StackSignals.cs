@@ -21,9 +21,5 @@ namespace Signals
         
         public UnityAction onInitializeStack = delegate {  };
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
     }
 }

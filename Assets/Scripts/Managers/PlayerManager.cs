@@ -66,6 +66,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onFailed += OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
         }
 
         private void UnsubscribeEvents()
@@ -78,6 +79,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onFailed -= OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
         }
 
 
@@ -106,26 +108,39 @@ namespace Managers
         private void OnFailed() => movementController.IsReadyToPlay(false);
 
         private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,playermanager  emir versin,is yapmasin
-   
-        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
 
-        public async void IsHitRainbow(ColorType colorType)
+        private async void OnEnterMutiplyArea()
         {
-            StackSignals.Instance.onChangeColor?.Invoke(colorType);
-            await Task.Delay(2500);
+           
+            ChangeForwardSpeeds(ChangeSpeedState.EnterMultipleArea);
+            await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
-            CoreGameSignals.Instance.onEnterMutiplyArea?.Invoke();
+            playerMeshController.ChangeScale();
+
+
+        }
+        public async void IsHitRainbow()
+        {
+            Debug.Log("sss");
+            await Task.Delay(3500);//Ýt Will cahange
+            UISignals.Instance.onMultiplyArea?.Invoke();
+            
         }
 
+        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
+
+        public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
         private void OnReset()
         {
             Debug.Log("MovementReset");
             movementController.MovementReset();
             gameObject.SetActive(true);
-            
-        }
 
-        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
+        }
+        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
+        
+
+        
 
         public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
@@ -133,7 +148,7 @@ namespace Managers
             await Task.Delay(1000);
         }
 
-        public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
+        
 
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);

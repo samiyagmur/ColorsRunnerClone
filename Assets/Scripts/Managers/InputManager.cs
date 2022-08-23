@@ -160,7 +160,7 @@ public class InputManager : MonoBehaviour
 
     private void OnChangeGameState(GameStates currentStates)
     {
-        currentGameState = currentStates;
+        currentGameState = currentStates;//next levelde bura çaðýralacak//
         if (currentGameState == GameStates.Idle)
         {
             floatingJoystick.gameObject.SetActive(true);

@@ -4,7 +4,6 @@ using Controllers;
 using System;
 using DG.Tweening;
 using Enums;
-using UnityEditor.VersionControl;
 using Task = System.Threading.Tasks.Task;
 
 namespace Managers
@@ -124,6 +123,15 @@ namespace Managers
         {
             CurrentCollectableColorType = colorType;
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
+        }
+
+        public  void IsHitRainbow()
+        {
+            
+            collectableMeshController.ChangeScale();
+            CoreGameSignals.Instance.onEnterMutiplyArea();
+
+
         }
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)

@@ -34,8 +34,9 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onPlay += SetCameraTarget;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            CoreGameSignals.Instance.onChangeGameState += OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
         }
 
         private void UnsubscribeEvents()
@@ -43,8 +44,9 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onPlay -= SetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
-            CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
+            CoreGameSignals.Instance.onChangeGameState -= OnEnterIdleArea;
+            CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
         }
 
         private void OnDisable()
@@ -69,8 +71,13 @@ namespace Managers
             
             stateDrivenCamera.Follow = playerManager.transform;
         }
-        
-        private void OnEnterIdleArea()
+
+        private void OnEnterMultiplyArea()
+        {
+            cameraMovementController.WhenEnterMultiplyArea();
+        }
+
+        private void OnEnterIdleArea(GameStates arg0)
         {
             cameraMovementController.WhenEnTerIdleArea();
         }

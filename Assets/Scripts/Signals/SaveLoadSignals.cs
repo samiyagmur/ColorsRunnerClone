@@ -21,9 +21,6 @@ namespace Signals
         
         public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;};
         
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+
     }
 }

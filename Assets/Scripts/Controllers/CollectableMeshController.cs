@@ -5,6 +5,7 @@ using DG.Tweening;
 using Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using System.Threading.Tasks;
 
 namespace Controllers
 {
@@ -20,6 +21,10 @@ namespace Controllers
         #region SerializeField Variables
         [SerializeField]
         private CollectableManager collectableManager;
+        [SerializeField]
+        private float dimensions;
+        [SerializeField]
+        private float smallerTime;
         #endregion
 
         #endregion
@@ -62,6 +67,13 @@ namespace Controllers
             }
         }
 
-        
+        public async void ChangeScale()
+        {   
+            await Task.Delay(1500);
+            transform.parent.parent.DOScale(new Vector3(dimensions, dimensions, dimensions), smallerTime);
+            await Task.Delay(80);
+            collectableManager.DecreaseStack();
+
+        }
     }
 }

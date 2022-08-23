@@ -18,11 +18,6 @@ namespace Signals
         public UnityAction onDroneActive = delegate {  };
 
         public UnityAction<ColorType> onSetCorrectColorToGround = delegate(ColorType arg0) {  };
-        
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
 
     }

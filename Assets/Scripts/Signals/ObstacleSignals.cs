@@ -10,9 +10,5 @@ namespace Signals
         public UnityAction<Transform> onEnterTurretArea = delegate { };
         public UnityAction onExitTurretArea= delegate { };
         
-        protected override void Awake()
-        {
-            base.Awake();
-        }
     }
 }

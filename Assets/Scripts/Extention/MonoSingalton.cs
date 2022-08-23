@@ -23,12 +23,5 @@ namespace Extention
                 return _instance;
             }
         }
-
-        protected virtual void Awake()
-        {
-            _instance = this as T;
-        }
-
-
     }
 }

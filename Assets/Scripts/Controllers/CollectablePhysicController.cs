@@ -105,12 +105,14 @@ namespace Controllers
                 }
             }
 
- 
-            #endregion
-           
 
             #endregion
-            
+
+
+            #endregion
+
+            if (other.CompareTag("Rainbow")) collectableManager.IsHitRainbow();
+
 
             if (other.CompareTag("TurretArea")) collectableManager.ChangeAnimationOnController(CollectableAnimType.CrouchWalk);
 
