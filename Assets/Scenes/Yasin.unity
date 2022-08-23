@@ -792,7 +792,8 @@ MonoBehaviour:
   LevelData:
     DroneAreaList: []
   IdleLevelData:
-    levelData: 0
+    Buildings: []
+    IdleLevelState: 0
   levelHolder: {fileID: 1627349972}
   idleLevelHolder: {fileID: 1497210439}
   levelLoader: {fileID: 869762215}
@@ -1383,7 +1384,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1042047046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,7 +1646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1117111820
 Transform:
   m_ObjectHideFlags: 0
@@ -1673,11 +1674,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b0560a78bc44c8aba4b42b9f189c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CityData:
-    CityList: []
-    PublicPlaces: []
-    SideObjects: []
+  IdleLevelData:
+    Buildings: []
+    IdleLevelState: 0
   Buildings: []
+  BuildingManager: []
   PublicPlaces: []
   BuildingsTransforms:
   - {fileID: 0}
@@ -1685,6 +1686,8 @@ MonoBehaviour:
   - {fileID: 0}
   SideObjectTransforms:
   - {fileID: 0}
+  buildingControllerArray: []
+  buildingsArray: []
 --- !u!1 &1127138598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,7 +1912,7 @@ MonoBehaviour:
   collectableList: []
   lerpDelay: 0.252
   playerTransform: {fileID: 0}
-  initSize: 60
+  initSize: 10
   stackHolder: {fileID: 0}
 --- !u!1 &1187180300
 GameObject:
