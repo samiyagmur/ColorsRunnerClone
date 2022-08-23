@@ -582,7 +582,6 @@ GameObject:
   m_Component:
   - component: {fileID: 218394606885077204}
   - component: {fileID: 1131009574569707590}
-  - component: {fileID: 909143773031198738}
   - component: {fileID: 5178435418671404566}
   m_Layer: 0
   m_Name: Gytoins
@@ -620,19 +619,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3572055, y: 5.5657177, z: 0.3819809}
   m_Center: {x: 2.8004575, y: 0.21179953, z: 0.022071838}
---- !u!65 &909143773031198738
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6714246893388082488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3874642, y: 5.5799656, z: 0.38197994}
-  m_Center: {x: 0.009853514, y: 0.20416737, z: 0.011036396}
 --- !u!65 &5178435418671404566
 BoxCollider:
   m_ObjectHideFlags: 0

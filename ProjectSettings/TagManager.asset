@@ -18,6 +18,7 @@ TagManager:
   - AfterGround
   - StackHolder
   - Buildings
+  - Rainbow
   layers:
   - Default
   - TransparentFX
