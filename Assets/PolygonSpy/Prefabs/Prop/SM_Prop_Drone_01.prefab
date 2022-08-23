@@ -691,7 +691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641625741792840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.68, z: -0.67}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4995399873664894}
@@ -902,7 +902,7 @@ MonoBehaviour:
       m_Calls: []
   delay: 0
   duration: 6
-  easeType: 1
+  easeType: 32
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -937,7 +937,7 @@ MonoBehaviour:
   autoPlay: 1
   autoKill: 1
   relative: 0
-  isLocal: 1
+  isLocal: 0
   isClosedPath: 0
   pathResolution: 10
   pathMode: 1
@@ -947,93 +947,115 @@ MonoBehaviour:
   upDirection: {x: 0, y: 1, z: 0}
   tweenRigidbody: 0
   wps:
-  - {x: 8, y: -6, z: 98}
-  - {x: 8, y: 6, z: 98}
-  - {x: 0, y: 6, z: 98}
-  - {x: -8, y: 6, z: 98}
-  - {x: -8, y: -6, z: 98}
+  - {x: -0.67985034, y: 9.730739, z: 1.9653901}
+  - {x: -6.1540775, y: 13.218005, z: 6.0873127}
+  - {x: -11.319459, y: 9.70233, z: 2.026886}
   fullWps: []
   path:
     wpLengths:
     - 0
-    - 0
-    - 12
-    - 8
-    - 8
-    - 12
+    - 8.565717
+    - 7.970583
+    - 7.6162944
     wps:
-    - {x: 8, y: -6, z: 98}
-    - {x: 8, y: -6, z: 98}
-    - {x: 8, y: 6, z: 98}
-    - {x: 0, y: 6, z: 98}
-    - {x: -8, y: 6, z: 98}
-    - {x: -8, y: -6, z: 98}
-    type: 0
+    - {x: 0, y: 1.68, z: -0.67}
+    - {x: -0.67985034, y: 9.730739, z: 1.9653901}
+    - {x: -6.1540775, y: 13.218005, z: 6.0873127}
+    - {x: -11.319459, y: 9.70233, z: 2.026886}
+    type: 1
     subdivisionsXSegment: 10
-    subdivisions: 60
-    controlPoints: []
-    length: 40
+    subdivisions: 40
+    controlPoints:
+    - a: {x: -0.67985034, y: 9.730739, z: 1.9653901}
+      b: {x: 0, y: 0, z: 0}
+    - a: {x: -16.48484, y: 6.186654, z: -2.0335407}
+      b: {x: 0, y: 0, z: 0}
+    length: 24.15895
     isFinalized: 1
     timesTable:
-    - 0
-    - 0
+    - 0.025
+    - 0.05
+    - 0.075
+    - 0.1
+    - 0.125
+    - 0.15
+    - 0.175
+    - 0.2
+    - 0.22500001
+    - 0.25
+    - 0.275
     - 0.3
+    - 0.32500002
+    - 0.35
+    - 0.375
+    - 0.4
+    - 0.425
+    - 0.45000002
+    - 0.475
     - 0.5
+    - 0.52500004
+    - 0.55
+    - 0.575
+    - 0.6
+    - 0.625
+    - 0.65000004
+    - 0.675
     - 0.7
+    - 0.725
+    - 0.75
+    - 0.77500004
+    - 0.8
+    - 0.825
+    - 0.85
+    - 0.875
+    - 0.90000004
+    - 0.925
+    - 0.95
+    - 0.975
     - 1
     lengthsTable:
-    - 0.03532791
-    - 0.12902403
-    - 0.2626562
-    - 0.41779184
-    - 0.5760002
-    - 0.7188482
-    - 0.8279042
-    - 0.88473606
-    - 0.89856005
-    - 1.001472
-    - 1.211904
-    - 1.5482874
-    - 2.037658
-    - 2.7338142
-    - 3.6130524
-    - 4.635706
-    - 5.7610025
-    - 6.948283
-    - 8.157746
-    - 9.351266
-    - 10.493723
-    - 11.555432
-    - 12.516982
-    - 13.379021
-    - 14.179285
-    - 15.080326
-    - 16.18571
-    - 17.470755
-    - 18.898556
-    - 20.427162
-    - 22.01234
-    - 23.608871
-    - 25.171375
-    - 26.65501
-    - 28.016453
-    - 29.215769
-    - 30.220772
-    - 31.036133
-    - 31.804285
-    - 32.604645
-    - 33.47265
-    - 34.419003
-    - 35.438652
-    - 36.517555
-    - 37.636726
-    - 38.77466
-    - 39.908817
-    - 41.01687
-    - 42.07794
-    - 43.074387
+    - 0.10220037
+    - 0.39099684
+    - 0.839723
+    - 1.4217783
+    - 2.110652
+    - 2.8799577
+    - 3.7034822
+    - 4.5552716
+    - 5.4097586
+    - 6.2419996
+    - 7.0280995
+    - 7.746052
+    - 8.377579
+    - 8.943916
+    - 9.543228
+    - 10.1773405
+    - 10.83787
+    - 11.514957
+    - 12.197908
+    - 12.875631
+    - 13.536991
+    - 14.171167
+    - 14.76813
+    - 15.319366
+    - 15.819143
+    - 16.266848
+    - 16.672579
+    - 17.079964
+    - 17.520107
+    - 18.004889
+    - 18.536413
+    - 19.110897
+    - 19.72121
+    - 20.35831
+    - 21.012087
+    - 21.671885
+    - 22.326862
+    - 22.966328
+    - 23.58009
+    - 24.15895
   inspectorMode: 0
-  pathType: 0
+  pathType: 1
   handlesType: 1
   livePreview: 1
   handlesDrawMode: 0
@@ -1041,8 +1063,8 @@ MonoBehaviour:
   showIndexes: 1
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
-  lastSrcPosition: {x: 8, y: -6, z: 98}
-  lastSrcRotation: {x: 0.18301274, y: 0.6830127, z: -0.18301274, w: 0.6830127}
+  lastSrcPosition: {x: 0, y: 1.68, z: -0.67}
+  lastSrcRotation: {x: -0, y: -0, z: -0, w: 1}
   wpsDropdown: 1
   dropToFloorOffset: 0
 --- !u!114 &1579609750
@@ -1090,7 +1112,7 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 0.5
+  delay: 1
   duration: 1
   easeType: 1
   easeCurve:
@@ -1197,7 +1219,7 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 4.5
+  delay: 5
   duration: 1
   easeType: 1
   easeCurve:
@@ -1241,7 +1263,7 @@ MonoBehaviour:
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: -35, y: 90, z: 0}
+  endValueV3: {x: 25, y: 100, z: 0}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
