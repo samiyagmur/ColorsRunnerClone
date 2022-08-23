@@ -35,7 +35,7 @@ namespace Controllers
 
         private void Start()
         {
-            //SetGroundMaterial(colorType);
+            SetGroundMaterial(colorType);
         }
 
         private void GetReferences()
