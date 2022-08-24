@@ -3,7 +3,10 @@ using Signals;
 using Enums;
 using System;
 using Controllers;
-using ToonyColorsPro.ShaderGenerator;
+using UnityEngine.UI;
+using System;
+using TMPro;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -17,7 +20,9 @@ namespace Managers
         #region SerializeField Veriables
 
         [SerializeField] UIPanelController UIPanelController;
-
+        [SerializeField] TextMeshProUGUI textMeshPro;
+        [SerializeField] TextMeshProUGUI textMeshPro2;
+        
         #endregion
 
 
@@ -38,7 +43,9 @@ namespace Managers
             UISignals.Instance.onMultiplyArea += OnMultiplyArea;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
-            
+            ScoreSignals.Instance.onSendScore += OnSendScore;
+
+
         }
 
         private void UnsubscribeEvents()
@@ -48,7 +55,8 @@ namespace Managers
             UISignals.Instance.onMultiplyArea -= OnMultiplyArea;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
-            
+            ScoreSignals.Instance.onSendScore -= OnSendScore;
+
         }
 
         private void OnDisable()
@@ -91,9 +99,9 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
         }
-        
-        #region ButonGrup
-        
+
+        #region ButonGroup
+
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
@@ -117,10 +125,23 @@ namespace Managers
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            //CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onRestartLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
-    } 
+        #region TextGroup
+    
+        private void OnSendScore(int score)
+        {
+
+
+            textMeshPro.text = score.ToString();
+            textMeshPro2.text = score.ToString();
+
+        }
         #endregion
+        #endregion
+    }
+
+
+
 }
 

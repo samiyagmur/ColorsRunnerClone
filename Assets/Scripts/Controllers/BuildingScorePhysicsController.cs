@@ -24,7 +24,7 @@ namespace Controllers
 
         #endregion
 
-        private void OnTriggerStay(Collider other)   
+        private void OnTriggerStay(Collider other)   //Where is the tag
         {
             _timer -= Time.fixedDeltaTime ;
             
@@ -35,6 +35,7 @@ namespace Controllers
                 if (buildingManager.BuildingMarketPrice > buildingManager.PayedAmount)
                 {
                     buildingManager.UpdatePayedAmount();
+                    
 
                 }
                 else
@@ -45,7 +46,6 @@ namespace Controllers
                     {
                         buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
                     }
- 
                 }
                 
             }

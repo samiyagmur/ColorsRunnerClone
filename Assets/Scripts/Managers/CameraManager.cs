@@ -33,7 +33,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onPlay += SetCameraTarget;
-            CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onReset += SetCameraTarget;
             CoreGameSignals.Instance.onChangeGameState += OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
@@ -43,7 +43,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onPlay -= SetCameraTarget;
-            CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onReset -= SetCameraTarget;
             CoreGameSignals.Instance.onChangeGameState -= OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
@@ -80,10 +80,17 @@ namespace Managers
         private void OnEnterIdleArea(GameStates arg0)
         {
             cameraMovementController.WhenEnTerIdleArea();
+            stateDrivenCamera.LookAt=playerManager.transform;
+
+
+            //Debug.Log(stateDrivenCamera.Follow.name);
+
+
         }
         private void OnReset()
         {
             cameraMovementController.WhenOnReset();
+
         }
     }
 }

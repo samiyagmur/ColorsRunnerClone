@@ -9,7 +9,7 @@ namespace Controllers
         [SerializeField] Animator camAnimator;
         public void whenGameStart() { changeCam(CameraStates.Level); } 
 
-        public void WhenEnterMultiplyArea() { changeCam(CameraStates.MiniGame); }
+        public void WhenEnterMultiplyArea() { changeCam(CameraStates.MiniGame);}
 
         public void WhenEnTerIdleArea() { changeCam(CameraStates.Idle); }
         
@@ -18,7 +18,6 @@ namespace Controllers
         public void changeCam(CameraStates cameraStates)//düzelcek
         {
             camAnimator.Play(cameraStates.ToString());
-            
         }
     }
 }
