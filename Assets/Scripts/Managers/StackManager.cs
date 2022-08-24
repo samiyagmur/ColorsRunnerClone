@@ -71,7 +71,7 @@ namespace Managers
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
-            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
         }
 
         private void OnDisable()
@@ -247,7 +247,7 @@ namespace Managers
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
                 await Task.Delay(350);
-                Debug.Log(_multipyStatus);
+              
 
 
                 OnFail(collectableList.Count);

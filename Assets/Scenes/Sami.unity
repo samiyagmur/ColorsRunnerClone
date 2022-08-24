@@ -1576,15 +1576,8 @@ MonoBehaviour:
     IdleLevelState: 0
   Buildings: []
   BuildingManager: []
-  PublicPlaces: []
   BuildingsTransforms:
   - {fileID: 0}
-  PublicPlacesTransforms:
-  - {fileID: 0}
-  SideObjectTransforms:
-  - {fileID: 0}
-  buildingControllerArray: []
-  buildingsArray: []
 --- !u!1 &748532426
 GameObject:
   m_ObjectHideFlags: 0

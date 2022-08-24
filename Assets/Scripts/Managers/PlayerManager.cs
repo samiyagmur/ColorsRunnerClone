@@ -133,7 +133,7 @@ namespace Managers
         }
         public async void IsHitRainbow()
         {
-            Debug.Log("sss");
+           
             await Task.Delay(3500);//Ýt Will cahange
             UISignals.Instance.onMultiplyArea?.Invoke();
             

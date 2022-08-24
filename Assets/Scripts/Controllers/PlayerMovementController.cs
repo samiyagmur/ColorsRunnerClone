@@ -62,7 +62,7 @@ public class PlayerMovementController : MonoBehaviour
 
         private void FixedUpdate()
         {
-            Debug.Log("_isReadyToPlay="+_isReadyToPlay+ "_isReadyToMove=" + _isReadyToMove);
+           
             if (_isReadyToPlay)
             {
                 
