@@ -6,7 +6,7 @@ namespace Command.SaveLoadCommands
 {
     public class SaveIdleGameCommand
     {
-        public void OnSaveIdleGameData(SaveStates saveStates,int idleLevelData)
+        public void Execute(SaveStates saveStates,int idleLevelData)
         {
             
             if (saveStates == SaveStates.IdleLevel)
