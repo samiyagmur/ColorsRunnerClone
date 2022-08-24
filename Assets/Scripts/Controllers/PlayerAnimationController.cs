@@ -23,19 +23,8 @@ public class PlayerAnimationController : MonoBehaviour
     public void WhenThrowing() { ChangeAnimationState(PlayerAnimationType.Throw); }
 
     public void ChangeAnimationState(PlayerAnimationType type)
-    {   
-        switch (type)
-        {   
-            case PlayerAnimationType.Idle:
-                playerAnimator.SetTrigger("isIdle");
-                break;
-            case PlayerAnimationType.Running:
-                playerAnimator.SetTrigger("isRunning");
-                break;
-            case PlayerAnimationType.Throw:
-                playerAnimator.SetTrigger("isThrow");
-                break;
-        }
+    {
+            playerAnimator.Play(type.ToString());
     }
 }
    

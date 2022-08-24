@@ -31,8 +31,8 @@ namespace Managers
 
         [SerializeField] private TextMeshPro scoreText;
 
-
         #endregion
+        private GameStates _gameStates;
         #endregion
 
         private void Awake()
@@ -67,6 +67,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onFailed += OnFailed;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+            ScoreSignals.Instance.onSendScore += OnSetScoreText;
 
         }
 
@@ -81,11 +82,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onFailed -= OnFailed;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
-        }
-
-        public void ChangePlayerAnimation(PlayerAnimationType ýdle)
-        {
-            animationController.ChangeAnimationState(ýdle);
+            ScoreSignals.Instance.onSendScore -= OnSetScoreText;
         }
 
         private void OnDisable()
@@ -112,14 +109,15 @@ namespace Managers
 
         private void OnChangeGameState(GameStates gameStates) 
         {
-            movementController.ChangeGameStates(gameStates);
-            
+            _gameStates = gameStates;
+            movementController.ChangeGameStates(_gameStates);
         }
+
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
         private void OnFailed() => movementController.IsReadyToPlay(false);
 
-        private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,playermanager  emir versin,is yapmasin
+        private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,player need to command  controller.
 
         private async void OnEnterMutiplyArea()
         {
@@ -127,7 +125,7 @@ namespace Managers
             ChangeForwardSpeeds(ChangeSpeedState.EnterMultipleArea);
             await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
-            playerMeshController.ChangeScale();
+            playerMeshController.ChangeScale(1);
 
 
         }
@@ -139,12 +137,30 @@ namespace Managers
             
         }
 
-        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
+        public void IsHitCollectable()
+        {   
+            if (_gameStates == GameStates.Idle)
+            {
+                ScoreSignals.Instance.onIncreaseScore?.Invoke();
+            }
+        }
+
+        internal void IsEnterPaymentArea()
+        {
+            if (_gameStates == GameStates.Idle)
+            {
+                ScoreSignals.Instance.onDecreaseScore?.Invoke();
+                playerMeshController.ChangeScale(-1);
+            }
+           
+        }
+
+
+        private void OnSetScoreText(int Score) => scoreText.text = Score.ToString();
 
         public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
         private void OnReset()
         {
-            Debug.Log("MovementReset");
             movementController.MovementReset();
             gameObject.SetActive(true);
 
@@ -164,6 +180,12 @@ namespace Managers
 
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);
+
+        public void ChangePlayerAnimation(PlayerAnimationType ýdle)
+        {
+            animationController.ChangeAnimationState(ýdle);
+        }
+
 
         // IEnumerator WaitForFinal()
         // {

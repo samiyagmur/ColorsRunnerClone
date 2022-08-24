@@ -35,7 +35,7 @@ namespace Managers
 
         private void Start()
         {
-            OnInitializeStack();
+            InitializeStack();
         }
 
         #region Event Subscription
@@ -110,19 +110,20 @@ namespace Managers
         
         #region Initialize Stack
 
-        private void OnInitializeStack()
+        private void InitializeStack()
         {
             for (int i = 0; i < initSize ; i++)
             {
+                Debug.Log(initSize);
                 var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
                 
                 StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.CrouchIdle);
+                ScoreSignals.Instance.onIncreaseScore?.Invoke();
                 
             }
         }
-
         private void OnRunStack()
         {
           
@@ -259,7 +260,7 @@ namespace Managers
 
         #region Decrease stack On LevelEnd
 
-        private  void OnLevelEndDecreaseStack()//async silindi
+        private  void OnLevelEndDecreaseStack()//async  deleted
         {
             for (int i = 0; i < collectableList.Count; i++)
             {   
@@ -343,7 +344,10 @@ namespace Managers
 
         private void OnReset()
         {
-            OnInitializeStack();
+            // collectableList.Clear();
+            // collectableList.TrimExcess();
+            InitializeStack();//Error from restart button
+            
         }
 
         #endregion

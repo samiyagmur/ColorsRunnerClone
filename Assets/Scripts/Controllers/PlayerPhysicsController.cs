@@ -23,9 +23,11 @@ namespace Controllers
 
       
         private void OnTriggerEnter(Collider other)
-        {
+        {   
             if (other.CompareTag("Gate")) playerManager.SendToColorType(other.transform.GetComponent<GateController>().colorType);
             if (other.CompareTag("Rainbow")) playerManager.IsHitRainbow();
+
+            if (other.CompareTag("Collectable")) playerManager.IsHitCollectable();
 
             else if (other.CompareTag("DroneArea"))
             {
@@ -56,6 +58,11 @@ namespace Controllers
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.Normal);
             }
         }
-  
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("PaymentArea")) playerManager.IsEnterPaymentArea();
+
+        }
+
     }
 }
