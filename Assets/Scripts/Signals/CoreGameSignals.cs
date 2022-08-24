@@ -11,18 +11,24 @@ namespace Signals
     {
         public UnityAction onGameOpen = delegate { };
 
-        public UnityAction onEnterMiniGame = delegate { };
+        public UnityAction onEnterMutiplyArea= delegate { };
 
-        public UnityAction onEnterIdleArea= delegate { };
+        public UnityAction onEnterIdleArea = delegate { };
 
         public UnityAction <GameStates> onChangeGameState = delegate { };
         
         public UnityAction onLevelInitialize = delegate { };
         
+        public UnityAction onIdleLevelInitialize = delegate { };
+        
         public UnityAction onClearActiveLevel = delegate { };
         
-        public UnityAction onLevelFailed = delegate { };
+        public UnityAction onClearActiveIdleLevel = delegate { };
         
+        public UnityAction onFailed = delegate { };
+
+        public UnityAction onSaveGameData = delegate { };
+
         public UnityAction onNextLevel = delegate { };
         
         public UnityAction onRestartLevel = delegate { };
@@ -36,14 +42,11 @@ namespace Signals
         public UnityAction onApplicationPause = delegate {  };
         
         public UnityAction onApplicationQuit = delegate {  };
-        
-        public UnityAction<CameraStates> onSetCameraState = delegate { };
 
         public Func<int> onGetLevelID = delegate { return 0; };
+        
+        public Func<int> onGetIdleLevelID = delegate { return 0; };
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+     
     }
 }

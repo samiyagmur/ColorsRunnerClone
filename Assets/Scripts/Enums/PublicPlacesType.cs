@@ -5,6 +5,7 @@
         Park,
         OtoPark,
         Statue,
-        Pool
+        Pool,
+        Museum
     }
 }

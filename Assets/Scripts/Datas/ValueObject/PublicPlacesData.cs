@@ -9,9 +9,11 @@ namespace Datas.ValueObject
     {
         public int RequiredBuilds;
 
-        public TextMeshPro RequiredBuildText;
+        public int PayedAmound;
         
-        public BuildingState BuildingState = BuildingState.Uncompleted;
+        //public TextMeshPro RequiredBuildText;
+        
+        public IdleLevelState ıdleLevelState = IdleLevelState.Uncompleted;
         
         public PublicPlacesType PublicPlacesType;
     }

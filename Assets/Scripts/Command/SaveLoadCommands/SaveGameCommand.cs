@@ -4,7 +4,7 @@ namespace Command.SaveLoadCommands
 {
     public class SaveGameCommand
     {
-        public void OnSaveGameData(SaveStates state,int levelData)
+        public void Execute(SaveStates state,int levelData)
         {
             if (state == SaveStates.Level)
             {

@@ -9,16 +9,15 @@ namespace Datas.ValueObject
     public class SideObject
     {
 
-        public TextMeshPro BuildingText;
-
         public int BuildingMarketPrice;
 
         public int PayedAmount;
 
         public int BuildingAdressId;
-        
-        public BuildingState BuildingState = BuildingState.Uncompleted;
 
-        public BuildingType BuildingType;
+        public float Saturation;
+        
+        public IdleLevelState ıdleLevelState = IdleLevelState.Uncompleted;
+        
     }
 }

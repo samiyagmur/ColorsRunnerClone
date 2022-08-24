@@ -2,7 +2,10 @@
 using UnityEngine;
 using Signals;
 using System;
-using Controlers;
+using Cinemachine;
+using Controllers;
+using DG.Tweening;
+using Enums;
 
 namespace Managers
 {
@@ -12,10 +15,13 @@ namespace Managers
         #region Self Variables
         #region SerilizeField
         [SerializeField]CameraMovementController cameraMovementController;
+        [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
+        [SerializeField] private PlayerManager playerManager;
         #endregion
         #endregion
 
         #region Event Subcription
+        
 
         private void OnEnable()
         {
@@ -26,17 +32,19 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onPlay += SetCameraTarget;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onEnterMiniGame += OnEnterMiniGame;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onPlay -= SetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onEnterMiniGame -= OnEnterMiniGame;
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
+            CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
         }
 
         private void OnDisable()
@@ -51,11 +59,17 @@ namespace Managers
             cameraMovementController.whenGameStart();
         }
 
-        private void OnEnterMiniGame()
+        private void SetCameraTarget()
         {
-            cameraMovementController.WhenEnterMiniGame();
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
         }
-
+        private void OnSetCameraTarget()
+        {
+            playerManager = FindObjectOfType<PlayerManager>();
+            
+            stateDrivenCamera.Follow = playerManager.transform;
+        }
+        
         private void OnEnterIdleArea()
         {
             cameraMovementController.WhenEnTerIdleArea();

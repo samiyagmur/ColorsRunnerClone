@@ -1,12 +1,15 @@
 ﻿using Extention;
+using UnityEngine.Events;
 
 namespace Signals
 {
     public class BuildingSignals : MonoSingleton<BuildingSignals>
-    {
-        protected override void Awake()
-        { 
-            base.Awake();
-        }
+    {   
+        
+        public UnityAction onDataReadyToUse = delegate {  };
+        
+        public UnityAction<int> onBuildingsCompleted = delegate(int arg0) {  };
+
+
     }
 }

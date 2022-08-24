@@ -10,6 +10,15 @@ TagManager:
   - TurretArea
   - Gate
   - Collectable
+  - Collected
+  - DroneArea
+  - Bullet
+  - Ground
+  - ColoredGround
+  - AfterGround
+  - StackHolder
+  - Buildings
+  - Rainbow
   layers:
   - Default
   - TransparentFX
