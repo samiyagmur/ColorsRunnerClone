@@ -17,18 +17,7 @@ namespace Controllers
 
         public void changeCam(CameraStates cameraStates)//düzelcek
         {
-            switch (cameraStates)
-            {
-                case CameraStates.Level:
-                    camAnimator.Play("Level");
-                    break;
-                case CameraStates.MiniGame:
-                    camAnimator.Play("MiniGame");
-                    break;
-                case CameraStates.Idle:
-                    camAnimator.Play("Idle");
-                    break;
-            }
+            camAnimator.Play(cameraStates.ToString());
         }
     }
 }
