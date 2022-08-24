@@ -36,6 +36,8 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onFailed += OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
         }
 
         private void UnsubscribeEvents()
@@ -43,6 +45,8 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
         }
 
         private void OnDisable()
@@ -70,12 +74,12 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
-        public void OnFail()
+        public void OnFailed()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
         }
 
-        public void OnEnterMiniGameArea()
+        public void OnEnterMultiplyArea()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
@@ -111,7 +115,8 @@ namespace Managers
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
+            //CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onRestartLevel?.Invoke();
         }
     } 
         #endregion

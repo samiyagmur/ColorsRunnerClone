@@ -4,6 +4,7 @@ using Enums;
 using Keys;
 using Managers;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Controllers
@@ -25,31 +26,23 @@ public class PlayerMovementController : MonoBehaviour
     
     [Header("Data")] private PlayerMovementData _movementData;
     
-    private bool _isReadyToMove, _isReadyToPlay,_isMovingVertical;
+    private bool _isReadyToMove,_isReadyToPlay,_isMovingVertical;
     
     private float _inputValueX;
     
     private Vector2 _clampValues;
     
     private Vector3 _movementDirection;
-    
-    #endregion
-    #endregion
-    
-        public void SetMovementData(PlayerMovementData dataMovementData)
-        {   
-            _movementData = dataMovementData; 
-        }
 
-        public void EnableMovement()
-        {
-            _isReadyToMove = true;
-        }
+    private ChangeSpeedState _changeSpeedState;
 
-        public void DeactiveMovement()
-        {
-            _isReadyToMove = false;
-        }
+    #endregion
+        #endregion
+
+        public void SetMovementData(PlayerMovementData dataMovementData) => _movementData = dataMovementData; 
+
+        public void EnableMovement() => _isReadyToMove = true;
+        public void DeactiveMovement()=> _isReadyToMove = false;
 
         public void UpdateRunnerInputValue(RunnerInputParams inputParam)
         {
@@ -57,21 +50,11 @@ public class PlayerMovementController : MonoBehaviour
             _clampValues = inputParam.ClampValues;
         }
         
-        public void UpdateIdleInputValue(IdleInputParams inputParam)
-        {
-            _movementDirection = inputParam.InputValues;
-        }
-        
+        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.InputValues;
 
-        public void IsReadyToPlay(bool state)
-        {
-            _isReadyToPlay = state;
-        }
+        public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
 
-        public void ChangeGameStates(GameStates currentState)
-        {
-            currentGameState = currentState;
-        }
+        public void ChangeGameStates(GameStates currentState) => currentGameState = currentState;
 
         private void FixedUpdate()
         {
@@ -161,28 +144,37 @@ public class PlayerMovementController : MonoBehaviour
         }
         public void StopVerticalMovement()
         {
-            _movementData.ForwardSpeed = 0;
-            
+            ChangeForwardSpeed(ChangeSpeedState.Stop);
+
             rigidbody.angularVelocity = Vector3.zero;
         }
 
         public void OnStartVerticalMovement(Transform exitPosition)
         {
-            _movementData.ForwardSpeed = 10;
-            
+            ChangeForwardSpeed(ChangeSpeedState.Normal);
+
             gameObject.transform.DOMoveZ((exitPosition.transform.position.z + exitPosition.transform.localScale.z/2.2f), .1f);
         }
 
         public void ChangeForwardSpeed(ChangeSpeedState changeSpeedState)
         {
             _movementData.ForwardSpeed =(int)changeSpeedState;
+
+            this._changeSpeedState = changeSpeedState;
         }
 
-        public void OnReset()
+        public  void MovementReset()
         {
+            
             Stop();
+
             _isReadyToPlay = false;
+
             _isReadyToMove = false;
+
+            gameObject.transform.position = Vector3.zero;
+            gameObject.transform.rotation = Quaternion.identity;
+
         }
 
     }

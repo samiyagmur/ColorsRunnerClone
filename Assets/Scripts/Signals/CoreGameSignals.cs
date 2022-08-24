@@ -11,7 +11,9 @@ namespace Signals
     {
         public UnityAction onGameOpen = delegate { };
 
-        public UnityAction onEnterIdleArea= delegate { };
+        public UnityAction onEnterMutiplyArea= delegate { };
+
+        public UnityAction onEnterIdleArea = delegate { };
 
         public UnityAction <GameStates> onChangeGameState = delegate { };
         
@@ -23,9 +25,10 @@ namespace Signals
         
         public UnityAction onClearActiveIdleLevel = delegate { };
         
-        
-        public UnityAction onLevelFailed = delegate { };
-        
+        public UnityAction onFailed = delegate { };
+
+        public UnityAction onSaveGameData = delegate { };
+
         public UnityAction onNextLevel = delegate { };
         
         public UnityAction onRestartLevel = delegate { };

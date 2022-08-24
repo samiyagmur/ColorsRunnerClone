@@ -25,10 +25,12 @@ namespace Managers
         
         [SerializeField] private int initSize = 3;  //Pooldan cek // Data
 
-        [SerializeField] private GameObject stackHolder;  
-        
-        #endregion
+        [SerializeField] private GameObject stackHolder;
 
+        #endregion
+        #region Private Variables
+       
+        #endregion
         #endregion
 
         private void Start()
@@ -46,6 +48,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += SetStackTarget;
+            CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onSetStackTarget += OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
@@ -58,6 +61,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {   
             CoreGameSignals.Instance.onPlay -= SetStackTarget;
+            CoreGameSignals.Instance.onReset -= OnReset;
             StackSignals.Instance.onSetStackTarget -= OnSetStackTarget;
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
             StackSignals.Instance.onDecreaseStack-= OnDecreaseStack;
@@ -66,6 +70,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -106,7 +111,7 @@ namespace Managers
         {
             for (int i = 0; i < initSize ; i++)
             {
-                var _currentStack = Instantiate(initStack, Vector3.zero, this.transform.rotation);
+                var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
                 
@@ -182,7 +187,7 @@ namespace Managers
         private void OnDecreaseStack(int currentIndex)
         {
             if (collectableList[currentIndex] is null)
-            {
+            {   
                 return;
             }
 
@@ -195,6 +200,7 @@ namespace Managers
             Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
+            OnFail(collectableList.Count);
         }
 
         #endregion
@@ -214,7 +220,9 @@ namespace Managers
             collectableList.RemoveAt(currentIndex);
             
             collectableList.TrimExcess();
+
             
+
             DroneAreaSignals.Instance.onDroneActive?.Invoke();
             
             if(transform.childCount == 0)
@@ -231,9 +239,10 @@ namespace Managers
                 
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
+                OnFail(collectableList.Count);
             }
         }
-        
+
 
         #endregion
 
@@ -306,8 +315,22 @@ namespace Managers
             }
         }
 
-      
+        private void OnFail(int count)
+        {
+            if (count is 0)
+            {
+                CoreGameSignals.Instance.onFailed();
+            }
+
+        }
+
+
+        private void OnReset()
+        {
+            OnInitializeStack();
+        }
+
         #endregion
-        
+
     }
 }

@@ -5,6 +5,7 @@ using Datas.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Signals;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Managers
@@ -88,7 +89,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
-            CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
+            CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
             CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelID;
         }
@@ -98,7 +99,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-            CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
+            CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
             CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelID;
         }
@@ -137,13 +138,16 @@ namespace Managers
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
 
-        private void OnRestartLevel()
+  
+        private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
+            Debug.Log("onLevelInitialize");
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
+
         }
 
         private int OnGetLevelID()

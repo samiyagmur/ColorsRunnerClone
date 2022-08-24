@@ -65,6 +65,7 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onFailed += OnFailed;
         }
 
         private void UnsubscribeEvents()
@@ -76,7 +77,9 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
         }
+
 
         private void OnDisable()
         {
@@ -85,83 +88,55 @@ namespace Managers
         
         #region Movement Controller
 
-        private void OnActivateMovement()
-        {
-            movementController.EnableMovement();
-        }
+        private void OnActivateMovement()=> movementController.EnableMovement();
 
-        private void OnDeactiveMovement()
-        {
-            movementController.DeactiveMovement();
-        }
+        private void OnDeactiveMovement()=> movementController.DeactiveMovement();
 
-        private void OnGetRunnerInputValues(RunnerInputParams inputParams)
-        {
-            movementController.UpdateRunnerInputValue(inputParams);
-        }
+        private void OnGetRunnerInputValues(RunnerInputParams inputParams)=> movementController.UpdateRunnerInputValue(inputParams);
 
-        private void OnGetIdleInputValues(IdleInputParams inputParams)
-        {
-            movementController.UpdateIdleInputValue(inputParams);
-        }
+        private void OnGetIdleInputValues(IdleInputParams inputParams) => movementController.UpdateIdleInputValue(inputParams);
 
         #endregion
 
         #endregion
 
-        private void OnChangeGameState(GameStates gameStates)
-        {
-            movementController.ChangeGameStates(gameStates);
-        }
-        
-        private void OnPlay()
-        {
-            movementController.IsReadyToPlay(true);
-        }
+        private void OnChangeGameState(GameStates gameStates) => movementController.ChangeGameStates(gameStates);
 
-        private void OnLevelSuccessful()
-        {
-            movementController.IsReadyToPlay(false); //OnReset,playermanager  emir versin,is yapmasin
+        private void OnPlay() => movementController.IsReadyToPlay(true);
+        private void OnFailed() => movementController.IsReadyToPlay(false);
 
-        }
-        private void OnLevelFailed()
-        {
-            movementController.IsReadyToPlay(false); // Reset
-        }
-        
-        internal void SendToColorType(ColorType colorType)
+        private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,playermanager  emir versin,is yapmasin
+   
+        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
+
+        public async void IsHitRainbow(ColorType colorType)
         {
             StackSignals.Instance.onChangeColor?.Invoke(colorType);
-        }
-        private void OnReset()
-        {
-            gameObject.SetActive(true);
-            movementController.OnReset();
+            await Task.Delay(2500);
+            ChangeForwardSpeeds(ChangeSpeedState.Stop);
+            CoreGameSignals.Instance.onEnterMutiplyArea?.Invoke();
         }
 
-        private void OnSetScoreText(int Values)
+        private void OnReset()
         {
-            scoreText.text = Values.ToString();
+            Debug.Log("MovementReset");
+            movementController.MovementReset();
+            gameObject.SetActive(true);
+            
         }
+
+        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
 
         public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
             StartVerticalMovement(exitPosition);
-
             await Task.Delay(1000);
-            
-
         }
 
-        public void OnStopVerticalMovement()
-        {
-            movementController.StopVerticalMovement();
-        }
+        public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
 
-        public void StartVerticalMovement(Transform exitPosition)
-        {
-            movementController.OnStartVerticalMovement(exitPosition);
-        }
+        public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
+        public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);
 
         // IEnumerator WaitForFinal()
         // {
@@ -170,10 +145,8 @@ namespace Managers
         //     gameObject.SetActive(false);
         //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         // }
-        public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState)
-        {
-            movementController.ChangeForwardSpeed(changeSpeedState);
-        }
+
+
 
 
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2480411916336483729}
   m_Layer: 0
   m_Name: guillotinesmall
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   tweenTargetIsTargetGO: 1
   delay: 0
   duration: 5
-  easeType: 13
+  easeType: 11
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -199,7 +199,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2771773700018613546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.373579, y: 1.1856078, z: 0.78699124}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 1360996422640960193}
   m_Layer: 0
   m_Name: guillotinesmall
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   tweenTargetIsTargetGO: 1
   delay: 0
   duration: 5
-  easeType: 13
+  easeType: 12
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -403,7 +403,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2771773701068907896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.373579, y: 1.1856078, z: 0.78699124}
@@ -434,7 +434,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3419445654149395366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 1.75, z: 0}
+  m_LocalPosition: {x: -1.4, y: 1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3259622970222540688}
@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3419445655264410612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 1.75, z: 0}
+  m_LocalPosition: {x: 1.4, y: 1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3259622971321040834}
@@ -582,7 +582,6 @@ GameObject:
   m_Component:
   - component: {fileID: 218394606885077204}
   - component: {fileID: 1131009574569707590}
-  - component: {fileID: 909143773031198738}
   - component: {fileID: 5178435418671404566}
   m_Layer: 0
   m_Name: Gytoins
@@ -600,7 +599,7 @@ Transform:
   m_GameObject: {fileID: 6714246893388082488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.12, y: 1, z: 1}
+  m_LocalScale: {x: 1.6, y: 1.5, z: 1}
   m_Children:
   - {fileID: 2611981234374682908}
   - {fileID: 2611981235407937870}
@@ -618,21 +617,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46543264, y: 5.5657177, z: 0.3819809}
-  m_Center: {x: 2.89786, y: 0.21179962, z: 0.022071838}
---- !u!65 &909143773031198738
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6714246893388082488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6255619, y: 5.5799656, z: 0.38197994}
-  m_Center: {x: 0.009853526, y: 0.20416737, z: 0.011036396}
+  m_Size: {x: 0.3572055, y: 5.5657177, z: 0.3819809}
+  m_Center: {x: 2.8004575, y: 0.21179953, z: 0.022071838}
 --- !u!65 &5178435418671404566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -645,4 +631,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.39892706, y: 5.5578947, z: 0.35990906}
-  m_Center: {x: -2.9117448, y: 0.21520376, z: 0.011035919}
+  m_Center: {x: -2.8, y: 0.21520376, z: 0.011035919}
