@@ -18,6 +18,7 @@ namespace Controllers
         public void changeCam(CameraStates cameraStates)//düzelcek
         {
             camAnimator.Play(cameraStates.ToString());
+            
         }
     }
 }

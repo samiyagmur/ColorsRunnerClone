@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 1350693953375796395}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -3460,7 +3460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2812358780166095181, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -92.73
+      value: 172.6
       objectReference: {fileID: 0}
     - target: {fileID: 3598849837399818181, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: colorType

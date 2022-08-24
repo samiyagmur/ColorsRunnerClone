@@ -7,7 +7,7 @@ namespace Controllers
     {
         public void ChangeScale()       
         {
-            Debug.Log("Enter");
+           
             if (transform.parent.gameObject.activeInHierarchy==false)
             {
                 transform.parent.gameObject.SetActive(true);
