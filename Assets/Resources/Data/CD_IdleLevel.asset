@@ -17,23 +17,23 @@ MonoBehaviour:
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
+      BuildingMarketPrice: 100
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
-      "\u0131dleLevelState": 1
+      "\u0131dleLevelState": 0
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
+      BuildingMarketPrice: 150
       PayedAmount: 0
       BuildingAdressId: 1
       Saturation: 0
@@ -41,11 +41,11 @@ MonoBehaviour:
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
+      BuildingMarketPrice: 70
       PayedAmount: 0
       BuildingAdressId: 2
       Saturation: 0
@@ -53,11 +53,11 @@ MonoBehaviour:
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
+      BuildingMarketPrice: 90
       PayedAmount: 0
       BuildingAdressId: 3
       Saturation: 0
@@ -65,11 +65,11 @@ MonoBehaviour:
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
+      BuildingMarketPrice: 110
       PayedAmount: 0
       BuildingAdressId: 4
       Saturation: 0
@@ -77,13 +77,49 @@ MonoBehaviour:
     - isDepended: 0
       SideObject:
         BuildingMarketPrice: 0
-        PayedAmounth: 0
+        PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 0
-      PayedAmount: 0
+      BuildingMarketPrice: 100
+      PayedAmount: 100
       BuildingAdressId: 5
+      Saturation: 0
+      "\u0131dleLevelState": 0
+    - isDepended: 0
+      SideObject:
+        BuildingMarketPrice: 0
+        PayedAmount: 0
+        BuildingAdressId: 0
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 90
+      PayedAmount: 0
+      BuildingAdressId: 6
+      Saturation: 0
+      "\u0131dleLevelState": 0
+    - isDepended: 0
+      SideObject:
+        BuildingMarketPrice: 0
+        PayedAmount: 0
+        BuildingAdressId: 0
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 100
+      PayedAmount: 0
+      BuildingAdressId: 7
+      Saturation: 0
+      "\u0131dleLevelState": 0
+    - isDepended: 0
+      SideObject:
+        BuildingMarketPrice: 0
+        PayedAmount: 0
+        BuildingAdressId: 0
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 200
+      PayedAmount: 0
+      BuildingAdressId: 8
       Saturation: 0
       "\u0131dleLevelState": 0
     IdleLevelState: 0

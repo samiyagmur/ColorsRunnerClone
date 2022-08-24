@@ -8,11 +8,10 @@ namespace Datas.ValueObject
     [Serializable]
     public class SideObject
     {
-        //public TextMeshPro BuildingText;
 
         public int BuildingMarketPrice;
 
-        public int PayedAmounth;
+        public int PayedAmount;
 
         public int BuildingAdressId;
 

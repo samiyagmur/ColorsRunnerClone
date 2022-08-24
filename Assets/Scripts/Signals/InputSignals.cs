@@ -14,10 +14,6 @@ namespace Signals
     public UnityAction<IdleInputParams> onJoyStickInputDragged = delegate { };
     public UnityAction onInputReleased = delegate { };
     
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     
     }
 }

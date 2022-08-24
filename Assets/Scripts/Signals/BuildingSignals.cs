@@ -8,9 +8,8 @@ namespace Signals
         
         public UnityAction onDataReadyToUse = delegate {  };
         
-        protected override void Awake()
-        { 
-            base.Awake();
-        }
+        public UnityAction<int> onBuildingsCompleted = delegate(int arg0) {  };
+
+
     }
 }

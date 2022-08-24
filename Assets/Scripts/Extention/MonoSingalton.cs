@@ -24,11 +24,5 @@ namespace Extention
             }
         }
 
-        protected virtual void Awake()
-        {
-            _instance = this as T;
-        }
-
-
     }
 }

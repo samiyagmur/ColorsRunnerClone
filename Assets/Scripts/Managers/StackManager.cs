@@ -272,12 +272,14 @@ namespace Managers
                     {
                         return;
                     }
+
+                    var position = playerTransform.position;
                     collectableList[i].transform.position= new Vector3(
-                        Mathf.Lerp(collectableList[i].transform.position.x, playerTransform.position.x, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.y, playerTransform.position.y, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.z,  playerTransform.position.z- 1f, lerpDelay));
+                        Mathf.Lerp(collectableList[i].transform.position.x, position.x, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.y, position.y, 0.3f),
+                        Mathf.Lerp(collectableList[i].transform.position.z,  position.z- 1f, lerpDelay));
                     
-                    Vector3 rotationDirection = playerTransform.position - collectableList[i].transform.position;
+                    Vector3 rotationDirection = position - collectableList[i].transform.position;
                     
                     if (rotationDirection != Vector3.zero)
                     {

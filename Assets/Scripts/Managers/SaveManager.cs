@@ -14,12 +14,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Private Variables
 
         private LoadGameCommand _loadGameCommand;
@@ -32,13 +26,7 @@ namespace Managers
         private IdleLevelData _idleLevelData;
 
         #endregion
-
-        #region Serialized Variables
-
         
-
-        #endregion
-
         #endregion
 
         private void Awake()
@@ -74,20 +62,20 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveRunnerLevelData += _saveGameCommand.OnSaveGameData;
-            SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.OnLoadGameData;
-            SaveLoadSignals.Instance.onSaveIdleLevelData += _saveIdleGameCommand.OnSaveIdleGameData;
-            SaveLoadSignals.Instance.onLoadIdleData += _loadIdleGameCommand.OnLoadBuildingsData;
+            SaveLoadSignals.Instance.onSaveRunnerLevelData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute;
+            SaveLoadSignals.Instance.onSaveIdleLevelData += _saveIdleGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData += _loadIdleGameCommand.Execute;
             SaveLoadSignals.Instance.onSaveIdleLevelProgressData += _saveIdleLevelProgressCommand.Execute;
             SaveLoadSignals.Instance.onLoadIdleLevelProgressData += _loadIdleLevelProgressCommand.Execute;
         }
 
         private void UnsubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveRunnerLevelData -= _saveGameCommand.OnSaveGameData;
-            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.OnLoadGameData;
-            SaveLoadSignals.Instance.onSaveIdleLevelData -= _saveIdleGameCommand.OnSaveIdleGameData;
-            SaveLoadSignals.Instance.onLoadIdleData -= _loadIdleGameCommand.OnLoadBuildingsData;
+            SaveLoadSignals.Instance.onSaveRunnerLevelData -= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute;
+            SaveLoadSignals.Instance.onSaveIdleLevelData -= _saveIdleGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData -= _loadIdleGameCommand.Execute;
             SaveLoadSignals.Instance.onSaveIdleLevelProgressData -= _saveIdleLevelProgressCommand.Execute;
             SaveLoadSignals.Instance.onLoadIdleLevelProgressData -= _loadIdleLevelProgressCommand.Execute;
         }
@@ -97,6 +85,5 @@ namespace Managers
         }
         
         #endregion
-        
     }
 }
