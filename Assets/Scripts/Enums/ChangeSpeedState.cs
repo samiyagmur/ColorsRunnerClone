@@ -8,7 +8,8 @@ namespace Enums
         Normal = 8,
         Stop = 0,
         EnterTaretArea = 4,
-        EnterMultipleArea=12
+        EnterMultipleArea=12,
+        EnterIdleState=6
 
     }
 }

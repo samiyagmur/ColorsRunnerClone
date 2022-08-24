@@ -4135,8 +4135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    HorizontalInputSpeed: 2
-    ClampSides: {x: -5, y: 5}
+    HorizontalInputSpeed: 8
+    ClampSides: {x: -4, y: 4}
     ClampSpeed: 0.007
   floatingJoystick: {fileID: 1100900110}
   isReadyForTouch: 0

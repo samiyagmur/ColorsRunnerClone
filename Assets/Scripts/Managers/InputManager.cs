@@ -82,8 +82,9 @@ public class InputManager : MonoBehaviour
     #endregion
     void Update()
     {
-        if (!isReadyForTouch) return;
-
+            
+            if (!isReadyForTouch) return;
+        
         if (Input.GetMouseButtonUp(0))
         {
             _isTouching = false;
@@ -137,11 +138,12 @@ public class InputManager : MonoBehaviour
         if (currentGameState == GameStates.Idle)
         {
             if (Input.GetMouseButton(0))
-            {
+            {   
                 if (_isTouching)
-                {
+                {   
                     if (currentGameState == GameStates.Idle)
                     {
+                            
                         _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
                     
                         _moveVector = _joystickPosition;
@@ -160,7 +162,7 @@ public class InputManager : MonoBehaviour
 
     private void OnChangeGameState(GameStates currentStates)
     {
-            Debug.Log("gamstate");
+            
         currentGameState = currentStates;//next levelde bura çaðýralacak//
         if (currentGameState == GameStates.Idle)
         {

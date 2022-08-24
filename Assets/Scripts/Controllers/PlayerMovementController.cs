@@ -50,7 +50,11 @@ public class PlayerMovementController : MonoBehaviour
             _clampValues = inputParam.ClampValues;
         }
         
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.InputValues;
+        public void UpdateIdleInputValue(IdleInputParams inputParam)
+        {
+            _movementDirection = inputParam.InputValues;
+        }
+
 
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
 
@@ -72,6 +76,8 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
+                        manager.ChangePlayerAnimation(PlayerAnimationType.Running);
+                        ChangeForwardSpeed(ChangeSpeedState.EnterIdleState);
                         
                         IdleMove();
                     }
@@ -85,6 +91,7 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
+                        manager.ChangePlayerAnimation(PlayerAnimationType.Idle);///This Place Has will been change.
                         Stop();
                     }
                     

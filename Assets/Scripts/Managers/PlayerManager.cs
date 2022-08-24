@@ -12,7 +12,7 @@ using UnityEngine;
 namespace Managers
 {
     public class PlayerManager : MonoBehaviour
-{
+    {
         #region Self Variables
 
         #region Public Variables
@@ -23,10 +23,10 @@ namespace Managers
 
         #region Serialized Variables
 
-        [Space] [SerializeField] private PlayerMovementController movementController;
-        
+        [Space][SerializeField] private PlayerMovementController movementController;
+
         [SerializeField] private PlayerAnimationController animationController;
-        
+
         [SerializeField] private PlayerMeshController playerMeshController;
 
         [SerializeField] private TextMeshPro scoreText;
@@ -83,27 +83,38 @@ namespace Managers
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
         }
 
+        public void ChangePlayerAnimation(PlayerAnimationType ýdle)
+        {
+            animationController.ChangeAnimationState(ýdle);
+        }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-        
+
         #region Movement Controller
 
-        private void OnActivateMovement()=> movementController.EnableMovement();
+        private void OnActivateMovement() => movementController.EnableMovement();
 
-        private void OnDeactiveMovement()=> movementController.DeactiveMovement();
+        private void OnDeactiveMovement() => movementController.DeactiveMovement();
 
-        private void OnGetRunnerInputValues(RunnerInputParams inputParams)=> movementController.UpdateRunnerInputValue(inputParams);
+        private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
 
-        private void OnGetIdleInputValues(IdleInputParams inputParams) => movementController.UpdateIdleInputValue(inputParams);
+        private void OnGetIdleInputValues(IdleInputParams inputParams) 
+        { 
+            movementController.UpdateIdleInputValue(inputParams); 
+        } 
 
         #endregion
 
         #endregion
 
-        private void OnChangeGameState(GameStates gameStates) => movementController.ChangeGameStates(gameStates);
+        private void OnChangeGameState(GameStates gameStates) 
+        {
+            movementController.ChangeGameStates(gameStates);
+            
+        }
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
         private void OnFailed() => movementController.IsReadyToPlay(false);
