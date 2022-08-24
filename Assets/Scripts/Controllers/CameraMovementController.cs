@@ -15,7 +15,7 @@ namespace Controllers
         
         public void WhenOnReset() { changeCam(CameraStates.Level); }
 
-        public void changeCam(CameraStates cameraStates)
+        public void changeCam(CameraStates cameraStates)//düzelcek
         {
             switch (cameraStates)
             {
