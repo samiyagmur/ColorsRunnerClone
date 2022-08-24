@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -12,42 +13,32 @@ namespace Controllers
 
         public int PayedAmount;
         public int MarketPrice;
-
+        
         #endregion
         #region Serialized Variables
         
-        [SerializeField] private TextMeshPro MarketPriceText;
-        [SerializeField] private BuildingManager buildingManager;
-        
+        [SerializeField] private TextMeshPro marketPriceText;
+
         #endregion
     
         #region Private Variables
-        
-    
+
 
         #endregion
         
 
         #endregion
-        private void Start()
-        {
-            SetRequiredAmountToText();
-        }
-        
-        
+
+
         private void SetRequiredAmountToText()
         {
-            MarketPriceText.text = $"{buildingManager.PayedAmount}/{buildingManager.BuildingMarketPrice}";
+            marketPriceText.text = $"{PayedAmount}/{MarketPrice}";
         }
 
-        public void UpdatePayedAmountText()
+        public void UpdatePayedAmountText(int payedAmount)
         {
-             //Set edicez
-        }
-
-        public void ControlCompletionState()
-        {
-       
+            PayedAmount = payedAmount;
+            SetRequiredAmountToText();
         }
         
     }

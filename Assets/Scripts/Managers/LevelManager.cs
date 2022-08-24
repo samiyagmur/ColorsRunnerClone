@@ -132,6 +132,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
             //UISignals.Instance.onChangeLevelText(_levelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
@@ -142,6 +143,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
         }
 
         private int OnGetLevelID()

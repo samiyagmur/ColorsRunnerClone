@@ -1,3 +1,5 @@
+using System;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -12,11 +14,19 @@ namespace Controllers
 
         #endregion
 
+        #region Serialized Variables
+        
+        [SerializeField] private BuildingManager manager;
+        
+
         #endregion
 
-        public void UpdateSaturation()
-        {
-               //Saturation
-        }
+        #endregion
+        
+        public float CalculateSaturation()
+         {
+            Saturation = (manager.PayedAmount / manager.BuildingMarketPrice);
+            return Saturation;
+         }
     }
 }

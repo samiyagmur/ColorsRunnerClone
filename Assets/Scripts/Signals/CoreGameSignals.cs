@@ -44,9 +44,6 @@ namespace Signals
         
         public Func<int> onGetIdleLevelID = delegate { return 0; };
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+     
     }
 }

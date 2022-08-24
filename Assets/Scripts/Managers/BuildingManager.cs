@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Controllers;
-using Datas.UnityObject;
-using Datas.ValueObject;
+﻿using Controllers;
 using Enums;
 using Signals;
-using TMPro;
 using UnityEngine;
+
 
 namespace Managers
 {
@@ -25,6 +21,8 @@ namespace Managers
         #endregion
         
         #region Public Variables
+
+        public IdleLevelState IdleLevelState;
         
         public int BuildingsAdressId;
         
@@ -32,7 +30,7 @@ namespace Managers
         
         public int BuildingMarketPrice;
         
-        public float Saturation;
+        public float Saturation;  //struct
 
         #endregion
 
@@ -79,8 +77,10 @@ namespace Managers
         private void SetDataToBuildingMarketStatusController() 
         {
             buildingMarketStatusController.MarketPrice = BuildingMarketPrice;
+            buildingMarketStatusController.UpdatePayedAmountText(PayedAmount);
             buildingMarketStatusController.PayedAmount = PayedAmount;
-            
+             UpdateSaturation();
+
         }
 
         private void SetDataToBuildingMeshController()
@@ -89,15 +89,25 @@ namespace Managers
         }
 
         public void UpdatePayedAmount()
-        {
-            buildingMarketStatusController.UpdatePayedAmountText();
+        {   
+            PayedAmount++;
+            buildingMarketStatusController.UpdatePayedAmountText(PayedAmount);
+            UpdateSaturation();
+            
         }
 
-        public void UpdateSaturation()
-        {
-            buildingMeshController.UpdateSaturation();
+        private void UpdateSaturation()
+        {   
+             Saturation = buildingMeshController.CalculateSaturation();
+  
         }
-        
+
+        public void UpdateBuildingStatus(IdleLevelState idleLevelState)
+        {
+            IdleLevelState = idleLevelState;
+            BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsAdressId);
+        }
+
         //Data control needs
     }
 }

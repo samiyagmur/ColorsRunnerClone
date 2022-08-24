@@ -19,10 +19,6 @@ namespace Signals
 
         public UnityAction<ColorType> onSetCorrectColorToGround = delegate(ColorType arg0) {  };
         
-        protected override void Awake()
-        {
-            base.Awake();
-        }
 
 
     }

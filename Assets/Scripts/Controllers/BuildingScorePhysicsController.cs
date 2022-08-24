@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Enums;
 using Managers;
 using UnityEngine;
 
@@ -13,7 +14,11 @@ namespace Controllers
 
         [SerializeField] private BuildingManager buildingManager;
 
-        private float _timer = 0.05f;
+        #endregion
+
+        #region Private Variables
+
+        private float _timer = 0f;
 
         #endregion
 
@@ -25,9 +30,24 @@ namespace Controllers
             
             if (_timer <= 0)
             {
-                _timer = 0.05f;
+                _timer = 0.2f;
                 
-                UpdatePayedAmount();
+                if (buildingManager.BuildingMarketPrice > buildingManager.PayedAmount)
+                {
+                    buildingManager.UpdatePayedAmount();
+
+                }
+                else
+                {   
+                    gameObject.SetActive(false);
+
+                    if (buildingManager.IdleLevelState == IdleLevelState.Uncompleted)
+                    {
+                        buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
+                    }
+ 
+                }
+                
             }
         }
 
@@ -35,13 +55,10 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                _timer = 0.05f;
+                _timer = 0f;
             }
         }
-
-        private  void UpdatePayedAmount()
-        {
-            buildingManager.PayedAmount++;
-        }
+        
+     
     }
 }
