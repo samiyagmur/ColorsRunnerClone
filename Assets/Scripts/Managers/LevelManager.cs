@@ -133,17 +133,21 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
             //UISignals.Instance.onChangeLevelText(_levelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
 
+  
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
             Debug.Log("onLevelInitialize");
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
-            //onreset
+            CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
+
         }
 
         private int OnGetLevelID()

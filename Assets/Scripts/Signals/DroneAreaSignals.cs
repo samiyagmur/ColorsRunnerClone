@@ -19,6 +19,5 @@ namespace Signals
 
         public UnityAction<ColorType> onSetCorrectColorToGround = delegate(ColorType arg0) {  };
 
-
     }
 }

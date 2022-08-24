@@ -7,7 +7,7 @@ namespace Command.SaveLoadCommands
 {
     public class LoadIdleGameCommand
     {
-        public int OnLoadBuildingsData(SaveStates state)
+        public int Execute(SaveStates state)
         {
             if (state == SaveStates.IdleLevel) return ES3.Load<int>("IdleLevel");
             else return 0;

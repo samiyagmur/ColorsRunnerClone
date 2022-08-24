@@ -8,5 +8,10 @@ namespace Signals
         
         public UnityAction onDataReadyToUse = delegate {  };
         
+
+        public UnityAction<int> onBuildingsCompleted = delegate(int arg0) {  };
+
+
+
     }
 }
