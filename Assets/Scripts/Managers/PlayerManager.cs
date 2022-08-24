@@ -12,7 +12,7 @@ using UnityEngine;
 namespace Managers
 {
     public class PlayerManager : MonoBehaviour
-{
+    {
         #region Self Variables
 
         #region Public Variables
@@ -23,10 +23,10 @@ namespace Managers
 
         #region Serialized Variables
 
-        [Space] [SerializeField] private PlayerMovementController movementController;
-        
+        [Space][SerializeField] private PlayerMovementController movementController;
+
         [SerializeField] private PlayerAnimationController animationController;
-        
+
         [SerializeField] private PlayerMeshController playerMeshController;
 
         [SerializeField] private TextMeshPro scoreText;
@@ -66,6 +66,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onFailed += OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+
         }
 
         private void UnsubscribeEvents()
@@ -78,54 +80,79 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onFailed -= OnFailed;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
         }
 
+        public void ChangePlayerAnimation(PlayerAnimationType ýdle)
+        {
+            animationController.ChangeAnimationState(ýdle);
+        }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-        
+
         #region Movement Controller
 
-        private void OnActivateMovement()=> movementController.EnableMovement();
+        private void OnActivateMovement() => movementController.EnableMovement();
 
-        private void OnDeactiveMovement()=> movementController.DeactiveMovement();
+        private void OnDeactiveMovement() => movementController.DeactiveMovement();
 
-        private void OnGetRunnerInputValues(RunnerInputParams inputParams)=> movementController.UpdateRunnerInputValue(inputParams);
+        private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
 
-        private void OnGetIdleInputValues(IdleInputParams inputParams) => movementController.UpdateIdleInputValue(inputParams);
+        private void OnGetIdleInputValues(IdleInputParams inputParams) 
+        { 
+            movementController.UpdateIdleInputValue(inputParams); 
+        } 
 
         #endregion
 
         #endregion
 
-        private void OnChangeGameState(GameStates gameStates) => movementController.ChangeGameStates(gameStates);
+        private void OnChangeGameState(GameStates gameStates) 
+        {
+            movementController.ChangeGameStates(gameStates);
+            
+        }
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
         private void OnFailed() => movementController.IsReadyToPlay(false);
 
         private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,playermanager  emir versin,is yapmasin
-   
-        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
 
-        public async void IsHitRainbow(ColorType colorType)
+        private async void OnEnterMutiplyArea()
         {
-            StackSignals.Instance.onChangeColor?.Invoke(colorType);
-            await Task.Delay(2500);
+           
+            ChangeForwardSpeeds(ChangeSpeedState.EnterMultipleArea);
+            await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
-            CoreGameSignals.Instance.onEnterMutiplyArea?.Invoke();
+            playerMeshController.ChangeScale();
+
+
+        }
+        public async void IsHitRainbow()
+        {
+            Debug.Log("sss");
+            await Task.Delay(3500);//Ýt Will cahange
+            UISignals.Instance.onMultiplyArea?.Invoke();
+            
         }
 
+        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
+
+        public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
         private void OnReset()
         {
             Debug.Log("MovementReset");
             movementController.MovementReset();
             gameObject.SetActive(true);
-            
-        }
 
-        private void OnSetScoreText(int Values) => scoreText.text = Values.ToString();
+        }
+        public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
+        
+
+        
 
         public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
@@ -133,7 +160,7 @@ namespace Managers
             await Task.Delay(1000);
         }
 
-        public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
+        
 
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);

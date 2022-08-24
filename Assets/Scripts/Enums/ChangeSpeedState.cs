@@ -5,8 +5,11 @@ namespace Enums
 {
     public enum ChangeSpeedState
     {   
-        Normal = 10,
+        Normal = 8,
         Stop = 0,
-        EnterTaretArea = 4
+        EnterTaretArea = 4,
+        EnterMultipleArea=12,
+        EnterIdleState=6
+
     }
 }

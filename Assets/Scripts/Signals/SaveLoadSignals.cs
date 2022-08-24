@@ -20,6 +20,6 @@ namespace Signals
         public Func<SaveStates,IdleLevelData,IdleLevelData> onLoadIdleLevelProgressData = delegate { return new IdleLevelData();};
         
         public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;};
-        
+
     }
 }

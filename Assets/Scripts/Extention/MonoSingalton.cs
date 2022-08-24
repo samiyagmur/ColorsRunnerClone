@@ -23,6 +23,5 @@ namespace Extention
                 return _instance;
             }
         }
-
     }
 }

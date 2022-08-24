@@ -50,7 +50,11 @@ public class PlayerMovementController : MonoBehaviour
             _clampValues = inputParam.ClampValues;
         }
         
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.InputValues;
+        public void UpdateIdleInputValue(IdleInputParams inputParam)
+        {
+            _movementDirection = inputParam.InputValues;
+        }
+
 
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
 
@@ -58,6 +62,7 @@ public class PlayerMovementController : MonoBehaviour
 
         private void FixedUpdate()
         {
+            Debug.Log("_isReadyToPlay="+_isReadyToPlay+ "_isReadyToMove=" + _isReadyToMove);
             if (_isReadyToPlay)
             {
                 
@@ -71,6 +76,8 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
+                        manager.ChangePlayerAnimation(PlayerAnimationType.Running);
+                        ChangeForwardSpeed(ChangeSpeedState.EnterIdleState);
                         
                         IdleMove();
                     }
@@ -84,6 +91,7 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
+                        manager.ChangePlayerAnimation(PlayerAnimationType.Idle);///This Place Has will been change.
                         Stop();
                     }
                     
@@ -136,6 +144,7 @@ public class PlayerMovementController : MonoBehaviour
             
             rigidbody.angularVelocity = Vector3.zero;
         }
+
         private void Stop()
         {
             rigidbody.velocity = Vector3.zero;

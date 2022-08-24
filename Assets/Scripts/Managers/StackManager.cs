@@ -29,7 +29,7 @@ namespace Managers
 
         #endregion
         #region Private Variables
-       
+        private MultipyStatus _multipyStatus;
         #endregion
         #endregion
 
@@ -56,6 +56,8 @@ namespace Managers
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack += OnRunStack;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+            
         }
 
         private void UnsubscribeEvents()
@@ -69,6 +71,7 @@ namespace Managers
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
         }
 
         private void OnDisable()
@@ -200,7 +203,11 @@ namespace Managers
             Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
-            OnFail(collectableList.Count);
+            if (_multipyStatus == MultipyStatus.Pasive)
+            {
+                OnFail(collectableList.Count);
+            }
+            
         }
 
         #endregion
@@ -239,6 +246,10 @@ namespace Managers
                 
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
+                await Task.Delay(350);
+                Debug.Log(_multipyStatus);
+
+
                 OnFail(collectableList.Count);
             }
         }
@@ -248,7 +259,7 @@ namespace Managers
 
         #region Decrease stack On LevelEnd
 
-        private async void OnLevelEndDecreaseStack()
+        private  void OnLevelEndDecreaseStack()//async silindi
         {
             for (int i = 0; i < collectableList.Count; i++)
             {   
@@ -322,6 +333,11 @@ namespace Managers
                 CoreGameSignals.Instance.onFailed();
             }
 
+        }
+
+        private void OnEnterMutiplyArea()
+        {
+            _multipyStatus = MultipyStatus.Active;
         }
 
 

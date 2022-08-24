@@ -19,14 +19,9 @@ public class PlayerAnimationController : MonoBehaviour
 
     #endregion
     
-    public void WhenJoinIdle() {ChangeAnimationState(PlayerAnimationType.Idle);}
 
-    public void WhenRunning() { ChangeAnimationState(PlayerAnimationType.Running); }
-    
     public void WhenThrowing() { ChangeAnimationState(PlayerAnimationType.Throw); }
-    
-    
-        
+
     public void ChangeAnimationState(PlayerAnimationType type)
     {   
         switch (type)

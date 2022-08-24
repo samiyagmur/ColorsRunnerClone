@@ -47,6 +47,5 @@ namespace Signals
         
         public Func<int> onGetIdleLevelID = delegate { return 0; };
 
-     
     }
 }
