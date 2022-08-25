@@ -47,7 +47,10 @@ namespace Managers
         {
             SetReferences(); 
         }
+        #region Event Subscription
 
+
+        #endregion
         private void SetReferences()
         {
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
@@ -132,6 +135,7 @@ namespace Managers
             
             collectableMeshController.ChangeScale();
             CoreGameSignals.Instance.onEnterMutiplyArea();
+            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
 
 
         }

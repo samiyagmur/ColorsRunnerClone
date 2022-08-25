@@ -41,8 +41,9 @@ namespace Controllers
         }
         
         public void SetCollectableMaterial(ColorType type)
-        {
-            _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");
+        {   Debug.Log("sssss");
+            _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");//Delete RainbowTag
+            
         }
         
         public void OutlineChange(bool isOutlineActive)

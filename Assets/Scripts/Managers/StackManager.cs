@@ -158,7 +158,7 @@ namespace Managers
             // Work in Progress,When Pool is created,we will add this future for beloved users.
         }
         private  void OnChangeCollectableColor(ColorType colorType)
-        {   
+        {
             for (int i = 0; i < collectableList.Count; i++)
             {
                 //await Task.Delay(50);
