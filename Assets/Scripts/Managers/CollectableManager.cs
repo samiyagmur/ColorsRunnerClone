@@ -132,12 +132,10 @@ namespace Managers
 
         public  void IsHitRainbow()
         {
-            
+           
             collectableMeshController.ChangeScale();
             CoreGameSignals.Instance.onEnterMutiplyArea();
-            collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
-
-
+            collectableMeshController.SetCollectableMaterial(ColorType.Rainbow);
         }
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)

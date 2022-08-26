@@ -3458,13 +3458,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2161503940757529090, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
+    - target: {fileID: 1440726963441562067, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: m_TagString
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 2161503940757529090, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
+      propertyPath: m_TagString
+      value: Rainbow
+      objectReference: {fileID: 0}
     - target: {fileID: 2812358780166095181, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -109.8
+      value: 163.7
       objectReference: {fileID: 0}
     - target: {fileID: 3598849837399818181, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: colorType
@@ -3537,6 +3541,10 @@ PrefabInstance:
     - target: {fileID: 8275551959104435858, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275551959104435858, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
+      propertyPath: m_TagString
+      value: Gate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}

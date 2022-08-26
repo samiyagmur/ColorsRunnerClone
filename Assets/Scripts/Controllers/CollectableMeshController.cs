@@ -41,7 +41,7 @@ namespace Controllers
         }
         
         public void SetCollectableMaterial(ColorType type)
-        {   Debug.Log("sssss");
+        {   
             _collectableRenderer.material = Resources.Load<Material>($"Materials/{type}Mat");//Delete RainbowTag
             
         }

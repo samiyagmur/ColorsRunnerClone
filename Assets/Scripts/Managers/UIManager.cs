@@ -4,9 +4,10 @@ using Enums;
 using System;
 using Controllers;
 using UnityEngine.UI;
-using System;
+
 using TMPro;
 using System.Collections.Generic;
+using DG.Tweening;
 
 namespace Managers
 {
@@ -17,15 +18,19 @@ namespace Managers
 
         #region Self Veriables
 
-        #region SerializeField Veriables
+        #region SerializeField Variables
 
         [SerializeField] UIPanelController UIPanelController;
         [SerializeField] TextMeshProUGUI textMeshPro;
         [SerializeField] TextMeshProUGUI textMeshPro2;
-        
+        [SerializeField] RectTransform rectTransform;
+        [SerializeField] RectTransform rectTransformCursor;
+
         #endregion
 
-
+        #region Private Variables
+        private string _multiply;
+        #endregion
         #endregion
 
         #region Event Subcription
@@ -94,6 +99,7 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+            CursorMovement();
         }
         public void Play()
         {
@@ -139,6 +145,48 @@ namespace Managers
         }
         #endregion
         #endregion
+        
+        
+        public void CursorMovement()//320//190//60//-50/-180/-320
+        {
+            Sequence sequence = DOTween.Sequence();
+
+
+            sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna göre seç
+            sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
+
+            sequence.SetLoops(-1, LoopType.Yoyo).onPlay();
+        }
+        public void SelectMultiply()
+        {
+            float CursorXPos = rectTransform.localPosition.x;
+
+            if (190 < CursorXPos && CursorXPos < 320)
+            {
+                _multiply = "x2";
+            }
+            else if (60 < CursorXPos && CursorXPos < 190)
+            {
+                _multiply = "x3";
+            }
+            else if (-50 < CursorXPos && CursorXPos < 60)
+            {
+                _multiply = "x5";
+            }
+            else if (-180 < CursorXPos && CursorXPos < -50)
+            {
+                _multiply = "x3";
+            }
+            else if (-320 < CursorXPos && CursorXPos < -180)
+            {
+                _multiply = "x2";
+            }
+
+
+            ScoreSignals.Instance.onMultiplyAmaunt?.Invoke(_multiply);
+        }
+
+
     }
 
 

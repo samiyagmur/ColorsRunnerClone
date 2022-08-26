@@ -10,9 +10,11 @@ namespace Managers
     {
         #region Self Veriables
         #region Private Veriables
-
+        private MultipleAreaStatus _multipleAreaStatus;
         private int _score;
-
+        private int _variantScore=1;
+        private int _multiplyValue;
+        private bool _isPressClaimButton;
         #endregion
         #endregion
 
@@ -24,13 +26,22 @@ namespace Managers
         private void SubscribeEvents()
         {
             ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
-            ScoreSignals.Instance.onDecreaseScore += onDecreaseScore;
+            ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
+            ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            CoreGameSignals.Instance.onReset += OnReset;
 
         }
+
         private void UnsubscribeEvents()
         {
             ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
-            ScoreSignals.Instance.onDecreaseScore -= onDecreaseScore;
+            ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
+            ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
+            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
+            CoreGameSignals.Instance.onReset -= OnReset;
         }
         private void OnDisable()
         {
@@ -39,24 +50,81 @@ namespace Managers
 
         #endregion
 
+
+
+        private void OnEnterMutiplyArea()
+        {
+
+            _multipleAreaStatus = MultipleAreaStatus.active;
+
+        }
+        private void OnEnterIdleArea()
+        {
+            
+            _multipleAreaStatus = MultipleAreaStatus.pasive;
+        }
+
         private void OnIncreaseScore()
         {
             _score++;
-            SendScore(_score);
+            SendScoreOrMultiplyValue(_score);
         }
 
-        private void onDecreaseScore()
+        private void OnDecreaseScore()
         {
             if (_score<0)
             {
                 _score = 0;
             }
             _score--;
-            SendScore(_score);
+            SendScoreOrMultiplyValue(_score);
         }
-        
-        private void SendScore(int score) =>  ScoreSignals.Instance.onSendScore?.Invoke(score);
- 
+        private void OnMultiplyAmaunt(string value)
+        {
+            _isPressClaimButton = true;
+            
+            _multiplyValue = Int32.Parse(value.TrimStart('x'));
+            Debug.Log("_multiplyValue" + _multiplyValue);
+            _score *= _multiplyValue;
+            Debug.Log("_score" + _score);
+
+            SendScoreOrMultiplyValue(_score);
+
+
+        }
+
+        private void SendScoreOrMultiplyValue(int score)
+        {
+            Debug.Log(_multipleAreaStatus);
+
+            if (_multipleAreaStatus==MultipleAreaStatus.active)
+            {
+                if (!_isPressClaimButton)
+                {
+                    score = _variantScore++;
+                    _score = score;
+                }
+                Debug.Log("_score" + score);
+                ScoreSignals.Instance.onSendScore?.Invoke(score);
+            }
+            else
+            {
+                Debug.Log("sad");
+                ScoreSignals.Instance.onSendScore?.Invoke(score);
+            }
+            
+            
+        }
+
+
+        private void OnReset()
+        {
+            _score = 0;
+        }
+
+
+
+
 
 
     }
