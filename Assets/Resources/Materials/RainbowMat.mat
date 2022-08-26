@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RainbowMat
-  m_Shader: {fileID: -6465566751694194690, guid: fa4ffacc4c7abfe41874be64f4ccc616, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0783f5a3483b20142a174816f7195a71, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

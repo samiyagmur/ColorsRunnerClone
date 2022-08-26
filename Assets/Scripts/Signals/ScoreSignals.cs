@@ -10,6 +10,7 @@ namespace Signals
         public UnityAction onIncreaseScore = delegate { };
         public UnityAction onDecreaseScore = delegate { };
         public UnityAction<int>onSendScore =delegate { };
+        public UnityAction<string> onMultiplyAmaunt = delegate { };
 
 
     }

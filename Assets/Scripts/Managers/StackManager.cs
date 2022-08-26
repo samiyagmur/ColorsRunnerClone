@@ -124,6 +124,16 @@ namespace Managers
                 
             }
         }
+        private void DeleteStack()
+        {
+            for (int i = 0; i < initSize; i++)
+            {
+               
+                collectableList[i].transform.SetParent(null);
+                Destroy(collectableList[i]);
+
+            }
+        }
         private void OnRunStack()
         {
           
@@ -158,7 +168,7 @@ namespace Managers
             // Work in Progress,When Pool is created,we will add this future for beloved users.
         }
         private  void OnChangeCollectableColor(ColorType colorType)
-        {   
+        {
             for (int i = 0; i < collectableList.Count; i++)
             {
                 //await Task.Delay(50);
@@ -171,8 +181,7 @@ namespace Managers
         #region Stack / Unstack Collectables
 
         private async void OnIncreaseStack(GameObject currentStack) 
-        {
-            
+        {   
             collectableList.Add(currentStack);
             
             collectableList.TrimExcess();
@@ -344,10 +353,10 @@ namespace Managers
 
         private void OnReset()
         {
-            // collectableList.Clear();
-            // collectableList.TrimExcess();
+            DeleteStack();
+            collectableList.Clear();
+            collectableList.TrimExcess();
             InitializeStack();//Error from restart button
-            
         }
 
         #endregion

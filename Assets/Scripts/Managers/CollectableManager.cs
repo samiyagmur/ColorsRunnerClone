@@ -47,7 +47,10 @@ namespace Managers
         {
             SetReferences(); 
         }
+        #region Event Subscription
 
+
+        #endregion
         private void SetReferences()
         {
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
@@ -129,11 +132,10 @@ namespace Managers
 
         public  void IsHitRainbow()
         {
-            
+           
             collectableMeshController.ChangeScale();
             CoreGameSignals.Instance.onEnterMutiplyArea();
-
-
+            collectableMeshController.SetCollectableMaterial(ColorType.Rainbow);
         }
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)

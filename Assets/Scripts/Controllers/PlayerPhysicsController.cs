@@ -24,7 +24,8 @@ namespace Controllers
       
         private void OnTriggerEnter(Collider other)
         {   
-            if (other.CompareTag("Gate")) playerManager.SendToColorType(other.transform.GetComponent<GateController>().colorType);
+            if (other.CompareTag("Gate")|| other.CompareTag("Rainbow"))
+                playerManager.SendToColorType(other.transform.GetComponent<GateController>().colorType);
             if (other.CompareTag("Rainbow")) playerManager.IsHitRainbow();
 
             if (other.CompareTag("Collectable")) playerManager.IsHitCollectable();
