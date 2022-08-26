@@ -54,6 +54,7 @@ namespace Controllers
             {
                 collectableManager.DecreaseStack();
                 Destroy(other.transform.gameObject);
+               
             }
 
             #endregion

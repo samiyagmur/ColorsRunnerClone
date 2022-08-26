@@ -133,6 +133,13 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
+
+        public void Vibration()
+        {
+            
+            CameraSignals.Instance.onVibrateStatus?.Invoke();
+        }
+
         #region TextGroup
     
         private void OnSendScore(int score)
