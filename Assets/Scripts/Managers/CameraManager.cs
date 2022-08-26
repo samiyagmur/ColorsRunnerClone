@@ -18,10 +18,16 @@ namespace Managers
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
         [SerializeField] private PlayerManager playerManager;
         #endregion
+        #region Private Variables
+        CamVibrationStatus vibrationStatus;
+        private bool IsPressVibrating=true;
+
+
+        #endregion
         #endregion
 
         #region Event Subcription
-        
+
 
         private void OnEnable()
         {
@@ -37,6 +43,8 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState += OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
+            CameraSignals.Instance.onVibrateCam += OnVibrateCam;
+            CameraSignals.Instance.onVibrateStatus += OnVibrateStatus;
         }
 
         private void UnsubscribeEvents()
@@ -47,6 +55,8 @@ namespace Managers
             CoreGameSignals.Instance.onChangeGameState -= OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
+            CameraSignals.Instance.onVibrateCam -= OnVibrateCam;
+            CameraSignals.Instance.onVibrateStatus -= OnVibrateStatus;
         }
 
         private void OnDisable()
@@ -92,5 +102,36 @@ namespace Managers
             cameraMovementController.WhenOnReset();
 
         }
+
+        private void OnVibrateStatus()
+        {
+            Debug.Log("vib");
+           
+            if (IsPressVibrating)
+            {
+                vibrationStatus = CamVibrationStatus.Active;
+                IsPressVibrating = false;
+            }
+            else
+            {
+                vibrationStatus = CamVibrationStatus.Pasive;
+                IsPressVibrating = true;
+            }
+            Debug.Log(IsPressVibrating);
+            vibrationStatus = CamVibrationStatus.Pasive;//Inactive
+        }
+
+        private void OnVibrateCam()
+        {
+            if (vibrationStatus== CamVibrationStatus.Active)
+            {
+                transform.DOPunchRotation(new Vector3(0.5f, 0.5f, 0.5f), 1f, 10, 1f);
+
+            }
+            
+            
+            
+        }
+
     }
 }

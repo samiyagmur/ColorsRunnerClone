@@ -67,13 +67,13 @@ namespace Managers
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
-        
         public void DecreaseStack()
         {
            
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             ScoreSignals.Instance.onDecreaseScore?.Invoke();
             gameObject.transform.SetParent(null);
+            CameraSignals.Instance.onVibrateCam.Invoke();
         }
 
         
