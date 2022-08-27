@@ -57,7 +57,8 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack += OnRunStack;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
-            
+            CoreGameSignals.Instance.onNextLevel += OnReset;
+
         }
 
         private void UnsubscribeEvents()
@@ -72,6 +73,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
+            CoreGameSignals.Instance.onNextLevel -= OnReset;
         }
 
         private void OnDisable()
@@ -125,7 +127,7 @@ namespace Managers
         }
         private void DeleteStack()
         {
-            for (int i = 0; i < initSize; i++)
+            for (int i = 0; i < collectableList.Count; i++)
             {
                
                 collectableList[i].transform.SetParent(null);
@@ -355,7 +357,7 @@ namespace Managers
             DeleteStack();
             collectableList.Clear();
             collectableList.TrimExcess();
-            InitializeStack();//Error from restart button
+            InitializeStack();//Error from restart button ?
         }
 
         #endregion

@@ -120,20 +120,13 @@ namespace Managers
         private void OnNextLevel()
         {
             _levelID++;
-            
+            Debug.Log(_levelID);
             if (Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelID].IdleLevelState == IdleLevelState.Completed)
             {
                 _idleLevelID++;
-                CoreGameSignals.Instance.onClearActiveIdleLevel?.Invoke();
-                CoreGameSignals.Instance.onReset?.Invoke();
-                SaveLoadSignals.Instance.onSaveIdleLevelData?.Invoke(SaveStates.IdleLevel, _idleLevelID);
-                CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
+               
             }
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
-            CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
             //UISignals.Instance.onChangeLevelText(_levelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
@@ -143,9 +136,9 @@ namespace Managers
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
+            SaveLoadSignals.Instance.onSaveIdleLevelData?.Invoke(SaveStates.IdleLevel, _idleLevelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
-
         }
 
         private int OnGetLevelID()

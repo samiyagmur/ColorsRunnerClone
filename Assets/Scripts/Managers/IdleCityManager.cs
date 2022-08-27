@@ -55,7 +55,7 @@ namespace Managers
        {
            GetIdleLevelData();
            
-           
+           SaveCityData(IdleLevelData); 
            if (!ES3.FileExists("IdleLevelProgress/IdleLevelProgressData.es3"))
            {
                IdleLevelData = OnGetCityData();
@@ -81,7 +81,7 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationPause += OnSaveCityData;
             CoreGameSignals.Instance.onApplicationQuit += OnSaveCityData;
             BuildingSignals.Instance.onBuildingsCompleted += OnSetBuildingsStatus;
-            CoreGameSignals.Instance.onLevelInitialize += OnGetBuildingsDataFromBuildingManagers;
+            CoreGameSignals.Instance.onLevelInitialize += OnLoadCityData;
             CoreGameSignals.Instance.onApplicationQuit += OnGetBuildingsDataFromBuildingManagers;
 
         }
@@ -91,7 +91,7 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationPause -= OnSaveCityData;
             CoreGameSignals.Instance.onApplicationQuit -= OnSaveCityData;
             BuildingSignals.Instance.onBuildingsCompleted -= OnSetBuildingsStatus;
-            CoreGameSignals.Instance.onLevelInitialize -= OnGetBuildingsDataFromBuildingManagers;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLoadCityData;
             CoreGameSignals.Instance.onApplicationQuit -= OnGetBuildingsDataFromBuildingManagers;
         }
         private void OnDisable()
@@ -105,6 +105,7 @@ namespace Managers
         {
             SaveLoadSignals.Instance.onSaveIdleLevelProgressData?.Invoke(SaveStates.IdleLevelProgress,ıdleLevelData);
         }
+        
 
         private IdleLevelData LoadCityData(IdleLevelData idleLevelData)
         {
@@ -116,6 +117,11 @@ namespace Managers
             SaveCityData(IdleLevelData);
         }
 
+        private void OnLoadCityData()
+        {
+            LoadCityData(IdleLevelData);
+        }
+
         private void SetDataToBuildingManagers()
         {
             for (int i = 0; i < Buildings.Count; i++)
@@ -123,9 +129,7 @@ namespace Managers
                 IdleLevelData.Buildings[i].BuildingAdressId = i;
                 
                 BuildingManager[i].BuildingsAdressId = i;
-                
-               // Buildings[i].transform.position = BuildingsTransforms[i].transform.position;
-                
+
                 BuildingManager[i].BuildingMarketPrice= IdleLevelData.Buildings[i].BuildingMarketPrice;
                 
                 BuildingManager[i].PayedAmount  = IdleLevelData.Buildings[i].PayedAmount;
@@ -167,11 +171,12 @@ namespace Managers
                 IdleLevelData.Buildings[i].SideObject.PayedAmount = BuildingManager[i].PayedAmount;
                 IdleLevelData.Buildings[i].SideObject.Saturation = BuildingManager[i].Saturation;
             }
+            
+            SaveCityData(IdleLevelData);
         }
         private void OnSetBuildingsStatus(int addressId)
         {
             IdleLevelData.Buildings[addressId].ıdleLevelState = IdleLevelState.Completed;
-            
         }
     
     }
