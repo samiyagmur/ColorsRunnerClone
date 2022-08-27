@@ -92,8 +92,6 @@ GameObject:
   - component: {fileID: 21402548125387004}
   - component: {fileID: 21402548128187070}
   - component: {fileID: 21402548127646334}
-  - component: {fileID: 47945487699987882}
-  - component: {fileID: 47295899018490648}
   m_Layer: 0
   m_Name: SM_Bld_Shop_64 (1)
   m_TagString: Untagged
@@ -164,34 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &47945487699987882
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21402548125200480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43991956860864250, guid: 08f252a4011784244a9d6c53e18b1f7c, type: 2}
---- !u!64 &47295899018490648
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21402548125200480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43613033862139046, guid: 08f252a4011784244a9d6c53e18b1f7c, type: 2}
 --- !u!1 &22743483079472461
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2205749339321518063}
+  - component: {fileID: 388258376126957777}
   m_Layer: 0
   m_Name: CandyShop
   m_TagString: Untagged
@@ -783,7 +754,7 @@ Transform:
   m_GameObject: {fileID: 7037832299957834198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 5684215597766048774}
   - {fileID: 2072861857359094578}
@@ -792,6 +763,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &388258376126957777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037832299957834198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c91bc0e1264174ea2d3bfc9a157493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Saturation: 0
+  manager: {fileID: 0}
 --- !u!1 &7263024632547989627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1097,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64603063352095440, guid: a5e568db0b228c24589c17f5b015934d, type: 3}
+    - {fileID: 64388135655235706, guid: a5e568db0b228c24589c17f5b015934d, type: 3}
+    - {fileID: 64683996517028596, guid: a5e568db0b228c24589c17f5b015934d, type: 3}
+    - {fileID: 64835292630815548, guid: a5e568db0b228c24589c17f5b015934d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a5e568db0b228c24589c17f5b015934d, type: 3}
 --- !u!4 &513575604486806772 stripped
 Transform:

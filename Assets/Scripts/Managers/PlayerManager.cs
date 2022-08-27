@@ -29,6 +29,8 @@ namespace Managers
 
         [SerializeField] private PlayerMeshController playerMeshController;
 
+        [SerializeField] private PlayerScoreController playerScoreController;
+
         [SerializeField] private TextMeshPro scoreText;
 
         [SerializeField] private GameObject scoreHolder;
@@ -128,6 +130,7 @@ namespace Managers
             await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
             playerMeshController.ChangeScale(1);
+            playerScoreController.OnChangeScorePos();
 
 
         }
@@ -199,10 +202,6 @@ namespace Managers
         //     gameObject.SetActive(false);
         //     CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         // }
-
-
-
-
 
 
     }
