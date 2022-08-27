@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350693953645909003}
   m_Layer: 0
-  m_Name: level 0
+  m_Name: level 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3431,6 +3431,10 @@ PrefabInstance:
     - target: {fileID: 505523903821665500, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
       propertyPath: m_Name
       value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 847400888642814644, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
