@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497999974281230536}
   m_Layer: 0
-  m_Name: Score
+  m_Name: ScoreHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   animationController: {fileID: 505523902901583841}
   playerMeshController: {fileID: 505523903641157004}
   scoreText: {fileID: 1624680300193706057}
+  scoreHolder: {fileID: 295225814764735412}
 --- !u!114 &505523903821665497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +316,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!1 &5739619365331830092
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ GameObject:
   - component: {fileID: 7109769488522982482}
   - component: {fileID: 1624680300193706057}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.21703124, y: 4.119492, z: 18.236174, w: 0.1853199}
+  m_margin: {x: 0.10034871, y: 4.119492, z: 18.178347, w: 0.1853199}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
