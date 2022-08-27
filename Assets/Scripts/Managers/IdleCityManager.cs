@@ -124,7 +124,7 @@ namespace Managers
                 
                 BuildingManager[i].BuildingsAdressId = i;
                 
-                Buildings[i].transform.position = BuildingsTransforms[i].transform.position;
+               // Buildings[i].transform.position = BuildingsTransforms[i].transform.position;
                 
                 BuildingManager[i].BuildingMarketPrice= IdleLevelData.Buildings[i].BuildingMarketPrice;
                 
