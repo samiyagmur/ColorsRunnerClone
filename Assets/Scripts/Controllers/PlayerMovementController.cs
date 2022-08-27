@@ -134,7 +134,7 @@ public class PlayerMovementController : MonoBehaviour
             {
                 Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
                 
-                transform.rotation = toRotation;
+                transform.GetChild(0).rotation = toRotation;
             }
             
         }
