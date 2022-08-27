@@ -31,7 +31,7 @@ namespace Managers
 
         [SerializeField] private PlayerScoreController playerScoreController;
 
-        [SerializeField] private TextMeshPro scoreText;
+
 
         [SerializeField] private GameObject scoreHolder;
 
@@ -161,13 +161,13 @@ namespace Managers
         }
 
 
-        private void OnSetScoreText(int Score) => scoreText.text = Score.ToString();
+        private void OnSetScoreText(int score) => playerScoreController.UpdateScore(score);
 
         public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
         private void OnReset()
         {
             movementController.MovementReset();
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);//changed
 
         }
         public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);

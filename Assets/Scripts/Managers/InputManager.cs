@@ -199,6 +199,7 @@ public class InputManager : MonoBehaviour
 
     private void OnReset()
     {
+        currentGameState = GameStates.Runner;//Changed
         _isTouching = false;
         isReadyForTouch = false;
         isFirstTimeTouchTaken = false;

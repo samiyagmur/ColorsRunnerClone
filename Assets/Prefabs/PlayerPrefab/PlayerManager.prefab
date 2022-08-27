@@ -132,7 +132,6 @@ MonoBehaviour:
   animationController: {fileID: 505523902901583841}
   playerMeshController: {fileID: 505523903641157004}
   playerScoreController: {fileID: 1405215540989902758}
-  scoreText: {fileID: 7908895828230114149}
   scoreHolder: {fileID: 2341673961908713311}
 --- !u!114 &505523903821665497
 MonoBehaviour:
@@ -218,7 +217,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969733901069104679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.001}
+  m_LocalPosition: {x: 0, y: 0, z: -0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 661169620007581194}
@@ -290,7 +289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -320,7 +319,7 @@ MonoBehaviour:
   m_fontSize: 6
   m_fontSizeBase: 6
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -420,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshController: {fileID: 1523302609667325539}
+  scoreText: {fileID: 7908895828230114149}
 --- !u!1 &3945480427260156968
 GameObject:
   m_ObjectHideFlags: 0
