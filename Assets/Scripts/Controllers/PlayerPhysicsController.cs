@@ -32,13 +32,14 @@ namespace Controllers
 
             else if (other.CompareTag("DroneArea"))
             {
-               // CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
+               playerManager.DeActivateScore(false);
             }
 
             else if (other.CompareTag("AfterGround"))
             {
                 playerManager.StartMovementAfterDroneArea(other.transform);
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.Normal);
+                playerManager.DeActivateScore(true);
 
             }
 
@@ -50,7 +51,8 @@ namespace Controllers
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("DroneArea"))
-            {
+            {   
+               
                 playerManager.OnStopVerticalMovement();
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.Stop);
             }

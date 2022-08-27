@@ -114,7 +114,6 @@ namespace Managers
         {
             for (int i = 0; i < initSize ; i++)
             {
-                Debug.Log(initSize);
                 var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);

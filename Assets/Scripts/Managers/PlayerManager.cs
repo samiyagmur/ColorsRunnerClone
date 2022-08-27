@@ -31,6 +31,8 @@ namespace Managers
 
         [SerializeField] private TextMeshPro scoreText;
 
+        [SerializeField] private GameObject scoreHolder;
+
         #endregion
         private GameStates _gameStates;
         #endregion
@@ -132,7 +134,7 @@ namespace Managers
         public async void IsHitRainbow()
         {
            
-            await Task.Delay(3500);//Ýt Will cahange
+            await Task.Delay(3500);//ï¿½t Will cahange
             UISignals.Instance.onMultiplyArea?.Invoke();
             
         }
@@ -166,9 +168,12 @@ namespace Managers
 
         }
         public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);
-        
 
-        
+        public void DeActivateScore(bool isActive)
+        {
+            scoreHolder.SetActive(isActive);
+        }
+
 
         public async void StartMovementAfterDroneArea(Transform exitPosition)
         {
@@ -181,9 +186,9 @@ namespace Managers
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);
 
-        public void ChangePlayerAnimation(PlayerAnimationType ýdle)
+        public void ChangePlayerAnimation(PlayerAnimationType animType)
         {
-            animationController.ChangeAnimationState(ýdle);
+            animationController.ChangeAnimationState(animType);
         }
 
 

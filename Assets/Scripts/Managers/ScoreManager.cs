@@ -84,9 +84,9 @@ namespace Managers
             _isPressClaimButton = true;
             
             _multiplyValue = Int32.Parse(value.TrimStart('x'));
-            Debug.Log("_multiplyValue" + _multiplyValue);
+           
             _score *= _multiplyValue;
-            Debug.Log("_score" + _score);
+      
 
             SendScoreOrMultiplyValue(_score);
 
@@ -95,7 +95,7 @@ namespace Managers
 
         private void SendScoreOrMultiplyValue(int score)
         {
-            Debug.Log(_multipleAreaStatus);
+          
 
             if (_multipleAreaStatus==MultipleAreaStatus.active)
             {
@@ -104,12 +104,12 @@ namespace Managers
                     score = _variantScore++;
                     _score = score;
                 }
-                Debug.Log("_score" + score);
+             
                 ScoreSignals.Instance.onSendScore?.Invoke(score);
             }
             else
             {
-                Debug.Log("sad");
+              
                 ScoreSignals.Instance.onSendScore?.Invoke(score);
             }
             
