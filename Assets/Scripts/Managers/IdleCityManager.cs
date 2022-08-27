@@ -53,7 +53,6 @@ namespace Managers
        {
            GetIdleLevelData();
            
-           SaveCityData(IdleLevelData); 
            
            if (!ES3.FileExists("IdleLevelProgress/IdleLevelProgressData.es3"))
            {
@@ -62,7 +61,10 @@ namespace Managers
                SaveCityData(IdleLevelData); 
            }
            
+           IdleLevelData = OnGetCityData();
+           
            LoadCityData(IdleLevelData);
+           
 
            SetDataToBuildingManagers();
 
@@ -138,13 +140,13 @@ namespace Managers
                 BuildingManager[i].Saturation = IdleLevelData.Buildings[i].Saturation;
 
                 if (IdleLevelData.Buildings[i].isDepended &&
-                    IdleLevelData.Buildings[i].ıdleLevelState == IdleLevelState.Completed)
+                    IdleLevelData.Buildings[i].ıdleLevelState != IdleLevelState.Completed)
                 {
-                    IdleLevelData.Buildings[i].BuildingAdressId = i;
+                    IdleLevelData.Buildings[i].SideObject.BuildingAdressId = i;
                     
                     BuildingManager[i].BuildingsAdressId = i;  
                     
-                    BuildingManager[i].PayedAmount= IdleLevelData.Buildings[i].SideObject.PayedAmount;
+                    BuildingManager[i].PayedAmount = IdleLevelData.Buildings[i].SideObject.PayedAmount;
                     
                     BuildingManager[i].BuildingMarketPrice = IdleLevelData.Buildings[i].SideObject.BuildingMarketPrice;
                     
@@ -177,13 +179,13 @@ namespace Managers
                     IdleLevelData.Buildings[i].ıdleLevelState = BuildingManager[i].IdleLevelState;
                     IdleLevelData.Buildings[i].SideObject.PayedAmount = BuildingManager[i].PayedAmount;
                     IdleLevelData.Buildings[i].SideObject.Saturation = BuildingManager[i].Saturation;
-                    
+                    Debug.Log(IdleLevelData.Buildings[i].SideObject.PayedAmount);
                 }
                 
             }
             
             SaveCityData(IdleLevelData);
-            Debug.Log(IdleLevelData.Buildings[0].PayedAmount);
+          
         }
         private void OnSetBuildingsStatus(int addressId)
         {

@@ -111,6 +111,7 @@ namespace Managers
 
         public void OpenSideObject()
         {   
+            Debug.Log(SideObject.activeInHierarchy);
             SideObject.SetActive(true);
             buildingMarketStatusController.gameObject.SetActive(false);
         }
