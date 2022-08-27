@@ -124,6 +124,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
@@ -158,7 +159,7 @@ namespace Managers
             Sequence sequence = DOTween.Sequence();
 
 
-            sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna göre seç
+            sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna 
             sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
 
             sequence.SetLoops(-1, LoopType.Yoyo).onPlay();
