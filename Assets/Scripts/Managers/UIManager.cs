@@ -4,7 +4,6 @@ using Enums;
 using System;
 using Controllers;
 using UnityEngine.UI;
-
 using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -163,6 +162,8 @@ namespace Managers
             sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
 
             sequence.SetLoops(-1, LoopType.Yoyo).onPlay();
+
+
         }
         public void SelectMultiply()
         {
