@@ -154,8 +154,7 @@ namespace Managers
                     
                     OnSetSideObjects(i);
                 }
-                
-                
+
             }  
             
             BuildingsDatasAreSync();
