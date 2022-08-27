@@ -66,12 +66,14 @@ namespace Managers
 
         private void OnIncreaseScore()
         {
+           
             _score++;
             SendScoreOrMultiplyValue(_score);
         }
 
         private void OnDecreaseScore()
         {
+           
             if (_score<0)
             {
                 _score = 0;
@@ -99,6 +101,7 @@ namespace Managers
 
             if (_multipleAreaStatus==MultipleAreaStatus.active)
             {
+                
                 if (!_isPressClaimButton)
                 {
                     score = _variantScore++;
@@ -109,7 +112,8 @@ namespace Managers
             }
             else
             {
-              
+                
+
                 ScoreSignals.Instance.onSendScore?.Invoke(score);
             }
             

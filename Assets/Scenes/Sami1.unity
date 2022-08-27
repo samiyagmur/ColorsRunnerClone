@@ -204,7 +204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 35094905}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 621180698}
+        m_TargetAssemblyTypeName: Managers.UIManager, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &35094905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,6 +1911,7 @@ MonoBehaviour:
   textMeshPro2: {fileID: 1667920013}
   rectTransform: {fileID: 1304027460}
   rectTransformCursor: {fileID: 414019750}
+  levelText: {fileID: 0}
 --- !u!4 &621180699
 Transform:
   m_ObjectHideFlags: 0
@@ -5097,7 +5110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 000
+  m_text: Level 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 605433b68313d491a8ab88bc03a41651, type: 2}
   m_sharedMaterial: {fileID: 2830636965969884548, guid: 605433b68313d491a8ab88bc03a41651, type: 2}
@@ -5739,7 +5752,7 @@ MonoBehaviour:
   initStack: {fileID: 1877316333817627185, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
   lerpDelay: 0.252
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 505523903821665479, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
   initSize: 10
   stackHolder: {fileID: 0}
 --- !u!1 &2081821416

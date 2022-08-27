@@ -24,6 +24,7 @@ namespace Managers
         [SerializeField] TextMeshProUGUI textMeshPro2;
         [SerializeField] RectTransform rectTransform;
         [SerializeField] RectTransform rectTransformCursor;
+        [SerializeField] TextMeshProUGUI levelText;
 
         #endregion
 
@@ -45,9 +46,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onMultiplyArea += OnMultiplyArea;
+            UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
-            ScoreSignals.Instance.onSendScore += OnSendScore;
+            ScoreSignals.Instance.onSendScore += OnUpdateCurrentScore;
+           
 
 
         }
@@ -57,9 +60,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onMultiplyArea -= OnMultiplyArea;
+            UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
-            ScoreSignals.Instance.onSendScore -= OnSendScore;
+            ScoreSignals.Instance.onSendScore -= OnUpdateCurrentScore;
+           
 
         }
 
@@ -100,12 +105,15 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
             CursorMovement();
         }
+
+      
+        #region ButonGroup
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
         }
 
-        #region ButonGroup
+        
 
         public void TryAgain()
         {
@@ -142,7 +150,7 @@ namespace Managers
 
         #region TextGroup
     
-        private void OnSendScore(int score)
+        private void OnUpdateCurrentScore(int score)
         {
 
 
@@ -150,11 +158,15 @@ namespace Managers
             textMeshPro2.text = score.ToString();
 
         }
-        #endregion
-        #endregion
-        
-        
-        public void CursorMovement()//320//190//60//-50/-180/-320
+        private void OnSetLevelText(int nextLevel)
+        {
+            nextLevel++;
+            levelText.text = $"Level{nextLevel.ToString()}";
+            #endregion
+            #endregion
+
+        }
+        public void CursorMovement()
         {
             Sequence sequence = DOTween.Sequence();
 
@@ -190,8 +202,6 @@ namespace Managers
             {
                 _multiply = "x2";
             }
-
-
             ScoreSignals.Instance.onMultiplyAmaunt?.Invoke(_multiply);
         }
 

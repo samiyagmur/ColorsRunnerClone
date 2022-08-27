@@ -129,6 +129,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             //UISignals.Instance.onChangeLevelText(_levelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
+            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
         }
 
   
@@ -151,7 +152,7 @@ namespace Managers
             return _idleLevelID;
         }
         private void OnInitializeLevel()
-        {
+        {   
             var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
