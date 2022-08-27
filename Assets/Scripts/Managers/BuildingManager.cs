@@ -14,6 +14,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private BuildingMarketStatusController buildingMarketStatusController;
+        [SerializeField] private GameObject SideObject;
         [SerializeField] private BuildingMeshController buildingMeshController;
         [SerializeField] private BuildingPhysicsController buildingPhysicsController;
         [SerializeField] private BuildingScorePhysicsController buildingScorePhysicsController;
@@ -30,7 +31,7 @@ namespace Managers
         
         public int BuildingMarketPrice;
         
-        public float Saturation;  //struct
+        public float Saturation;  
 
         #endregion
 
@@ -108,6 +109,13 @@ namespace Managers
             BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsAdressId);
         }
 
-        //Data control needs
+        public void OpenSideObject()
+        {   
+            SideObject.SetActive(true);
+            buildingMarketStatusController.gameObject.SetActive(false);
+        }
+        
+
+  
     }
 }

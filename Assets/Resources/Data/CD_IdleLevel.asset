@@ -22,9 +22,9 @@ MonoBehaviour:
         Saturation: 0
         "\u0131dleLevelState": 0
       BuildingMarketPrice: 100
-      PayedAmount: 66
+      PayedAmount: 0
       BuildingAdressId: 0
-      Saturation: 0
+      Saturation: 2
       "\u0131dleLevelState": 0
     - isDepended: 0
       SideObject:
@@ -34,9 +34,9 @@ MonoBehaviour:
         Saturation: 0
         "\u0131dleLevelState": 0
       BuildingMarketPrice: 150
-      PayedAmount: 106
+      PayedAmount: 0
       BuildingAdressId: 1
-      Saturation: 0
+      Saturation: 2
       "\u0131dleLevelState": 0
     - isDepended: 0
       SideObject:
@@ -46,8 +46,8 @@ MonoBehaviour:
         Saturation: 0
         "\u0131dleLevelState": 0
       BuildingMarketPrice: 70
-      PayedAmount: 70
+      PayedAmount: 0
       BuildingAdressId: 2
-      Saturation: 1
+      Saturation: 2
       "\u0131dleLevelState": 0
     IdleLevelState: 0
