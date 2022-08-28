@@ -149,7 +149,7 @@ namespace Managers
         }
 
 
-        #endregion
+       
         #region TextGroup
 
         private void OnUpdateCurrentScore(int score)
