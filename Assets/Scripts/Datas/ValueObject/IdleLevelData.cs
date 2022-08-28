@@ -9,8 +9,8 @@ namespace Datas.ValueObject
     public class IdleLevelData : SaveableEntity
     {
         public string IdleLevelKey = "IdleLevelDataKey";
-        
-        public List<BuildingsData> Buildings = new List<BuildingsData>();
+
+        public List<BuildingsData> Buildings;
 
         public IdleLevelState IdleLevelState;
 

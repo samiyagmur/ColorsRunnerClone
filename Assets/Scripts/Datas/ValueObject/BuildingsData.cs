@@ -9,8 +9,7 @@ namespace Datas.ValueObject
     public class BuildingsData : SaveableEntity
     {   
         public string Key = "IdleBuildingDataKey";
-        
-        
+
         public bool IsDepended;
 
         public SideObject SideObject;

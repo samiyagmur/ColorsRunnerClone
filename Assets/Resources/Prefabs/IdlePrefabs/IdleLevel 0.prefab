@@ -336,6 +336,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: BuildingsAdressId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: buildingMeshController
       value: 
       objectReference: {fileID: 7114234341443240626}
@@ -1093,6 +1097,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078393, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: BuildingsAdressId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}

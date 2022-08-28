@@ -54,7 +54,7 @@ namespace Managers
 
            IdleLevelData = OnGetCityData();
 
-           SetDataToBuildingManagers();
+           //SetDataToBuildingManagers();
 
        }
 
@@ -99,10 +99,10 @@ namespace Managers
                 BuildingManagers[i].BuildingMarketPrice = IdleLevelData.Buildings[i].BuildingMarketPrice;
 
                 BuildingManagers[i].IdleLevelState = IdleLevelData.Buildings[i].idleLevelState;
+                
             }  
             
             DOVirtual.DelayedCall(.1f, ()=>{ BuildingsDatasAreSync();});
-
 
         }
         private void BuildingsDatasAreSync()
