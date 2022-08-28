@@ -38,10 +38,17 @@ MonoBehaviour:
     - Sirenix.OdinInspector.CompatibilityLayer
     - ToonyColorsPro.Runtime
     - AllIn1VfxTexDemoAssembly
+    - Boxophobic.Utils.Scripts
+    - Boxophobic.PolyverseSkies.Runtime
+    - Boxophobic.PolyverseSkies.Scripts
+    - sc.stylizedwater2.editor
+    - sc.stylizedwater2.runtime
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
+    - Boxophobic.Utils.Editor
+    - Boxophobic.PolyverseSkies.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
