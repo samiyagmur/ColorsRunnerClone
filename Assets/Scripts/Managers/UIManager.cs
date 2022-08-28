@@ -103,7 +103,7 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
-            CursorMovement();
+            //CursorMovement();
         }
         
         public void Play()
@@ -133,13 +133,15 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
-            
+            //DOTween.KillAll();
+
         }
 
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
+            //DOTween.KillAll();
         }
 
         public void Vibration()
@@ -147,9 +149,6 @@ namespace Managers
             
             CameraSignals.Instance.onVibrateStatus?.Invoke();
         }
-
-
-       
         #region TextGroup
 
         private void OnUpdateCurrentScore(int score)
@@ -167,18 +166,18 @@ namespace Managers
             
         }
         #endregion
-        public void CursorMovement()
-        {
-            Sequence sequence = DOTween.Sequence();
+        //public void CursorMovement()
+        //{
+        //    Sequence sequence = DOTween.Sequence();
 
 
-            sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna 
-            sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
+        //    sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna 
+        //    sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
 
-            sequence.SetLoops(-1, LoopType.Yoyo).onPlay();
+        //    sequence.SetLoops(-1, LoopType.Yoyo);
 
 
-        }
+        //}
         public void SelectMultiply()
         {
             float CursorXPos = rectTransform.localPosition.x;
@@ -205,8 +204,6 @@ namespace Managers
             }
             ScoreSignals.Instance.onMultiplyAmaunt?.Invoke(_multiply);
         }
-
-
     }
 
 
