@@ -167,7 +167,7 @@ namespace Managers
 
         private void UpdateSaturation()
         {   
-            // Saturation = buildingMeshController.CalculateSaturation();
+            buildingMeshController.CalculateSaturation();
         }
 
         public void UpdateBuildingStatus(IdleLevelState idleLevelState)

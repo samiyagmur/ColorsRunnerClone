@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 473949675246383931}
   - component: {fileID: 473949675243501539}
   - component: {fileID: 473949675244405921}
-  - component: {fileID: 465481869375242097}
+  - component: {fileID: 1650297908965153173}
   m_Layer: 0
   m_Name: SM_Prop_Manhole_35
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &465481869375242097
-MeshCollider:
+--- !u!65 &1650297908965153173
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43576622065284154, guid: edd48df2643778c4eba730fdb643c09e, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 1.1053452, y: 0.042259485, z: 1.0818539}
+  m_Center: {x: -0.00000023841858, y: 0.021129742, z: 0}

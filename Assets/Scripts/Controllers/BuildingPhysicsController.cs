@@ -19,7 +19,6 @@ namespace Controllers
             if (other.CompareTag("Collectable"))
             {
                 Destroy(other.gameObject);
-
             }
         }
         

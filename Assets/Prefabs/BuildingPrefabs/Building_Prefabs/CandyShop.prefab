@@ -607,7 +607,6 @@ GameObject:
   - component: {fileID: 4785950987052135266}
   - component: {fileID: 4785950987050909504}
   - component: {fileID: 4785950987050252010}
-  - component: {fileID: 4796270136579996528}
   m_Layer: 0
   m_Name: SM_Bld_Apartment_Corner_97
   m_TagString: Untagged
@@ -678,20 +677,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4796270136579996528
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4785950987051959752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43197437058000784, guid: 5d932c27263caa04d97c8fc9e7da1a78, type: 2}
 --- !u!1 &5596312093233254039
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Saturation: 0
   manager: {fileID: 0}
+  renderer: []
 --- !u!1 &7263024632547989627
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,7 +931,6 @@ GameObject:
   - component: {fileID: 9132141244726012213}
   - component: {fileID: 9132141244726846743}
   - component: {fileID: 9132141244728028349}
-  - component: {fileID: 9106059936668868903}
   m_Layer: 0
   m_Name: SM_Bld_Apartment_Corner_97 (1)
   m_TagString: Untagged
@@ -1016,20 +1001,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9106059936668868903
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132141244725845919}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43197437058000784, guid: 5d932c27263caa04d97c8fc9e7da1a78, type: 2}
 --- !u!1001 &513575604486457202
 PrefabInstance:
   m_ObjectHideFlags: 0

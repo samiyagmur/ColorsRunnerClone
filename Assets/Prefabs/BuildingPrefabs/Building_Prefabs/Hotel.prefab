@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1970596460873684974}
   - component: {fileID: 1970596460876602622}
   - component: {fileID: 1970596460875588372}
-  - component: {fileID: 1998238819884148882}
+  - component: {fileID: 2206402226375506088}
   m_Layer: 0
   m_Name: HotelSign
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1998238819884148882
-MeshCollider:
+--- !u!65 &2206402226375506088
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,10 +92,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43060891256214226, guid: 56dbd9cd7beb5f24b95d37992abdad3b, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 1.2672687, y: 3.800848, z: 0.29997504}
+  m_Center: {x: -0.07271552, y: 1.5711055, z: -0.0075539798}
 --- !u!1 &3838603965467648984
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9012721722674043185}
+  - component: {fileID: 4942289002835387392}
   m_Layer: 0
   m_Name: Hotel
   m_TagString: Untagged
@@ -135,6 +135,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4942289002835387392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838603965467648984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c91bc0e1264174ea2d3bfc9a157493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Saturation: 0
+  manager: {fileID: 0}
+  renderer: []
 --- !u!1 &5100336660705242819
 GameObject:
   m_ObjectHideFlags: 0

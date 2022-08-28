@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 1306662420984782119}
   - component: {fileID: 1306662420983508415}
   - component: {fileID: 1306662420982597435}
-  - component: {fileID: 1353244234215019247}
-  - component: {fileID: 2849916411168538607}
+  - component: {fileID: 5169854568266289}
   m_Layer: 0
   m_Name: SM_Prop_Hydrant_08
   m_TagString: Untagged
@@ -83,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1353244234215019247
-MeshCollider:
+--- !u!65 &5169854568266289
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,23 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43494689567649082, guid: e3d9d6de8c2fd36419c49c00938bd4a9, type: 2}
---- !u!54 &2849916411168538607
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306662420984414587}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0.28
-  m_AngularDrag: 2.23
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 0.5419631, y: 1.0532614, z: 0.47839192}
+  m_Center: {x: 0.0045883507, y: 0.5266307, z: 0.03561981}
