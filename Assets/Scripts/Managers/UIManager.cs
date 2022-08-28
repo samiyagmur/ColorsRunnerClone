@@ -105,9 +105,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
             CursorMovement();
         }
-
-      
-        #region ButonGroup
+        
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
@@ -134,6 +132,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
+            
         }
 
         public void Restart()
@@ -147,9 +146,7 @@ namespace Managers
             
             CameraSignals.Instance.onVibrateStatus?.Invoke();
         }
-
-        #region TextGroup
-    
+        
         private void OnUpdateCurrentScore(int score)
         {
 
@@ -162,8 +159,7 @@ namespace Managers
         {
             nextLevel++;
             levelText.text = $"Level{nextLevel.ToString()}";
-            #endregion
-            #endregion
+        
 
         }
         public void CursorMovement()

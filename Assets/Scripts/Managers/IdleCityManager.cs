@@ -54,7 +54,7 @@ namespace Managers
 
            IdleLevelData = OnGetCityData();
 
-           SetDataToBuildingManagers();
+           //SetDataToBuildingManagers();
 
        }
 
@@ -88,21 +88,21 @@ namespace Managers
             {
                 IdleLevelData.Buildings[i].BuildingAdressId = i;
                 
-                BuildingManagers[i].BuildingsAdressId = i;
+                BuildingManagers[i].buildingsData.BuildingAdressId = i;
 
-                BuildingManagers[i].isDepended = IdleLevelData.Buildings[i].IsDepended;
+                BuildingManagers[i].buildingsData.IsDepended = IdleLevelData.Buildings[i].IsDepended;
 
-                BuildingManagers[i].Saturation = IdleLevelData.Buildings[i].Saturation;
+                BuildingManagers[i].buildingsData.Saturation = IdleLevelData.Buildings[i].Saturation;
 
-                BuildingManagers[i].PayedAmount = IdleLevelData.Buildings[i].PayedAmount;
+                BuildingManagers[i].buildingsData.PayedAmount = IdleLevelData.Buildings[i].PayedAmount;
 
-                BuildingManagers[i].BuildingMarketPrice = IdleLevelData.Buildings[i].BuildingMarketPrice;
+                BuildingManagers[i].buildingsData.BuildingMarketPrice = IdleLevelData.Buildings[i].BuildingMarketPrice;
 
-                BuildingManagers[i].IdleLevelState = IdleLevelData.Buildings[i].idleLevelState;
+                BuildingManagers[i].buildingsData.idleLevelState = IdleLevelData.Buildings[i].idleLevelState;
+                
             }  
             
             DOVirtual.DelayedCall(.1f, ()=>{ BuildingsDatasAreSync();});
-
 
         }
         private void BuildingsDatasAreSync()
