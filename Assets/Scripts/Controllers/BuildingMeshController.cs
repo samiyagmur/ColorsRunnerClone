@@ -23,10 +23,10 @@ namespace Controllers
 
         #endregion
         
-        public float CalculateSaturation()
-         {
-            Saturation = (manager.PayedAmount / manager.BuildingMarketPrice);
-            return Saturation;
-         }
+        // public float CalculateSaturation()
+        //  {
+        //     // Saturation = (manager.PayedAmount / manager.BuildingMarketPrice);
+        //     // return Saturation;
+        //  }
     }
 }

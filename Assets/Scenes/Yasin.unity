@@ -576,7 +576,7 @@ MonoBehaviour:
     HorizontalInputSpeed: 2
     ClampSides: {x: -5, y: 5}
     ClampSpeed: 0.007
-  floatingJoystick: {fileID: 0}
+  floatingJoystick: {fileID: 878023474}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
   currentGameState: 0
@@ -792,6 +792,7 @@ MonoBehaviour:
   LevelData:
     DroneAreaList: []
   IdleLevelData:
+    IdleLevelKey: IdleLevelDataKey
     Buildings: []
     IdleLevelState: 0
   levelHolder: {fileID: 1627349972}
@@ -800,6 +801,17 @@ MonoBehaviour:
   levelClearer: {fileID: 869762214}
   idleLevelLoader: {fileID: 869762213}
   idleLevelClearer: {fileID: 869762212}
+--- !u!114 &878023474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+  m_PrefabInstance: {fileID: 1193879403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889359684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,19 +1687,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleLevelData:
+    IdleLevelKey: IdleLevelDataKey
     Buildings: []
     IdleLevelState: 0
-  Buildings: []
-  BuildingManager: []
-  PublicPlaces: []
-  BuildingsTransforms:
-  - {fileID: 0}
-  PublicPlacesTransforms:
-  - {fileID: 0}
-  SideObjectTransforms:
-  - {fileID: 0}
-  buildingControllerArray: []
-  buildingsArray: []
+  BuildingManagers: []
+  IdleLevelState: 0
 --- !u!1 &1127138598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,6 +3887,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIPanelController: {fileID: 2054319198}
+  textMeshPro: {fileID: 0}
+  textMeshPro2: {fileID: 0}
+  rectTransform: {fileID: 0}
+  rectTransformCursor: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!4 &2054319200
 Transform:
   m_ObjectHideFlags: 0
