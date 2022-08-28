@@ -57,7 +57,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack += OnRunStack;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
-            CoreGameSignals.Instance.onNextLevel += OnReset;
+           
 
         }
 
@@ -73,7 +73,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
-            CoreGameSignals.Instance.onNextLevel -= OnReset;
+         
         }
 
         private void OnDisable()
@@ -114,8 +114,9 @@ namespace Managers
 
         private void InitializeStack()
         {
+            Debug.Log("InitializeStack");
             for (int i = 0; i < initSize ; i++)
-            {
+            {   
                 var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
@@ -127,6 +128,7 @@ namespace Managers
         }
         private void DeleteStack()
         {
+            Debug.Log("DeleteStack");
             for (int i = 0; i < collectableList.Count; i++)
             {
                

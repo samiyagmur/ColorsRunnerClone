@@ -80,6 +80,7 @@ namespace Managers
             playerManager = FindObjectOfType<PlayerManager>();
             
             stateDrivenCamera.Follow = playerManager.transform;
+           // stateDrivenCamera.LookAt = playerManager.transform;
         }
 
         private void OnEnterMultiplyArea()
