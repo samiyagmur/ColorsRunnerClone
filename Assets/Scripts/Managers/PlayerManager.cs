@@ -71,7 +71,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onFailed += OnFailed;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
-            ScoreSignals.Instance.onSendScore += OnSetScoreText;
+            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
+            ScoreSignals.Instance.onSendPlayerScore += OnSetScoreText;
 
         }
 
@@ -86,7 +87,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onFailed -= OnFailed;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
-            ScoreSignals.Instance.onSendScore -= OnSetScoreText;
+            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
+            ScoreSignals.Instance.onSendPlayerScore -= OnSetScoreText;
         }
 
         private void OnDisable()
@@ -102,7 +104,7 @@ namespace Managers
 
         private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
 
-        private void OnGetIdleInputValues(IdleInputParams inputParams) 
+        private void OnGetIdleInputValues(IdleInputParams inputParams)
         { 
             movementController.UpdateIdleInputValue(inputParams); 
         } 
@@ -129,15 +131,20 @@ namespace Managers
             ChangeForwardSpeeds(ChangeSpeedState.EnterMultipleArea);
             await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
+            movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Pasive);
             playerMeshController.ChangeScale(1);
             playerScoreController.OnChangeScorePos();
-
-
         }
+
+        private void OnEnterIdleArea()
+        {
+           // movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
+        }
+
         public async void IsHitRainbow()
         {
-           
-            await Task.Delay(3500);//�t Will cahange
+            
+            await Task.Delay(3500);//it Will cahange
             UISignals.Instance.onMultiplyArea?.Invoke();
             
         }
@@ -168,6 +175,7 @@ namespace Managers
         {
             movementController.MovementReset();
             gameObject.SetActive(false);//changed
+            movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
 
         }
         public void SendToColorType(ColorType colorType) => StackSignals.Instance.onChangeColor?.Invoke(colorType);

@@ -120,16 +120,14 @@ namespace Managers
                 _IdleLevelID++;
                 Save(_IdleLevelID);
             }
-   
-           
-            
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
-            
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            
+
+
+
+
+            CoreGameSignals.Instance.onReset?.Invoke();
             //UISignals.Instance.onChangeLevelText(_LevelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
-           UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
+            UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
         private int OnGetLevelId()
