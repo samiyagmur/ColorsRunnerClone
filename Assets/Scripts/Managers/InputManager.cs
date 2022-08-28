@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private FloatingJoystick floatingJoystick;
     
-    [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
+    [SerializeField] private bool isReadyForTouch;
     
     [SerializeField]private GameStates currentGameState;
 
@@ -83,7 +83,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
             
-            if (!isReadyForTouch) return;
+        if (!isReadyForTouch) return;
         
         if (Input.GetMouseButtonUp(0))
         {
@@ -93,27 +93,32 @@ public class InputManager : MonoBehaviour
 
 
         if (Input.GetMouseButtonDown(0))
-        {
-            _isTouching = true;
-            InputSignals.Instance.onInputTaken?.Invoke();
-            if (!isFirstTimeTouchTaken)
             {
-                isFirstTimeTouchTaken = true;
-                InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
-            }
+                
 
-            _mousePosition = Input.mousePosition;
-        }
+                if (Input.mousePosition.y<= 960)
+                {
+                    
+                    _isTouching = true;
+                    InputSignals.Instance.onInputTaken?.Invoke();
+                }
+                _mousePosition = Input.mousePosition;
+
+
+            }
 
         if (currentGameState == GameStates.Runner)
         {
-            if (Input.GetMouseButton(0))
+                
+                if (Input.GetMouseButton(0))
             {
-                if (_isTouching)
+                    if (_isTouching)
                 {
-                    if (_mousePosition != null)
+                        
+                        if (_mousePosition != null)
                     {
-                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
+                           
+                            Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
 
                         if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
                             _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
@@ -163,7 +168,7 @@ public class InputManager : MonoBehaviour
     private void OnChangeGameState(GameStates currentStates)
     {
             
-        currentGameState = currentStates;//next levelde bura çaðýralacak//
+            currentGameState = currentStates;
         if (currentGameState == GameStates.Idle)
         {
             floatingJoystick.gameObject.SetActive(true);
@@ -185,6 +190,7 @@ public class InputManager : MonoBehaviour
 
     private void OnPlay()
     {
+            
         isReadyForTouch = true;
     }
 
@@ -199,10 +205,11 @@ public class InputManager : MonoBehaviour
 
     private void OnReset()
     {
-        currentGameState = GameStates.Runner;//Changed
+
+        OnChangeGameState(GameStates.Runner);//Changed
         _isTouching = false;
         isReadyForTouch = false;
-        isFirstTimeTouchTaken = false;
+        
     }
 }
 }

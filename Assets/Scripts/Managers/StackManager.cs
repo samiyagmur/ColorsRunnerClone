@@ -114,7 +114,7 @@ namespace Managers
 
         private void InitializeStack()
         {
-            Debug.Log("InitializeStack");
+            ;
             for (int i = 0; i < initSize ; i++)
             {   
                 var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
@@ -128,7 +128,7 @@ namespace Managers
         }
         private void DeleteStack()
         {
-            Debug.Log("DeleteStack");
+            
             for (int i = 0; i < collectableList.Count; i++)
             {
                

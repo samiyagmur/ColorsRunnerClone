@@ -46,6 +46,7 @@ public class PlayerMovementController : MonoBehaviour
 
         public void UpdateRunnerInputValue(RunnerInputParams inputParam)
         {
+            
             _inputValueX = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
         }
@@ -185,6 +186,11 @@ public class PlayerMovementController : MonoBehaviour
             gameObject.transform.rotation = Quaternion.identity;
 
         }
+        public void ChangeHorizontalSpeed(HorizontalSpeedStatus horizontalSpeedStatus)
+        {
 
+          //  _movementData.SidewaysSpeed=(int)horizontalSpeedStatus;
+            
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace Managers
             UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
-            ScoreSignals.Instance.onSendScore += OnUpdateCurrentScore;
+            ScoreSignals.Instance.onSendUIScore += OnUpdateCurrentScore;
            
 
 
@@ -63,7 +63,7 @@ namespace Managers
             UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
-            ScoreSignals.Instance.onSendScore -= OnUpdateCurrentScore;
+            ScoreSignals.Instance.onSendUIScore -= OnUpdateCurrentScore;
            
 
         }
@@ -125,6 +125,7 @@ namespace Managers
         {
 
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
+            CoreGameSignals.Instance.onEnterIdleArea();
             CoreGameSignals.Instance.onChangeGameState(GameStates.Idle);
         }
 
@@ -148,24 +149,25 @@ namespace Managers
             CameraSignals.Instance.onVibrateStatus?.Invoke();
         }
 
+
+        #endregion
         #region TextGroup
-    
+
         private void OnUpdateCurrentScore(int score)
         {
 
 
-            // textMeshPro.text = score.ToString();
-            // textMeshPro2.text = score.ToString();
+            textMeshPro.text = score.ToString();
+            textMeshPro2.text = score.ToString();
 
         }
         private void OnSetLevelText(int nextLevel)
         {
             nextLevel++;
-            levelText.text = $"Level{nextLevel.ToString()}";
-            #endregion
-            #endregion
-
+            levelText.text = "Level "+ nextLevel;
+            
         }
+        #endregion
         public void CursorMovement()
         {
             Sequence sequence = DOTween.Sequence();

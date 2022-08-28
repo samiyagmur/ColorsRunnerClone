@@ -38,6 +38,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onReset +=OnReset;
             CoreGameSignals.Instance.onPlay += SetCameraTarget;
             CoreGameSignals.Instance.onReset += SetCameraTarget;
             CoreGameSignals.Instance.onChangeGameState += OnEnterIdleArea;
@@ -50,6 +51,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= SetCameraTarget;
             CoreGameSignals.Instance.onReset -= SetCameraTarget;
             CoreGameSignals.Instance.onChangeGameState -= OnEnterIdleArea;
@@ -80,7 +82,7 @@ namespace Managers
             playerManager = FindObjectOfType<PlayerManager>();
             
             stateDrivenCamera.Follow = playerManager.transform;
-           // stateDrivenCamera.LookAt = playerManager.transform;
+            
         }
 
         private void OnEnterMultiplyArea()
@@ -91,7 +93,7 @@ namespace Managers
         private void OnEnterIdleArea(GameStates arg0)
         {
             cameraMovementController.WhenEnTerIdleArea();
-            stateDrivenCamera.LookAt=playerManager.transform;
+            stateDrivenCamera.Follow = playerManager.transform;
 
 
             //Debug.Log(stateDrivenCamera.Follow.name);

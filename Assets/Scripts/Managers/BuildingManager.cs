@@ -118,7 +118,7 @@ namespace Managers
         private void OnSetDataToControllers()
         {
             SetDataToControllers();
-            Debug.Log("Girdi");
+           
         }
         private void SetDataToControllers() 
         {

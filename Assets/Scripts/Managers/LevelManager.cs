@@ -119,7 +119,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             //UISignals.Instance.onChangeLevelText(_LevelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
-            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
+            UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
         private int OnGetLevelId()
