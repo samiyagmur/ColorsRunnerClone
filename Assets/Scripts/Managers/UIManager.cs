@@ -132,6 +132,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
+            
         }
 
         public void Restart()

@@ -252,6 +252,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 7779248226039575003}
+    - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: marketPriceText
       value: 
       objectReference: {fileID: 7779248227141892305}
@@ -334,6 +338,14 @@ PrefabInstance:
     - target: {fileID: 7632061493999078393, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: _idleLevelId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: BuildingAddressID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: BuildingsAdressId
@@ -1016,6 +1028,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 2875865381924936419}
+    - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: marketPriceText
       value: 
       objectReference: {fileID: 2875865380821570537}
@@ -1097,6 +1113,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078393, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: _idleLevelId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: BuildingAddressID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7632061493999078399, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
@@ -1656,6 +1680,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1986342344048981916}
     - target: {fileID: 4776822466620894259, guid: 0dbc9557a3f78a741a24015cd02b445d, type: 3}
       propertyPath: marketPriceText
       value: 

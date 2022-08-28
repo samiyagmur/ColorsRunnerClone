@@ -32,7 +32,7 @@ namespace Controllers
             {
                 _timer = 0.2f;
                 
-                if (buildingManager.BuildingMarketPrice > buildingManager.PayedAmount)
+                if (buildingManager.buildingsData.BuildingMarketPrice > buildingManager.buildingsData.PayedAmount)
                 {
                     buildingManager.UpdatePayedAmount();
 
@@ -41,8 +41,8 @@ namespace Controllers
                 {   
                     gameObject.SetActive(false);
 
-                    if (buildingManager.IdleLevelState == IdleLevelState.Uncompleted)
-                    {   
+                    if (buildingManager.buildingsData.idleLevelState == IdleLevelState.Uncompleted)
+                    {
                         transform.gameObject.SetActive(false);
                         buildingManager.OpenSideObject();
                         buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
@@ -57,6 +57,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 _timer = 0f;
+                buildingManager.Save(buildingManager.BuildingAddressID);
             }
         }
         
