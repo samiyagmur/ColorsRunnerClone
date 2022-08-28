@@ -35,7 +35,6 @@ namespace Controllers
                 if (buildingManager.BuildingMarketPrice > buildingManager.PayedAmount)
                 {
                     buildingManager.UpdatePayedAmount();
-                    
 
                 }
                 else
@@ -43,7 +42,9 @@ namespace Controllers
                     gameObject.SetActive(false);
 
                     if (buildingManager.IdleLevelState == IdleLevelState.Uncompleted)
-                    {
+                    {   
+                        transform.gameObject.SetActive(false);
+                        buildingManager.OpenSideObject();
                         buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
                     }
                 }

@@ -20,7 +20,6 @@ namespace Controllers
             {
                 Destroy(other.gameObject);
 
-
             }
         }
         
