@@ -6,17 +6,21 @@ using Datas.ValueObject;
 using Enums;
 using Signals;
 using System.Threading.Tasks;
+using Abstract;
 using UnityEngine;
 
 namespace Managers
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : MonoBehaviour,ISaveable
     {
        #region Self Variables
 
         #region Public Variables
 
         [Header("LevelData")] public LevelData LevelData;
+        
+        [Header("LevelIdData")] public LevelIdData LevelIdData = new LevelIdData();
+        
         [Header("IdleLevelData")] public IdleLevelData IdleLevelData;
 
         #endregion
@@ -35,8 +39,8 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private int _levelID;
-        private int _idleLevelID;
+        private int _LevelID;
+        private int _IdleLevelID;
         private int _gameScore;
         #endregion
 
@@ -44,36 +48,23 @@ namespace Managers
 
         private void Awake()
         {   
-            
-            _levelID = GetActiveLevel();
-            _idleLevelID = GetActiveIdleLevel();
+            Save(LevelIdData.IdleLevelId);
+            Load(LevelIdData.IdleLevelId);
             LevelData = GetLevelData();
             IdleLevelData = GetIdleLevelData();
+            
         }
         
-
-        private int GetActiveLevel()
-        {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
-        }
-
-        private int GetActiveIdleLevel()
-        {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("IdleLevel") ? ES3.Load<int>("IdleLevel") : 0;
-        }
-
         private LevelData GetLevelData()
         {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            var newLevelData = LevelIdData.LevelId % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
             return Resources.Load<CD_Level>("Data/CD_Level").Levels[newLevelData];
         }
 
         private IdleLevelData GetIdleLevelData()
         {   
             var newIdleLevelData =
-                _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
+                LevelIdData.IdleLevelId % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
             return Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[newIdleLevelData];
         }
 
@@ -90,8 +81,7 @@ namespace Managers
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
-            CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelID;
+            CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelId;
         }
 
         private void UnsubscribeEvents()
@@ -100,8 +90,8 @@ namespace Managers
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
-            CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelID;
+            CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelId;
+        
         }
 
         private void OnDisable()
@@ -119,40 +109,39 @@ namespace Managers
 
         private void OnNextLevel()
         {
-            _levelID++;
-            Debug.Log(_levelID);
-            if (Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelID].IdleLevelState == IdleLevelState.Completed)
+            _LevelID++;
+            Save(_IdleLevelID);
+            if (Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_IdleLevelID].IdleLevelState == IdleLevelState.Completed)
             {
-                _idleLevelID++;
-               
+                _IdleLevelID++;
+                Save(_IdleLevelID);
             }
             CoreGameSignals.Instance.onReset?.Invoke();
-            //UISignals.Instance.onChangeLevelText(_levelID + 1);
+            //UISignals.Instance.onChangeLevelText(_LevelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
         }
 
-  
+        private int OnGetLevelId()
+        {
+            return _LevelID;
+        }
+        private int OnGetIdleLevelId()
+        {
+            return _IdleLevelID;
+        }
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            SaveLoadSignals.Instance.onSaveRunnerLevelData?.Invoke(SaveStates.Level, _levelID);
-            SaveLoadSignals.Instance.onSaveIdleLevelData?.Invoke(SaveStates.IdleLevel, _idleLevelID);
+            Save(_IdleLevelID);
+            SaveLoadSignals.Instance.onSaveIdleLevelData?.Invoke(SaveStates.IdleLevel, _IdleLevelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
         }
 
-        private int OnGetLevelID()
-        {
-            return _levelID;
-        }
-
-        private int OnGetIdleLevelID()
-        {
-            return _idleLevelID;
-        }
         private void OnInitializeLevel()
         {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            var newLevelData = _LevelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
 
@@ -164,13 +153,30 @@ namespace Managers
         private void OnInitializeIdleLevel()
         {
             var newIdleLevelData =
-                _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
+                _IdleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
+            
             idleLevelLoader.InitializeIdleLevel(newIdleLevelData,idleLevelHolder.transform);
         }
         
         private void OnClearActiveIdleLevel()
         {
             idleLevelClearer.ClearActiveIdleLevel(idleLevelHolder.transform);
+        }
+
+        public void Save(int uniqueId)
+        {
+            LevelIdData = new LevelIdData(_LevelID,_IdleLevelID);
+            
+            SaveLoadSignals.Instance.onSaveGameData.Invoke(LevelIdData,uniqueId);
+        }
+
+        public void Load(int uniqueId)
+        {
+            LevelIdData = SaveLoadSignals.Instance.onLoadGameData.Invoke(LevelIdData.LevelKey, uniqueId);
+            
+            _IdleLevelID = LevelIdData.IdleLevelId;
+            
+            _LevelID = LevelIdData.LevelId;
         }
     }
 }

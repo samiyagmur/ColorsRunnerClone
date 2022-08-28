@@ -9,17 +9,17 @@ namespace Signals
 {
     public class SaveLoadSignals : MonoSingleton<SaveLoadSignals>
     {
-        public UnityAction<SaveStates, int> onSaveRunnerLevelData = delegate { };
-        
-        public Func<SaveStates, int> onLoadGameData = delegate { return 0; };
         
         public UnityAction<SaveStates,int> onSaveIdleLevelData = delegate{  };
         
-        public UnityAction<SaveStates,IdleLevelData> onSaveIdleLevelProgressData = delegate{  };
+        public UnityAction<LevelIdData,int> onSaveGameData = delegate { };
         
-        public Func<SaveStates,IdleLevelData,IdleLevelData> onLoadIdleLevelProgressData = delegate { return new IdleLevelData();};
+        public UnityAction<BuildingsData,int> onSaveIdleData = delegate { };
+
+        public Func<string, int, LevelIdData> onLoadGameData;
         
-        public Func<SaveStates, int> onLoadIdleData = delegate{ return 0;};
+        public Func<string, int, BuildingsData> onLoadBuildingsData;
+
 
     }
 }

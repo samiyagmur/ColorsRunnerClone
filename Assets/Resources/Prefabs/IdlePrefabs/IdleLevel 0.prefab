@@ -1413,6 +1413,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
+      propertyPath: BuildingManagers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
       propertyPath: BuildingManager.Array.data[0]
       value: 
       objectReference: {fileID: 1986342344048981916}
@@ -1452,6 +1456,18 @@ PrefabInstance:
       propertyPath: BuildingControllers.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
+      propertyPath: BuildingManagers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1986342344048981916}
+    - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
+      propertyPath: BuildingManagers.Array.data[1]
+      value: 
+      objectReference: {fileID: 2875865381924936419}
+    - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
+      propertyPath: BuildingManagers.Array.data[2]
+      value: 
+      objectReference: {fileID: 7779248226039575003}
     - target: {fileID: 5696089200017270663, guid: dd784b60a1c308d4b92d415e8a2cd2a5, type: 3}
       propertyPath: BuildingsTransforms.Array.size
       value: 0

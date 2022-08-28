@@ -28,11 +28,12 @@ namespace Controllers
         
 
         #endregion
+        
 
-
-        private void SetRequiredAmountToText()
+        public void SetRequiredAmountToText()
         {
             marketPriceText.text = $"{PayedAmount}/{MarketPrice}";
+            
         }
 
         public void UpdatePayedAmountText(int payedAmount)

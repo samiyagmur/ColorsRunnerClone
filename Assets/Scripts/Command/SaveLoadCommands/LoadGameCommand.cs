@@ -22,9 +22,7 @@ namespace Command.SaveLoadCommands
                 {
                     return default(T); 
                 }
-                
             }
-			
             return default(T);
         }
 

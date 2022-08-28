@@ -2,19 +2,24 @@
 using Enums;
 using Signals;
 using System;
+using Abstract;
+using Datas.ValueObject;
+using DG.Tweening;
 using UnityEngine;
 
 
 namespace Managers
 {
-    public class BuildingManager : MonoBehaviour
+    public class BuildingManager : MonoBehaviour,ISaveable
     {
         #region Self Variables
 
         #region Serialized Variables
 
+        [SerializeField] private BuildingsData BuildingsData = new BuildingsData();
         [SerializeField] private BuildingMarketStatusController buildingMarketStatusController;
         [SerializeField] private GameObject SideObject;
+        [SerializeField] private SideObject sideObjectData;
         [SerializeField] private BuildingMeshController buildingMeshController;
         [SerializeField] private BuildingPhysicsController buildingPhysicsController;
         [SerializeField] private BuildingScorePhysicsController buildingScorePhysicsController;
@@ -22,7 +27,7 @@ namespace Managers
         #endregion
 
         #region Public Variables
-
+        
         public IdleLevelState IdleLevelState;
         
         public int BuildingsAdressId;
@@ -31,7 +36,10 @@ namespace Managers
         
         public int BuildingMarketPrice;
         
-        public float Saturation;  
+        public float Saturation;
+
+        public bool isDepended;
+        
 
         #endregion
 
@@ -44,7 +52,8 @@ namespace Managers
         #endregion
 
         #region Event Subscription
-        
+
+   
         private void OnEnable()
         {
           
@@ -54,12 +63,20 @@ namespace Managers
         private void SubscribeEvents()
         {
             BuildingSignals.Instance.onDataReadyToUse += OnSetDataToControllers;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
+            CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onNextLevel += OnSave;
+            CoreGameSignals.Instance.onLevelInitialize += OnLoad;
 
         }
 
         private void UnsubscribeEvents()
         {
-            BuildingSignals.Instance.onDataReadyToUse -= OnSetDataToControllers;
+            BuildingSignals.Instance.onDataReadyToUse -= OnSetDataToControllers; // Invoke atiliyor ama bu arkadaslar dinlemiyor,ilginc
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
+            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onNextLevel -= OnSave;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
 
         }
         private void OnDisable()
@@ -69,24 +86,51 @@ namespace Managers
 
         #endregion
 
+        private void OnSave()
+        {
+            Save(BuildingsAdressId);
+        }
+
+        private void OnLoad()
+        {
+            Load(BuildingsAdressId);
+        }
+        public void Save(int uniqueId)
+        {   
+         
+            BuildingsData  = new BuildingsData(isDepended,sideObjectData,BuildingsAdressId,BuildingMarketPrice,PayedAmount,Saturation,IdleLevelState);
+            SaveLoadSignals.Instance.onSaveIdleData.Invoke(BuildingsData,uniqueId);
+        }
+
+        public void Load(int uniqueId)
+        {
+            BuildingsData =
+                SaveLoadSignals.Instance.onLoadBuildingsData.Invoke(BuildingsData.Key, uniqueId);
+            
+            IdleLevelState = BuildingsData.idleLevelState;
+            BuildingsAdressId = BuildingsData.BuildingAdressId;
+            BuildingMarketPrice = BuildingsData.BuildingMarketPrice;
+            PayedAmount = BuildingsData.PayedAmount;
+            Saturation = BuildingsData.Saturation;
+            isDepended = BuildingsData.IsDepended;
+        }
+
         private void OnSetDataToControllers()
         {
-            SetDataToBuildingMeshController();
-            SetDataToBuildingMarketStatusController();
-            
+            SetDataToControllers();
+            Debug.Log("Girdi");
         }
-        private void SetDataToBuildingMarketStatusController() 
+        private void SetDataToControllers() 
         {
             buildingMarketStatusController.MarketPrice = BuildingMarketPrice;
-            buildingMarketStatusController.UpdatePayedAmountText(PayedAmount);
             buildingMarketStatusController.PayedAmount = PayedAmount;
-             UpdateSaturation();
-
-        }
-
-        private void SetDataToBuildingMeshController()
-        {
+            
+            buildingMarketStatusController.UpdatePayedAmountText(PayedAmount);
+            
+            Debug.Log("/" + buildingMarketStatusController.MarketPrice +" / " + PayedAmount);
             buildingMeshController.Saturation = Saturation;
+            UpdateSaturation();
+
         }
 
         public void UpdatePayedAmount()
@@ -100,7 +144,6 @@ namespace Managers
         private void UpdateSaturation()
         {   
              Saturation = buildingMeshController.CalculateSaturation();
-  
         }
 
         public void UpdateBuildingStatus(IdleLevelState idleLevelState)
@@ -115,8 +158,6 @@ namespace Managers
             SideObject.SetActive(true);
             buildingMarketStatusController.gameObject.SetActive(false);
         }
-        
-
-  
+    
     }
 }

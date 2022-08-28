@@ -4,6 +4,6 @@
     {
         void Save(int uniqueId);
 
-        void Load(int uniquId);
+        void Load(int uniqueId);
     }
 }

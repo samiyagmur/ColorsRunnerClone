@@ -146,8 +146,8 @@ namespace Managers
         {
 
 
-            textMeshPro.text = score.ToString();
-            textMeshPro2.text = score.ToString();
+            // textMeshPro.text = score.ToString();
+            // textMeshPro2.text = score.ToString();
 
         }
         #endregion

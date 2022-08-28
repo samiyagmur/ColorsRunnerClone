@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Saturation: 0
-  manager: {fileID: 0}
+  manager: {fileID: 7632061493999078399}
 --- !u!114 &5558704999369439087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b4fa49078860d49a4f5094516cfffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingManager: {fileID: 0}
+  buildingManager: {fileID: 7632061493999078399}
 --- !u!1 &7632061493999078393
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,8 +149,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc38b0d6ff5a4267bec59031bdaa02fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingsData:
+    Key: IdleBuildingDataKey
+    IsDepended: 0
+    SideObject:
+      BuildingMarketPrice: 0
+      PayedAmount: 0
+      BuildingAdressId: 0
+      Saturation: 0
+      "\u0131dleLevelState": 0
+    BuildingMarketPrice: 0
+    PayedAmount: 0
+    BuildingAdressId: 0
+    Saturation: 0
+    idleLevelState: 0
   buildingMarketStatusController: {fileID: 4776822466620894259}
   SideObject: {fileID: 470088486731748415}
+  sideObjectData:
+    BuildingMarketPrice: 0
+    PayedAmount: 0
+    BuildingAdressId: 0
+    Saturation: 0
+    "\u0131dleLevelState": 0
   buildingMeshController: {fileID: 0}
   buildingPhysicsController: {fileID: 7632061494339189703}
   buildingScorePhysicsController: {fileID: 6732366323518569719}
@@ -159,6 +179,7 @@ MonoBehaviour:
   PayedAmount: 0
   BuildingMarketPrice: 0
   Saturation: 0
+  isDepended: 0
 --- !u!1 &7632061494339189699
 GameObject:
   m_ObjectHideFlags: 0
