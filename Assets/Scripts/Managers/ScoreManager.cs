@@ -28,7 +28,6 @@ namespace Managers
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onEnterPaymentArea += OnEnterPaymentArea;
             ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
@@ -42,36 +41,30 @@ namespace Managers
       
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
-            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onEnterPaymentArea -= OnEnterPaymentArea;
             ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
-
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
         private void Start()
         {
-            
             scoreStatus=ScoreStatusAsLocations.LevelInitilize;
         }
         private void OnEnterMutiplyArea()
         {
-            
             scoreStatus = ScoreStatusAsLocations.EnterMultiple;
             Debug.Log("OnEnterMutiplyArea");
         }
 
         private void OnEnterIdleArea()
         {
-            
             Debug.Log("OnEnterIdleArea");
-            scoreStatus = ScoreStatusAsLocations.ExitMultiple;
+            scoreStatus = ScoreStatusAsLocations.EnterIdle;
         }
 
         private void OnEnterPaymentArea()
@@ -79,22 +72,10 @@ namespace Managers
             Debug.Log("OnEnterPaymentArea");
             scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
         }
-
-        private void OnNextLevel()
-        {
-          
-            scoreStatus = ScoreStatusAsLocations.NextLevel;
-
-            Debug.Log("OnNextLevel");
-        }
-
         private void OnReset()
         {
-         
             scoreStatus = ScoreStatusAsLocations.Reset;
-
         }
-
         private void OnIncreaseScore()
         {
             Score++;
@@ -108,13 +89,12 @@ namespace Managers
             {   
                 Score = 0;
             }
-           
             CalculateScore();
         }
 
         private void OnMultiplyAmaunt(string value)
         {
-            scoreStatus = ScoreStatusAsLocations.ExitMultiple;
+            scoreStatus = ScoreStatusAsLocations.EnterIdle;
             MultiplyAmaunt = Convert.ToInt32(value.TrimStart('x'));
             TotalScore *= MultiplyAmaunt;
             CalculateScore();
@@ -127,9 +107,6 @@ namespace Managers
                 case ScoreStatusAsLocations.LevelInitilize:
                     ReadPlayerText(Score);
                     break;
-                case ScoreStatusAsLocations.NextLevel:
-                    ReadPlayerText(Score);               
-                    break;
                 case ScoreStatusAsLocations.Reset:
                     ReadPlayerText(Score);
                     break;
@@ -138,7 +115,7 @@ namespace Managers
                     ReadPlayerText(Score);
                     ReadUIText(TotalScore);
                     break;
-                case ScoreStatusAsLocations.ExitMultiple:
+                case ScoreStatusAsLocations.EnterIdle:
                     IdleScore += TotalScore;
                     IdleScore += Score;
                     ReadUIText(IdleScore);
@@ -162,157 +139,11 @@ namespace Managers
         private void ReadUIText(int _totalScore)
         {
             ScoreSignals.Instance.onSendUIScore?.Invoke(_totalScore);
-          
         }
         private void ReadPlayerText(int _totalScore)
         {
 
             ScoreSignals.Instance.onSendPlayerScore?.Invoke(_totalScore);
         }
-
-
     }
 }
-//#region Self Veriables
-//#region Private Veriables
-//private MultipleAreaStatus _multipleAreaStatus;
-//private int _uıScore;
-//private int _playerScore;
-//private int _variantScore=1;
-//private int _multiplyValue;
-//private bool _isPressClaimButton;
-//private bool IsPressNextLevel;
-//#endregion
-//#endregion
-
-//#region Event Subscription
-//private void OnEnable()
-//{
-//    SubscribeEvents();
-//}
-//private void SubscribeEvents()
-//{
-//    ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
-//    ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
-//    ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
-//    CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
-//    CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
-//    CoreGameSignals.Instance.onNextLevel += OnNextLevel;
-//    CoreGameSignals.Instance.onReset += OnReset;
-
-//}
-
-//private void UnsubscribeEvents()
-//{
-//    ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
-//    ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
-//    ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
-//    CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
-//    CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;,
-//     CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-//    CoreGameSignals.Instance.onReset -= OnReset;
-//}
-//private void OnDisable()
-//{
-//    UnsubscribeEvents();
-//}
-
-//#endregion
-
-
-
-//private void OnEnterMutiplyArea()
-//{
-
-//    _multipleAreaStatus = MultipleAreaStatus.active;
-
-//}
-//private void OnEnterIdleArea()
-//{
-
-//    _multipleAreaStatus = MultipleAreaStatus.pasive;
-//}
-
-//private void OnIncreaseScore()
-//{
-
-//    _uıScore++;
-//    _playerScore++;
-//    SendScoreOrMultiplyValue(_uıScore, _playerScore);
-//}
-
-//private void OnDecreaseScore()
-//{
-
-//    if (_playerScore < 0)
-//    {
-//        _uıScore = 0;
-//    }
-//    _uıScore--;
-//    _playerScore--;
-//    SendScoreOrMultiplyValue(_uıScore, _playerScore);
-//}
-//private void OnMultiplyAmaunt(string value)
-//{
-//    _isPressClaimButton = true;
-
-//    _multiplyValue = Int32.Parse(value.TrimStart('x'));
-
-//    _uıScore *= _multiplyValue;
-//    _playerScore *= _multiplyValue;
-
-//    SendScoreOrMultiplyValue(_uıScore, _playerScore);
-
-
-//}
-
-//private void SendScoreOrMultiplyValue(int uıScore,int playerScore)
-//{
-
-
-//    if (_multipleAreaStatus==MultipleAreaStatus.active)
-//    {
-
-//        if (!_isPressClaimButton)
-//        {
-//            _uıScore = uıScore++;
-//            _playerScore= playerScore++;
-//            _uıScore = uıScore;
-//            _playerScore = playerScore;
-
-//        }
-
-//        ScoreSignals.Instance.onSendUIScore?.Invoke(uıScore);
-//        ScoreSignals.Instance.onSendPlayerScore?.Invoke(playerScore);
-//    }
-//    else
-//    {
-
-
-//        ScoreSignals.Instance.onSendUIScore?.Invoke(uıScore);
-//        ScoreSignals.Instance.onSendPlayerScore?.Invoke(playerScore);
-//    }
-
-//}
-
-
-//private void OnNextLevel()
-//{
-//    IsPressNextLevel = true;
-//}
-
-//private void OnReset()
-//{
-
-//    if (IsPressNextLevel)
-//    {
-//        _uıScore = uıScore;
-//    }
-//    else
-//    {
-
-//        _playerScore = 0;
-//    }
-
-
-//}

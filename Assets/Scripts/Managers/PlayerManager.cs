@@ -121,16 +121,12 @@ namespace Managers
             }
 
         }
-        private void Update()
-        {
-            
-        }
         public void ChangeAnimationintextarea()
         {
-            playerAnimation = PlayerAnimationType.Throw;
+            playerAnimation = PlayerAnimationType.Throw;//This place will Changge
         }
         public void ExitPaymentArea()
-        {   Debug.Log("++");
+        {   
             playerAnimation = PlayerAnimationType.Idle;
         }
 
