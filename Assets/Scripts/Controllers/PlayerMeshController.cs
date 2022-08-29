@@ -12,7 +12,13 @@ namespace Controllers
             {
                 transform.parent.gameObject.SetActive(true);
             }
-            transform.parent.localScale += Vector3.one/8* muiltiplyAmount;
+            Debug.Log(transform.parent.localScale);
+            
+          
+            if (transform.parent.localScale.x >= 1 && transform.parent.localScale.y >= 1 && transform.parent.localScale.y >= 1)
+            {
+                transform.parent.localScale += Vector3.one / 8 * muiltiplyAmount;//cancelınvoke
+            }
         }
     }
 }

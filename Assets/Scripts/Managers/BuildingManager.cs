@@ -94,6 +94,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnSave;
             CoreGameSignals.Instance.onLevelInitialize += OnLoad;
 
+
         }
 
         private void UnsubscribeEvents()
@@ -104,7 +105,9 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel -= OnSave;
             CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
 
+
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -123,6 +126,7 @@ namespace Managers
             Load(BuildingAddressID);
             SetDataToControllers();
         }
+
         public void Save(int uniqueId)
         {   
 
@@ -169,6 +173,7 @@ namespace Managers
         {   
             buildingMeshController.CalculateSaturation();
         }
+
 
         public void UpdateBuildingStatus(IdleLevelState idleLevelState)
         {

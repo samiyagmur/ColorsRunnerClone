@@ -455,6 +455,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6246347623427846488}
     m_Modifications:
+    - target: {fileID: 1266613996473920232, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_TagString
+      value: PaymentArea
+      objectReference: {fileID: 0}
     - target: {fileID: 7588762652693451852, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -533,6 +537,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6246347623427846488}
     m_Modifications:
+    - target: {fileID: 792063389423727893, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_TagString
+      value: PaymentArea
+      objectReference: {fileID: 0}
     - target: {fileID: 1507126562658142488, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
       propertyPath: m_Name
       value: Hotel
@@ -1082,6 +1090,10 @@ PrefabInstance:
     - target: {fileID: 892225101967693788, guid: 0a52d01af9342954da2e1e592bf5b075, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900783636544925514, guid: 0a52d01af9342954da2e1e592bf5b075, type: 3}
+      propertyPath: m_TagString
+      value: PaymentArea
       objectReference: {fileID: 0}
     - target: {fileID: 6554471502605120988, guid: 0a52d01af9342954da2e1e592bf5b075, type: 3}
       propertyPath: m_RootOrder

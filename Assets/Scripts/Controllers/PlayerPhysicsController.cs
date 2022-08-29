@@ -47,12 +47,12 @@ namespace Controllers
             {
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.EnterTaretArea);
             }
+            if (other.CompareTag("PaymentArea")) playerManager.InvokeRepeating("IsEnterPaymentArea", 0, 0.2f);
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("DroneArea"))
             {   
-               
                 playerManager.OnStopVerticalMovement();
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.Stop);
             }
@@ -62,8 +62,8 @@ namespace Controllers
             }
         }
         private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("PaymentArea")) playerManager.IsEnterPaymentArea();
+        {   
+            
 
         }
 
