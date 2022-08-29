@@ -121,7 +121,6 @@ namespace Managers
         }
         public void EnterIdleArea()
         {
-
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
             CoreGameSignals.Instance.onEnterIdleArea();
             CoreGameSignals.Instance.onChangeGameState(GameStates.Idle);
@@ -166,18 +165,6 @@ namespace Managers
             
         }
         #endregion
-        //public void CursorMovement()
-        //{
-        //    Sequence sequence = DOTween.Sequence();
-
-
-        //    sequence.Join(rectTransform.DORotate(new Vector3(0, 0, 15), 1f).SetEase(Ease.Linear));//x2 lerin konumuna 
-        //    sequence.Join(rectTransform.DOLocalMoveX(-320, 1f).SetEase(Ease.Linear));
-
-        //    sequence.SetLoops(-1, LoopType.Yoyo);
-
-
-        //}
         public void SelectMultiply()
         {
             float CursorXPos = rectTransform.localPosition.x;

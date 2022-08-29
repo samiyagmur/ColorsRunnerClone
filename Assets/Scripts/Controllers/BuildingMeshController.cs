@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -19,7 +20,7 @@ namespace Controllers
         #region Serialized Variables
         
         [SerializeField] private BuildingManager manager;
-        [SerializeField] List<MeshRenderer> renderer;
+        [SerializeField] private List<MeshRenderer> renderer;
         
 
         #endregion
@@ -38,7 +39,10 @@ namespace Controllers
              {
                  var matSaturation = renderer[i].material;
                  matSaturation.DOFloat(saturation, "_Saturation", 0.5f);
+                
              }
          }
+
+
     }
 }

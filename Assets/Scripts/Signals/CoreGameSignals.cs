@@ -14,6 +14,8 @@ namespace Signals
         public UnityAction onEnterMutiplyArea= delegate { };
 
         public UnityAction onEnterIdleArea = delegate { };
+        
+        public UnityAction onEnterPaymentArea=delegate { }; 
 
         public UnityAction <GameStates> onChangeGameState = delegate { };
         

@@ -1,6 +1,8 @@
 ﻿using Signals;
 using UnityEngine;
 using Enums;
+using System;
+
 namespace Managers
 {
     public class ScoreManager : MonoBehaviour
@@ -12,6 +14,7 @@ namespace Managers
         private int Score;
         private int TotalScore;
         private int IdleScore;
+        private int MultiplyAmaunt;
 
         #endregion
         #endregion
@@ -26,8 +29,11 @@ namespace Managers
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onEnterPaymentArea += OnEnterPaymentArea;
             ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
+            ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
+
 
         }
 
@@ -38,11 +44,13 @@ namespace Managers
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onEnterPaymentArea -= OnEnterPaymentArea;
             ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
 
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -54,21 +62,27 @@ namespace Managers
         }
         private void OnEnterMutiplyArea()
         {
-            CalculateScore(ScoreStatusAsLocations.EnterMultiple);
+            
             scoreStatus = ScoreStatusAsLocations.EnterMultiple;
             Debug.Log("OnEnterMutiplyArea");
         }
 
         private void OnEnterIdleArea()
         {
+            
             Debug.Log("OnEnterIdleArea");
-            CalculateScore(ScoreStatusAsLocations.ExitMultiple);
             scoreStatus = ScoreStatusAsLocations.ExitMultiple;
+        }
+
+        private void OnEnterPaymentArea()
+        {
+            Debug.Log("OnEnterPaymentArea");
+            scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
         }
 
         private void OnNextLevel()
         {
-            CalculateScore(ScoreStatusAsLocations.NextLevel);
+          
             scoreStatus = ScoreStatusAsLocations.NextLevel;
 
             Debug.Log("OnNextLevel");
@@ -76,7 +90,7 @@ namespace Managers
 
         private void OnReset()
         {
-            CalculateScore(ScoreStatusAsLocations.Reset);
+         
             scoreStatus = ScoreStatusAsLocations.Reset;
 
         }
@@ -84,63 +98,64 @@ namespace Managers
         private void OnIncreaseScore()
         {
             Score++;
-            if (scoreStatus == ScoreStatusAsLocations.NextLevel|| scoreStatus == ScoreStatusAsLocations.Reset|| scoreStatus == ScoreStatusAsLocations.LevelInitilize)
-            {
-                CalculateScore(ScoreStatusAsLocations.LevelInitilize);
-            }
-            if (scoreStatus == ScoreStatusAsLocations.ExitMultiple)
-            {   
-                CalculateScore(ScoreStatusAsLocations.ExitMultiple);
-            }
+            CalculateScore();
         }
 
         private void OnDecreaseScore()
         {
+            Score--;
             if (Score < 0)
             {
                 Score = 0;
             }
-            Score--;
-            if (scoreStatus==ScoreStatusAsLocations.EnterMultiple)
-            {
-                CalculateScore(ScoreStatusAsLocations.EnterMultiple);
-            }//when player smaller than preplayer,score will increase;
+           
+            CalculateScore();
         }
 
-        private void OnMultiplyAmaunt(string arg0)
+        private void OnMultiplyAmaunt(string value)
         {
-            
+            scoreStatus = ScoreStatusAsLocations.ExitMultiple;
+            MultiplyAmaunt = Convert.ToInt32(value.TrimStart('x'));
+            TotalScore *= MultiplyAmaunt;
+            CalculateScore();
         }
         
-        private void CalculateScore(ScoreStatusAsLocations scoreStatus)
+        private void CalculateScore()
         {
             switch (scoreStatus)
             {
                 case ScoreStatusAsLocations.LevelInitilize:
-                    TotalScore = Score;
-                    ReadPlayerText(TotalScore);
+                    ReadPlayerText(Score);
                     break;
                 case ScoreStatusAsLocations.NextLevel:
-                    TotalScore = 0;
-                    ReadPlayerText(TotalScore);
-                    Score = TotalScore;
+                    ReadPlayerText(Score);               
                     break;
                 case ScoreStatusAsLocations.Reset:
-                    TotalScore = 0;
-                    ReadPlayerText(TotalScore);
-                    Score= TotalScore;
+                    ReadPlayerText(Score);
                     break;
                 case ScoreStatusAsLocations.EnterMultiple:
+                    TotalScore++;
                     ReadPlayerText(Score);
+                    ReadUIText(TotalScore);
                     break;
                 case ScoreStatusAsLocations.ExitMultiple:
                     IdleScore += TotalScore;
                     IdleScore += Score;
-                    Debug.Log("IdleScore" + IdleScore + "TotalScore" + TotalScore + "Score" + Score);
                     ReadUIText(IdleScore);
                     ReadPlayerText(IdleScore);
                     Score = 0;
                     TotalScore =0;
+                    break;
+                case ScoreStatusAsLocations.EnterPaymentArea:
+                    ScoreSignals.Instance.onSendPlayerScore(IdleScore);
+                    IdleScore--;
+                    if (IdleScore <= 0)
+                    {
+                        IdleScore = 0;
+                    }
+                    ReadPlayerText(IdleScore);
+                    ReadUIText(IdleScore);
+
                     break;
             }
         }

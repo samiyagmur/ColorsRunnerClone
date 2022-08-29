@@ -138,7 +138,7 @@ namespace Managers
 
         private void OnEnterIdleArea()
         {
-           // movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
+           movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
         }
 
         public async void IsHitRainbow()
@@ -157,13 +157,18 @@ namespace Managers
             }
         }
 
-        internal void IsEnterPaymentArea()
+        public  void IsEnterPaymentArea()
         {
+            
             if (_gameStates == GameStates.Idle)
             {
+                
+                CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
                 ScoreSignals.Instance.onDecreaseScore?.Invoke();
                 playerMeshController.ChangeScale(-1);
+
             }
+
            
         }
 

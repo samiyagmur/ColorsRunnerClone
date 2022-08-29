@@ -189,7 +189,7 @@ public class PlayerMovementController : MonoBehaviour
         public void ChangeHorizontalSpeed(HorizontalSpeedStatus horizontalSpeedStatus)
         {
 
-          //  _movementData.SidewaysSpeed=(int)horizontalSpeedStatus;
+            _movementData.SidewaysSpeed=(int)horizontalSpeedStatus;
             
         }
     }
