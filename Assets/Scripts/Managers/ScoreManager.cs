@@ -105,7 +105,7 @@ namespace Managers
         {
             Score--;
             if (Score < 0)
-            {
+            {   
                 Score = 0;
             }
            
@@ -147,15 +147,15 @@ namespace Managers
                     TotalScore =0;
                     break;
                 case ScoreStatusAsLocations.EnterPaymentArea:
-                    ScoreSignals.Instance.onSendPlayerScore(IdleScore);
+                    BuildingSignals.Instance.onActiveTextUpdate.Invoke();
                     IdleScore--;
                     if (IdleScore <= 0)
                     {
+                        BuildingSignals.Instance.onScoreZero.Invoke();
                         IdleScore = 0;
                     }
                     ReadPlayerText(IdleScore);
                     ReadUIText(IdleScore);
-
                     break;
             }
         }
