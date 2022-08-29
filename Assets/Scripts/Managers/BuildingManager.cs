@@ -32,18 +32,18 @@ namespace Managers
 
         public int BuildingAddressID;
         public int _idleLevelId;
-        
+
 
         #endregion
 
         #region Private Variables
-        
-        
+
+        ScoreZeroStatus scoreZeroStatus;
         #endregion
-        
+
 
         #endregion
-        
+
         private BuildingsData GetBuildingsData()
         {
             return Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelId].Buildings[BuildingAddressID]; 
@@ -71,7 +71,7 @@ namespace Managers
             
             
         }
-        
+
         private void GetIdleLevelID()
         {
             _idleLevelId = CoreGameSignals.Instance.onGetIdleLevelID.Invoke();
@@ -93,6 +93,8 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit += OnSave;
             CoreGameSignals.Instance.onNextLevel += OnSave;
             CoreGameSignals.Instance.onLevelInitialize += OnLoad;
+            BuildingSignals.Instance.onActiveTextUpdate += OnActiveTextUpdate;
+            BuildingSignals.Instance.onScoreZero += OnScoreZero;
 
 
         }
@@ -104,6 +106,9 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit -= OnSave;
             CoreGameSignals.Instance.onNextLevel -= OnSave;
             CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
+            BuildingSignals.Instance.onActiveTextUpdate -= OnActiveTextUpdate;
+            BuildingSignals.Instance.onScoreZero -= OnScoreZero;
+
 
 
         }
@@ -151,7 +156,22 @@ namespace Managers
            buildingsData.BuildingMarketPrice = _buildingsData.BuildingMarketPrice;
            buildingsData.IsDepended = _buildingsData.IsDepended;
         }
-        
+
+        internal void SetScoreStatus()
+        {
+            scoreZeroStatus = ScoreZeroStatus.Pasive;
+        }
+
+        private void OnActiveTextUpdate()
+        {
+            scoreZeroStatus = ScoreZeroStatus.Active;
+        }
+
+        private void OnScoreZero()
+        {
+            scoreZeroStatus = ScoreZeroStatus.Pasive;
+        }
+
         private void SetDataToControllers() 
         {
             
@@ -162,11 +182,13 @@ namespace Managers
         }
 
         public void UpdatePayedAmount()
-        {   
-            buildingsData.PayedAmount++;
-            buildingMarketStatusController.UpdatePayedAmountText(buildingsData.PayedAmount);
-            UpdateSaturation();
-            
+        {
+            if (scoreZeroStatus == ScoreZeroStatus.Active)
+            {
+                buildingsData.PayedAmount++;
+                buildingMarketStatusController.UpdatePayedAmountText(buildingsData.PayedAmount);
+                UpdateSaturation();
+            }
         }
 
         private void UpdateSaturation()

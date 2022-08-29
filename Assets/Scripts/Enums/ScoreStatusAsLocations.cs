@@ -9,7 +9,7 @@ namespace Enums
         NextLevel,
         Reset,
         EnterMultiple,
-        ExitMultiple,
+        EnterIdle,
         EnterPaymentArea
 
         
