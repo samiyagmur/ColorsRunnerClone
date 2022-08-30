@@ -31,6 +31,8 @@ namespace Managers
 
         [SerializeField] private PlayerScoreController playerScoreController;
 
+        [SerializeField] private PlayerThrowController playerThrowController;
+
         [SerializeField] private GameObject scoreHolder;
 
         #endregion
@@ -123,10 +125,11 @@ namespace Managers
         }
         public void ChangeAnimationintextarea()
         {
-            playerAnimation = PlayerAnimationType.Throw;//This place will Changge
+            playerAnimation = PlayerAnimationType.Throw;
         }
         public void ExitPaymentArea()
-        {   
+        {
+            CoreGameSignals.Instance.onExitPaymentArea?.Invoke();
             playerAnimation = PlayerAnimationType.Idle;
         }
 
@@ -150,8 +153,6 @@ namespace Managers
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
         private void OnFailed() => movementController.IsReadyToPlay(false);
-
-        private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,player need to command  controller.
 
         private async void OnEnterMutiplyArea()
         {
@@ -194,10 +195,17 @@ namespace Managers
                 CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
                 ScoreSignals.Instance.onDecreaseScore?.Invoke();
                 
+                
             }
         }
         private void OnSetScoreText(int score) 
         {
+            if (score!=0 && playerAnimation == PlayerAnimationType.Throw)
+            {
+                playerThrowController.ThrowGameObject();
+            }
+                
+          
             playerMeshController.CalculateSmallerRate(score);
             playerScoreController.UpdateScore(score);
         }
@@ -223,9 +231,6 @@ namespace Managers
             StartVerticalMovement(exitPosition);
             await Task.Delay(1000);
         }
-
-        
-
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);
 
@@ -234,7 +239,7 @@ namespace Managers
             animationController.ChangeAnimationState(animType);
         }
 
-
+        
         // IEnumerator WaitForFinal()
         // {
         //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);
