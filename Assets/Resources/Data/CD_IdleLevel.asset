@@ -15,43 +15,48 @@ MonoBehaviour:
   IdleLevelList:
   - IdleLevelKey: IdleLevelDataKey
     Buildings:
-    - IdleBuildingDatalKey: IdleBuildingDataKey
-      IsDepended: 0
+    - Key: IdleBuildingDataKey
+      IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 50
+        BuildingMarketPrice: 7
         PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 1
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 100
+      BuildingMarketPrice: 10
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
       idleLevelState: 0
-    - IdleBuildingDatalKey: IdleBuildingDataKey
-      IsDepended: 0
+    - Key: IdleBuildingDataKey
+      IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 0
+        BuildingMarketPrice: 7
         PayedAmount: 0
-        BuildingAdressId: 0
+        BuildingAdressId: 1
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 150
+      BuildingMarketPrice: 10
       PayedAmount: 0
       BuildingAdressId: 1
       Saturation: 0
       idleLevelState: 0
-    - IdleBuildingDatalKey: IdleBuildingDataKey
-      IsDepended: 0
+    - Key: IdleBuildingDataKey
+      IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 0
+        BuildingMarketPrice: 5
         PayedAmount: 0
-        BuildingAdressId: 0
+        BuildingAdressId: 2
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 70
+      BuildingMarketPrice: 10
       PayedAmount: 0
       BuildingAdressId: 2
-      Saturation: 1
+      Saturation: 0
       idleLevelState: 0
     IdleLevelState: 0
+    CompletedBuildingsCount: 0
+  - IdleLevelKey: IdleLevelDataKey
+    Buildings: []
+    IdleLevelState: 0
+    CompletedBuildingsCount: 0

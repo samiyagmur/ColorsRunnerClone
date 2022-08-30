@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Enums;
+﻿using Enums;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.BuildingControllers
 {
     public class BuildingScorePhysicsController : MonoBehaviour
     {
@@ -41,11 +39,12 @@ namespace Controllers
                     }
                     else
                     {
-
+                        
                         if (buildingManager.BuildingsData.idleLevelState == IdleLevelState.Uncompleted)
-                        {
+                        {   
+                            buildingManager.OpenSideObject();
                             buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
-                            buildingManager.Save(buildingManager.BuildingAddressID);
+                            buildingManager.CheckBuildingsScoreStatus(IdleLevelState.Completed);
                         }
                     }
                 
@@ -57,8 +56,15 @@ namespace Controllers
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
-            {
+            {   
+                if (buildingManager.BuildingsData.BuildingMarketPrice == buildingManager.BuildingsData.PayedAmount)
+                {
+                    buildingManager.OpenSideObject();
+                    buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
+                    buildingManager.CheckBuildingsScoreStatus(IdleLevelState.Completed);
+                }
                 _timer = 0f;
+                
                 buildingManager.Save(buildingManager.BuildingAddressID);
                 
             }

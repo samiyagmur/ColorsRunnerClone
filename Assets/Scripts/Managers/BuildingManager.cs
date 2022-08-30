@@ -3,6 +3,7 @@ using Enums;
 using Signals;
 using System;
 using Abstract;
+using Controllers.BuildingControllers;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using DG.Tweening;
@@ -22,7 +23,8 @@ namespace Managers
         [SerializeField] private GameObject sideObject;
         [SerializeField] private BuildingMeshController buildingMeshController;
         [SerializeField] private BuildingPhysicsController buildingPhysicsController;
-        [SerializeField] private BuildingScorePhysicsController buildingScorePhysicsController;
+        [SerializeField] private SideObjectMeshController sideObjectMeshController;
+        [SerializeField] private SideObjectMarketStatusController sideObjectMarketStatusController;
 
         #endregion
 
@@ -48,7 +50,6 @@ namespace Managers
         private void Awake()
         {   
           SetData();
-      
         }
 
         private void SetData()
@@ -66,7 +67,15 @@ namespace Managers
             }
             Debug.Log("Key Exist!");
             Load(BuildingAddressID);
+            CheckBuildingsScoreStatus(BuildingsData.idleLevelState);
+            
+            if (BuildingsData.IsDepended && BuildingsData.idleLevelState == IdleLevelState.Completed)
+            {
+                CheckSideBuildingsScoreStatus(BuildingsData.SideObject.ıdleLevelState);
+            }
+            
             SetDataToControllers();
+            
         }
         
         private void GetIdleLevelID()
@@ -114,7 +123,13 @@ namespace Managers
             buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
             buildingMeshController.Saturation = BuildingsData.Saturation;
             UpdateSaturation();
-            UpdateBuildingStatus(BuildingsData.idleLevelState);
+            if (BuildingsData.IsDepended)
+            {
+                sideObjectMarketStatusController.UpdatePayedAmountText(BuildingsData.SideObject.PayedAmount);
+                sideObjectMeshController.Saturation = BuildingsData.SideObject.Saturation;
+                UpDateSideSaturation();
+            }
+            
 
         }
 
@@ -155,6 +170,7 @@ namespace Managers
             BuildingsData.idleLevelState = _buildingsData.idleLevelState;
             BuildingsData.BuildingMarketPrice = _buildingsData.BuildingMarketPrice;
             BuildingsData.IsDepended = _buildingsData.IsDepended;
+            BuildingsData.SideObject = _buildingsData.SideObject;
         }
 
         #endregion
@@ -170,6 +186,17 @@ namespace Managers
             
         }
 
+        public void UpdateSidePayedAmount()
+        {
+            BuildingsData.SideObject.PayedAmount++;
+            sideObjectMarketStatusController.UpdatePayedAmountText(BuildingsData.SideObject.PayedAmount);
+            UpDateSideSaturation();
+        }
+
+        public void UpDateSideSaturation()
+        {
+            sideObjectMeshController.CalculateSaturation();
+        }
         private void UpdateSaturation()
         {   
             buildingMeshController.CalculateSaturation();
@@ -188,7 +215,41 @@ namespace Managers
                 }
             }
         }
-        
+        public void UpdateSideBuildingStatus(IdleLevelState _idleLevelState)
+        {
+            BuildingsData.SideObject.ıdleLevelState = _idleLevelState;
+
+            BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsData.SideObject.BuildingAdressId);
+     
+        }
+
+        public void CheckBuildingsScoreStatus(IdleLevelState _idleLevelState)
+        {
+            if (_idleLevelState == IdleLevelState.Completed)
+            {
+                buildingMarketStatusController.gameObject.SetActive(false);
+            }
+            else
+            {
+                buildingMarketStatusController.gameObject.SetActive(true);
+            }
+        }
+        public void CheckSideBuildingsScoreStatus(IdleLevelState _idleLevelState)
+        {
+            if (_idleLevelState == IdleLevelState.Completed)
+            {
+               sideObjectMarketStatusController.gameObject.SetActive(false);
+            }
+            else
+            {
+                sideObjectMarketStatusController.gameObject.SetActive(true);
+            }
+        }
+
+        public void OpenSideObject()
+        {
+            sideObject.SetActive(true);
+        }
 
         #endregion
        

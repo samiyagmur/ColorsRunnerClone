@@ -25,7 +25,7 @@ namespace Datas.ValueObject
             IdleLevelState = _idleLevelState;
             CompletedBuildingsCount = _completedBuildingsCount;
         }
-        
+
         public override string GetKey()
         {
             return IdleLevelKey;

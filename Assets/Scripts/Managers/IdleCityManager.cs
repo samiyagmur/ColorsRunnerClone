@@ -76,11 +76,18 @@ namespace Managers
         private void SubscribeEvents()
         {
             BuildingSignals.Instance.onBuildingsCompleted += OnIncreaseCompletedCount;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
+            CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onLevelInitialize += OnLoad;
         }
 
         private void UnsubscribeEvents()
         {
             BuildingSignals.Instance.onBuildingsCompleted -= OnIncreaseCompletedCount;
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
+            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
+
         }
         private void OnDisable()
         {
@@ -91,6 +98,15 @@ namespace Managers
 
         #region Save-Load
 
+        private void OnSave()
+        {
+            Save(_idleLevelId);
+        }
+
+        private void OnLoad()
+        {
+            Load(_idleLevelId);
+        }
         public void Save(int uniqueId)
         {
             IdleLevelData = new IdleLevelData(IdleLevelData.IdleLevelState,IdleLevelData.CompletedBuildingsCount);
@@ -100,7 +116,7 @@ namespace Managers
         public void Load(int uniqueId)
         {
             
-            IdleLevelData _IdleLevelData = SaveLoadSignals.Instance.onLoadIdleData.Invoke(IdleLevelData.GetKey(), uniqueId);
+            IdleLevelData _IdleLevelData = SaveLoadSignals.Instance.onLoadIdleData.Invoke(IdleLevelData.IdleLevelKey, uniqueId);
 
             IdleLevelData.IdleLevelState = _IdleLevelData.IdleLevelState;
             IdleLevelData.CompletedBuildingsCount = _IdleLevelData.CompletedBuildingsCount;
@@ -113,15 +129,24 @@ namespace Managers
         private void OnIncreaseCompletedCount(int addressId)
         {
             IdleLevelData.CompletedBuildingsCount++;
+            Debug.Log(IdleLevelData.CompletedBuildingsCount);
+            SetIdleLevelStatus();
+            Save(_idleLevelId);
         }
-
+        
         private void SetIdleLevelStatus()
         {
             if (IdleLevelData.CompletedBuildingsCount == BuildingManagers.Count)
             {
                 IdleLevelData.IdleLevelState = IdleLevelState.Completed;
+                Save(_idleLevelId);
+                CoreGameSignals.Instance.onIdleLevelChange.Invoke();
+                
             }
+            
+            Debug.Log(IdleLevelData.CompletedBuildingsCount + "/" + BuildingManagers.Count);
         }
+        
         
         
 

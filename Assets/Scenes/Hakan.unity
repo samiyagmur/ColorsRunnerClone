@@ -2059,6 +2059,7 @@ MonoBehaviour:
     IdleLevelKey: IdleLevelDataKey
     Buildings: []
     IdleLevelState: 0
+    CompletedBuildingsCount: 0
   levelHolder: {fileID: 183518861}
   idleLevelHolder: {fileID: 85257424}
   levelLoader: {fileID: 649062154}

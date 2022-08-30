@@ -97,6 +97,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelId;
+            CoreGameSignals.Instance.onIdleLevelChange += OnIncreaseIdleLevel;
         }
 
         private void UnsubscribeEvents()
@@ -108,7 +109,8 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelId;
-        
+            CoreGameSignals.Instance.onIdleLevelChange -= OnIncreaseIdleLevel;
+
         }
 
         private void OnDisable()
@@ -124,22 +126,22 @@ namespace Managers
             OnInitializeIdleLevel();
         }
 
-        private void OnNextLevel()
+        private async void OnNextLevel()
         {
             _LevelID++;
             Save(_IdleLevelId);
-            if (Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_IdleLevelId].IdleLevelState == IdleLevelState.Completed)
-            {
-                _IdleLevelId++;
-                Save(_IdleLevelId);
-            }
-
-            CoreGameSignals.Instance.onReset?.Invoke();
+            await Task.Delay(25);
+            OnReset();
             //UISignals.Instance.onChangeLevelText(_LevelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
             UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
+        private void OnIncreaseIdleLevel()
+        {
+            _IdleLevelId++;
+            Debug.Log(_IdleLevelId);
+        }
         private int OnGetLevelId()
         {
             return _LevelID;
@@ -151,6 +153,7 @@ namespace Managers
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onClearActiveIdleLevel.Invoke();
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             CoreGameSignals.Instance.onIdleLevelInitialize?.Invoke();
         }
@@ -183,7 +186,7 @@ namespace Managers
 
         public void Save(int uniqueId)
         {
-            LevelIdData levelIdData= new LevelIdData(_LevelID,_IdleLevelId);
+            LevelIdData levelIdData= new LevelIdData(_IdleLevelId,_LevelID);
             
             SaveLoadSignals.Instance.onSaveGameData.Invoke(levelIdData,uniqueId);
         }
