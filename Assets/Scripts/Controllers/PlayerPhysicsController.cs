@@ -47,7 +47,12 @@ namespace Controllers
             {
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.EnterTaretArea);
             }
-            if (other.CompareTag("PaymentArea")) playerManager.InvokeRepeating("IsEnterPaymentArea", 0, 0.2f);
+            if (other.CompareTag("PaymentArea"))
+            {
+                playerManager.ChangeAnimationintextarea();
+                playerManager.InvokeRepeating("IsEnterPaymentArea", 0, 0.1f);
+                
+            } 
         }
         private void OnTriggerExit(Collider other)
         {
@@ -60,12 +65,20 @@ namespace Controllers
             {
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.Normal);
             }
-        }
-        private void OnTriggerStay(Collider other)
-        {   
+            if (other.CompareTag("PaymentArea")) 
+            {
+                playerManager.ExitPaymentArea();
+                playerManager.CancelInvoke("IsEnterPaymentArea"); 
+            }
             
-
         }
+        //private void OnTriggerStay(Collider other)
+        //{
+        //    if (other.CompareTag("PaymentArea"))
+        //    {
+                
+        //    }
+        //}
 
     }
 }

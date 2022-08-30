@@ -71,18 +71,15 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     if (currentGameState == GameStates.Runner)
                     {
-                       
                         RunnerMove();
-
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
-                        manager.ChangePlayerAnimation(PlayerAnimationType.Running);
+                        
                         ChangeForwardSpeed(ChangeSpeedState.EnterIdleState);
                         
                         IdleMove();
                     }
-                    
                 }
                 else
                 {
@@ -92,10 +89,9 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     else if (currentGameState == GameStates.Idle)
                     {
-                        manager.ChangePlayerAnimation(PlayerAnimationType.Idle);///This Place Has will been change.
+                       
                         Stop();
                     }
-                    
                 }
                 
             }

@@ -132,14 +132,15 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);//yeri deðiþcek
             //DOTween.KillAll();
 
         }
-
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);
             //DOTween.KillAll();
         }
 
