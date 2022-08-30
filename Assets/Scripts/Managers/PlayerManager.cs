@@ -194,12 +194,18 @@ namespace Managers
                 playerMeshController.ChangeScale(-1);
                 CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
                 ScoreSignals.Instance.onDecreaseScore?.Invoke();
-                playerThrowController.ThrowGameObject();
+                
                 
             }
         }
         private void OnSetScoreText(int score) 
         {
+            if (score!=0 && playerAnimation == PlayerAnimationType.Throw)
+            {
+                playerThrowController.ThrowGameObject();
+            }
+                
+          
             playerMeshController.CalculateSmallerRate(score);
             playerScoreController.UpdateScore(score);
         }
