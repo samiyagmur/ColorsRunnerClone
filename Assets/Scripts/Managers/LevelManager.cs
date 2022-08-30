@@ -135,7 +135,8 @@ namespace Managers
             _LevelID++;
             Save(_uniqueID);
             await Task.Delay(25);
-            OnReset();
+
+            CoreGameSignals.Instance.onReset?.Invoke();
             //UISignals.Instance.onChangeLevelText(_LevelID + 1);
             //MoneyPoolManager.Instance.HideAllActiveMoney();
             UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
