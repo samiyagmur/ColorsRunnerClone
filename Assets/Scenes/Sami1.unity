@@ -2032,6 +2032,7 @@ MonoBehaviour:
     IdleLevelKey: IdleLevelDataKey
     Buildings: []
     IdleLevelState: 0
+    CompletedBuildingsCount: 0
   levelHolder: {fileID: 183518861}
   idleLevelHolder: {fileID: 85257424}
   levelLoader: {fileID: 649062154}
@@ -2253,7 +2254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_TagString
@@ -4270,7 +4271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488114985}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 34.9, z: -18.2}
+  m_LocalPosition: {x: 0, y: 24.28, z: -16.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 317372515}
@@ -4826,7 +4827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671055364}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 23.2, z: -8.8}
+  m_LocalPosition: {x: 0, y: 23.2, z: -10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1097272177}

@@ -5,6 +5,7 @@ namespace Controllers
 {
     public class PlayerMeshController : MonoBehaviour
     {
+        
         #region Self Variables
         #region Private Variables
         private int _totalScore;
@@ -17,6 +18,7 @@ namespace Controllers
                 transform.parent.gameObject.SetActive(true);
             }
 
+            if (transform.parent.localScale.x >= 1 && transform.parent.localScale.y >= 1 && transform.parent.localScale.y >= 1)
             transform.parent.localScale += Vector3.one / (_totalScore * 2) * muiltiplyAmount;
 
             if (transform.parent.localScale.x <= 1 && transform.parent.localScale.y <= 1 && transform.parent.localScale.y <= 1)

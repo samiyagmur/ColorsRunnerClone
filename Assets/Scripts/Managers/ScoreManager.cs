@@ -24,6 +24,7 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
+        
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -32,6 +33,8 @@ namespace Managers
             ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
+
+
         }
 
         private void UnsubscribeEvents()
@@ -45,45 +48,57 @@ namespace Managers
             ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
+
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
         private void Start()
         {
+            
             scoreStatus=ScoreStatusAsLocations.LevelInitilize;
         }
         private void OnEnterMutiplyArea()
         {
+            
             scoreStatus = ScoreStatusAsLocations.EnterMultiple;
-            Debug.Log("OnEnterMutiplyArea");
+           
         }
 
         private void OnEnterIdleArea()
         {
-            Debug.Log("OnEnterIdleArea");
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
+            CalculateScore();//
         }
 
         private void OnEnterPaymentArea()
         {
-            Debug.Log("OnEnterPaymentArea");
+        
             scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
         }
 
+  
         private void OnExitPaymentArea()
         {
+          
+            
             scoreStatus = ScoreStatusAsLocations.ExitPaymentArea;
         }
 
         private void OnReset()
         {
+           
             scoreStatus = ScoreStatusAsLocations.Reset;
+            CalculateScore();
+
         }
+
         private void OnIncreaseScore()
         {
             Score++;
+            
             CalculateScore();
         }
 
@@ -102,6 +117,8 @@ namespace Managers
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
             MultiplyAmaunt = Convert.ToInt32(value.TrimStart('x'));
             TotalScore *= MultiplyAmaunt;
+
+
             CalculateScore();
         }
         
@@ -129,6 +146,7 @@ namespace Managers
                     TotalScore =0;
                     break;
                 case ScoreStatusAsLocations.EnterPaymentArea:
+                    ScoreSignals.Instance.onSendPlayerScore(IdleScore);
                     BuildingSignals.Instance.onActiveTextUpdate.Invoke();
                     IdleScore--;
                     if (IdleScore <= 0)
@@ -138,6 +156,7 @@ namespace Managers
                     }
                     ReadPlayerText(IdleScore);
                     ReadUIText(IdleScore);
+
                     break;
                 case ScoreStatusAsLocations.ExitPaymentArea:
                     IdleScore=Score;
@@ -149,11 +168,14 @@ namespace Managers
         private void ReadUIText(int _totalScore)
         {
             ScoreSignals.Instance.onSendUIScore?.Invoke(_totalScore);
+          
         }
         private void ReadPlayerText(int _totalScore)
         {
 
             ScoreSignals.Instance.onSendPlayerScore?.Invoke(_totalScore);
         }
+
+
     }
 }

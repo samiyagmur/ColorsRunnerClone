@@ -87,58 +87,58 @@ public class InputManager : MonoBehaviour
         
         if (Input.GetMouseButtonUp(0))
         {
-                Debug.Log("Update");
+         
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
 
         if (Input.GetMouseButtonDown(0))
-            {
+        {
                 
 
-                if (Input.mousePosition.y<= 960)
-                {
+            if (Input.mousePosition.y<= 960)
+            {
                     
-                    _isTouching = true;
-                    InputSignals.Instance.onInputTaken?.Invoke();
-                }
-                _mousePosition = Input.mousePosition;
-
-
+                _isTouching = true;
+                InputSignals.Instance.onInputTaken?.Invoke();
             }
+            _mousePosition = Input.mousePosition;
+
+
+        }
 
         if (currentGameState == GameStates.Runner)
         {
                 
                 if (Input.GetMouseButton(0))
-            {
-                    if (_isTouching)
                 {
+                    if (_isTouching)
+                    {
                         
                         if (_mousePosition != null)
-                    {
+                        {
                            
                             Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
 
-                        if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
-                            _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
-                        else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
-                            _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
-                        else
-                            _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                                Data.ClampSpeed);
+                            if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
+                                _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
+                            else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
+                                _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
+                            else
+                                _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
+                                    Data.ClampSpeed);
 
-                        _mousePosition = Input.mousePosition;
+                            _mousePosition = Input.mousePosition;
 
-                        InputSignals.Instance.onInputDragged?.Invoke(new RunnerInputParams()
-                        {
-                            XValue = _moveVector.x,
-                            ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y)
-                        });
+                            InputSignals.Instance.onInputDragged?.Invoke(new RunnerInputParams()
+                            {
+                                XValue = _moveVector.x,
+                                ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y)
+                            });
+                        }
                     }
                 }
-            }
         }
 
         if (currentGameState == GameStates.Idle)
@@ -207,7 +207,7 @@ public class InputManager : MonoBehaviour
     private void OnReset()
     {
 
-        OnChangeGameState(GameStates.Runner);//Changed
+        OnChangeGameState(GameStates.Runner);
         _isTouching = false;
         isReadyForTouch = false;
         

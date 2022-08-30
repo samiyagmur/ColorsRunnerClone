@@ -29,11 +29,11 @@ namespace Controllers
         
          public void CalculateSaturation()
           {
-              Saturation = (float)manager.buildingsData.PayedAmount / manager.buildingsData.BuildingMarketPrice*3f;
-              changeSaturation(Saturation);
+              Saturation = (float)manager.BuildingsData.PayedAmount / manager.BuildingsData.BuildingMarketPrice*3f;
+              ChangeSaturation(Saturation);
           }
 
-         private void changeSaturation(float saturation)
+         private void ChangeSaturation(float saturation)
          {
              for (int i = 0; i < renderer.Count; i++)
              {
