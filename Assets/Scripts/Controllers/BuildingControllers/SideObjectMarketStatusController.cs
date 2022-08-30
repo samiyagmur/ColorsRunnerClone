@@ -1,11 +1,10 @@
-using System;
 using Managers;
 using TMPro;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.BuildingControllers
 {
-    public class BuildingMarketStatusController : MonoBehaviour
+    public class SideObjectMarketStatusController : MonoBehaviour
     {
         #region Self Variables
 
@@ -30,15 +29,13 @@ namespace Controllers
 
         public void SetRequiredAmountToText()
         {
-            marketPriceText.text = $"{manager.buildingsData.PayedAmount}/{manager.buildingsData.BuildingMarketPrice}";
-            
+            marketPriceText.text = $"{manager.BuildingsData.PayedAmount}/{manager.BuildingsData.BuildingMarketPrice}";
         }
 
         public void UpdatePayedAmountText(int payedAmount)
         {
-            manager.buildingsData.PayedAmount = payedAmount;
+            manager.BuildingsData.PayedAmount = payedAmount;
             SetRequiredAmountToText();
         }
-        
     }
 }

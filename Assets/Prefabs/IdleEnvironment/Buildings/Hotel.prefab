@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &932242358913228504
+--- !u!114 &317675428525881900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 552977844106142894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c91bc0e1264174ea2d3bfc9a157493, type: 3}
+  m_Script: {fileID: 11500000, guid: f6d9c26fdcdd433dbba5933eb746912c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Saturation: 0
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 2337033275394735638}
   m_Layer: 0
   m_Name: ScoreHolder
-  m_TagString: Untagged
+  m_TagString: PaymentArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc38b0d6ff5a4267bec59031bdaa02fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingsData:
+  BuildingsData:
     Key: IdleBuildingDataKey
     IsDepended: 0
     SideObject:
@@ -160,18 +160,12 @@ MonoBehaviour:
     Saturation: 0
     idleLevelState: 0
   buildingMarketStatusController: {fileID: 3813136454919738973}
-  SideObject: {fileID: 3197765966687815071}
-  sideObjectData:
-    BuildingMarketPrice: 0
-    PayedAmount: 0
-    BuildingAdressId: 0
-    Saturation: 0
-    "\u0131dleLevelState": 0
+  sideObject: {fileID: 3197765966687815071}
   buildingMeshController: {fileID: 6823373001471844444}
   buildingPhysicsController: {fileID: 1186926544110523240}
-  buildingScorePhysicsController: {fileID: 2337033275394735638}
+  sideObjectMeshController: {fileID: 0}
+  sideObjectMarketStatusController: {fileID: 459631761079373412}
   BuildingAddressID: 0
-  _idleLevelId: 0
 --- !u!1 &2041820090085671497
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,17 +250,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7378615185143715251}
-  - component: {fileID: 9042041685898724620}
   - component: {fileID: 8804368659494978206}
-  - component: {fileID: 6329579230828150229}
-  - component: {fileID: 6784922258460706993}
+  - component: {fileID: 459631761079373412}
+  - component: {fileID: 1901493958984761488}
+  - component: {fileID: 5798734734146852729}
   m_Layer: 0
   m_Name: SideObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7378615185143715251
 Transform:
   m_ObjectHideFlags: 0
@@ -282,20 +276,6 @@ Transform:
   m_Father: {fileID: 1507126562658142489}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9042041685898724620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197765966687815071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001074c640601ea4b81b3aaac770c782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marketPriceText: {fileID: 1416742436377609782}
-  manager: {fileID: 0}
 --- !u!65 &8804368659494978206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -309,7 +289,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 5.119133}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6329579230828150229
+--- !u!114 &459631761079373412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,13 +298,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3197765966687815071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c91bc0e1264174ea2d3bfc9a157493, type: 3}
+  m_Script: {fileID: 11500000, guid: ba035c3bf250ba1449eef450b38432dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Saturation: 0
+  marketPriceText: {fileID: 1416742436377609782}
   manager: {fileID: 1507126562658142494}
-  renderer: []
---- !u!114 &6784922258460706993
+--- !u!114 &1901493958984761488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,7 +312,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3197765966687815071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b4fa49078860d49a4f5094516cfffb, type: 3}
+  m_Script: {fileID: 11500000, guid: 78e7e20609ba4a91bab3c7ceea0303c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingManager: {fileID: 1507126562658142494}
+--- !u!114 &5798734734146852729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197765966687815071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6079594155940a897d34b7ea8d07621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buildingManager: {fileID: 1507126562658142494}
@@ -605,9 +597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0/0
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -634,7 +624,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.9
+  m_fontSize: 18.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -90,15 +90,13 @@ namespace Managers
 
         private void OnSetStackTarget()
         {
-
             playerTransform = FindObjectOfType<PlayerManager>().transform;
             
             stackHolder = GameObject.FindWithTag("StackHolder");
             
             StackSignals.Instance.onInitializeStack?.Invoke();
-            
-            
         }
+        
         private void FixedUpdate()
         {
             if (playerTransform != null)
@@ -106,8 +104,6 @@ namespace Managers
                 LerpStack();
             }
             
-            
-           
         }
         
         #region Initialize Stack
@@ -130,10 +126,8 @@ namespace Managers
         {
             for (int i = 0; i < collectableList.Count; i++)
             {
-               
                 collectableList[i].transform.SetParent(null);
                 Destroy(collectableList[i]);
-
             }
         }
         private void OnRunStack()

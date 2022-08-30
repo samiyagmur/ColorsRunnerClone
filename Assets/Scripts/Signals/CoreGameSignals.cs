@@ -48,6 +48,8 @@ namespace Signals
         public Func<int> onGetLevelID = delegate { return 0; };
         
         public Func<int> onGetIdleLevelID = delegate { return 0; };
+        
+        public UnityAction onIdleLevelChange = delegate {  };
 
     }
 }

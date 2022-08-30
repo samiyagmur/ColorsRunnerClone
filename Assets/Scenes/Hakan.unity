@@ -400,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85257424}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 423}
+  m_LocalPosition: {x: 0, y: 0, z: 365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 822607208}
@@ -2059,6 +2059,7 @@ MonoBehaviour:
     IdleLevelKey: IdleLevelDataKey
     Buildings: []
     IdleLevelState: 0
+    CompletedBuildingsCount: 0
   levelHolder: {fileID: 183518861}
   idleLevelHolder: {fileID: 85257424}
   levelLoader: {fileID: 649062154}
@@ -5506,7 +5507,6 @@ MonoBehaviour:
     ClampSpeed: 0.007
   floatingJoystick: {fileID: 533010121}
   isReadyForTouch: 0
-  isFirstTimeTouchTaken: 0
   currentGameState: 0
 --- !u!1 &1959078468
 GameObject:
