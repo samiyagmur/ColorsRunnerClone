@@ -20,12 +20,34 @@ public class PlayerAnimationController : MonoBehaviour
     #endregion
     
 
-    public void WhenThrowing() { ChangeAnimationState(PlayerAnimationType.Throw); }
+
 
     public void ChangeAnimationState(PlayerAnimationType type)
     {
-            playerAnimator.Play(type.ToString());
+            //ınvoke
+            //when player change animation type,this methost will work.
+            
+           playerAnimator.Play(type.ToString());
+
+            //switch (type)
+            //{
+            //    case PlayerAnimationType.Idle:
+            //        playerAnimator.Play("Idle");
+            //        break;
+            //    case PlayerAnimationType.Running:
+            //        playerAnimator.Play("Running");
+            //        break;
+            //    case PlayerAnimationType.Throw:
+            //        playerAnimator.Play("Throw");
+            //        break;
+            //    case PlayerAnimationType.Next:
+            //        break;
+                
+                    
+            //}
+
+
+        }
     }
-}
-   
+
 }

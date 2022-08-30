@@ -31,12 +31,13 @@ namespace Managers
 
         [SerializeField] private PlayerScoreController playerScoreController;
 
-
+        [SerializeField] private PlayerThrowController playerThrowController;
 
         [SerializeField] private GameObject scoreHolder;
 
         #endregion
         private GameStates _gameStates;
+        private PlayerAnimationType playerAnimation;
         #endregion
 
         private void Awake()
@@ -98,22 +99,52 @@ namespace Managers
 
         #region Movement Controller
 
-        private void OnActivateMovement() => movementController.EnableMovement();
+        private void OnActivateMovement() 
+        {
+            ChangePlayerAnimation(PlayerAnimationType.Running);
+            
+            movementController.EnableMovement();
+        }
 
-        private void OnDeactiveMovement() => movementController.DeactiveMovement();
+        private void OnDeactiveMovement() 
+        {
+            movementController.DeactiveMovement();
+          
+
+            if (playerAnimation == PlayerAnimationType.Throw)//This place will Changge
+            {
+               
+                ChangePlayerAnimation(PlayerAnimationType.Throw);
+            }
+            else
+            {
+                ChangePlayerAnimation(PlayerAnimationType.Idle);
+
+            }
+
+        }
+        public void ChangeAnimationintextarea()
+        {
+            playerAnimation = PlayerAnimationType.Throw;
+        }
+        public void ExitPaymentArea()
+        {
+            CoreGameSignals.Instance.onExitPaymentArea?.Invoke();
+            playerAnimation = PlayerAnimationType.Idle;
+        }
 
         private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
 
         private void OnGetIdleInputValues(IdleInputParams inputParams)
-        { 
-            movementController.UpdateIdleInputValue(inputParams); 
-        } 
+        {
+            movementController.UpdateIdleInputValue(inputParams);
+        }
 
         #endregion
 
         #endregion
 
-        private void OnChangeGameState(GameStates gameStates) 
+        private void OnChangeGameState(GameStates gameStates)
         {
             _gameStates = gameStates;
             movementController.ChangeGameStates(_gameStates);
@@ -123,11 +154,9 @@ namespace Managers
         private void OnPlay() => movementController.IsReadyToPlay(true);
         private void OnFailed() => movementController.IsReadyToPlay(false);
 
-        private void OnLevelSuccessful() => movementController.IsReadyToPlay(false);//OnReset,player need to command  controller.
-
         private async void OnEnterMutiplyArea()
         {
-           
+
             ChangeForwardSpeeds(ChangeSpeedState.EnterMultipleArea);
             await Task.Delay(1500);
             ChangeForwardSpeeds(ChangeSpeedState.Stop);
@@ -138,42 +167,48 @@ namespace Managers
 
         private void OnEnterIdleArea()
         {
-           movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
+            movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
         }
 
         public async void IsHitRainbow()
         {
-            
+
             await Task.Delay(3500);//it Will cahange
             UISignals.Instance.onMultiplyArea?.Invoke();
-            
+
         }
 
         public void IsHitCollectable()
-        {   
+        {
             if (_gameStates == GameStates.Idle)
             {
                 ScoreSignals.Instance.onIncreaseScore?.Invoke();
             }
         }
 
-        public  void IsEnterPaymentArea()
+        public void IsEnterPaymentArea()
         {
-            
+
             if (_gameStates == GameStates.Idle)
             {
-                
+                playerMeshController.ChangeScale(-1);
                 CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
                 ScoreSignals.Instance.onDecreaseScore?.Invoke();
-                playerMeshController.ChangeScale(-1);
-
+                
+                
             }
-
-           
         }
-
-
-        private void OnSetScoreText(int score) => playerScoreController.UpdateScore(score);
+        private void OnSetScoreText(int score) 
+        {
+            if (score!=0 && playerAnimation == PlayerAnimationType.Throw)
+            {
+                playerThrowController.ThrowGameObject();
+            }
+                
+          
+            playerMeshController.CalculateSmallerRate(score);
+            playerScoreController.UpdateScore(score);
+        }
 
         public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
         private void OnReset()
@@ -196,9 +231,6 @@ namespace Managers
             StartVerticalMovement(exitPosition);
             await Task.Delay(1000);
         }
-
-        
-
         public void StartVerticalMovement(Transform exitPosition) => movementController.OnStartVerticalMovement(exitPosition);
         public void ChangeForwardSpeeds(ChangeSpeedState changeSpeedState) => movementController.ChangeForwardSpeed(changeSpeedState);
 
@@ -207,7 +239,7 @@ namespace Managers
             animationController.ChangeAnimationState(animType);
         }
 
-
+        
         // IEnumerator WaitForFinal()
         // {
         //     animationController.Playanim(animationStates:PlayerAnimationStates.Idle);

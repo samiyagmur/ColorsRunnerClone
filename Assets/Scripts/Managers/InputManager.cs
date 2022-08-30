@@ -87,6 +87,7 @@ public class InputManager : MonoBehaviour
         
         if (Input.GetMouseButtonUp(0))
         {
+                Debug.Log("Update");
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
         }

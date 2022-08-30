@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 505523903821665497}
   - component: {fileID: 505523903821665498}
   - component: {fileID: 8033736329645616880}
+  - component: {fileID: 2798135257217706350}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Player
@@ -132,6 +133,7 @@ MonoBehaviour:
   animationController: {fileID: 505523902901583841}
   playerMeshController: {fileID: 505523903641157004}
   playerScoreController: {fileID: 1405215540989902758}
+  playerThrowController: {fileID: 2798135257217706350}
   scoreHolder: {fileID: 2341673961908713311}
 --- !u!114 &505523903821665497
 MonoBehaviour:
@@ -161,7 +163,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &8033736329645616880
@@ -178,6 +180,20 @@ CapsuleCollider:
   m_Height: 2.1890402
   m_Direction: 1
   m_Center: {x: 0, y: 1.106724, z: 0.023281991}
+--- !u!114 &2798135257217706350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505523903821665500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39b8d2f868e43f4c88398fc00be3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _throwObject: {fileID: 3010178883341975155, guid: 96d236c6c626ff74c9f6f40177a91c3d, type: 3}
+  _throwRigidbody: {fileID: 3484239039067881873, guid: 96d236c6c626ff74c9f6f40177a91c3d, type: 3}
 --- !u!114 &505523902901583841
 MonoBehaviour:
   m_ObjectHideFlags: 0
