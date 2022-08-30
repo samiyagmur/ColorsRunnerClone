@@ -70,6 +70,7 @@ namespace Managers
         private void OnEnterIdleArea()
         {
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
+            CalculateScore();//
         }
 
         private void OnEnterPaymentArea()
@@ -82,15 +83,15 @@ namespace Managers
         private void OnExitPaymentArea()
         {
           
-            scoreStatus = ScoreStatusAsLocations.NextLevel;
             
             scoreStatus = ScoreStatusAsLocations.ExitPaymentArea;
         }
 
         private void OnReset()
         {
-         
+           
             scoreStatus = ScoreStatusAsLocations.Reset;
+            CalculateScore();
 
         }
 
@@ -104,12 +105,10 @@ namespace Managers
         private void OnDecreaseScore()
         {
             Score--;
-            
             if (Score < 0)
             {   
                 Score = 0;
             }
-           
             CalculateScore();
         }
 
@@ -118,6 +117,8 @@ namespace Managers
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
             MultiplyAmaunt = Convert.ToInt32(value.TrimStart('x'));
             TotalScore *= MultiplyAmaunt;
+
+
             CalculateScore();
         }
         
@@ -127,9 +128,6 @@ namespace Managers
             {
                 case ScoreStatusAsLocations.LevelInitilize:
                     ReadPlayerText(Score);
-                    break;
-                case ScoreStatusAsLocations.NextLevel:
-                    ReadPlayerText(Score);               
                     break;
                 case ScoreStatusAsLocations.Reset:
                     ReadPlayerText(Score);

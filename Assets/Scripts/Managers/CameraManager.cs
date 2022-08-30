@@ -102,6 +102,7 @@ namespace Managers
         }
         private void OnReset()
         {
+            //stateDrivenCamera.Follow = playerManager.transform;
             cameraMovementController.WhenOnReset();
 
         }
