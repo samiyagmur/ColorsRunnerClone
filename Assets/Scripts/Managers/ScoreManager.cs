@@ -64,19 +64,19 @@ namespace Managers
         {
             
             scoreStatus = ScoreStatusAsLocations.EnterMultiple;
-            Debug.Log("OnEnterMutiplyArea");
+           
         }
 
         private void OnEnterIdleArea()
         {
             
-            Debug.Log("OnEnterIdleArea");
+          
             scoreStatus = ScoreStatusAsLocations.ExitMultiple;
         }
 
         private void OnEnterPaymentArea()
         {
-            Debug.Log("OnEnterPaymentArea");
+        
             scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
         }
 
@@ -84,8 +84,7 @@ namespace Managers
         {
           
             scoreStatus = ScoreStatusAsLocations.NextLevel;
-
-            Debug.Log("OnNextLevel");
+            
         }
 
         private void OnReset()

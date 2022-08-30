@@ -42,6 +42,7 @@ namespace Managers
         private int _LevelID;
         private int _IdleLevelId;
         private int _gameScore;
+        private int _uniqueID = 0;
         #endregion
 
         #endregion
@@ -55,29 +56,32 @@ namespace Managers
 
         private void GetData()
         {
-            if (!ES3.FileExists($"Level{_IdleLevelId}.es3"))
-            {
-                if (!ES3.KeyExists("IdleBuildingDataKey"))
+
+            if (!ES3.FileExists($"Level{_uniqueID}.es3"))
+            {   
+               
+                if (!ES3.KeyExists("Level"))
                 {   
-                    Debug.Log("Key does not exist!");
+                 
                     IdleLevelData = GetIdleLevelData();
-                    Save(_IdleLevelId);
+                    Save(_uniqueID);
                 }
             }
-            Load(LevelIdData.IdleLevelId);
+            Load(_uniqueID);
+           
             LevelData = GetLevelData();
         }
         
         private LevelData GetLevelData()
         {
-            var newLevelData = LevelIdData.LevelId % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            var newLevelData = _LevelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
             return Resources.Load<CD_Level>("Data/CD_Level").Levels[newLevelData];
         }
 
         private IdleLevelData GetIdleLevelData()
         {   
             var newIdleLevelData =
-                LevelIdData.IdleLevelId % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
+                _IdleLevelId % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
             return Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[newIdleLevelData];
         }
 
@@ -129,7 +133,7 @@ namespace Managers
         private async void OnNextLevel()
         {
             _LevelID++;
-            Save(_IdleLevelId);
+            Save(_uniqueID);
             await Task.Delay(25);
             OnReset();
             //UISignals.Instance.onChangeLevelText(_LevelID + 1);
@@ -138,9 +142,10 @@ namespace Managers
         }
 
         private void OnIncreaseIdleLevel()
-        {
+        {   
+        
             _IdleLevelId++;
-            Debug.Log(_IdleLevelId);
+            Save(_uniqueID);
         }
         private int OnGetLevelId()
         {
@@ -175,7 +180,7 @@ namespace Managers
         {
             var newIdleLevelData =
                 _IdleLevelId % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList.Count;
-            
+
             idleLevelLoader.InitializeIdleLevel(newIdleLevelData,idleLevelHolder.transform);
         }
         

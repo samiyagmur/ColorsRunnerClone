@@ -59,13 +59,11 @@ namespace Managers
             if (!ES3.FileExists($"IdleBuildingDataKey{BuildingAddressID}.es3"))
             {
                 if (!ES3.KeyExists("IdleBuildingDataKey"))
-                {   
-                    Debug.Log("Key does not exist!");
+                {
                     BuildingsData = GetBuildingsData();
                     Save(BuildingAddressID);
                 }
             }
-            Debug.Log("Key Exist!");
             Load(BuildingAddressID);
             CheckBuildingsScoreStatus(BuildingsData.idleLevelState);
             

@@ -43,8 +43,9 @@ namespace Managers
        {
            _idleLevelId = CoreGameSignals.Instance.onGetIdleLevelID.Invoke();
        }
+       
 
-       private void Awake()
+       private void Start()
        {
            SetData();
        }
@@ -52,18 +53,16 @@ namespace Managers
        private void SetData()
        {
            GetIdleLevelData();
-           
            if (!ES3.FileExists($"IdleLevelDataKey{_idleLevelId}.es3"))
            {
                if (!ES3.KeyExists("IdleBuildingDataKey"))
-               {   
-                   Debug.Log("Key does not exist!");
+               {
+                   GetIdleLevelData();
                    IdleLevelData = GetIdleData();
                    Save(_idleLevelId);
                }
            }
            Load(_idleLevelId);
-           Debug.Log("Key Exist!");
        }
        
        #region Event Subscription
@@ -129,7 +128,6 @@ namespace Managers
         private void OnIncreaseCompletedCount(int addressId)
         {
             IdleLevelData.CompletedBuildingsCount++;
-            Debug.Log(IdleLevelData.CompletedBuildingsCount);
             SetIdleLevelStatus();
             Save(_idleLevelId);
         }
@@ -143,8 +141,7 @@ namespace Managers
                 CoreGameSignals.Instance.onIdleLevelChange.Invoke();
                 
             }
-            
-            Debug.Log(IdleLevelData.CompletedBuildingsCount + "/" + BuildingManagers.Count);
+   
         }
         
         
