@@ -69,8 +69,6 @@ namespace Managers
 
         private void OnEnterIdleArea()
         {
-            
-            Debug.Log("OnEnterIdleArea");
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
         }
 
@@ -99,12 +97,14 @@ namespace Managers
         private void OnIncreaseScore()
         {
             Score++;
+            
             CalculateScore();
         }
 
         private void OnDecreaseScore()
         {
             Score--;
+            
             if (Score < 0)
             {   
                 Score = 0;

@@ -66,6 +66,7 @@ namespace Controllers.BuildingControllers
                 _timer = 0f;
                 
                 buildingManager.Save(buildingManager.BuildingAddressID);
+                buildingManager.SetScoreStatus();
                 
             }
         }
