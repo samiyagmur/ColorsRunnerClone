@@ -19,7 +19,7 @@ namespace Controllers
         [SerializeField]
         private Transform taretAreaTranform;
         [SerializeField]
-        private float timeİncreaseSpeed;
+        private float timeIncreaseSpeed;
         [SerializeField]
         private float invokeRepeatTimeForRandomPos;
 
@@ -86,7 +86,7 @@ namespace Controllers
                     _relativePos = _shotPositon - transform.position;
                     _rotation = Quaternion.LookRotation(_relativePos);
 
-                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0,1, timeİncreaseSpeed*10));
+                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0,1, timeIncreaseSpeed*10));
 
 
                     break;
@@ -98,7 +98,7 @@ namespace Controllers
                     _rotation = Quaternion.LookRotation(_relativePos);
                     //Debug.Log(turretAreaType);
                     //lerpTime+= timeİncreaseSpeed;
-                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0, 1, timeİncreaseSpeed));//PlayerıYavaşlat;
+                    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Mathf.Lerp(0, 1, timeIncreaseSpeed));//PlayerıYavaşlat;
                     HitWithRaycast();
                    // await Task.Delay(500);
                     break;
