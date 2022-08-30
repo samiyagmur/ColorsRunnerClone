@@ -24,16 +24,14 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
-        
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
             CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onEnterPaymentArea += OnEnterPaymentArea;
+            CoreGameSignals.Instance.onExitPaymentArea += OnExitPaymentArea;
             ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
-
-
         }
 
         private void UnsubscribeEvents()
@@ -43,6 +41,7 @@ namespace Managers
             CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onEnterPaymentArea -= OnEnterPaymentArea;
+            CoreGameSignals.Instance.onExitPaymentArea -= OnExitPaymentArea;
             ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
             ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
@@ -72,6 +71,12 @@ namespace Managers
             Debug.Log("OnEnterPaymentArea");
             scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
         }
+
+        private void OnExitPaymentArea()
+        {
+            scoreStatus = ScoreStatusAsLocations.ExitPaymentArea;
+        }
+
         private void OnReset()
         {
             scoreStatus = ScoreStatusAsLocations.Reset;
@@ -131,6 +136,11 @@ namespace Managers
                         BuildingSignals.Instance.onScoreZero.Invoke();
                         IdleScore = 0;
                     }
+                    ReadPlayerText(IdleScore);
+                    ReadUIText(IdleScore);
+                    break;
+                case ScoreStatusAsLocations.ExitPaymentArea:
+                    IdleScore=Score;
                     ReadPlayerText(IdleScore);
                     ReadUIText(IdleScore);
                     break;
