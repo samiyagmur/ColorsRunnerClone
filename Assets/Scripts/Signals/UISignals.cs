@@ -11,7 +11,8 @@ namespace Signals
     {
         public UnityAction<UIPanels> onOpenPanel = delegate { };
         public UnityAction<UIPanels> onClosePanel = delegate { };
-        
+        public UnityAction onMultiplyArea=delegate { };
+        public UnityAction<int> onSetLevelText=delegate { };
     }
 
 }

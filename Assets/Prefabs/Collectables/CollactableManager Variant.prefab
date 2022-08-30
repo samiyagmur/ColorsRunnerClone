@@ -63,6 +63,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollactableManager Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8326928517121663179, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
+      propertyPath: dimensions
+      value: 0.00000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326928517121663179, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
+      propertyPath: smallerTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8326928517241359852, guid: 133f50c42bc22b74198543e0e3e1953e, type: 3}
       propertyPath: m_TagString
       value: Collected

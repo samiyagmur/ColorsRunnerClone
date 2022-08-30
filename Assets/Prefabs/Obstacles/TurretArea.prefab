@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taretAreaTranform: {fileID: 6358184530859153059}
-  "time\u0130ncreaseSpeed": 0.01
+  timeIncreaseSpeed: 0.005
   invokeRepeatTimeForRandomPos: 0.5
 --- !u!114 &6358184530294340286
 MonoBehaviour:
@@ -803,7 +803,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358184531054568251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5000005, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5000005, y: -0.65, z: 0}
   m_LocalScale: {x: 5, y: 0.2, z: 15}
   m_Children: []
   m_Father: {fileID: 6358184530859153059}
@@ -912,7 +912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358184531061955208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4999995, y: 0, z: 0}
+  m_LocalPosition: {x: 2.4999995, y: -0.65, z: 0}
   m_LocalScale: {x: 5, y: 0.2, z: 15}
   m_Children: []
   m_Father: {fileID: 6358184530859153059}
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taretAreaTranform: {fileID: 6358184530859153059}
-  "time\u0130ncreaseSpeed": 0.01
+  timeIncreaseSpeed: 0.005
   invokeRepeatTimeForRandomPos: 0.5
 --- !u!114 &6358184531539855139
 MonoBehaviour:
@@ -1174,7 +1174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358184531665732542}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.19999999, z: 150}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6358184530859153059}

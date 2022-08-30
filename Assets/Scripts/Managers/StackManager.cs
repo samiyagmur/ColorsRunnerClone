@@ -29,13 +29,13 @@ namespace Managers
 
         #endregion
         #region Private Variables
-       
+        private MultipyStatus _multipyStatus;
         #endregion
         #endregion
 
         private void Start()
         {
-            OnInitializeStack();
+            InitializeStack();
         }
 
         #region Event Subscription
@@ -56,6 +56,9 @@ namespace Managers
             StackSignals.Instance.onChangeColor += OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation += OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack += OnRunStack;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
+           
+
         }
 
         private void UnsubscribeEvents()
@@ -69,6 +72,8 @@ namespace Managers
             StackSignals.Instance.onChangeColor -= OnChangeCollectableColor;
             StackSignals.Instance.onChangeCollectedAnimation -= OnChangeCollectedAnimation;
             StackSignals.Instance.onInitializeStack-= OnRunStack;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
+         
         }
 
         private void OnDisable()
@@ -85,15 +90,13 @@ namespace Managers
 
         private void OnSetStackTarget()
         {
-
             playerTransform = FindObjectOfType<PlayerManager>().transform;
             
             stackHolder = GameObject.FindWithTag("StackHolder");
             
             StackSignals.Instance.onInitializeStack?.Invoke();
-            
-            
         }
+        
         private void FixedUpdate()
         {
             if (playerTransform != null)
@@ -101,25 +104,32 @@ namespace Managers
                 LerpStack();
             }
             
-            
-           
         }
         
         #region Initialize Stack
 
-        private void OnInitializeStack()
+        private void InitializeStack()
         {
+     
             for (int i = 0; i < initSize ; i++)
-            {
+            {   
                 var _currentStack = Instantiate(initStack, new Vector3(0,0,0-i), this.transform.rotation);
                 
                 AddStackOnInitialize(_currentStack);
                 
                 StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.CrouchIdle);
+                ScoreSignals.Instance.onIncreaseScore?.Invoke();
                 
             }
         }
-
+        private void DeleteStack()
+        {
+            for (int i = 0; i < collectableList.Count; i++)
+            {
+                collectableList[i].transform.SetParent(null);
+                Destroy(collectableList[i]);
+            }
+        }
         private void OnRunStack()
         {
           
@@ -154,7 +164,7 @@ namespace Managers
             // Work in Progress,When Pool is created,we will add this future for beloved users.
         }
         private  void OnChangeCollectableColor(ColorType colorType)
-        {   
+        {
             for (int i = 0; i < collectableList.Count; i++)
             {
                 //await Task.Delay(50);
@@ -167,8 +177,7 @@ namespace Managers
         #region Stack / Unstack Collectables
 
         private async void OnIncreaseStack(GameObject currentStack) 
-        {
-            
+        {   
             collectableList.Add(currentStack);
             
             collectableList.TrimExcess();
@@ -200,7 +209,11 @@ namespace Managers
             Destroy(currentGameObj,0.1f);
             
             collectableList.TrimExcess();
-            OnFail(collectableList.Count);
+            if (_multipyStatus == MultipyStatus.Pasive)
+            {
+                OnFail(collectableList.Count);
+            }
+            
         }
 
         #endregion
@@ -239,6 +252,10 @@ namespace Managers
                 
                 DroneAreaSignals.Instance.onDisableDroneAreaCollider?.Invoke();
                 DroneAreaSignals.Instance.onDisableWrongColorGround?.Invoke();
+                await Task.Delay(350);
+              
+
+
                 OnFail(collectableList.Count);
             }
         }
@@ -248,7 +265,7 @@ namespace Managers
 
         #region Decrease stack On LevelEnd
 
-        private async void OnLevelEndDecreaseStack()
+        private  void OnLevelEndDecreaseStack()//async  deleted
         {
             for (int i = 0; i < collectableList.Count; i++)
             {   
@@ -324,10 +341,18 @@ namespace Managers
 
         }
 
+        private void OnEnterMutiplyArea()
+        {
+            _multipyStatus = MultipyStatus.Active;
+        }
+
 
         private void OnReset()
         {
-            OnInitializeStack();
+            DeleteStack();
+            collectableList.Clear();
+            collectableList.TrimExcess();
+            InitializeStack();//Error from restart button ?
         }
 
         #endregion

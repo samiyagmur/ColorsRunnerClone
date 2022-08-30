@@ -3,7 +3,10 @@ using Signals;
 using Enums;
 using System;
 using Controllers;
-using ToonyColorsPro.ShaderGenerator;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
+using DG.Tweening;
 
 namespace Managers
 {
@@ -14,13 +17,20 @@ namespace Managers
 
         #region Self Veriables
 
-        #region SerializeField Veriables
+        #region SerializeField Variables
 
         [SerializeField] UIPanelController UIPanelController;
+        [SerializeField] TextMeshProUGUI textMeshPro;
+        [SerializeField] TextMeshProUGUI textMeshPro2;
+        [SerializeField] RectTransform rectTransform;
+        [SerializeField] RectTransform rectTransformCursor;
+        [SerializeField] TextMeshProUGUI levelText;
 
         #endregion
 
-
+        #region Private Variables
+        private string _multiply;
+        #endregion
         #endregion
 
         #region Event Subcription
@@ -35,18 +45,27 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            UISignals.Instance.onMultiplyArea += OnMultiplyArea;
+            UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
-            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
+            ScoreSignals.Instance.onSendUIScore += OnUpdateCurrentScore;
+           
+
+
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
+            UISignals.Instance.onMultiplyArea -= OnMultiplyArea;
+            UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
-            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
+            ScoreSignals.Instance.onSendUIScore -= OnUpdateCurrentScore;
+           
+
         }
 
         private void OnDisable()
@@ -79,19 +98,21 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
         }
 
-        public void OnEnterMultiplyArea()
+        public void OnMultiplyArea()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+            //CursorMovement();
         }
+        
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
         }
+
         
-        #region ButonGrup
-        
+
         public void TryAgain()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
@@ -100,25 +121,80 @@ namespace Managers
         }
         public void EnterIdleArea()
         {
-
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
             CoreGameSignals.Instance.onEnterIdleArea();
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Idle);
         }
 
         public void NextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
             CoreGameSignals.Instance.onNextLevel?.Invoke();
-        }
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);//yeri değişcek
+            //DOTween.KillAll();
 
+        }
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            //CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onRestartLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);
+            //DOTween.KillAll();
         }
-    } 
+
+        public void Vibration()
+        {
+            
+            CameraSignals.Instance.onVibrateStatus?.Invoke();
+        }
+        #region TextGroup
+
+        private void OnUpdateCurrentScore(int score)
+        {
+
+
+            textMeshPro.text = score.ToString();
+            textMeshPro2.text = score.ToString();
+
+        }
+        private void OnSetLevelText(int nextLevel)
+        {
+            nextLevel++;
+            levelText.text = "Level "+ nextLevel;
+            
+        }
         #endregion
+        public void SelectMultiply()
+        {
+            float CursorXPos = rectTransform.localPosition.x;
+
+            if (190 < CursorXPos && CursorXPos < 320)
+            {
+                _multiply = "x2";
+            }
+            else if (60 < CursorXPos && CursorXPos < 190)
+            {
+                _multiply = "x3";
+            }
+            else if (-50 < CursorXPos && CursorXPos < 60)
+            {
+                _multiply = "x5";
+            }
+            else if (-180 < CursorXPos && CursorXPos < -50)
+            {
+                _multiply = "x3";
+            }
+            else if (-320 < CursorXPos && CursorXPos < -180)
+            {
+                _multiply = "x2";
+            }
+            ScoreSignals.Instance.onMultiplyAmaunt?.Invoke(_multiply);
+        }
+    }
+
+
+
 }
 

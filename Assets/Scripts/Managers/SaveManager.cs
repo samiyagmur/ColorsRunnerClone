@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using Command;
 using Command.SaveLoadCommands;
-using Datas.UnityObject;
 using Datas.ValueObject;
-using Enums;
 using Signals;
 using UnityEngine;
 
@@ -18,12 +13,7 @@ namespace Managers
 
         private LoadGameCommand _loadGameCommand;
         private SaveGameCommand _saveGameCommand;
-        private LoadIdleGameCommand _loadIdleGameCommand;
-        private SaveIdleGameCommand _saveIdleGameCommand;
-        private SaveIdleLevelProgressCommand _saveIdleLevelProgressCommand;
-        private LoadIdleLevelProgressCommand _loadIdleLevelProgressCommand;
-
-        private IdleLevelData _idleLevelData;
+ 
 
         #endregion
         
@@ -31,26 +21,14 @@ namespace Managers
 
         private void Awake()
         {
+            Initialization();
+         
+        }
+
+        private void Initialization()
+        {
             _loadGameCommand = new LoadGameCommand();
-            _saveGameCommand = new SaveGameCommand();
-            _loadIdleGameCommand = new LoadIdleGameCommand();
-            _saveIdleGameCommand = new SaveIdleGameCommand();
-            _saveIdleLevelProgressCommand = new SaveIdleLevelProgressCommand();
-            _loadIdleLevelProgressCommand = new LoadIdleLevelProgressCommand();
-            if (!ES3.FileExists())
-            {
-                ES3.Save("Level",0,"RunnerLevelData/RunnerLevelData.es3");
-            }
-
-            if (!ES3.FileExists())
-            {
-                ES3.Save("IdleLevel",0,"IdleLevelData/IdleLevelData.es3");
-            }
-
-            if (!ES3.FileExists())
-            {
-                ES3.Save("IdleLevelProgress","IdleLevelProgress/IdleLevelProgressData.es3");
-            }
+            _saveGameCommand = new SaveGameCommand(); 
         }
         
         #region Event Subscription
@@ -62,22 +40,22 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveRunnerLevelData += _saveGameCommand.Execute;
-            SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute;
-            SaveLoadSignals.Instance.onSaveIdleLevelData += _saveIdleGameCommand.Execute;
-            SaveLoadSignals.Instance.onLoadIdleData += _loadIdleGameCommand.Execute;
-            SaveLoadSignals.Instance.onSaveIdleLevelProgressData += _saveIdleLevelProgressCommand.Execute;
-            SaveLoadSignals.Instance.onLoadIdleLevelProgressData += _loadIdleLevelProgressCommand.Execute;
+            SaveLoadSignals.Instance.onSaveGameData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute<LevelIdData>;
+            SaveLoadSignals.Instance.onSaveBuildingsData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadBuildingsData += _loadGameCommand.Execute<BuildingsData>;
+            SaveLoadSignals.Instance.onSaveIdleData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData += _loadGameCommand.Execute<IdleLevelData>;
         }
 
         private void UnsubscribeEvents()
         {
-            SaveLoadSignals.Instance.onSaveRunnerLevelData -= _saveGameCommand.Execute;
-            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute;
-            SaveLoadSignals.Instance.onSaveIdleLevelData -= _saveIdleGameCommand.Execute;
-            SaveLoadSignals.Instance.onLoadIdleData -= _loadIdleGameCommand.Execute;
-            SaveLoadSignals.Instance.onSaveIdleLevelProgressData -= _saveIdleLevelProgressCommand.Execute;
-            SaveLoadSignals.Instance.onLoadIdleLevelProgressData -= _loadIdleLevelProgressCommand.Execute;
+            SaveLoadSignals.Instance.onSaveGameData -= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute<LevelIdData>;
+            SaveLoadSignals.Instance.onSaveIdleData-= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadBuildingsData -= _loadGameCommand.Execute<BuildingsData>;
+            SaveLoadSignals.Instance.onSaveIdleData -= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData -= _loadGameCommand.Execute<IdleLevelData>;
         }
         private void OnDisable()
         {

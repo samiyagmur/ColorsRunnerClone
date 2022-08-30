@@ -4,7 +4,6 @@ using Controllers;
 using System;
 using DG.Tweening;
 using Enums;
-using UnityEditor.VersionControl;
 using Task = System.Threading.Tasks.Task;
 
 namespace Managers
@@ -48,7 +47,10 @@ namespace Managers
         {
             SetReferences(); 
         }
+        #region Event Subscription
 
+
+        #endregion
         private void SetReferences()
         {
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
@@ -60,16 +62,18 @@ namespace Managers
         {
 
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
+            ScoreSignals.Instance.onIncreaseScore?.Invoke();
             
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
-        
         public void DecreaseStack()
         {
+           
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
-            
+            ScoreSignals.Instance.onDecreaseScore?.Invoke();
             gameObject.transform.SetParent(null);
+            CameraSignals.Instance.onVibrateCam.Invoke();
         }
 
         
@@ -124,6 +128,14 @@ namespace Managers
         {
             CurrentCollectableColorType = colorType;
             collectableMeshController.SetCollectableMaterial(CurrentCollectableColorType);
+        }
+
+        public  void IsHitRainbow()
+        {
+           
+            collectableMeshController.ChangeScale();
+            CoreGameSignals.Instance.onEnterMutiplyArea();
+            collectableMeshController.SetCollectableMaterial(ColorType.Rainbow);
         }
 
         public void ChangeAnimationOnController(CollectableAnimType collectableAnimType)

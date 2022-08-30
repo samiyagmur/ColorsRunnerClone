@@ -2,17 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Abstract;
 using Datas.UnityObject;
 using Datas.ValueObject;
+using DG.Tweening;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 
 namespace Managers
 {
-    public class IdleCityManager : MonoBehaviour
+    public class IdleCityManager : MonoBehaviour,ISaveable
     {
         #region Self Variables
 
@@ -20,55 +20,51 @@ namespace Managers
 
         [Header("BuildingsData")] public IdleLevelData IdleLevelData;
 
-        public List<GameObject> Buildings = new List<GameObject>();
+        public List<BuildingManager> BuildingManagers = new List<BuildingManager>();
 
-        public List<BuildingManager> BuildingManager = new List<BuildingManager>();
-
-        public List<Transform> BuildingsTransforms = new List<Transform>();
+        public IdleLevelState IdleLevelState;
         
 
         #endregion
 
         #region Private Variables
-
-        private int _index;
+        
         private int _idleLevelId;
 
         #endregion
-
-        #region Serialized Variables
         
 
         #endregion
 
-        #endregion
-
  
-       private IdleLevelData OnGetCityData() => Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelId]; //SaveManager çeksin bize passlasin,
+       private IdleLevelData GetIdleData() => Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelList[_idleLevelId];
 
        private void GetIdleLevelData()
        {
            _idleLevelId = CoreGameSignals.Instance.onGetIdleLevelID.Invoke();
        }
+       
 
        private void Start()
        {
-           GetIdleLevelData();
-           
-           
-           if (!ES3.FileExists("IdleLevelProgress/IdleLevelProgressData.es3"))
-           {
-               IdleLevelData = OnGetCityData();
-
-               SaveCityData(IdleLevelData); 
-           }
-           
-           LoadCityData(IdleLevelData);
-           
-           SetDataToBuildingManagers();
-
+           SetData();
        }
 
+       private void SetData()
+       {
+           GetIdleLevelData();
+           if (!ES3.FileExists($"IdleLevelDataKey{_idleLevelId}.es3"))
+           {
+               if (!ES3.KeyExists("IdleBuildingDataKey"))
+               {
+                   GetIdleLevelData();
+                   IdleLevelData = GetIdleData();
+                   Save(_idleLevelId);
+               }
+           }
+           Load(_idleLevelId);
+       }
+       
        #region Event Subscription
 
         private void OnEnable()
@@ -78,21 +74,19 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onApplicationPause += OnSaveCityData;
-            CoreGameSignals.Instance.onApplicationQuit += OnSaveCityData;
-            BuildingSignals.Instance.onBuildingsCompleted += OnSetBuildingsStatus;
-            CoreGameSignals.Instance.onLevelInitialize += OnGetBuildingsDataFromBuildingManagers;
-            CoreGameSignals.Instance.onApplicationQuit += OnGetBuildingsDataFromBuildingManagers;
-
+            BuildingSignals.Instance.onBuildingsCompleted += OnIncreaseCompletedCount;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
+            CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onLevelInitialize += OnLoad;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onApplicationPause -= OnSaveCityData;
-            CoreGameSignals.Instance.onApplicationQuit -= OnSaveCityData;
-            BuildingSignals.Instance.onBuildingsCompleted -= OnSetBuildingsStatus;
-            CoreGameSignals.Instance.onLevelInitialize -= OnGetBuildingsDataFromBuildingManagers;
-            CoreGameSignals.Instance.onApplicationQuit -= OnGetBuildingsDataFromBuildingManagers;
+            BuildingSignals.Instance.onBuildingsCompleted -= OnIncreaseCompletedCount;
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
+            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
+
         }
         private void OnDisable()
         {
@@ -100,79 +94,59 @@ namespace Managers
         }
 
         #endregion
- 
-        private void SaveCityData(IdleLevelData ıdleLevelData)
+
+        #region Save-Load
+
+        private void OnSave()
         {
-            SaveLoadSignals.Instance.onSaveIdleLevelProgressData?.Invoke(SaveStates.IdleLevelProgress,ıdleLevelData);
+            Save(_idleLevelId);
         }
 
-        private IdleLevelData LoadCityData(IdleLevelData idleLevelData)
+        private void OnLoad()
         {
-            return SaveLoadSignals.Instance.onLoadIdleLevelProgressData.Invoke(SaveStates.IdleLevelProgress,idleLevelData);
+            Load(_idleLevelId);
+        }
+        public void Save(int uniqueId)
+        {
+            IdleLevelData = new IdleLevelData(IdleLevelData.IdleLevelState,IdleLevelData.CompletedBuildingsCount);
+            SaveLoadSignals.Instance.onSaveIdleData.Invoke(IdleLevelData,uniqueId);
+        }
+
+        public void Load(int uniqueId)
+        {
+            
+            IdleLevelData _IdleLevelData = SaveLoadSignals.Instance.onLoadIdleData.Invoke(IdleLevelData.IdleLevelKey, uniqueId);
+
+            IdleLevelData.IdleLevelState = _IdleLevelData.IdleLevelState;
+            IdleLevelData.CompletedBuildingsCount = _IdleLevelData.CompletedBuildingsCount;
+
+        }
+
+        #endregion
+      
+     
+        private void OnIncreaseCompletedCount(int addressId)
+        {
+            IdleLevelData.CompletedBuildingsCount++;
+            SetIdleLevelStatus();
+            Save(_idleLevelId);
         }
         
-        private void OnSaveCityData()
+        private void SetIdleLevelStatus()
         {
-            SaveCityData(IdleLevelData);
-        }
-
-        private void SetDataToBuildingManagers()
-        {
-            for (int i = 0; i < Buildings.Count; i++)
+            if (IdleLevelData.CompletedBuildingsCount == BuildingManagers.Count)
             {
-                IdleLevelData.Buildings[i].BuildingAdressId = i;
+                IdleLevelData.IdleLevelState = IdleLevelState.Completed;
+                Save(_idleLevelId);
+                CoreGameSignals.Instance.onIdleLevelChange.Invoke();
                 
-                BuildingManager[i].BuildingsAdressId = i;
-                
-                Buildings[i].transform.position = BuildingsTransforms[i].transform.position;
-                
-                BuildingManager[i].BuildingMarketPrice= IdleLevelData.Buildings[i].BuildingMarketPrice;
-                
-                BuildingManager[i].PayedAmount  = IdleLevelData.Buildings[i].PayedAmount;
-                
-                BuildingManager[i].Saturation = IdleLevelData.Buildings[i].Saturation;
-
-                if (!IdleLevelData.Buildings[i].isDepended ||
-                    IdleLevelData.Buildings[i].ıdleLevelState != IdleLevelState.Completed) continue;
-                IdleLevelData.Buildings[i].BuildingAdressId = i;
-                    
-                BuildingManager[i].BuildingsAdressId = i;  
-                    
-                BuildingManager[i].PayedAmount= IdleLevelData.Buildings[i].SideObject.PayedAmount;
-                    
-                BuildingManager[i].BuildingMarketPrice = IdleLevelData.Buildings[i].SideObject.BuildingMarketPrice;
-                    
-                BuildingManager[i].Saturation= IdleLevelData.Buildings[i].SideObject.Saturation;
-                
-            }  
-            
-            BuildingsDatasAreSync();
-      
-        }
-        private void BuildingsDatasAreSync()
-        {
-            BuildingSignals.Instance.onDataReadyToUse?.Invoke();
-        }
-        private void OnGetBuildingsDataFromBuildingManagers()
-        {
-            for (int i = 0; i < BuildingManager.Count; i++)
-            {
-                IdleLevelData.Buildings[i].ıdleLevelState = BuildingManager[i].IdleLevelState;
-                IdleLevelData.Buildings[i].PayedAmount = BuildingManager[i].PayedAmount;
-                IdleLevelData.Buildings[i].Saturation = BuildingManager[i].Saturation;
-
-                if (!IdleLevelData.Buildings[i].isDepended ||
-                    IdleLevelData.Buildings[i].ıdleLevelState != IdleLevelState.Completed) continue;
-                IdleLevelData.Buildings[i].ıdleLevelState = BuildingManager[i].IdleLevelState;
-                IdleLevelData.Buildings[i].SideObject.PayedAmount = BuildingManager[i].PayedAmount;
-                IdleLevelData.Buildings[i].SideObject.Saturation = BuildingManager[i].Saturation;
             }
+   
         }
-        private void OnSetBuildingsStatus(int addressId)
-        {
-            IdleLevelData.Buildings[addressId].ıdleLevelState = IdleLevelState.Completed;
-            
-        }
-    
+        
+        
+        
+
+      
     }
 }

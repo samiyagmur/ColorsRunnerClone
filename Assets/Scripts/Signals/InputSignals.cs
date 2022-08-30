@@ -14,6 +14,5 @@ namespace Signals
     public UnityAction<IdleInputParams> onJoyStickInputDragged = delegate { };
     public UnityAction onInputReleased = delegate { };
     
-    
     }
 }

@@ -20,6 +20,6 @@ namespace Signals
         public UnityAction<CollectableAnimType> onChangeCollectedAnimation = delegate(CollectableAnimType arg0) {  };
         
         public UnityAction onInitializeStack = delegate {  };
-        
+
     }
 }
