@@ -30,13 +30,13 @@ namespace Controllers
 
         public void SetRequiredAmountToText()
         {
-            marketPriceText.text = $"{manager.buildingsData.PayedAmount}/{manager.buildingsData.BuildingMarketPrice}";
+            marketPriceText.text = $"{manager.BuildingsData.PayedAmount}/{manager.BuildingsData.BuildingMarketPrice}";
             
         }
 
         public void UpdatePayedAmountText(int payedAmount)
         {
-            manager.buildingsData.PayedAmount = payedAmount;
+            manager.BuildingsData.PayedAmount = payedAmount;
             SetRequiredAmountToText();
         }
         

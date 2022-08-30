@@ -108,8 +108,7 @@ namespace Managers
 
         private void OnVibrateStatus()
         {
-            Debug.Log("vib");
-           
+
             if (IsPressVibrating)
             {
                 vibrationStatus = CamVibrationStatus.Active;
@@ -120,8 +119,7 @@ namespace Managers
                 vibrationStatus = CamVibrationStatus.Pasive;
                 IsPressVibrating = true;
             }
-            Debug.Log(IsPressVibrating);
-            vibrationStatus = CamVibrationStatus.Pasive;//Inactive
+       
         }
 
         private void OnVibrateCam()
@@ -131,8 +129,6 @@ namespace Managers
                 transform.DOPunchRotation(new Vector3(0.5f, 0.5f, 0.5f), 1f, 10, 1f);
 
             }
-            
-            
             
         }
 

@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using Command;
 using Command.SaveLoadCommands;
-using Datas.UnityObject;
 using Datas.ValueObject;
-using Enums;
 using Signals;
 using UnityEngine;
 
@@ -26,9 +21,14 @@ namespace Managers
 
         private void Awake()
         {
-            _loadGameCommand = new LoadGameCommand();
-            _saveGameCommand = new SaveGameCommand();
+            Initialization();
          
+        }
+
+        private void Initialization()
+        {
+            _loadGameCommand = new LoadGameCommand();
+            _saveGameCommand = new SaveGameCommand(); 
         }
         
         #region Event Subscription
@@ -42,8 +42,10 @@ namespace Managers
         {
             SaveLoadSignals.Instance.onSaveGameData += _saveGameCommand.Execute;
             SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute<LevelIdData>;
-            SaveLoadSignals.Instance.onSaveIdleData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onSaveBuildingsData += _saveGameCommand.Execute;
             SaveLoadSignals.Instance.onLoadBuildingsData += _loadGameCommand.Execute<BuildingsData>;
+            SaveLoadSignals.Instance.onSaveIdleData += _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData += _loadGameCommand.Execute<IdleLevelData>;
         }
 
         private void UnsubscribeEvents()
@@ -52,6 +54,8 @@ namespace Managers
             SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute<LevelIdData>;
             SaveLoadSignals.Instance.onSaveIdleData-= _saveGameCommand.Execute;
             SaveLoadSignals.Instance.onLoadBuildingsData -= _loadGameCommand.Execute<BuildingsData>;
+            SaveLoadSignals.Instance.onSaveIdleData -= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadIdleData -= _loadGameCommand.Execute<IdleLevelData>;
         }
         private void OnDisable()
         {

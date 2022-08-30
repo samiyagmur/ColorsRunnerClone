@@ -26,30 +26,32 @@ namespace Controllers
 
         private void OnTriggerStay(Collider other)   //Where is the tag
         {
-            _timer -= Time.fixedDeltaTime ;
-            
-            if (_timer <= 0)
+            if (other.CompareTag("Player"))
             {
-                _timer = 0.2f;
-                
-                if (buildingManager.buildingsData.BuildingMarketPrice > buildingManager.buildingsData.PayedAmount)
+                _timer -= Time.fixedDeltaTime ;
+            
+                if (_timer <= 0)
                 {
-                    buildingManager.UpdatePayedAmount();
-
-                }
-                else
-                {   
-                    gameObject.SetActive(false);
-
-                    if (buildingManager.buildingsData.idleLevelState == IdleLevelState.Uncompleted)
-                    {
-                        transform.gameObject.SetActive(false);
-                        buildingManager.OpenSideObject();
-                        buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
-                    }
-                }
+                    _timer = 0.2f;
                 
+                    if (buildingManager.BuildingsData.BuildingMarketPrice > buildingManager.BuildingsData.PayedAmount)
+                    {
+                        buildingManager.UpdatePayedAmount();
+
+                    }
+                    else
+                    {
+
+                        if (buildingManager.BuildingsData.idleLevelState == IdleLevelState.Uncompleted)
+                        {
+                            buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
+                            buildingManager.Save(buildingManager.BuildingAddressID);
+                        }
+                    }
+                
+                } 
             }
+            
         }
 
         private void OnTriggerExit(Collider other)
@@ -58,6 +60,7 @@ namespace Controllers
             {
                 _timer = 0f;
                 buildingManager.Save(buildingManager.BuildingAddressID);
+                
             }
         }
         
