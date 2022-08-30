@@ -10,7 +10,8 @@ namespace Enums
         Reset,
         EnterMultiple,
         EnterIdle,
-        EnterPaymentArea
+        EnterPaymentArea,
+        ExitPaymentArea
 
         
     }

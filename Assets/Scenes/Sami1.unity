@@ -2253,7 +2253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_TagString
@@ -4505,7 +4505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1632502906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMovementController: {fileID: 1726475474}
   stateDrivenCamera: {fileID: 1726475477}
-  playerManager: {fileID: 505523903821665496, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
+  playerManager: {fileID: 0}
 --- !u!95 &1726475476
 Animator:
   serializedVersion: 3

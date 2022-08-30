@@ -27,7 +27,7 @@ public class PlayerAnimationController : MonoBehaviour
             //ınvoke
             //when player change animation type,this methost will work.
             
-           playerAnimator.SetTrigger(type.ToString());
+           playerAnimator.Play(type.ToString());
 
             //switch (type)
             //{
