@@ -12,38 +12,38 @@ namespace Controllers
         private StateMachine _stateMachine;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
-        public Transform Target;
-        public Transform RichTarget;
-        
+        public AITargetStationController Target;
+
 
         private void Awake()
         {
-            _animator=GetComponent<Animator>();
-            _navMeshAgent=GetComponent<NavMeshAgent>();
-            _stateMachine=new StateMachine();
+            _animator = GetComponent<Animator>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _stateMachine = new StateMachine();
 
             var idleState = new StickmanAlIdleState(this, _animator, _navMeshAgent);
             var walkingState = new StickmanWalkingState(this, _animator, _navMeshAgent);
+            
+            At(idleState, walkingState, hasTarget());
+            
+            At(walkingState, idleState, reachedTarget());
+
+            void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
+
+            Func<bool> hasTarget() => () => Target != null;
+
+            Func<bool> reachedTarget() =>
+                () => Target != null && 1 > Vector3.Distance(transform.position, Target.transform.position);
         }
 
 
-        private void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition); 
+        private void Update()
+        {
+            _stateMachine.Setup();
+        }
 
-        Func<bool> hasTarget() => () => Target!=null && 1<Vector3.Distance(transform.position,Target.position);
-        Func<bool> hasRichTargetTarget() => () => RichTarget != null;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void PlayAnim()
+        {
+        }
     }
 }
