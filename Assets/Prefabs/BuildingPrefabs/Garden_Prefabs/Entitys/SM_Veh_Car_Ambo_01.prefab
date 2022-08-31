@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 5174251761607054407}
   - component: {fileID: 5174251761609944311}
   - component: {fileID: 5174251761608841549}
-  - component: {fileID: 5056841452928669013}
   m_Layer: 0
   m_Name: SM_Veh_Car_Ambo_Wheel_rl
   m_TagString: Untagged
@@ -163,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5056841452928669013
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174251761606600883}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3975829
-  m_Center: {x: -0.10251425, y: 0, z: 0}
 --- !u!1 &5174251761606601551
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +173,6 @@ GameObject:
   - component: {fileID: 5174251761607030697}
   - component: {fileID: 5174251761609946271}
   - component: {fileID: 5174251761609032131}
-  - component: {fileID: 5056666662021371581}
   m_Layer: 0
   m_Name: SM_Veh_Car_Ambo_Wheel_fr
   m_TagString: Untagged
@@ -258,19 +243,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5056666662021371581
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174251761606601551}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3975832
-  m_Center: {x: 0.10251425, y: 0, z: -0.000000044703484}
 --- !u!1 &5174251761606773589
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +847,6 @@ GameObject:
   - component: {fileID: 5174251761607112365}
   - component: {fileID: 5174251761609900557}
   - component: {fileID: 5174251761608864201}
-  - component: {fileID: 5056475148386355733}
   m_Layer: 0
   m_Name: SM_Veh_Car_Ambo_Wheel_fl
   m_TagString: Untagged
@@ -946,19 +917,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5056475148386355733
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174251761606839957}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.39758295
-  m_Center: {x: -0.10251425, y: 0, z: 0}
 --- !u!1 &5174251761606848349
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +928,6 @@ GameObject:
   - component: {fileID: 5174251761607062841}
   - component: {fileID: 5174251761609909107}
   - component: {fileID: 5174251761609078523}
-  - component: {fileID: 5057518008995011341}
   m_Layer: 0
   m_Name: SM_Veh_Car_Ambo_Wheel_rr
   m_TagString: Untagged
@@ -1041,16 +998,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5057518008995011341
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174251761606848349}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3975829
-  m_Center: {x: 0.10251425, y: 0, z: 0}
