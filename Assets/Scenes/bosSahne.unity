@@ -1173,21 +1173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectabelanimator: {fileID: 5999473095224767057}
---- !u!114 &155652739993571274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155417116911701574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b1e6536fa4bb0469286306d8685574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableManager: {fileID: 155652740720911240}
-  dimensions: 0
-  smallerTime: 0
 --- !u!1 &155652740249908236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,20 +1243,6 @@ Transform:
   m_Father: {fileID: 155652740720911241}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &155652740377518739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155652740377518829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2290859455358e5438761c2e299c2291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableManager: {fileID: 155652740720911240}
-  collectableCollider: {fileID: 155652740377518737}
 --- !u!1 &155652740377518829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1253,6 @@ GameObject:
   m_Component:
   - component: {fileID: 155652740377518738}
   - component: {fileID: 155652740377518737}
-  - component: {fileID: 155652740377518739}
   - component: {fileID: 7587902882566158586}
   m_Layer: 0
   m_Name: Physics
@@ -1291,25 +1261,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &155652740720911240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155652740720911243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43193b83a3e286a48a4ab5f122badedf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableMeshController: {fileID: 155652739993571274}
-  collectableAnimationController: {fileID: 155652739993571269}
-  collectableParticalController: {fileID: 155652740249908237}
-  collectablePhysicController: {fileID: 155652740377518739}
-  collectableMovementCommand: {fileID: 8929186481160561659}
-  CurrentCollectableColorType: 5
-  ColorMatchType: 0
 --- !u!4 &155652740720911241
 Transform:
   m_ObjectHideFlags: 0
@@ -1336,8 +1287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155652740720911241}
-  - component: {fileID: 155652740720911240}
-  - component: {fileID: 8929186481160561659}
+  - component: {fileID: 155652740720911244}
   m_Layer: 0
   m_Name: BotAI
   m_TagString: Untagged
@@ -1345,6 +1295,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!195 &155652740720911244
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155652740720911243}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!65 &161349539921097184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7282,7 +7254,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4404333532573830218}
   - component: {fileID: 2966992129642703549}
-  - component: {fileID: 155652739993571274}
   m_Layer: 0
   m_Name: pCylinder5
   m_TagString: Untagged
@@ -60444,19 +60415,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 2.140427, z: 0.44459152}
   m_Center: {x: 2.5, y: 1.0702136, z: 0.0018024445}
---- !u!114 &8929186481160561659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155652740720911243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca47a19fb4246bab176eccc8eb9db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableManager: {fileID: 155652740720911240}
 --- !u!65 &8930349176600570477
 BoxCollider:
   m_ObjectHideFlags: 0
