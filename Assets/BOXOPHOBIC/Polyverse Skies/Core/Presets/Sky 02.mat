@@ -204,10 +204,10 @@ Material:
     - _Float5: -0.2
     - _Float6: 1
     - _FogCat: 1
-    - _FogFill: 0.022
-    - _FogHeight: 0.495
+    - _FogFill: 0.167
+    - _FogHeight: 0.098
     - _FogIntensity: 0
-    - _FogSmoothness: 0.137
+    - _FogSmoothness: 0.747
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
