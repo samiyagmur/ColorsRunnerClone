@@ -31,7 +31,6 @@ namespace Managers
         #region Public Variables
 
         public int BuildingAddressID;
-        public int _idleLevelId;
 
 
         #endregion
@@ -39,6 +38,9 @@ namespace Managers
         #region Private Variables
 
         private int _IdleLevelID;
+        private int _SaveIdentifier = 1;
+        private string _UniqueIdString;
+        private int _uniqueId;
 
         #endregion
 
@@ -63,16 +65,20 @@ namespace Managers
         {
             GetIdleLevelID();
 
-            if (!ES3.FileExists($"IdleBuildingDataKey{BuildingAddressID}.es3"))
+            _UniqueIdString = _SaveIdentifier.ToString() + _IdleLevelID.ToString() + BuildingAddressID.ToString();
+
+            int.TryParse(_UniqueIdString,out _uniqueId);
+            
+            if (!ES3.FileExists($"IdleBuildingDataKey{_uniqueId}.es3"))
             {
                 if (!ES3.KeyExists("IdleBuildingDataKey"))
                 {
                     BuildingsData = GetBuildingsData();
-                    Save(BuildingAddressID);
+                    Save(_uniqueId);
                 }
             }
 
-            Load(BuildingAddressID);
+            Load(_uniqueId);
             CheckBuildingsScoreStatus(BuildingsData.idleLevelState);
 
             if (BuildingsData.IsDepended && BuildingsData.idleLevelState == IdleLevelState.Completed)
@@ -81,7 +87,7 @@ namespace Managers
             }
 
             SetDataToControllers();
-
+           
         }
 
 
@@ -148,13 +154,13 @@ namespace Managers
 
         private void OnSave()
         {
-            Save(BuildingAddressID);
+            Save(_uniqueId);
             SetDataToControllers();
         }
 
         private void OnLoad()
         {
-            Load(BuildingAddressID);
+            Load(_uniqueId);
             SetDataToControllers();
         }
 
