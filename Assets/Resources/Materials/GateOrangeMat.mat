@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 4d6fab2707c33d64383f9d6e247f6e1a, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1, y: 1.25}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -97,7 +97,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 4d6fab2707c33d64383f9d6e247f6e1a, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1, y: 1.25}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -206,7 +206,7 @@ Material:
     - _LightBands: 4
     - _LightBandsScale: 0.5
     - _LightThreshold: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
     - _OptionsTab: 1
@@ -228,7 +228,7 @@ Material:
     - _RimThresholdOffset: 0.25
     - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
@@ -256,10 +256,10 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _AlbedoColor: {r: 0, g: 0.6603774, b: 0, a: 1}
-    - _BaseColor: {r: 0.90588236, g: 0.49019608, b: 0.16470589, a: 0.3529412}
+    - _BaseColor: {r: 1, g: 0.31746036, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 0.24206921, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0.1963189, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 1, g: 1, b: 1, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}

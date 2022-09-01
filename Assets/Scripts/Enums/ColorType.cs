@@ -11,7 +11,7 @@ namespace Enums
         DarkGreen,
         Magenda,
         Orange,
-        Gray,
+        Blue,
         Rainbow
     }
 }

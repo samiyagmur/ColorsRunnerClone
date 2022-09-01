@@ -11,7 +11,6 @@ namespace Managers
 {
     public class CameraManager : MonoBehaviour
     {
-
         #region Self Variables
         #region SerilizeField
         [SerializeField]CameraMovementController cameraMovementController;
@@ -21,8 +20,6 @@ namespace Managers
         #region Private Variables
         CamVibrationStatus vibrationStatus;
         private bool IsPressVibrating=true;
-
-
         #endregion
         #endregion
 
@@ -39,26 +36,22 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset +=OnReset;
-            CoreGameSignals.Instance.onPlay += SetCameraTarget;
-            CoreGameSignals.Instance.onReset += SetCameraTarget;
-            CoreGameSignals.Instance.onChangeGameState += OnEnterIdleArea;
+            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultiplyArea;
-            CameraSignals.Instance.onVibrateCam += OnVibrateCam;
-            CameraSignals.Instance.onVibrateStatus += OnVibrateStatus;
+            //CameraSignals.Instance.onVibrateCam += OnVibrateCam;
+            //CameraSignals.Instance.onVibrateStatus += OnVibrateStatus;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onPlay -= SetCameraTarget;
-            CoreGameSignals.Instance.onReset -= SetCameraTarget;
-            CoreGameSignals.Instance.onChangeGameState -= OnEnterIdleArea;
+            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultiplyArea;
-            CameraSignals.Instance.onVibrateCam -= OnVibrateCam;
-            CameraSignals.Instance.onVibrateStatus -= OnVibrateStatus;
+           // CameraSignals.Instance.onVibrateCam -= OnVibrateCam;
+            //CameraSignals.Instance.onVibrateStatus -= OnVibrateStatus;
         }
 
         private void OnDisable()
@@ -68,21 +61,11 @@ namespace Managers
 
         #endregion
 
+        #region Evet Methods
         private void OnPlay()
         {
             cameraMovementController.whenGameStart();
-        }
-
-        private void SetCameraTarget()
-        {
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
-        }
-        private void OnSetCameraTarget()
-        {
-            playerManager = FindObjectOfType<PlayerManager>();
-            
-            stateDrivenCamera.Follow = playerManager.transform;
-            
         }
 
         private void OnEnterMultiplyArea()
@@ -90,48 +73,50 @@ namespace Managers
             cameraMovementController.WhenEnterMultiplyArea();
         }
 
-        private void OnEnterIdleArea(GameStates arg0)
+        private void OnEnterIdleArea()
         {
+
             cameraMovementController.WhenEnTerIdleArea();
-            stateDrivenCamera.Follow = playerManager.transform;
-
-
-            //Debug.Log(stateDrivenCamera.Follow.name);
-
-
+            //stateDrivenCamera.Follow = playerManager.transform;
         }
         private void OnReset()
         {
-            //stateDrivenCamera.Follow = playerManager.transform;
             cameraMovementController.WhenOnReset();
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
 
         }
 
-        private void OnVibrateStatus()
+
+        //private void OnVibrateStatus()
+        //{
+
+        //    if (IsPressVibrating)
+        //    {
+        //        vibrationStatus = CamVibrationStatus.Active;
+        //        IsPressVibrating = false;
+        //    }
+        //    else
+        //    {
+        //        vibrationStatus = CamVibrationStatus.Pasive;
+        //        IsPressVibrating = true;
+        //    }
+
+        //}
+
+        //private void OnVibrateCam()
+        //{
+        //    if (vibrationStatus== CamVibrationStatus.Active)
+        //    {
+        //        transform.DOPunchRotation(new Vector3(0.5f, 0.5f, 0.5f), 1f, 10, 1f);
+
+        //    }
+
+        //}
+        private void OnSetCameraTarget()
         {
-
-            if (IsPressVibrating)
-            {
-                vibrationStatus = CamVibrationStatus.Active;
-                IsPressVibrating = false;
-            }
-            else
-            {
-                vibrationStatus = CamVibrationStatus.Pasive;
-                IsPressVibrating = true;
-            }
-       
+            playerManager = FindObjectOfType<PlayerManager>();
+            stateDrivenCamera.Follow = playerManager.transform;
         }
-
-        private void OnVibrateCam()
-        {
-            if (vibrationStatus== CamVibrationStatus.Active)
-            {
-                transform.DOPunchRotation(new Vector3(0.5f, 0.5f, 0.5f), 1f, 10, 1f);
-
-            }
-            
-        }
-
+        #endregion
     }
 }
