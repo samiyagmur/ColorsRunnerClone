@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Controllers
 {
-
-   
-
     public class PlayerScoreController : MonoBehaviour
     {
-        [SerializeField] GameObject meshController;
-        [SerializeField] private TextMeshPro scoreText;
-        public void OnChangeScorePos()
-        {   
-            transform.position = meshController.transform.position+new Vector3(0,2,0);
+        #region Self Variables
 
-        }
+        #region SerializeField Variables
+        [SerializeField] private GameObject meshController;
+        [SerializeField] private TextMeshPro scoreText; 
+        #endregion
 
-        internal void UpdateScore(int score)
-        {   
+        #endregion
+        public void OnChangeScorePos() => transform.position = meshController.transform.position + new Vector3(0, 2, 0);
 
-            
-            scoreText.text = score.ToString();
-        }
+        internal void UpdateScore(int score) => scoreText.text = score.ToString();
+
     }
 }

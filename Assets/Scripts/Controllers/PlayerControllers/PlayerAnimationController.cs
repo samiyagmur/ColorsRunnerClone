@@ -1,53 +1,28 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
-namespace Controllers{
-
-public class PlayerAnimationController : MonoBehaviour
+namespace Controllers
 {
-    #region Self Variables
-    #region Serialized Variables
-
-    [SerializeField] private Animator playerAnimator;
-
-    #endregion
-
-    #region Private Variables
-
-    #endregion
-
-    #endregion
-    
-
-
-
-    public void ChangeAnimationState(PlayerAnimationType type)
+    public class PlayerAnimationController : MonoBehaviour
     {
-            //ınvoke
-            //when player change animation type,this methost will work.
-            
-           playerAnimator.Play(type.ToString());
+        #region Self Variables
 
-            //switch (type)
-            //{
-            //    case PlayerAnimationType.Idle:
-            //        playerAnimator.Play("Idle");
-            //        break;
-            //    case PlayerAnimationType.Running:
-            //        playerAnimator.Play("Running");
-            //        break;
-            //    case PlayerAnimationType.Throw:
-            //        playerAnimator.Play("Throw");
-            //        break;
-            //    case PlayerAnimationType.Next:
-            //        break;
-                
-                    
-            //}
+        #region Serialized Variables
+
+        [SerializeField] private Animator playerAnimator;
+
+        #endregion Serialized Variables
+
+        #endregion Self Variables
 
 
+
+
+
+        
+        public void ChangeAnimationState(PlayerAnimationType type)
+        {
+            playerAnimator.Play(type.ToString());
         }
     }
-
 }
