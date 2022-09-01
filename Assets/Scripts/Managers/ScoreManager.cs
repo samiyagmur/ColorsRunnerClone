@@ -68,7 +68,7 @@ namespace Managers
         private void OnEnterIdleArea()
         {
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
-            CalculateScore();
+            
         }
 
         private void OnEnterPaymentArea()
@@ -132,6 +132,7 @@ namespace Managers
                     break;
 
                 case ScoreStatusAsLocations.EnterIdle:
+                    Debug.Log(TotalScore);
                     IdleScore += TotalScore;
                     IdleScore += Score;
                     ReadUIText(IdleScore);
