@@ -50,7 +50,6 @@ namespace Managers
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
 
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -70,7 +69,7 @@ namespace Managers
         private void OnEnterIdleArea()
         {
             scoreStatus = ScoreStatusAsLocations.EnterIdle;
-            CalculateScore();//
+            CalculateScore();
         }
 
         private void OnEnterPaymentArea()
@@ -89,14 +88,13 @@ namespace Managers
 
         private void OnReset()
         {
-           
             scoreStatus = ScoreStatusAsLocations.Reset;
             CalculateScore();
 
         }
 
         private void OnIncreaseScore()
-        {
+        {   
             Score++;
             
             CalculateScore();
@@ -156,7 +154,6 @@ namespace Managers
                     }
                     ReadPlayerText(IdleScore);
                     ReadUIText(IdleScore);
-
                     break;
                 case ScoreStatusAsLocations.ExitPaymentArea:
                     IdleScore=Score;
