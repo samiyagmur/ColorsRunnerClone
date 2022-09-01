@@ -34,37 +34,6 @@ namespace Managers
         {
             Application.targetFrameRate = 60;
         }
-        
-        
-        #region Event Subscription
-        
-        private void OnEnable()
-        {
-            OnGameOpen();
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
-        }
-
-        private void UnsubscribeEvents()
-        {
-            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
-        }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        #endregion
-
-        private void OnChangeGameState(GameStates newState)
-        {
-            States = newState;
-        }
-
         private void OnApplicationPause(bool isPauseStatus)
         {
             if (isPauseStatus)
@@ -78,11 +47,5 @@ namespace Managers
         {
             CoreGameSignals.Instance.onApplicationQuit?.Invoke();
         }
-
-        private void OnGameOpen()
-        {
-            CoreGameSignals.Instance.onGameOpen?.Invoke();
-        }
-
     }
 }
