@@ -3,9 +3,7 @@ using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Managers
 {
@@ -85,7 +83,7 @@ namespace Managers
         #endregion Event Subscriptions
 
         private void Update()
-        {   
+        {
             if (!isReadyForTouch) return;
 
             if (Input.GetMouseButtonUp(0))
@@ -180,13 +178,13 @@ namespace Managers
             isReadyForTouch = false;
         }
 
-        private bool IsPointerOverUIElement()
-        {
-            var eventData = new PointerEventData(EventSystem.current);
-            eventData.position = Input.mousePosition;
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            return results.Count > 0;
-        }
+        //private bool IsPointerOverUIElement()
+        //{
+        //    var eventData = new PointerEventData(EventSystem.current);
+        //    eventData.position = Input.mousePosition;
+        //    var results = new List<RaycastResult>();
+        //    EventSystem.current.RaycastAll(eventData, results);
+        //    return results.Count > 0;
+        //}
     }
 }
