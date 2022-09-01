@@ -9,9 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Sky 02
   m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
-  m_ShaderKeywords: _BACKGROUNDMODE_COLORS _DISABLEDIRECTIONLIGHT_ON _ENABLECLOUDSROTATION_ON
-    _ENABLEDIRECTIONLIGHT_ON _ENABLESUNMOONMASK_ON _ENABLESUNMOON_ON _USECUBEMAP_ON
-    _USEENVIRONMENTGRADIENT_ON _USETEXTURE_ON
+  m_ShaderKeywords: _BACKGROUNDMODE_COLORS _DISABLEDIRECTIONLIGHT_ON _ENABLEBUILTINFOG_ON
+    _ENABLECLOUDSROTATION_ON _ENABLEDIRECTIONLIGHT_ON _ENABLESUNMOONMASK_ON _ENABLESUNMOON_ON
+    _USECUBEMAP_ON _USEENVIRONMENTGRADIENT_ON _USETEXTURE_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -175,7 +175,7 @@ Material:
     - _DisableRotation: 0
     - _DstBlend: 0
     - _Enable1Twinkling: 0
-    - _EnableBuiltinFog: 0
+    - _EnableBuiltinFog: 1
     - _EnableClouds: 0
     - _EnableCloudsRotation: 1
     - _EnableDirectionLight: 1
@@ -204,8 +204,8 @@ Material:
     - _Float5: -0.2
     - _Float6: 1
     - _FogCat: 1
-    - _FogFill: 0
-    - _FogHeight: 0
+    - _FogFill: 0.404
+    - _FogHeight: 0.635
     - _FogIntensity: 0
     - _FogSmoothness: 1
     - _GlossMapScale: 1
@@ -270,12 +270,12 @@ Material:
     - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
-    - _EquatorColor: {r: 0.5584282, g: 0.8396226, b: 0.8396226, a: 0}
+    - _EquatorColor: {r: 0.5896226, g: 1, b: 1, a: 0}
     - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
-    - _GroundColor: {r: 0.735849, g: 0.33714277, b: 0.05900677, a: 0}
+    - _GroundColor: {r: 0.16981131, g: 0.069691345, b: 0, a: 0}
     - _MoonColor: {r: 1, g: 0.99840564, b: 0.6745283, a: 1}
     - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
-    - _SkyColor: {r: 0.5372549, g: 0.8397748, b: 1, a: 0}
+    - _SkyColor: {r: 0.6745283, g: 0.96723276, b: 1, a: 0}
     - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
     - _StarsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
     - _SunColor: {r: 1, g: 0.9210713, b: 0.6627451, a: 1}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2572339505182494181}
   - component: {fileID: 6636836910828845923}
   - component: {fileID: 9208217343658061038}
-  - component: {fileID: 6582013635607558390}
+  - component: {fileID: 8003283800169994213}
   m_Layer: 0
   m_Name: HorizontalSaw
   m_TagString: Obstacle
@@ -204,7 +204,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6324661, y: 1.6324661, z: 0.24541052}
   m_Center: {x: -0.0000075399876, y: -0.000009298326, z: 0}
---- !u!114 &6582013635607558390
+--- !u!114 &8003283800169994213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,7 +250,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 2
+  duration: 3
   easeType: 35
   easeCurve:
     serializedVersion: 2
@@ -287,13 +287,13 @@ MonoBehaviour:
   isActive: 1
   isValid: 1
   target: {fileID: 3745277427509933706}
-  animationType: 1
+  animationType: 2
   targetType: 11
   forcedTargetType: 0
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: -0.7, y: 0, z: 87.55}
+  endValueV3: {x: 3.6, y: 0.02, z: 52}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
