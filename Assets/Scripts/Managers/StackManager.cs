@@ -19,8 +19,12 @@ namespace Managers
         
         [SerializeField] private List<GameObject> collectableList = new List<GameObject>();
         
-        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay; //Data
-        
+        [SerializeField] [Range(0.02f, 1f)] private float lerpDelay;
+
+        [SerializeField][Range(0.02f, 1f)] private float lerpDelayX;//Data
+
+        [SerializeField][Range(0.02f, 1f)] private float lerpDelayY;
+
         [SerializeField] private Transform playerTransform;
         
         [SerializeField] private int initSize = 3;  //Pooldan cek // Data
@@ -292,9 +296,9 @@ namespace Managers
 
                     var position = playerTransform.position;
                     collectableList[i].transform.position= new Vector3(
-                        Mathf.Lerp(collectableList[i].transform.position.x, position.x, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.y, position.y, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.z,  position.z- 1f, lerpDelay));
+                        Mathf.Lerp(collectableList[i].transform.position.x, position.x, lerpDelayX),
+                        Mathf.Lerp(collectableList[i].transform.position.y, position.y, lerpDelayY),
+                        Mathf.Lerp(collectableList[i].transform.position.z,  position.z- 0.5f, lerpDelay));
                     
                     Vector3 rotationDirection = position - collectableList[i].transform.position;
                     
@@ -314,9 +318,9 @@ namespace Managers
                         return;
                     }
                     collectableList[i].transform.position = new Vector3(
-                        Mathf.Lerp(collectableList[i].transform.position.x, collectableList[i-1].transform.position.x, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.y, collectableList[i-1].transform.position.y, 0.3f),
-                        Mathf.Lerp(collectableList[i].transform.position.z, collectableList[i-1].transform.position.z - 1f, lerpDelay));
+                        Mathf.Lerp(collectableList[i].transform.position.x, collectableList[i-1].transform.position.x, lerpDelayX),
+                        Mathf.Lerp(collectableList[i].transform.position.y, collectableList[i-1].transform.position.y, lerpDelayY),
+                        Mathf.Lerp(collectableList[i].transform.position.z, collectableList[i-1].transform.position.z - 0.5f, lerpDelay));
 
                     Vector3 rotationDirection = collectableList[i-1].transform.position - collectableList[i].transform.position;
                     
