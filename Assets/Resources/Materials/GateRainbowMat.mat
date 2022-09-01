@@ -22,10 +22,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: GateRainbowMat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _EMISSION _RECEIVE_SHADOWS_OFF _SPECULAR_SETUP
-  m_LightmapFlags: 2
+  m_ShaderKeywords: _RECEIVE_SHADOWS_OFF
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     IGNOREPROJECTOR: False
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 8056d3e8484928a4cb99e8153ed1b6d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ef29f8f7876e9b489cec646830b47c0, type: 3}
         m_Scale: {x: 1, y: 1.25}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -96,7 +96,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8056d3e8484928a4cb99e8153ed1b6d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ef29f8f7876e9b489cec646830b47c0, type: 3}
         m_Scale: {x: 1, y: 1.25}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -167,7 +167,7 @@ Material:
     - _Artistic: 0
     - _ArtisticFrequency: 1
     - _ArtisticProjection: 1
-    - _Blend: 2
+    - _Blend: 0
     - _BlendDst: 0
     - _BlendSrc: 1
     - _Brightness: 1
@@ -176,7 +176,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _ColorGrading: 0
     - _Contrast: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -189,7 +189,7 @@ Material:
     - _DrawnClampMax: 1
     - _DrawnClampMin: 0
     - _DrawnMapScale: 1
-    - _DstBlend: 1
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -206,7 +206,7 @@ Material:
     - _LightBands: 4
     - _LightBandsScale: 0.5
     - _LightThreshold: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
     - _OptionsTab: 1
@@ -228,7 +228,7 @@ Material:
     - _RimThresholdOffset: 0.25
     - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
@@ -250,7 +250,7 @@ Material:
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0
     - _VertexAnimationStutter: 0
-    - _WorkflowMode: 0
+    - _WorkflowMode: 1
     - _WrappedLighting: 1
     - _ZTest: 4
     - _ZWrite: 0
@@ -259,7 +259,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.0009765625, g: 0.0009765625, b: 0.0009765625, a: 1}
+    - _EmissionColor: {r: 0.0013037875, g: 0.0013037875, b: 0.0013037875, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 1, g: 1, b: 1, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
