@@ -1884,7 +1884,7 @@ MonoBehaviour:
   textMeshPro: {fileID: 1725787649}
   textMeshPro2: {fileID: 1667920013}
   levelText: {fileID: 1883952379}
-  CalculateMultiply: {fileID: 0}
+  CalculateMultiply: {fileID: 621180700}
 --- !u!4 &621180699
 Transform:
   m_ObjectHideFlags: 0
@@ -2316,7 +2316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5907459442253940512, guid: 3ae1f7e91425e2f43968fac1659483c9, type: 3}
       propertyPath: m_TagString
