@@ -69,9 +69,10 @@ namespace Managers
         }
         public void DecreaseStack()
         {
-           
+            
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
             ScoreSignals.Instance.onDecreaseScore?.Invoke();
+            ParticalSignals.Instance.onCollectableDead?.Invoke(transform.position);
             gameObject.transform.SetParent(null);
             CameraSignals.Instance.onVibrateCam.Invoke();
         }

@@ -9,8 +9,6 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        public UnityAction onGameOpen = delegate { };
-
         public UnityAction onEnterMutiplyArea= delegate { };
 
         public UnityAction onEnterIdleArea = delegate { };
@@ -31,8 +29,6 @@ namespace Signals
         
         public UnityAction onFailed = delegate { };
 
-        public UnityAction onSaveGameData = delegate { };
-
         public UnityAction onNextLevel = delegate { };
         
         public UnityAction onPlay = delegate { };
@@ -41,15 +37,15 @@ namespace Signals
         
         public UnityAction onSetCameraTarget = delegate { };
         
-        public UnityAction onApplicationPause = delegate {  };
+        public UnityAction onApplicationPause = delegate { };
         
-        public UnityAction onApplicationQuit = delegate {  };
+        public UnityAction onApplicationQuit = delegate { };
 
-        public Func<int> onGetLevelID = delegate { return 0; };
+        //public Func<int> onGetLevelID = delegate { return 0; };
         
         public Func<int> onGetIdleLevelID = delegate { return 0; };
         
-        public UnityAction onIdleLevelChange = delegate {  };
+        public UnityAction onIdleLevelChange = delegate { };
 
     }
 }

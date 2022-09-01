@@ -1,45 +1,31 @@
-using UnityEngine;
-using Signals;
-using Enums;
-using System;
+using Command;
 using Controllers;
-using UnityEngine.UI;
+using Enums;
+using Signals;
 using TMPro;
-using System.Collections.Generic;
-using DG.Tweening;
+using UnityEngine;
 
 namespace Managers
 {
-
     public class UIManager : MonoBehaviour
     {
-
-
         #region Self Veriables
 
         #region SerializeField Variables
 
-        [SerializeField] UIPanelController UIPanelController;
-        [SerializeField] TextMeshProUGUI textMeshPro;
-        [SerializeField] TextMeshProUGUI textMeshPro2;
-        [SerializeField] RectTransform rectTransform;
-        [SerializeField] RectTransform rectTransformCursor;
-        [SerializeField] TextMeshProUGUI levelText;
+        [SerializeField] private UIPanelController UIPanelController;
+        [SerializeField] private TextMeshProUGUI textMeshPro;
+        [SerializeField] private TextMeshProUGUI textMeshPro2;
+        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] private CalculateMultiplyCommand CalculateMultiply;
 
-        #endregion
+        #endregion SerializeField Variables
 
-        #region Private Variables
-        private string _multiply;
-        #endregion
-        #endregion
+        #endregion Self Veriables
 
         #region Event Subcription
 
-        private void OnEnable()
-        {
-            SubscribeEvents();
-
-        }
+        private void OnEnable() => SubscribeEvents();
 
         private void SubscribeEvents()
         {
@@ -50,9 +36,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
             ScoreSignals.Instance.onSendUIScore += OnUpdateCurrentScore;
-           
-
-
         }
 
         private void UnsubscribeEvents()
@@ -64,16 +47,11 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
             ScoreSignals.Instance.onSendUIScore -= OnUpdateCurrentScore;
-           
-
         }
 
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
+        private void OnDisable() => UnsubscribeEvents();
 
-        #endregion
+        #endregion Event Subcription
 
         #region PanelControls
 
@@ -86,13 +64,17 @@ namespace Managers
         {
             UIPanelController.ClosePanel(panels);
         }
-        #endregion
+
+        #endregion PanelControls
+
+        #region UnityEvent Methods
 
         public void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
+
         public void OnFailed()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
@@ -103,15 +85,16 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.MultiplyPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
-            //CursorMovement();
-        }
-        
-        public void Play()
-        {
-            CoreGameSignals.Instance.onPlay?.Invoke(); // Invoker
         }
 
-        
+        #endregion UnityEvent Methods
+
+        #region ButtonGroup
+
+        public void Play()
+        {
+            CoreGameSignals.Instance.onPlay?.Invoke();
+        }
 
         public void TryAgain()
         {
@@ -119,82 +102,52 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
+
         public void EnterIdleArea()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.MultiplyPanel);
             CoreGameSignals.Instance.onEnterIdleArea();
             CoreGameSignals.Instance.onChangeGameState(GameStates.Idle);
+            ScoreSignals.Instance.onMultiplyAmaunt(CalculateMultiply.SelectMultiply());
         }
 
         public void NextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel); // LevelPanel Acilmadi ekledik
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);
             CoreGameSignals.Instance.onNextLevel?.Invoke();
-            CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);//yeri değişcek
-            //DOTween.KillAll();
-
         }
+
         public void Restart()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
             CoreGameSignals.Instance.onChangeGameState(GameStates.Runner);
-            //DOTween.KillAll();
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         public void Vibration()
         {
-            
             CameraSignals.Instance.onVibrateStatus?.Invoke();
         }
+
+        #endregion ButtonGroup
+
         #region TextGroup
 
         private void OnUpdateCurrentScore(int score)
         {
-
-
             textMeshPro.text = score.ToString();
             textMeshPro2.text = score.ToString();
-
         }
+
         private void OnSetLevelText(int nextLevel)
         {
             nextLevel++;
-            levelText.text = "Level "+ nextLevel;
-            
+            levelText.text = "Level " + nextLevel;
         }
-        #endregion
-        public void SelectMultiply()
-        {
-            float CursorXPos = rectTransform.localPosition.x;
 
-            if (190 < CursorXPos && CursorXPos < 320)
-            {
-                _multiply = "x2";
-            }
-            else if (60 < CursorXPos && CursorXPos < 190)
-            {
-                _multiply = "x3";
-            }
-            else if (-50 < CursorXPos && CursorXPos < 60)
-            {
-                _multiply = "x5";
-            }
-            else if (-180 < CursorXPos && CursorXPos < -50)
-            {
-                _multiply = "x3";
-            }
-            else if (-320 < CursorXPos && CursorXPos < -180)
-            {
-                _multiply = "x2";
-            }
-            ScoreSignals.Instance.onMultiplyAmaunt?.Invoke(_multiply);
-        }
+        #endregion TextGroup
     }
-
-
-
 }
-
