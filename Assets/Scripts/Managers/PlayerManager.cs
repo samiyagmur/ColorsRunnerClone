@@ -4,6 +4,7 @@ using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -123,6 +124,7 @@ namespace Managers
 
         public void ChangeAnimationintextarea()
         {
+            
             playerAnimation = PlayerAnimationType.Throw;
         }
 
@@ -130,6 +132,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onExitPaymentArea?.Invoke();
             playerAnimation = PlayerAnimationType.Idle;
+            ParticalSignals.Instance.onParticleStop?.Invoke();
         }
 
         private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
@@ -193,6 +196,7 @@ namespace Managers
         {
             if (_gameStates == GameStates.Idle)
             {
+                
                 playerMeshController.ChangeScale(-1);
                 CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
                 ScoreSignals.Instance.onDecreaseScore?.Invoke();
@@ -201,10 +205,7 @@ namespace Managers
 
         private void OnSetScoreText(int score)
         {
-            if (score != 0 && playerAnimation == PlayerAnimationType.Throw)
-            {
-                playerThrowController.ThrowGameObject(transform);
-            }
+
             playerMeshController.CalculateSmallerRate(score);
             PlayerScoreText(score);
         }
