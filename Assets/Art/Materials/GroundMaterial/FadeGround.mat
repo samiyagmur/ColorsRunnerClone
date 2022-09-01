@@ -301,13 +301,13 @@ Material:
     - _Roughness: 0.5
     - _Saturation: 3.28
     - _SketchMapScale: 1
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SoftFade: 1
     - _SoftFadeFarDistance: 100
     - _SoftFadeNearDistance: 0
     - _SoftParticlesEnabled: 1
-    - _SoftParticlesFarFadeDistance: 25.51
+    - _SoftParticlesFarFadeDistance: 10
     - _SoftParticlesNearFadeDistance: 0
     - _Specular: 0
     - _SpecularHighlights: 1
@@ -352,7 +352,7 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftFadeModeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _SoftParticleFadeParams: {r: 0, g: 0.039200313, b: 0, a: 0}
+    - _SoftParticleFadeParams: {r: 0, g: 0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.20312497, g: 0.20312497, b: 0.20312497, a: 1}
     - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}

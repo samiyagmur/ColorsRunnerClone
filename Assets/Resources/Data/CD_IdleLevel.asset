@@ -18,12 +18,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 7
+        BuildingMarketPrice: 50
         PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 1
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 10
+      BuildingMarketPrice: 70
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
@@ -31,12 +31,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 7
+        BuildingMarketPrice: 30
         PayedAmount: 0
         BuildingAdressId: 1
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 10
+      BuildingMarketPrice: 40
       PayedAmount: 0
       BuildingAdressId: 1
       Saturation: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 5
+        BuildingMarketPrice: 20
         PayedAmount: 0
         BuildingAdressId: 2
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 10
+      BuildingMarketPrice: 30
       PayedAmount: 0
       BuildingAdressId: 2
       Saturation: 0
@@ -57,6 +57,45 @@ MonoBehaviour:
     IdleLevelState: 0
     CompletedBuildingsCount: 0
   - IdleLevelKey: IdleLevelDataKey
-    Buildings: []
+    Buildings:
+    - Key: IdleBuildingDataKey
+      IsDepended: 0
+      SideObject:
+        BuildingMarketPrice: 25
+        PayedAmount: 0
+        BuildingAdressId: 0
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 100
+      PayedAmount: 0
+      BuildingAdressId: 0
+      Saturation: 0
+      idleLevelState: 0
+    - Key: IdleBuildingDataKey
+      IsDepended: 1
+      SideObject:
+        BuildingMarketPrice: 80
+        PayedAmount: 0
+        BuildingAdressId: 1
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 90
+      PayedAmount: 0
+      BuildingAdressId: 1
+      Saturation: 0
+      idleLevelState: 0
+    - Key: IdleBuildingDataKey
+      IsDepended: 1
+      SideObject:
+        BuildingMarketPrice: 70
+        PayedAmount: 0
+        BuildingAdressId: 2
+        Saturation: 0
+        "\u0131dleLevelState": 0
+      BuildingMarketPrice: 90
+      PayedAmount: 0
+      BuildingAdressId: 2
+      Saturation: 0
+      idleLevelState: 0
     IdleLevelState: 0
     CompletedBuildingsCount: 0
