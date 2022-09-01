@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0130f1d92fc0a754389ee10825181df4, type: 3}
-  m_Name: CD_Input
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Volume Profile
   m_EditorClassIdentifier: 
-  InputData:
-    HorizontalInputSpeed: 8
-    ClampSides: {x: -4, y: 4}
-    ClampSpeed: 0.05
+  components: []
