@@ -186,10 +186,10 @@ namespace Managers
 
             if (collectableList.Count == 1)
             {
-                playerTransform.position = collectableList[0].transform.position;
+                playerTransform.position = collectableList[0].transform.position + Vector3.forward*2;
             }
             currentStack.SetActive(false);
-            await Task.Delay(25);
+            await Task.Delay(100);
             currentStack.SetActive(true);
         }
 
