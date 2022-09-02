@@ -40,7 +40,9 @@ namespace Managers
 
         private int _LevelID;
         private int _IdleLevelId;
-        private int _uniqueID = 0;
+
+        private int _gameScore;
+        private int _uniqueID = 1234;
 
         #endregion Private Variables
 
