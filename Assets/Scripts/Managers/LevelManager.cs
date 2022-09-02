@@ -4,6 +4,7 @@ using Command.LevelCommands;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using Signals;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -110,6 +111,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelId;
             CoreGameSignals.Instance.onIdleLevelChange += OnIncreaseIdleLevel;
+            CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
         }
 
         private void UnsubscribeEvents()
@@ -122,6 +125,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelId;
             CoreGameSignals.Instance.onIdleLevelChange -= OnIncreaseIdleLevel;
+            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
         }
 
         private void OnDisable()
@@ -131,6 +136,12 @@ namespace Managers
 
         #endregion Event Subscription
 
+        private void OnSave()
+        {
+            Save(_uniqueID);
+        }
+        
+
         #region Level Management
         private async void OnNextLevel()
         {
@@ -138,7 +149,7 @@ namespace Managers
             Save(_uniqueID);
             await Task.Delay(25);
             CoreGameSignals.Instance.onReset?.Invoke();
-            //UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
+            UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
         private void OnIncreaseIdleLevel()

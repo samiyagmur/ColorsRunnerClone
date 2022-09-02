@@ -62,8 +62,8 @@ namespace Managers
         {
 
             StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
-            ScoreSignals.Instance.onIncreaseScore?.Invoke();
-            
+            ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.plus);
+
             DOVirtual.DelayedCall(.2f, () => { ChangeAnimationOnController(CollectableAnimType.Run); });
 
         }
@@ -71,7 +71,7 @@ namespace Managers
         {
             
             StackSignals.Instance.onDecreaseStack?.Invoke(transform.GetSiblingIndex());
-            ScoreSignals.Instance.onDecreaseScore?.Invoke();
+            ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.minus);
             ParticalSignals.Instance.onCollectableDead?.Invoke(transform.position);
             gameObject.transform.SetParent(null);
             CameraSignals.Instance.onVibrateCam.Invoke();

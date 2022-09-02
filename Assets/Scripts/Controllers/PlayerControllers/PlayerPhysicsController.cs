@@ -13,7 +13,7 @@ namespace Controllers
 
         [SerializeField]
         private PlayerManager playerManager;
-
+        private float _timer = 0f;
         #endregion Serialized Variables
 
         #endregion Self Variables
@@ -26,6 +26,7 @@ namespace Controllers
             if (other.CompareTag("Rainbow")) playerManager.IsHitRainbow();
 
             if (other.CompareTag("Collectable")) playerManager.IsHitCollectable();
+
             else if (other.CompareTag("DroneArea"))
             {
                 playerManager.DeActivateScore(false);
@@ -41,11 +42,7 @@ namespace Controllers
             {
                 playerManager.ChangeForwardSpeeds(ChangeSpeedState.EnterTaretArea);
             }
-            if (other.CompareTag("PaymentArea"))
-            {
-                playerManager.ChangeAnimationintextarea();
-                playerManager.InvokeRepeating("IsEnterPaymentArea", 0, 0.1f);
-            }
+
         }
 
         private void OnTriggerExit(Collider other)
@@ -62,15 +59,35 @@ namespace Controllers
             if (other.CompareTag("PaymentArea"))
             {
                 playerManager.ExitPaymentArea();
-                playerManager.CancelInvoke("IsEnterPaymentArea");
+               
             }
         }
 
-        //private void OnTriggerStay(Collider other)
-        //{
-        //    if (other.CompareTag("PaymentArea"))
-        //    {
-        //    }
-        //}
+        private void OnTriggerStay(Collider other)
+        {
+            
+
+            if (other.CompareTag("PaymentArea"))
+            {
+                _timer -= Time.fixedDeltaTime;
+                Debug.Log(_timer);
+                if (_timer <= 0)
+                {
+                    _timer = 0.2f;
+                    
+
+                    if (playerManager.ScoreVaryant>0)
+                    {
+                        playerManager.SetupScore();
+
+
+                    }
+                    else
+                    {
+                        playerManager.PlayerPhysicDisabled();
+                    }
+                }
+            }
+        }
     }
 }

@@ -28,11 +28,11 @@ namespace Controllers.BuildingControllers
             if (other.CompareTag("Player"))
             {
                 _timer -= Time.fixedDeltaTime ;
-            
+                
                 if (_timer <= 0)
                 {
                     _timer = 0.2f;
-                
+                    
                     if (buildingManager.BuildingsData.BuildingMarketPrice > buildingManager.BuildingsData.PayedAmount)
                     {
                         buildingManager.UpdatePayedAmount();
@@ -43,8 +43,7 @@ namespace Controllers.BuildingControllers
                         if (buildingManager.BuildingsData.idleLevelState == IdleLevelState.Uncompleted)
                         {   
                             buildingManager.OpenSideObject();
-                            ParticalSignals.Instance.onParticleStop?.Invoke();
-                            //score burada durcak.
+                            ParticalSignals.Instance.onParticleStop?.Invoke();  
                             buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
                             buildingManager.CheckBuildingsScoreStatus(IdleLevelState.Completed);
                         }

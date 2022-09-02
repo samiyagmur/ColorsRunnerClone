@@ -22,7 +22,7 @@ namespace Controllers
             }
 
             if (transform.parent.localScale.x >= 1 && transform.parent.localScale.y >= 1 && transform.parent.localScale.y >= 1)
-                transform.parent.localScale += Vector3.one / (_totalScore * 2) * muiltiplyAmount;
+                transform.parent.localScale += Vector3.one / (_totalScore ) * muiltiplyAmount;
 
             if (transform.parent.localScale.x <= 1 && transform.parent.localScale.y <= 1 && transform.parent.localScale.y <= 1)
             {
@@ -33,7 +33,7 @@ namespace Controllers
         public void CalculateSmallerRate(int score)
         {
             if (score > 0)
-            {
+            {   
                 _totalScore = score;
             }
         }
