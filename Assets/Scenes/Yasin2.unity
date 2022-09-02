@@ -5533,6 +5533,8 @@ MonoBehaviour:
   initStack: {fileID: 1877316333817627185, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
   lerpDelay: 0.252
+  lerpDelayX: 0.35
+  lerpDelayY: 0.35
   playerTransform: {fileID: 505523903821665479, guid: dcd1e0c26f40ed74083d82ade488503a, type: 3}
   initSize: 10
   stackHolder: {fileID: 0}

@@ -96,13 +96,15 @@ namespace Managers
 
         public void DecreaseStackAfterDroneArea()
         {
+            
             ChangeAnimationOnController(CollectableAnimType.Dying);
             
             gameObject.transform.SetParent(null);
             
             Death();
-            
+            ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.minus);
             Destroy(gameObject,3f);
+            
         }
        
 
@@ -135,7 +137,6 @@ namespace Managers
         {
            
             collectableMeshController.ChangeScale();
-            CoreGameSignals.Instance.onEnterMutiplyArea();
             collectableMeshController.SetCollectableMaterial(ColorType.Rainbow);
         }
 

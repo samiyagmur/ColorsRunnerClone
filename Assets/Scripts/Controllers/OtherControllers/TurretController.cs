@@ -45,7 +45,6 @@ namespace Controllers
         }
         public void ExitTurretArea()
         {
-            Debug.Log("ExitTurretArea");
             CancelInvoke("TaretMovement");
         }
 
@@ -108,17 +107,22 @@ namespace Controllers
 
         private void HitWithRaycast()
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, transform.forward, out hit))
-            {   
-                Debug.DrawRay(transform.position, transform.forward* 15f, Color.red);
-
-                if (hit.transform.gameObject.CompareTag("Collected"))
-                {   
-                    hit.transform.parent.GetComponent<CollectableManager>().DecreaseStack();
-                }
+            int rand = Random.Range(0, 100);
+            if (rand <= 9)
+            {
+                RaycastHit hit;
+                
+                            if (Physics.Raycast(transform.position, transform.forward, out hit))
+                            {   
+                                Debug.DrawRay(transform.position, transform.forward* 15f, Color.red);
+                
+                                if (hit.transform.gameObject.CompareTag("Collected"))
+                                {   
+                                    hit.transform.parent.GetComponent<CollectableManager>().DecreaseStack();
+                                }
+                            }
             }
+            
 
         }
        

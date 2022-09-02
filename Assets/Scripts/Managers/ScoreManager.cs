@@ -113,7 +113,9 @@ namespace Managers
 
         private void OnReset()
         {
+            IdleScore = 0;
             _totalScore = 0;
+            ReadPlayerText(_totalScore);
         }
 
     }

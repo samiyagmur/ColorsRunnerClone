@@ -2470,6 +2470,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 163.7
       objectReference: {fileID: 0}
+    - target: {fileID: 2956270670582321820, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3598849837399818181, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: colorType
       value: 7
@@ -2480,7 +2484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4607436646454357012, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: colorType
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4986375192487478386, guid: dc2738524708f6d4eb7b77c5414e999e, type: 3}
       propertyPath: m_RootOrder
@@ -3638,6 +3642,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4575399289387289399, guid: 0e18d5abb87606245bb7efaa3a62d443, type: 3}
+      propertyPath: colorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5435991892447924099, guid: 0e18d5abb87606245bb7efaa3a62d443, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4772,6 +4780,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 136451814712900062}
     m_Modifications:
+    - target: {fileID: 3682999947326915144, guid: fdcb19e70b4784c49a7ce13f9639034f, type: 3}
+      propertyPath: endValueV3.x
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682999947326915144, guid: fdcb19e70b4784c49a7ce13f9639034f, type: 3}
+      propertyPath: endValueV3.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682999947326915144, guid: fdcb19e70b4784c49a7ce13f9639034f, type: 3}
+      propertyPath: endValueV3.z
+      value: 52
+      objectReference: {fileID: 0}
     - target: {fileID: 3745277427509933706, guid: fdcb19e70b4784c49a7ce13f9639034f, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -5066,6 +5086,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 136451814712900062}
     m_Modifications:
+    - target: {fileID: 6358184531061955210, guid: 9da5ef4a69bb4d841a149face0de9d49, type: 3}
+      propertyPath: colorType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6358184531665732542, guid: 9da5ef4a69bb4d841a149face0de9d49, type: 3}
       propertyPath: m_Name
       value: TurretArea

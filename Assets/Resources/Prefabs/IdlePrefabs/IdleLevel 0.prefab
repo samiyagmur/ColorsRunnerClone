@@ -842,6 +842,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PaymentArea
       objectReference: {fileID: 0}
+    - target: {fileID: 1430029544382016425, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 1430029544382016425, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1430029544382016425, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5376909405958255089, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 7588762651581701441, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 7588762651581701441, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588762651581701441, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
     - target: {fileID: 7588762652693451851, guid: 9548ca4b4826f7445bdc24bd53e11b2f, type: 3}
       propertyPath: sideObject
       value: 
@@ -979,6 +1007,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6246347623427846488}
     m_Modifications:
+    - target: {fileID: 1416742436377609782, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 1416742436377609782, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416742436377609782, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 1416742436377609782, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1507126562658142488, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
       propertyPath: m_Name
       value: Hotel
@@ -1031,10 +1075,42 @@ PrefabInstance:
       propertyPath: sideObjectMeshController
       value: 
       objectReference: {fileID: 797726848669172910}
+    - target: {fileID: 1507126563685482516, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_text
+      value: 19/20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507126563685482516, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_fontSize
+      value: 8.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507126563685482516, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 1507126563685482516, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507126563685482516, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 3197765966687815071, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3197765966687815071, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
       propertyPath: m_TagString
       value: PaymentArea
       objectReference: {fileID: 0}
+    - target: {fileID: 3634565531084854484, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
+    - target: {fileID: 6385861617685433816, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -1549217092752389676, guid: 89974cfad1b3b2a4dbbdd2d86c5611fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac5e3effaaa18374297e02ec5ee47724, type: 3}
 --- !u!1 &1986342344048981914 stripped
