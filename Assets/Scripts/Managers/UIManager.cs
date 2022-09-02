@@ -32,7 +32,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onMultiplyArea += OnMultiplyArea;
-            //UISignals.Instance.onSetLevelText += OnSetLevelText;
+            UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onFailed += OnFailed;
             ScoreSignals.Instance.onSendUIScore += OnUpdateCurrentScore;
@@ -43,7 +43,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onMultiplyArea -= OnMultiplyArea;
-           // UISignals.Instance.onSetLevelText -= OnSetLevelText;
+            UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onFailed -= OnFailed;
             ScoreSignals.Instance.onSendUIScore -= OnUpdateCurrentScore;

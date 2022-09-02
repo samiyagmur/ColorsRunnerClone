@@ -1,5 +1,6 @@
 ﻿using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.BuildingControllers
@@ -35,6 +36,7 @@ namespace Controllers.BuildingControllers
                     if (buildingManager.BuildingsData.SideObject.BuildingMarketPrice > buildingManager.BuildingsData.SideObject.PayedAmount)
                     {
                         buildingManager.UpdateSidePayedAmount();
+                        ParticalSignals.Instance.onParticleBurst?.Invoke(transform.position);
 
                     }
                     else
@@ -42,6 +44,7 @@ namespace Controllers.BuildingControllers
 
                         if (buildingManager.BuildingsData.SideObject.ıdleLevelState == IdleLevelState.Uncompleted)
                         {
+                            ParticalSignals.Instance.onParticleStop?.Invoke();
                             buildingManager.UpdateSideBuildingStatus(IdleLevelState.Completed);
                             buildingManager.CheckSideBuildingsScoreStatus(IdleLevelState.Completed);
                         }

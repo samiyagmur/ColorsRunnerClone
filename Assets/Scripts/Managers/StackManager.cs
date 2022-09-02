@@ -122,8 +122,8 @@ namespace Managers
                 AddStackOnInitialize(_currentStack);
                 
                 StackSignals.Instance.onChangeCollectedAnimation?.Invoke(CollectableAnimType.CrouchIdle);
-                ScoreSignals.Instance.onIncreaseScore?.Invoke();
-                
+                ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.plus);
+
             }
         }
         private void DeleteStack()

@@ -138,7 +138,7 @@ namespace Managers
             Save(_uniqueID);
             await Task.Delay(25);
             CoreGameSignals.Instance.onReset?.Invoke();
-            //UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
+            UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
         private void OnIncreaseIdleLevel()
