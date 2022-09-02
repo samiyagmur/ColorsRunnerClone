@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableManager: {fileID: 8326928516369419401}
+  dimensions: 0
+  smallerTime: 0
 --- !u!1 &8326928516369419402
 GameObject:
   m_ObjectHideFlags: 0

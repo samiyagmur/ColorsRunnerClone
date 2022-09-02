@@ -129,12 +129,15 @@ MonoBehaviour:
     MovementData:
       ForwardSpeed: 10
       SidewaysSpeed: 2
+  ScoreVaryant: 0
   movementController: {fileID: 505523903821665497}
   animationController: {fileID: 505523902901583841}
   playerMeshController: {fileID: 505523903641157004}
   playerScoreController: {fileID: 1405215540989902758}
   playerThrowController: {fileID: 2798135257217706350}
   scoreHolder: {fileID: 2341673961908713311}
+  playerRigidbody: {fileID: 505523903821665498}
+  playerCollider: {fileID: 8033736329645616880}
 --- !u!114 &505523903821665497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,8 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39b8d2f868e43f4c88398fc00be3c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwObject: {fileID: 3010178883341975155, guid: 96d236c6c626ff74c9f6f40177a91c3d, type: 3}
-  _throwRigidbody: {fileID: 3484239039067881873, guid: 96d236c6c626ff74c9f6f40177a91c3d, type: 3}
 --- !u!114 &505523902901583841
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ namespace Controllers
     {
         public void ThrowGameObject(Transform playerTransform)
         {
-            ParticalSignals.Instance.onParticleBurst?.Invoke(playerTransform.position);
+          // ParticalSignals.Instance.onParticleBurst?.Invoke(playerTransform.position);
         }
     }
 }

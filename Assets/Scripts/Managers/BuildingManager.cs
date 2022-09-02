@@ -111,9 +111,6 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit += OnSave;
             CoreGameSignals.Instance.onNextLevel += OnSave;
             CoreGameSignals.Instance.onLevelInitialize += OnLoad;
-            BuildingSignals.Instance.onActiveTextUpdate += OnActiveTextUpdate;
-            BuildingSignals.Instance.onScoreZero += OnScoreZero;
-
 
         }
 
@@ -123,9 +120,7 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit -= OnSave;
             CoreGameSignals.Instance.onNextLevel -= OnSave;
             CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
-            BuildingSignals.Instance.onActiveTextUpdate -= OnActiveTextUpdate;
-            BuildingSignals.Instance.onScoreZero -= OnScoreZero;
-            
+ 
         }
 
         private void OnDisable()
@@ -141,6 +136,7 @@ namespace Managers
             buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
             buildingMeshController.Saturation = BuildingsData.Saturation;
             UpdateSaturation();
+            
             if (BuildingsData.IsDepended)
             {
                 sideObjectMarketStatusController.UpdatePayedAmountText(BuildingsData.SideObject.PayedAmount);
@@ -193,21 +189,7 @@ namespace Managers
 
         #endregion
 
-        internal void SetScoreStatus()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Pasive;
-        }
 
-        private void OnActiveTextUpdate()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Active;
-        }
-
-        private void OnScoreZero()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Pasive;
-        }
-        
 
         #region UpdateControllers
 
@@ -216,86 +198,78 @@ namespace Managers
             BuildingsData.PayedAmount++;
             buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
             UpdateSaturation();
-        
-            if (scoreZeroStatus == ScoreZeroStatus.Active)
-            {
-                BuildingsData.PayedAmount++;
-                buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
-                UpdateSaturation();
-            }
-        
-                
+
         }
 
-            public void UpdateSidePayedAmount()
-            {
-                BuildingsData.SideObject.PayedAmount++;
-                sideObjectMarketStatusController.UpdatePayedAmountText(BuildingsData.SideObject.PayedAmount);
-                UpDateSideSaturation();
-            }
+        public void UpdateSidePayedAmount()
+        {
+            BuildingsData.SideObject.PayedAmount++;
+            sideObjectMarketStatusController.UpdatePayedAmountText(BuildingsData.SideObject.PayedAmount);
+            UpDateSideSaturation();
+        }
 
-            public void UpDateSideSaturation()
-            {
-                sideObjectMeshController.CalculateSaturation();
-            }
+         public void UpDateSideSaturation()
+         {
+             sideObjectMeshController.CalculateSaturation();
+         }
 
-            private void UpdateSaturation()
-            {
-                buildingMeshController.CalculateSaturation();
-            }
+         private void UpdateSaturation()
+         {
+             buildingMeshController.CalculateSaturation();
+         }
 
 
-            public void UpdateBuildingStatus(IdleLevelState _idleLevelState)
-            {
-                BuildingsData.idleLevelState = _idleLevelState;
-                if (_idleLevelState == IdleLevelState.Completed)
-                {
-                    buildingPhysicsController.gameObject.SetActive(false);
-                    if (!BuildingsData.IsDepended)
-                    {
-                        BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsData.BuildingAdressId);
-                    }
-                }
-            }
+         public void UpdateBuildingStatus(IdleLevelState _idleLevelState)
+         {
+             BuildingsData.idleLevelState = _idleLevelState;
+             if (_idleLevelState == IdleLevelState.Completed)
+             {
+                 buildingPhysicsController.gameObject.SetActive(false);
+                 if (!BuildingsData.IsDepended)
+                 {
+                     BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsData.BuildingAdressId);
+                 }
+             }
+         }
 
-            public void UpdateSideBuildingStatus(IdleLevelState _idleLevelState)
-            {
-                BuildingsData.SideObject.ıdleLevelState = _idleLevelState;
+          public void UpdateSideBuildingStatus(IdleLevelState _idleLevelState)
+          {
+              BuildingsData.SideObject.ıdleLevelState = _idleLevelState;
 
-                BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsData.SideObject.BuildingAdressId);
+              BuildingSignals.Instance.onBuildingsCompleted.Invoke(BuildingsData.SideObject.BuildingAdressId);
 
-            }
+          }
 
-            public void CheckBuildingsScoreStatus(IdleLevelState _idleLevelState)
-            {
-                if (_idleLevelState == IdleLevelState.Completed)
-                {
-                    buildingMarketStatusController.gameObject.SetActive(false);
-                }
-                else
-                {
-                    buildingMarketStatusController.gameObject.SetActive(true);
-                }
-            }
+          public void CheckBuildingsScoreStatus(IdleLevelState _idleLevelState)
+          {
+              if (_idleLevelState == IdleLevelState.Completed)
+              {
+                  buildingMarketStatusController.gameObject.SetActive(false);
+              }
+              else
+              {
+                  buildingMarketStatusController.gameObject.SetActive(true);
+              }
+          }
 
-            public void CheckSideBuildingsScoreStatus(IdleLevelState _idleLevelState)
-            {
-                if (_idleLevelState == IdleLevelState.Completed)
-                {
-                    sideObjectMarketStatusController.gameObject.SetActive(false);
-                }
-                else
-                {
-                    sideObjectMarketStatusController.gameObject.SetActive(true);
-                }
-            }
+          public void CheckSideBuildingsScoreStatus(IdleLevelState _idleLevelState)
+          {
+              if (_idleLevelState == IdleLevelState.Completed)
+              {
+                  sideObjectMarketStatusController.gameObject.SetActive(false);
+              }
+              else
+              {
+                  sideObjectMarketStatusController.gameObject.SetActive(true);
+              }
+          }
 
-            public void OpenSideObject()
-            {
-                sideObject.SetActive(true);
-            }
+          public void OpenSideObject()
+          {
+              sideObject.SetActive(true);
+          }
 
-            #endregion
+          #endregion
 
         }
     }

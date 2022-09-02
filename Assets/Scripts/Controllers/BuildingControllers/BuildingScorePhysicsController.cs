@@ -1,5 +1,6 @@
 ﻿using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.BuildingControllers
@@ -27,22 +28,22 @@ namespace Controllers.BuildingControllers
             if (other.CompareTag("Player"))
             {
                 _timer -= Time.fixedDeltaTime ;
-            
+                
                 if (_timer <= 0)
                 {
                     _timer = 0.2f;
-                
+                    
                     if (buildingManager.BuildingsData.BuildingMarketPrice > buildingManager.BuildingsData.PayedAmount)
                     {
                         buildingManager.UpdatePayedAmount();
-
+                        ParticalSignals.Instance.onParticleBurst?.Invoke(transform.position);
                     }
                     else
                     {
-                        
                         if (buildingManager.BuildingsData.idleLevelState == IdleLevelState.Uncompleted)
                         {   
                             buildingManager.OpenSideObject();
+                            ParticalSignals.Instance.onParticleStop?.Invoke();  
                             buildingManager.UpdateBuildingStatus(IdleLevelState.Completed);
                             buildingManager.CheckBuildingsScoreStatus(IdleLevelState.Completed);
                         }
@@ -66,8 +67,7 @@ namespace Controllers.BuildingControllers
                 _timer = 0f;
                 
                 buildingManager.Save(buildingManager.BuildingAddressID);
-                buildingManager.SetScoreStatus();
-                
+
             }
         }
         

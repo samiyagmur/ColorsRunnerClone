@@ -23,7 +23,7 @@ MonoBehaviour:
         BuildingAdressId: 0
         Saturation: 1
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 70
+      BuildingMarketPrice: 20
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
         BuildingAdressId: 1
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 40
+      BuildingMarketPrice: 10
       PayedAmount: 0
       BuildingAdressId: 1
       Saturation: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
         BuildingAdressId: 2
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 30
+      BuildingMarketPrice: 15
       PayedAmount: 0
       BuildingAdressId: 2
       Saturation: 0
@@ -61,12 +61,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 0
       SideObject:
-        BuildingMarketPrice: 25
+        BuildingMarketPrice: 10
         PayedAmount: 0
         BuildingAdressId: 0
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 100
+      BuildingMarketPrice: 15
       PayedAmount: 0
       BuildingAdressId: 0
       Saturation: 0
@@ -74,12 +74,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 80
+        BuildingMarketPrice: 10
         PayedAmount: 0
         BuildingAdressId: 1
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 90
+      BuildingMarketPrice: 10
       PayedAmount: 0
       BuildingAdressId: 1
       Saturation: 0
@@ -87,12 +87,12 @@ MonoBehaviour:
     - Key: IdleBuildingDataKey
       IsDepended: 1
       SideObject:
-        BuildingMarketPrice: 70
+        BuildingMarketPrice: 15
         PayedAmount: 0
         BuildingAdressId: 2
         Saturation: 0
         "\u0131dleLevelState": 0
-      BuildingMarketPrice: 90
+      BuildingMarketPrice: 15
       PayedAmount: 0
       BuildingAdressId: 2
       Saturation: 0

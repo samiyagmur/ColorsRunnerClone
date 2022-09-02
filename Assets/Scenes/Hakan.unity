@@ -1909,9 +1909,8 @@ MonoBehaviour:
   UIPanelController: {fileID: 621180697}
   textMeshPro: {fileID: 1725787649}
   textMeshPro2: {fileID: 1667920013}
-  rectTransform: {fileID: 1304027460}
-  rectTransformCursor: {fileID: 414019750}
   levelText: {fileID: 0}
+  CalculateMultiply: {fileID: 0}
 --- !u!4 &621180699
 Transform:
   m_ObjectHideFlags: 0
@@ -5841,6 +5840,8 @@ MonoBehaviour:
   initStack: {fileID: 1877316333817627185, guid: b94de0a9d4e51bf4da5daa3e66d9e68e, type: 3}
   collectableList: []
   lerpDelay: 0.252
+  lerpDelayX: 0.35
+  lerpDelayY: 0.35
   playerTransform: {fileID: 0}
   initSize: 10
   stackHolder: {fileID: 0}

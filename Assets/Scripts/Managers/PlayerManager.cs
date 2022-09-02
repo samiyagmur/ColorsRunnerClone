@@ -1,9 +1,11 @@
 using Controllers;
+using Controllers.BuildingControllers;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ namespace Managers
         #region Public Variables
 
         [Header("Data")] public PlayerData Data;
+
+        public int ScoreVaryant;
 
         #endregion Public Variables
 
@@ -33,10 +37,15 @@ namespace Managers
 
         [SerializeField] private GameObject scoreHolder;
 
+        [SerializeField] private Rigidbody playerRigidbody;
+
+        [SerializeField] private CapsuleCollider playerCollider;
+
         #endregion Serialized Variables
 
         private GameStates _gameStates;
         private PlayerAnimationType playerAnimation;
+        
 
         #endregion Self Variables
 
@@ -91,6 +100,21 @@ namespace Managers
             ScoreSignals.Instance.onSendPlayerScore -= OnSetScoreText;
         }
 
+        public void SetupScore()
+        {
+            ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.minus);
+            playerMeshController.ChangeScale(-1);
+            ChangePlayerAnimation(PlayerAnimationType.Throw);
+        }
+
+        public void PlayerPhysicDisabled()
+        {
+            playerCollider.enabled = false;
+            playerRigidbody.useGravity = false;
+        }
+
+        
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -100,7 +124,7 @@ namespace Managers
 
         private void OnActivateMovement()
         {
-            ChangePlayerAnimation(PlayerAnimationType.Running);
+           ChangePlayerAnimation(PlayerAnimationType.Running);
 
             movementController.EnableMovement();
         }
@@ -109,27 +133,12 @@ namespace Managers
         {
             movementController.DeactiveMovement();
 
-
-
-            if (playerAnimation == PlayerAnimationType.Throw)//This place will Changge
-            {
-                ChangePlayerAnimation(PlayerAnimationType.Throw);
-            }
-            else
-            {
-                ChangePlayerAnimation(PlayerAnimationType.Idle);
-            }
-        }
-
-        public void ChangeAnimationintextarea()
-        {
-            playerAnimation = PlayerAnimationType.Throw;
+            ChangePlayerAnimation(PlayerAnimationType.Idle);
         }
 
         public void ExitPaymentArea()
         {
-            CoreGameSignals.Instance.onExitPaymentArea?.Invoke();
-            playerAnimation = PlayerAnimationType.Idle;
+            ParticalSignals.Instance.onParticleStop?.Invoke();
         }
 
         private void OnGetRunnerInputValues(RunnerInputParams inputParams) => movementController.UpdateRunnerInputValue(inputParams);
@@ -185,26 +194,13 @@ namespace Managers
         {
             if (_gameStates == GameStates.Idle)
             {
-                ScoreSignals.Instance.onIncreaseScore?.Invoke();
-            }
-        }
-
-        public void IsEnterPaymentArea()
-        {
-            if (_gameStates == GameStates.Idle)
-            {
-                playerMeshController.ChangeScale(-1);
-                CoreGameSignals.Instance.onEnterPaymentArea?.Invoke();
-                ScoreSignals.Instance.onDecreaseScore?.Invoke();
+                ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.plus);
             }
         }
 
         private void OnSetScoreText(int score)
         {
-            if (score != 0 && playerAnimation == PlayerAnimationType.Throw)
-            {
-                playerThrowController.ThrowGameObject(transform);
-            }
+            ScoreVaryant = score;
             playerMeshController.CalculateSmallerRate(score);
             PlayerScoreText(score);
         }

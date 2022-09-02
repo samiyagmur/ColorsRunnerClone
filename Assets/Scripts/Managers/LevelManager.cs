@@ -4,6 +4,7 @@ using Command.LevelCommands;
 using Datas.UnityObject;
 using Datas.ValueObject;
 using Signals;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -40,8 +41,9 @@ namespace Managers
 
         private int _LevelID;
         private int _IdleLevelId;
+
         private int _gameScore;
-        private int _uniqueID = 0;
+        private int _uniqueID = 1234;
 
         #endregion Private Variables
 
@@ -61,7 +63,7 @@ namespace Managers
 
         #endregion
 
-        #region Gettin Data Menegment
+        #region Data Management
         private void GetData()
         {
             if (!ES3.FileExists($"Level{_uniqueID}.es3"))
@@ -109,6 +111,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelId;
             CoreGameSignals.Instance.onIdleLevelChange += OnIncreaseIdleLevel;
+            CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
         }
 
         private void UnsubscribeEvents()
@@ -121,6 +125,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelId;
             CoreGameSignals.Instance.onIdleLevelChange -= OnIncreaseIdleLevel;
+            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
         }
 
         private void OnDisable()
@@ -130,7 +136,13 @@ namespace Managers
 
         #endregion Event Subscription
 
-        #region LevelMenegment
+        private void OnSave()
+        {
+            Save(_uniqueID);
+        }
+        
+
+        #region Level Management
         private async void OnNextLevel()
         {
             _LevelID++;

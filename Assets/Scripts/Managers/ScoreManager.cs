@@ -11,16 +11,13 @@ namespace Managers
 
         #region Private Veriables
 
-        private ScoreStatusAsLocations scoreStatus;
-        private int Score;
-        private int TotalScore;
+        private int _totalScore;
+        private ScoreStatus state;
+        private bool IsEnterMultiplyArea;
         private int IdleScore;
-        private int MultiplyAmaunt;
-
         #endregion Private Veriables
 
         #endregion Self Veriables
-
         private void OnEnable()
         {
             SubscribeEvents();
@@ -28,137 +25,79 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMutiplyArea;
-            CoreGameSignals.Instance.onEnterIdleArea += OnEnterIdleArea;
-            CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onEnterPaymentArea += OnEnterPaymentArea;
-            CoreGameSignals.Instance.onExitPaymentArea += OnExitPaymentArea;
-            ScoreSignals.Instance.onIncreaseScore += OnIncreaseScore;
-            ScoreSignals.Instance.onDecreaseScore += OnDecreaseScore;
+
+            
+            ScoreSignals.Instance.onUpdateScore += onUpdateScore;
+            CoreGameSignals.Instance.onEnterMutiplyArea += OnEnterMultilyArea;
             ScoreSignals.Instance.onMultiplyAmaunt += OnMultiplyAmaunt;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMutiplyArea;
-            CoreGameSignals.Instance.onEnterIdleArea -= OnEnterIdleArea;
-            CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onEnterPaymentArea -= OnEnterPaymentArea;
-            CoreGameSignals.Instance.onExitPaymentArea -= OnExitPaymentArea;
-            ScoreSignals.Instance.onIncreaseScore -= OnIncreaseScore;
-            ScoreSignals.Instance.onDecreaseScore -= OnDecreaseScore;
+
+           
+            ScoreSignals.Instance.onUpdateScore -= onUpdateScore;
+            CoreGameSignals.Instance.onEnterMutiplyArea -= OnEnterMultilyArea;
             ScoreSignals.Instance.onMultiplyAmaunt -= OnMultiplyAmaunt;
+            CoreGameSignals.Instance.onReset -= OnReset;
+            
         }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-
-        private void Start()
+        private void OnEnterMultilyArea()
         {
-            scoreStatus = ScoreStatusAsLocations.LevelInitilize;
+
+            IsEnterMultiplyArea = true;
         }
-
-        private void OnEnterMutiplyArea()
-        {
-            scoreStatus = ScoreStatusAsLocations.EnterMultiple;
-        }
-
-        private void OnEnterIdleArea()
-        {
-            scoreStatus = ScoreStatusAsLocations.EnterIdle;
-            
-        }
-
-        private void OnEnterPaymentArea()
-        {
-            scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
-        }
-
-        private void OnExitPaymentArea()
-        {
-            scoreStatus = ScoreStatusAsLocations.ExitPaymentArea;
-        }
-
-        private void OnReset()
-        {
-            scoreStatus = ScoreStatusAsLocations.Reset;
-            CalculateScore();
-        }
-
-        private void OnIncreaseScore()
-        {
-            Score++;
-
-            CalculateScore();
-        }
-
-        private void OnDecreaseScore()
-        {
-            Score--;
-            if (Score < 0)
-            {
-                Score = 0;
-            }
-            CalculateScore();
-        }
-
+        
         private void OnMultiplyAmaunt(string value)
         {
-            scoreStatus = ScoreStatusAsLocations.EnterIdle;
-            MultiplyAmaunt = Convert.ToInt32(value.TrimStart('x'));
-            TotalScore *= MultiplyAmaunt;
+            
+            IdleScore *= Convert.ToInt32(value.TrimStart('x'));
+            EnterIdleArea();
 
-            CalculateScore();
         }
-
-        private void CalculateScore()
+        private void EnterIdleArea()
         {
-            switch (scoreStatus)
+             _totalScore = IdleScore;
+            IsEnterMultiplyArea = false;
+            ReadUIText(_totalScore);
+            ReadPlayerText(_totalScore);
+
+        }
+        private void onUpdateScore(ScoreStatus state)
+        {
+
+            if (_totalScore <= 0)
+            {   
+                _totalScore = 0;
+            }
+
+            if (state== ScoreStatus.plus)
             {
-                case ScoreStatusAsLocations.LevelInitilize:
-                    ReadPlayerText(Score);
-                    break;
-
-                case ScoreStatusAsLocations.Reset:
-                    ReadPlayerText(Score);
-                    break;
-
-                case ScoreStatusAsLocations.EnterMultiple:
-                    TotalScore++;
-                    ReadPlayerText(Score);
-                    ReadUIText(TotalScore);
-                    break;
-
-                case ScoreStatusAsLocations.EnterIdle:
-                    Debug.Log(TotalScore);
-                    IdleScore += TotalScore;
-                    IdleScore += Score;
+                _totalScore ++;
+                ReadPlayerText(_totalScore);
+                ReadUIText(_totalScore);
+            }
+            else
+            {
+                if (IsEnterMultiplyArea)
+                {
+                    _totalScore--;
+                    IdleScore++;
+                    ReadPlayerText(_totalScore);
                     ReadUIText(IdleScore);
-                    ReadPlayerText(IdleScore);
-                    Score = 0;
-                    TotalScore = 0;
-                    break;
-
-                case ScoreStatusAsLocations.EnterPaymentArea:
-                    ScoreSignals.Instance.onSendPlayerScore(IdleScore);
-                    BuildingSignals.Instance.onActiveTextUpdate.Invoke();
-                    IdleScore--;
-                    if (IdleScore <= 0)
-                    {
-                        BuildingSignals.Instance.onScoreZero.Invoke();
-                        IdleScore = 0;
-                    }
-                    ReadPlayerText(IdleScore);
-                    ReadUIText(IdleScore);
-                    break;
-
-                case ScoreStatusAsLocations.ExitPaymentArea:
-                    IdleScore = Score;
-                    ReadPlayerText(IdleScore);
-                    ReadUIText(IdleScore);
-                    break;
+                }
+                else
+                {
+                    _totalScore--;
+                    ReadPlayerText(_totalScore);
+                    ReadUIText(_totalScore);
+                }
             }
         }
 
@@ -171,5 +110,101 @@ namespace Managers
         {
             ScoreSignals.Instance.onSendPlayerScore?.Invoke(_totalScore);
         }
+
+        private void OnReset()
+        {
+            _totalScore = 0;
+        }
+
     }
 }
+
+
+
+
+
+//private void Start()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.LevelInitilize;
+//}
+
+//private void OnEnterMutiplyArea()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.EnterMultiple;
+//}
+
+//private void OnEnterIdleArea()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.EnterIdle;
+//    CalculateScore();
+
+//}
+
+//private void OnEnterPaymentArea()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.EnterPaymentArea;
+//}
+
+//private void OnExitPaymentArea()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.ExitPaymentArea;
+//}
+
+//private void OnReset()
+//{
+//    _scoreStatus = ScoreStatusAsLocations.Reset;
+//    CalculateScore();
+//}
+
+
+
+
+
+//private void CalculateScore()
+//{
+//    switch (_scoreStatus)
+//    {
+//        case ScoreStatusAsLocations.LevelInitilize:
+//            ReadPlayerText(_score);
+//            break;
+
+//        case ScoreStatusAsLocations.Reset:
+//            ReadPlayerText(_score);
+//            break;
+
+//        case ScoreStatusAsLocations.EnterMultiple:
+//            _totalScore++;
+//            ReadPlayerText(_score);
+//            ReadUIText(_totalScore);
+//            break;
+
+//        case ScoreStatusAsLocations.EnterIdle:
+//            Debug.Log(_totalScore);
+//            _idleScore += _totalScore;
+//            _idleScore += _score;
+//            ReadUIText(_idleScore);
+//            ReadPlayerText(_idleScore);
+//            _score = 0;
+//            _totalScore = 0;
+//            break;
+
+//        case ScoreStatusAsLocations.EnterPaymentArea:
+//            ScoreSignals.Instance.onSendPlayerScore(_idleScore);
+//            BuildingSignals.Instance.onActiveTextUpdate.Invoke();
+//            _idleScore--;
+//            if (_idleScore <= 0)
+//            {
+//                BuildingSignals.Instance.onScoreZero.Invoke();
+//                _idleScore = 0;
+//            }
+//            ReadPlayerText(_idleScore);
+//            ReadUIText(_idleScore);
+//            break;
+
+//        case ScoreStatusAsLocations.ExitPaymentArea:
+//            _idleScore = _score;
+//            ReadPlayerText(_idleScore);
+//            ReadUIText(_idleScore);
+//            break;
+//    }
+//}
