@@ -45,7 +45,7 @@ namespace Managers
        }
        
 
-       private void Start()
+       private void Awake()
        {
            SetData();
        }

@@ -40,6 +40,7 @@ namespace Managers
 
         private int _LevelID;
         private int _IdleLevelId;
+
         private int _gameScore;
         private int _uniqueID = 1234;
 
@@ -61,7 +62,7 @@ namespace Managers
 
         #endregion
 
-        #region Gettin Data Menegment
+        #region Data Management
         private void GetData()
         {
             if (!ES3.FileExists($"Level{_uniqueID}.es3"))
@@ -130,14 +131,14 @@ namespace Managers
 
         #endregion Event Subscription
 
-        #region LevelMenegment
+        #region Level Management
         private async void OnNextLevel()
         {
             _LevelID++;
             Save(_uniqueID);
             await Task.Delay(25);
             CoreGameSignals.Instance.onReset?.Invoke();
-            UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
+            //UISignals.Instance.onSetLevelText?.Invoke(_LevelID);
         }
 
         private void OnIncreaseIdleLevel()
