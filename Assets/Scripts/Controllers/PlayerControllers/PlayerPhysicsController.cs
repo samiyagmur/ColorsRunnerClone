@@ -70,7 +70,6 @@ namespace Controllers
             if (other.CompareTag("PaymentArea"))
             {
                 _timer -= Time.fixedDeltaTime;
-                Debug.Log(_timer);
                 if (_timer <= 0)
                 {
                     _timer = 0.2f;

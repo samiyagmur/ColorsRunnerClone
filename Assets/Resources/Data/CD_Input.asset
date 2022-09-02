@@ -15,4 +15,4 @@ MonoBehaviour:
   InputData:
     HorizontalInputSpeed: 8
     ClampSides: {x: -4, y: 4}
-    ClampSpeed: 0.05
+    ClampSpeed: 0.07

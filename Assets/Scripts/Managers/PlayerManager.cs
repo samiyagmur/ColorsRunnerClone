@@ -186,6 +186,7 @@ namespace Managers
 
         public async void IsHitRainbow()
         {
+            CoreGameSignals.Instance.onEnterMutiplyArea();
             await Task.Delay(3500);//it Will cahange
             UISignals.Instance.onMultiplyArea?.Invoke();
         }

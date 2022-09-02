@@ -163,7 +163,7 @@ MonoBehaviour:
   sideObject: {fileID: 3197765966687815071}
   buildingMeshController: {fileID: 6823373001471844444}
   buildingPhysicsController: {fileID: 1186926544110523240}
-  sideObjectMeshController: {fileID: 0}
+  sideObjectMeshController: {fileID: 317675428525881900}
   sideObjectMarketStatusController: {fileID: 459631761079373412}
   BuildingAddressID: 0
 --- !u!1 &2041820090085671497
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 5798734734146852729}
   m_Layer: 0
   m_Name: SideObjects
-  m_TagString: Untagged
+  m_TagString: PaymentArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
