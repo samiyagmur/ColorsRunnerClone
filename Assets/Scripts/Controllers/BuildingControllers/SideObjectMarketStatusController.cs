@@ -29,12 +29,12 @@ namespace Controllers.BuildingControllers
 
         public void SetRequiredAmountToText()
         {
-            marketPriceText.text = $"{manager.BuildingsData.PayedAmount}/{manager.BuildingsData.BuildingMarketPrice}";
+            marketPriceText.text = $"{manager.BuildingsData.SideObject.PayedAmount}/{manager.BuildingsData.SideObject.BuildingMarketPrice}";
         }
 
         public void UpdatePayedAmountText(int payedAmount)
         {
-            manager.BuildingsData.PayedAmount = payedAmount;
+            manager.BuildingsData.SideObject.PayedAmount = payedAmount;
             SetRequiredAmountToText();
         }
     }
