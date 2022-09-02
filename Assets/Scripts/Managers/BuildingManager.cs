@@ -111,9 +111,6 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit += OnSave;
             CoreGameSignals.Instance.onNextLevel += OnSave;
             CoreGameSignals.Instance.onLevelInitialize += OnLoad;
-            BuildingSignals.Instance.onActiveTextUpdate += OnActiveTextUpdate;
-            BuildingSignals.Instance.onScoreZero += OnScoreZero;
-
 
         }
 
@@ -123,9 +120,7 @@ namespace Managers
             CoreGameSignals.Instance.onApplicationQuit -= OnSave;
             CoreGameSignals.Instance.onNextLevel -= OnSave;
             CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
-            BuildingSignals.Instance.onActiveTextUpdate -= OnActiveTextUpdate;
-            BuildingSignals.Instance.onScoreZero -= OnScoreZero;
-            
+ 
         }
 
         private void OnDisable()
@@ -193,21 +188,7 @@ namespace Managers
 
         #endregion
 
-        internal void SetScoreStatus()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Pasive;
-        }
 
-        private void OnActiveTextUpdate()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Active;
-        }
-
-        private void OnScoreZero()
-        {
-            scoreZeroStatus = ScoreZeroStatus.Pasive;
-        }
-        
 
         #region UpdateControllers
 
@@ -216,15 +197,7 @@ namespace Managers
             BuildingsData.PayedAmount++;
             buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
             UpdateSaturation();
-        
-            if (scoreZeroStatus == ScoreZeroStatus.Active)
-            {
-                BuildingsData.PayedAmount++;
-                buildingMarketStatusController.UpdatePayedAmountText(BuildingsData.PayedAmount);
-                UpdateSaturation();
-            }
-        
-                
+
         }
 
             public void UpdateSidePayedAmount()
