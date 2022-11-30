@@ -22,7 +22,7 @@
 ***Ömer Sami Yağmur*** : [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>]  
 [<img (linkedin.com/in/ömer-sami-yağmur-6b64b018b//)
 
-## Packages
+# Packages
 - MKTOON
 - DOTween
 - TextMeshPro
@@ -30,11 +30,11 @@
 - Odin Inspector
 - Cinemachine (State Driven Camera)
 
-## Architecture
+# Architecture
 - SOLID Principle
 - Dry,Kiss
 - OOP
-## Patterns
+# Patterns
 - Observer Pattern
 - Singleton
 - Command Pattern
