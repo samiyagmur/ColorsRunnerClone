@@ -17,11 +17,9 @@
 * [Architecture](#Architecture)
 * [Patterns#](#Patterns#)
 
-![Level](https://user-images.githubusercontent.com/77567437/204898638-f282da86-3728-48e5-918f-5f41a350daea.PNG)
-
 ![linkedin_rbinwhyb1b69_32](https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png)
 
-***Ömer Sami Yağmur*** [<img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>]  
+<img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>
 
 
 # Packages
