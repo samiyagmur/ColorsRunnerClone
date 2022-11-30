@@ -19,8 +19,8 @@
 
 ![Level](https://user-images.githubusercontent.com/77567437/204898638-f282da86-3728-48e5-918f-5f41a350daea.PNG)
 
-***Ömer Sami Yağmur*** : [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>]  
-[<img (linkedin.com/in/ömer-sami-yağmur-6b64b018b//)
+***Ömer Sami Yağmur*** [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>]  
+
 
 # Packages
 - MKTOON
