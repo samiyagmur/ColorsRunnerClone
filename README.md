@@ -10,7 +10,7 @@
     * [Packages](#Packages)
   * [C#](#Architecture)
     * [Architecture](#Architecture)
-    * [Patterns#](#Patterns)
+    * [Patterns](#Patterns)
 * [Screenshot](#Screenshot)
 * [Link](#Link)
   * [Linkedin](#Link)
