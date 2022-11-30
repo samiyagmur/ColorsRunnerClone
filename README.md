@@ -19,8 +19,11 @@
 
 ![Level](https://user-images.githubusercontent.com/77567437/204898638-f282da86-3728-48e5-918f-5f41a350daea.PNG)
 
-***Ömer Sami Yağmur*** [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>]  
+***Ömer Sami Yağmur*** [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='linkedin' height='40' color='#6e5494'>]  
 
+***Ömer Sami Yağmur*** [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>]
+
+(https://www.linkedin.com/in/burak-orhan-aohg2022//) :rewind:
 
 # Packages
 - MKTOON
