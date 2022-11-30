@@ -9,7 +9,7 @@
 * [Unity](#Unity)
 * [C#](#C#)
 
-##Unity#
+#Unity#
 * [Packages](#Packages)
 
 ##Packages
@@ -20,7 +20,7 @@
 - Odin Inspector
 - Cinemachine (State Driven Camera)
 
-##C#
+#C#
 * [Architecture](#Architecture)
 * [Patterns#](#Patterns#)
 ## Architecture
