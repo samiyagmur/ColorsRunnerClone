@@ -19,9 +19,17 @@
 
 ![Level](https://user-images.githubusercontent.com/77567437/204904469-62e7686b-bdc1-4525-aa2e-d387f7505a65.PNG)
 
+
+
+
 [![Drive](https://user-images.githubusercontent.com/77567437/204913666-f3d025e6-bf76-4c43-8d68-ed8869f79016.png)][1]
 
 [1]: https://drive.google.com/file/d/1rl4lMNfRFgrpVs83NuJPJslvLNP6956G/view?usp=share_link
+
+[![Linkedin](https://user-images.githubusercontent.com/77567437/204913666-f3d025e6-bf76-4c43-8d68-ed8869f79016.png)][2]
+
+[2]: linkedin.com/in/ömer-sami-yağmur-6b64b018b
+
 
 # Packages
 - MKTOON
