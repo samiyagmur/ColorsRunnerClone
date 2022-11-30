@@ -6,11 +6,11 @@
 
 ## Table of contents
 * [Technologies](#technologies)
-      ** [Unity](#Unity)
-            ***[Packages](#Packages)
-      ** [C#](#C#)
-            *** [Architecture](#Architecture)
-            *** [Patterns#](#Patterns#)
+      * [Unity](#Unity)
+            * [Packages](#Packages)
+      * [C#](#C#)
+            * [Architecture](#Architecture)
+            * [Patterns#](#Patterns#)
 * [Screenshot](#Screenshot)
 * [Link](#Link)
     * [Linkedin](#Link)
