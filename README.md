@@ -13,7 +13,7 @@
 ## Unity
 * [Packages](#Packages)
 
-##Packages
+## Packages
 - MKTOON
 - DOTween
 - TextMeshPro
@@ -21,7 +21,7 @@
 - Odin Inspector
 - Cinemachine (State Driven Camera)
 
-#C#
+# C#
 * [Architecture](#Architecture)
 * [Patterns#](#Patterns#)
 ## Architecture
