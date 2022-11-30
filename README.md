@@ -20,6 +20,8 @@
 ![Level](https://user-images.githubusercontent.com/77567437/204904469-62e7686b-bdc1-4525-aa2e-d387f7505a65.PNG)
 
 <img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>
+<img src='https://user-images.githubusercontent.com/77567437/204905527-4e98063a-c72c-4f7e-b034-ab03ce90e83b.png' alt='drive' height='40' color='#6e5494'>
+
 
 
 # Packages
@@ -34,6 +36,7 @@
 - SOLID Principle
 - Dry,Kiss
 - OOP
+
 # Patterns
 - Observer Pattern
 - Singleton
