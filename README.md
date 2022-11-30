@@ -25,7 +25,7 @@
 
 [1]: https://drive.google.com/file/d/1rl4lMNfRFgrpVs83NuJPJslvLNP6956G/view?usp=share_link
 
-<hr>[![Linkedin](https://user-images.githubusercontent.com/77567437/204914179-e4bdb56f-6a88-4db3-88c2-c9df092f2184.png)][2]
+***[![Linkedin](https://user-images.githubusercontent.com/77567437/204914179-e4bdb56f-6a88-4db3-88c2-c9df092f2184.png)][2]
 
 [2]: https://www.linkedin.com/in/%C3%B6mer-sami-ya%C4%9Fmur-6b64b018b/
 
