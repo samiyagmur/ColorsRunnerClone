@@ -5,11 +5,12 @@
 ## Indroduce
 *I would like to present to you the 3rd mobile game we made in the training we cloned in 3 weeks at the Level-Up academy.*
 *This mobile game made by rolic games, consists of 2 parts, the first part of which is the runner and the second part is Idle.*
+
 ## Technologies
 * [Unity](#Unity)
 * [C#](#C#)
 
-#Unity#
+## Unity
 * [Packages](#Packages)
 
 ##Packages
