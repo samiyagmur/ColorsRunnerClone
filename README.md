@@ -19,11 +19,11 @@
 
 ![Level](https://user-images.githubusercontent.com/77567437/204904469-62e7686b-bdc1-4525-aa2e-d387f7505a65.PNG)
 
-[<img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>]
+<img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>
 (linkedin.com/in/ömer-sami-yağmur-6b64b018b)
 
-[<img src='https://user-images.githubusercontent.com/77567437/204905527-4e98063a-c72c-4f7e-b034-ab03ce90e83b.png' alt='drive' height='40' color='#6e5494'>]
-(https://drive.google.com/file/d/1rl4lMNfRFgrpVs83NuJPJslvLNP6956G/view?usp=share_link)
+<link rel="stylesheet" href="https://drive.google.com/file/d/1rl4lMNfRFgrpVs83NuJPJslvLNP6956G/view?usp=share_link" img src='https://user-images.githubusercontent.com/77567437/204905527-4e98063a-c72c-4f7e-b034-ab03ce90e83b.png'  alt='drive' height='40' color='#6e5494'>
+
 
 
 
