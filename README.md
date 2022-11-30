@@ -13,8 +13,8 @@
             *** [Patterns#](#Patterns#)
 * [Screenshot](#Screenshot)
 * [Link](#Link)
-    * [Linkedin](#Linkedin)
-    * [Drive Project Video](#Drive Project Video)
+    * [Link](#Linkedin)
+    * [Link](#DriveProjectVideo)
 
 ## Screenshot
 ![Level](https://user-images.githubusercontent.com/77567437/204904469-62e7686b-bdc1-4525-aa2e-d387f7505a65.PNG)
