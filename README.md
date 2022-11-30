@@ -6,9 +6,9 @@
 
 ## Table of contents
 * [Technologies](#technologies)
-  * [Unity](#Unity)
+  * [Packages](#Unity)
    * [Packages](#Packages)
-  * [C#](#C#)
+  * [Architecture#](#C#)
    * [Architecture](#Architecture)
    * [Patterns#](#Patterns)
 * [Screenshot](#Screenshot)
