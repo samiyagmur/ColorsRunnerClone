@@ -5,16 +5,14 @@
 ## Indroduce
 *I would like to present to you the 3rd mobile game we made in the training we cloned in 3 weeks at the Level-Up academy.*
 *This mobile game made by rolic games, consists of 2 parts, the first part of which is the runner and the second part is Idle.*
+## Technologies
+* [Unity](#Unity)
+* [C#](#C#)
 
-***Ömer Sami Yağmur*** : [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>](https://github.com/Burak-san)  [<img src='https://user-images.githubusercontent.com/77567437/204886635-0c7f7316-d411-49e8-afea-76d4f0efa1ee.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/burak-orhan-aohg2022//) :rewind:
+##Unity#
+* [Packages](#Packages)
 
-![linkedin_rbinwhyb1b69_32](https://user-images.githubusercontent.com/77567437/204886635-0c7f7316-d411-49e8-afea-76d4f0efa1ee.png)
-
-
-![CubeCrusher](https://user-images.githubusercontent.com/60696929/198413813-e845d304-037d-4882-8fd9-76bf172aa884.png)
-
-
-## Used Unity Packages
+##Packages
 - MKTOON
 - DOTween
 - TextMeshPro
@@ -22,9 +20,23 @@
 - Odin Inspector
 - Cinemachine (State Driven Camera)
 
-## Used Patterns
+##C#
+* [Architecture](#Architecture)
+* [Patterns#](#Patterns#)
+## Architecture
+- SOLID Principle
+- Dry,Kiss
+- OOP
+## Patterns
 - Observer Pattern
 - Singleton
 - Command Pattern
 - Object Pooling
 - FacedPattern
+
+***Ömer Sami Yağmur*** : [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#6e5494'>]  
+[<img (linkedin.com/in/ömer-sami-yağmur-6b64b018b//)
+
+![Level](https://user-images.githubusercontent.com/77567437/204898638-f282da86-3728-48e5-918f-5f41a350daea.PNG)
+
+
