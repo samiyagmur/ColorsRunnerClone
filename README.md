@@ -17,8 +17,6 @@
 * [Architecture](#Architecture)
 * [Patterns#](#Patterns#)
 
-![linkedin_rbinwhyb1b69_32](https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png)
-
 <img src='https://user-images.githubusercontent.com/77567437/204903822-d00bbe97-5968-4201-b7c2-a86b5106a51e.png' alt='linkedin' height='40' color='#6e5494'>
 
 
