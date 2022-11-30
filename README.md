@@ -7,10 +7,10 @@
 ## Table of contents
 * [Technologies](#technologies)
   * [Unity](#Packages)
-   * [Packages](#Packages)
+    * [Packages](#Packages)
   * [C#](#Architecture)
-   * [Architecture](#Architecture)
-   * [Patterns#](#Patterns)
+    * [Architecture](#Architecture)
+    * [Patterns#](#Patterns)
 * [Screenshot](#Screenshot)
 * [Link](#Link)
   * [Linkedin](#Link)
