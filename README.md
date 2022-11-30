@@ -19,9 +19,7 @@
 
 ![Level](https://user-images.githubusercontent.com/77567437/204904469-62e7686b-bdc1-4525-aa2e-d387f7505a65.PNG)
 
-[![Drive](https://user-images.githubusercontent.com/77567437/204905527-4e98063a-c72c-4f7e-b034-ab03ce90e83b.png) height='40' ][1]
-
-
+[![Drive](https://user-images.githubusercontent.com/77567437/204913666-f3d025e6-bf76-4c43-8d68-ed8869f79016.png)][1]
 
 [1]: https://drive.google.com/file/d/1rl4lMNfRFgrpVs83NuJPJslvLNP6956G/view?usp=share_link
 
@@ -44,6 +42,7 @@
 - Command Pattern
 - Object Pooling
 - FacedPattern
+
 
 
 
